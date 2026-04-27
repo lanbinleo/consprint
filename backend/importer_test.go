@@ -52,4 +52,12 @@ func TestResolveCompactID(t *testing.T) {
 	if id != concepts[2].ID || idx != 2 {
 		t.Fatalf("expected exact resolution, got %s %d", id, idx)
 	}
+	id, _ = resolveCompactID("id: relative-clarity", concepts, index, -1)
+	if id != concepts[0].ID {
+		t.Fatalf("expected id-prefixed slug resolution, got %s", id)
+	}
+	id, _ = resolveCompactID("ap-psychology.u2.t2-1.relative-clarity (RC)", concepts, index, -1)
+	if id != concepts[0].ID {
+		t.Fatalf("expected parenthetical exact resolution, got %s", id)
+	}
 }

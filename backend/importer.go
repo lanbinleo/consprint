@@ -380,7 +380,7 @@ func (i Importer) orderedConcepts() ([]Concept, map[string]int) {
 }
 
 func resolveCompactID(raw string, concepts []Concept, indexByID map[string]int, lastIndex int) (string, int) {
-	raw = strings.TrimSpace(raw)
+	raw = cleanCompactHeader(raw)
 	if idx, ok := indexByID[raw]; ok {
 		return raw, idx
 	}
@@ -399,6 +399,19 @@ func resolveCompactID(raw string, concepts []Concept, indexByID map[string]int, 
 		}
 	}
 	return "", lastIndex
+}
+
+func cleanCompactHeader(raw string) string {
+	raw = strings.TrimSpace(raw)
+	raw = strings.TrimSpace(strings.TrimPrefix(strings.ToLower(raw), "id:"))
+	raw = strings.TrimSpace(raw)
+	if strings.HasPrefix(raw, "ap-psychology.") {
+		if before, _, ok := strings.Cut(raw, " "); ok {
+			raw = before
+		}
+	}
+	raw = strings.Trim(raw, "`")
+	return raw
 }
 
 func (i Importer) applyNotes(entries map[string][]string, source string, confidence float64) error {
