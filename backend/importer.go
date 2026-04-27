@@ -3,8 +3,10 @@ package backend
 import (
 	"bufio"
 	"encoding/json"
+	"encoding/xml"
 	"errors"
 	"fmt"
+	"io"
 	"os"
 	"path/filepath"
 	"regexp"
@@ -186,28 +188,76 @@ func (i Importer) EnrichFromBullets(path, source string) error {
 }
 
 func (i Importer) EnrichFromOPML(path string) error {
-	content, err := os.ReadFile(path)
+	file, err := os.Open(path)
 	if err != nil {
 		return err
 	}
-	text := string(content)
+	defer file.Close()
+	type outlineNode struct {
+		Text     string
+		Children []*outlineNode
+	}
+	var roots []*outlineNode
+	var stack []*outlineNode
+	decoder := xml.NewDecoder(file)
+	for {
+		token, err := decoder.Token()
+		if err != nil {
+			if errors.Is(err, io.EOF) {
+				break
+			}
+			break
+		}
+		switch t := token.(type) {
+		case xml.StartElement:
+			if t.Name.Local != "outline" {
+				continue
+			}
+			node := &outlineNode{}
+			for _, attr := range t.Attr {
+				if attr.Name.Local == "text" {
+					node.Text = strings.TrimSpace(attr.Value)
+					break
+				}
+			}
+			if len(stack) == 0 {
+				roots = append(roots, node)
+			} else {
+				parent := stack[len(stack)-1]
+				parent.Children = append(parent.Children, node)
+			}
+			stack = append(stack, node)
+		case xml.EndElement:
+			if t.Name.Local == "outline" && len(stack) > 0 {
+				stack = stack[:len(stack)-1]
+			}
+		}
+	}
+	byText := map[string][]string{}
+	var walk func(*outlineNode)
+	walk = func(node *outlineNode) {
+		if node.Text != "" && len(node.Children) > 0 {
+			for _, child := range node.Children {
+				if child.Text != "" && len([]rune(child.Text)) > 4 {
+					byText[NormalizeTerm(node.Text)] = append(byText[NormalizeTerm(node.Text)], child.Text)
+				}
+			}
+		}
+		for _, child := range node.Children {
+			walk(child)
+		}
+	}
+	for _, root := range roots {
+		walk(root)
+	}
 	var concepts []Concept
 	if err := i.DB.Find(&concepts).Error; err != nil {
 		return err
 	}
 	entries := map[string][]string{}
 	for _, c := range concepts {
-		re := regexp.MustCompile(`(?is)<outline[^>]+text="` + regexp.QuoteMeta(escapeXMLAttr(c.Term)) + `"[^>]*>(.*?)</outline>`)
-		m := re.FindStringSubmatch(text)
-		if len(m) < 2 {
-			continue
-		}
-		childRE := regexp.MustCompile(`(?is)<outline[^>]+text="([^"]+)"`)
-		for _, child := range childRE.FindAllStringSubmatch(m[1], 5) {
-			n := htmlUnescape(child[1])
-			if n != c.Term && len([]rune(n)) > 4 {
-				entries[NormalizeTerm(c.Term)] = append(entries[NormalizeTerm(c.Term)], n)
-			}
+		if notes, ok := byText[c.NormalizedTerm]; ok {
+			entries[c.NormalizedTerm] = append(entries[c.NormalizedTerm], notes...)
 		}
 	}
 	return i.applyNotes(entries, "AP Psychology Notes.opml", 0.58)
@@ -397,14 +447,4 @@ func blocksJSON(lines []string) datatypes.JSON {
 	}
 	b, _ := json.Marshal(blocks)
 	return datatypes.JSON(b)
-}
-
-func htmlUnescape(s string) string {
-	replacer := strings.NewReplacer("&amp;", "&", "&lt;", "<", "&gt;", ">", "&quot;", `"`, "&#39;", "'")
-	return replacer.Replace(s)
-}
-
-func escapeXMLAttr(s string) string {
-	replacer := strings.NewReplacer("&", "&amp;", `"`, "&quot;", "<", "&lt;", ">", "&gt;")
-	return replacer.Replace(s)
 }

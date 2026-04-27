@@ -33,4 +33,3 @@ func TestNextMastery(t *testing.T) {
 		t.Fatalf("unknown should clamp at 0, got %f", got)
 	}
 }
-

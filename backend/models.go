@@ -70,17 +70,17 @@ type Concept struct {
 }
 
 type ConceptContent struct {
-	ID           string         `gorm:"primaryKey" json:"id"`
-	ConceptID    string         `gorm:"uniqueIndex;not null" json:"conceptId"`
-	Definition   datatypes.JSON `json:"definition"`
-	Examples     datatypes.JSON `json:"examples"`
-	Pitfalls     datatypes.JSON `json:"pitfalls"`
-	Notes        datatypes.JSON `json:"notes"`
-	Source       string         `json:"source"`
-	Confidence   float64        `json:"confidence"`
-	NeedsReview  bool           `json:"needsReview"`
-	CreatedAt    time.Time      `json:"createdAt"`
-	UpdatedAt    time.Time      `json:"updatedAt"`
+	ID          string         `gorm:"primaryKey" json:"id"`
+	ConceptID   string         `gorm:"uniqueIndex;not null" json:"conceptId"`
+	Definition  datatypes.JSON `json:"definition"`
+	Examples    datatypes.JSON `json:"examples"`
+	Pitfalls    datatypes.JSON `json:"pitfalls"`
+	Notes       datatypes.JSON `json:"notes"`
+	Source      string         `json:"source"`
+	Confidence  float64        `json:"confidence"`
+	NeedsReview bool           `json:"needsReview"`
+	CreatedAt   time.Time      `json:"createdAt"`
+	UpdatedAt   time.Time      `json:"updatedAt"`
 }
 
 type Card struct {
@@ -127,4 +127,3 @@ type ImportRun struct {
 	CreatedAt time.Time `json:"createdAt"`
 	UpdatedAt time.Time `json:"updatedAt"`
 }
-

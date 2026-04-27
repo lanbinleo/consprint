@@ -249,7 +249,9 @@ func (a *App) concept(c *gin.Context) {
 }
 
 func (a *App) rateConcept(c *gin.Context) {
-	var req struct{ Rating int `json:"rating"` }
+	var req struct {
+		Rating int `json:"rating"`
+	}
 	if err := c.ShouldBindJSON(&req); err != nil || req.Rating < 0 || req.Rating > 5 {
 		c.JSON(400, gin.H{"error": "rating must be 0-5"})
 		return

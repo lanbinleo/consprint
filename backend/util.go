@@ -75,4 +75,3 @@ func Clamp(v, min, max float64) float64 {
 	}
 	return v
 }
-
