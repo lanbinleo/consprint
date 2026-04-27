@@ -35,6 +35,7 @@ func (i Importer) RunAll() error {
 	_ = i.EnrichFromBullets(filepath.Join(i.Sources, "unit0.md"), "unit0.md")
 	_ = i.EnrichFromBullets(filepath.Join(i.Sources, "unit1.md"), "unit1.md")
 	_ = i.EnrichFromOPML(filepath.Join(i.Sources, "AP-Psychology-Notes.opml"))
+	_ = i.EnrichFromCompact(filepath.Join(i.Sources, "ai-enrichment.compact"))
 	return nil
 }
 
@@ -210,6 +211,98 @@ func (i Importer) EnrichFromOPML(path string) error {
 		}
 	}
 	return i.applyNotes(entries, "AP Psychology Notes.opml", 0.58)
+}
+
+func (i Importer) EnrichFromCompact(path string) error {
+	file, err := os.Open(path)
+	if err != nil {
+		return err
+	}
+	defer file.Close()
+
+	type entry struct {
+		def   []string
+		ex    []string
+		pit   []string
+		notes []string
+	}
+	entries := map[string]*entry{}
+	currentID := ""
+	scanner := bufio.NewScanner(file)
+	scanner.Buffer(make([]byte, 1024), 1024*1024)
+	for scanner.Scan() {
+		t := strings.TrimSpace(scanner.Text())
+		if t == "" || strings.HasPrefix(t, "#") {
+			continue
+		}
+		if strings.HasPrefix(t, "@@") {
+			currentID = strings.TrimSpace(strings.TrimPrefix(t, "@@"))
+			if currentID != "" {
+				entries[currentID] = &entry{}
+			}
+			continue
+		}
+		if currentID == "" {
+			continue
+		}
+		key, value, ok := strings.Cut(t, ":")
+		if !ok {
+			continue
+		}
+		key = strings.ToLower(strings.TrimSpace(key))
+		value = strings.TrimSpace(value)
+		if value == "" {
+			continue
+		}
+		switch key {
+		case "def", "definition":
+			entries[currentID].def = append(entries[currentID].def, value)
+		case "ex", "example":
+			entries[currentID].ex = append(entries[currentID].ex, value)
+		case "pit", "pitfall":
+			entries[currentID].pit = append(entries[currentID].pit, value)
+		case "note":
+			entries[currentID].notes = append(entries[currentID].notes, value)
+		}
+	}
+	if err := scanner.Err(); err != nil {
+		return err
+	}
+
+	updated := 0
+	for conceptID, e := range entries {
+		var concept Concept
+		if err := i.DB.First(&concept, "id = ?", conceptID).Error; err != nil {
+			continue
+		}
+		if concept.ContentStatus == "ready" {
+			continue
+		}
+		payload := ConceptContent{
+			ID:          concept.ID + ".content",
+			ConceptID:   concept.ID,
+			Definition:  blocksJSON(e.def),
+			Examples:    blocksJSON(e.ex),
+			Pitfalls:    blocksJSON(e.pit),
+			Notes:       blocksJSON(e.notes),
+			Source:      "ai-enrichment.compact",
+			Confidence:  0.66,
+			NeedsReview: true,
+		}
+		if err := i.DB.Clauses(clause.OnConflict{UpdateAll: true}).Create(&payload).Error; err != nil {
+			return err
+		}
+		status := "partial"
+		if len(e.def) > 0 {
+			status = "ready"
+		}
+		if err := i.DB.Model(&Concept{}).Where("id = ?", concept.ID).Update("content_status", status).Error; err != nil {
+			return err
+		}
+		updated++
+	}
+	run := ImportRun{ID: NewID("imp"), Source: "ai-enrichment.compact", Status: "ok", Message: "Imported compact AI enrichment", Counts: fmt.Sprintf("concepts=%d", updated)}
+	return i.DB.Create(&run).Error
 }
 
 func (i Importer) applyNotes(entries map[string][]string, source string, confidence float64) error {

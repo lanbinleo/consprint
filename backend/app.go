@@ -76,6 +76,13 @@ func (a *App) Router() *gin.Engine {
 	protected.POST("/review/events", a.reviewEvent)
 	protected.GET("/import/status", a.importStatus)
 	protected.POST("/import/run", a.importRun)
+	if _, err := os.Stat("frontend/dist/index.html"); err == nil {
+		r.Static("/assets", "frontend/dist/assets")
+		r.StaticFile("/favicon.svg", "frontend/dist/favicon.svg")
+		r.NoRoute(func(c *gin.Context) {
+			c.File("frontend/dist/index.html")
+		})
+	}
 	return r
 }
 
@@ -379,4 +386,3 @@ func fallback(v, d string) string {
 }
 
 var errNotFound = errors.New("not found")
-

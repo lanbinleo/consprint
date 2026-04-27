@@ -1,0 +1,662 @@
+# Compact AI enrichment for AP Psych Final Sprint
+
+
+@@ ap-psychology.science-practices.set-a.independent-variables
+def: Variable manipulated by researcher to cause an effect. / 研究者操控以产生效果的变量。
+ex: Giving one group a drug and another a placebo; drug type is IV.
+pit: Don’t confuse IV with the measured outcome (DV).
+note: AP asks you to identify the IV in an experiment design.
+
+@@ ap-psychology.science-practices.set-a.confounding-variables
+def: Extra variables that unintentionally affect results. / 意外影响结果的额外变量。
+ex: Participants’ age if not controlled, both groups differ in age.
+pit: Confounds can threaten internal validity; not just any variable.
+note: AP FRQ often asks you to identify or propose control for confounds.
+
+@@ ap-psychology.science-practices.set-a.dependent-variables
+def: Measured outcome that may change due to IV. / 因IV变化而测量的结果。
+ex: In drug study, symptom score after treatment is DV.
+pit: DV depends on IV, not the other way.
+note: Know how to operationally define the DV.
+
+@@ ap-psychology.science-practices.set-a.random-assignment
+def: Placing participants into groups by chance to reduce bias. / 随机分组以减少偏差。
+ex: Flipping a coin to assign subjects to control or treatment.
+pit: Random assignment ≠ random sampling (sampling from population).
+note: AP highlights random assignment controls for confounds.
+
+@@ ap-psychology.science-practices.set-a.hypothesis
+def: Testable prediction about relationship between variables. / 关于变量关系的可检验预测。
+ex: “Students who study more will have higher test scores.”
+pit: Hypothesis must be falsifiable and specific.
+note: FRQ may ask you to write a hypothesis for an experiment.
+
+@@ ap-psychology.science-practices.set-a.generalizability
+def: Extent findings apply to wider population beyond sample. / 研究结果推广到更大人群的程度。
+ex: If sample is all college students, results may not generalize to elderly.
+pit: Generalizability depends on sampling method, not sample size alone.
+note: AP often asks about external validity (generalizability).
+
+@@ ap-psychology.science-practices.set-a.quantitative-data
+def: Numerical data that can be measured and analyzed statistically. / 可测量和统计分析的数值数据。
+ex: Reaction time in milliseconds, test scores.
+pit: Quantitative ≠ qualitative; count vs. description.
+note: AP asks to identify type of data in studies.
+
+@@ ap-psychology.science-practices.set-a.qualitative-data
+def: Non-numerical descriptive data (words, images, etc.). / 非数值的描述性数据（文字、图像等）。
+ex: Interview transcripts describing emotions after event.
+pit: Qualitative is subjective and hard to quantify; often used in case studies.
+note: AP distinguishes qualitative from quantitative in research methods.
+
+@@ ap-psychology.science-practices.set-b.institutional-review
+def: Review by IRB to ensure ethical standards in research. / 机构审查委员会审查以确保研究伦理。
+ex: A university IRB approves or rejects a study proposal.
+pit: IRB review occurs before data collection, not after.
+note: AP ethics questions focus on IRB role in protecting participants.
+
+@@ ap-psychology.science-practices.set-b.informed-consent
+def: Participants agree to participate after being told risks/benefits. / 告知风险和利益后参与者同意。
+ex: Signing a consent form before a psychology experiment.
+pit: Consent must be voluntary and informed; deception requires debriefing.
+note: AP tests understanding of exceptions (e.g., minimal risk, deception).
+
+@@ ap-psychology.science-practices.set-b.informed-assent
+def: Agreement by a minor to participate in research after understanding procedures, in addition to parental consent / 未成年人同意参与研究，需理解程序并获得家长同意
+ex: Asking a 12‑year‑old to sign an assent form before a study
+pit: Confusing with informed consent (assent = minor, consent = guardian)
+note: Required for minors; must be documented
+
+@@ ap-psychology.science-practices.set-b.protection-from-harm
+def: Ensuring participants are not exposed to physical or psychological harm / 确保参与者不受身心伤害
+ex: Stopping a study if a participant becomes distressed
+pit: Harm includes psychological stress, not just physical
+note: APA ethical guideline; must be followed
+
+@@ ap-psychology.science-practices.set-b.confidentiality
+def: Keeping participants' data private and not revealing identities / 保密参与者数据，不泄露身份
+ex: Using code numbers instead of names in data files
+pit: Not the same as anonymity; confidentiality protects linked data, anonymity means no link
+note: Must be promised and maintained throughout study
+
+@@ ap-psychology.science-practices.set-b.deception
+def: Misleading participants about the true purpose of a study (allowed only if necessary and ethical) / 对参与者隐瞒研究真实目的（仅在必要且符合伦理时允许）
+ex: Telling participants they are testing memory when actually studying reaction to stressful words
+pit: Must be justified and followed by debriefing; cannot cause harm
+note: Requires IRB approval and thorough debriefing
+
+@@ ap-psychology.science-practices.set-b.debriefing
+def: Explaining the true purpose of a study to participants after completion, especially if deception was used / 研究结束后向参与者解释真实目的，尤其在使用欺骗后
+ex: After a memory test deception, telling participants the real goal
+pit: Debriefing should address any distress and educate; not just “thank you”
+note: Mandatory after deception; good practice for all studies
+
+@@ ap-psychology.science-practices.set-c.central-tendency
+def: A statistical measure that identifies a single score as representative of an entire distribution (mean, median, mode) / 代表整个数据集集中趋势的统计量（平均数、中数、众数）
+ex: Describing class average on a test
+pit: Not about spread; different from variation
+note: Know the three types and when to use each
+
+@@ ap-psychology.science-practices.set-c.mean
+def: Arithmetic average; sum of scores divided by number of scores / 算术平均数：总分除以个数
+ex: Scores 80+90+70 = 240 → mean = 80
+pit: Sensitive to extreme scores (outliers)
+note: Use median if distribution is skewed
+
+@@ ap-psychology.science-practices.set-c.median
+def: Middle score when data are ordered; 50th percentile / 中位数：排序后的中间分数
+ex: Scores 70,80,90 → median = 80
+pit: For even number of scores, average the two middle values
+note: Best for skewed distributions (e.g., income)
+
+@@ ap-psychology.science-practices.set-c.mode
+def: Most frequently occurring score / 众数：出现次数最多的分数
+ex: Scores 70,80,80,90 → mode = 80
+pit: Can have multiple modes or no mode (bimodal, multimodal)
+note: Useful for nominal (categorical) data
+
+@@ ap-psychology.science-practices.set-c.variation
+def: Measure of how spread out scores are in a distribution (e.g., range, standard deviation) / 数据分散程度的度量（如全距、标准差）
+ex: High variation → scores differ widely; low variation → scores similar
+pit: Variation does not indicate central tendency; same mean, different spread possible
+note: Know range and standard deviation as key measures
+
+@@ ap-psychology.science-practices.set-c.percentile-rank
+def: The percentage of scores in a distribution that fall below a given score / 百分位排名：某分数低于分布中其他分数的百分比。
+ex: Scoring 85th percentile means you did better than 85% of test-takers.
+pit: Confusing percentile rank with percentage correct; they are different.
+note: AP often asks to interpret percentile rank in data analysis.
+
+@@ ap-psychology.science-practices.set-c.range
+def: The difference between the highest and lowest scores in a distribution / 全距：分布中最高分与最低分之差。
+ex: Scores 2, 4, 6, 8 → range = 6.
+pit: Range is highly influenced by outliers.
+note: Know range vs. standard deviation; range is crude.
+
+@@ ap-psychology.science-practices.set-d.normal-curve
+def: A symmetric, bell-shaped curve that represents the distribution of many traits / 正态曲线：对称的钟形曲线，代表许多特质的分布。
+ex: IQ scores are normally distributed with mean 100.
+pit: Assuming all data is normal; many real-world distributions are not.
+note: AP uses normal curve for z-scores and probability.
+
+@@ ap-psychology.science-practices.set-d.bimodal-distribution
+def: A distribution with two distinct peaks / 双峰分布：有两个明显峰值的分布。
+ex: Heights of both men and women combined often show two peaks.
+pit: Confusing bimodal with skewed; look for two separate clusters.
+note: AP may ask to identify from graph or explain possible cause.
+
+@@ ap-psychology.science-practices.set-d.standard-deviation
+def: A measure of variability that indicates the average distance of scores from the mean / 标准差：衡量数据与均值平均偏离程度的指标。
+ex: Small SD means scores cluster tightly; large SD means spread out.
+pit: Misinterpreting SD as percentage; SD is in original units.
+note: AP expects to know that ~68% within ±1 SD in normal curve.
+
+@@ ap-psychology.science-practices.set-d.regression-toward-the-mean
+def: The tendency for extreme scores to be followed by scores closer to the average / 回归均值：极端分数后通常出现更接近平均值的分数。
+ex: A student who scores extremely high on one test will likely score lower on the next.
+pit: Thinking regression is caused by something specific; it's statistical.
+note: AP often tests this with research design or correlation.
+
+@@ ap-psychology.science-practices.set-d.positive-skew
+def: A distribution where the tail extends to the right (higher values) / 正偏态：分布尾部向右延伸（高数值方向）。
+ex: Income distribution: most earn moderate but a few very high earners pull the mean right.
+pit: Confusing skew direction: mean > median in positive skew.
+note: AP identifies from graph: tail points to positive side.
+
+@@ ap-psychology.science-practices.set-d.negative-skew
+def: A distribution where the tail extends to the left (lower values) / 负偏态：分布尾部向左延伸（低数值方向）。
+ex: Age at retirement: most retire around 65, but a few retire very early.
+pit: Mean < median in negative skew; opposite of positive skew.
+note: AP may compare with positive skew; know which measure is affected.
+
+@@ ap-psychology.science-practices.set-d.scatterplot
+def: A graph that shows the relationship between two variables using dots / 散点图：用点表示两个变量关系的图表。
+ex: Plotting hours studied vs. test scores shows if they correlate.
+pit: Assuming causation from correlation visible in scatterplot.
+note: AP uses scatterplots to illustrate correlation direction and strength.
+
+@@ ap-psychology.science-practices.set-d.correlation
+def: A statistical measure that indicates the extent to which two variables are related / 相关：衡量两个变量之间关联程度的统计量。
+ex: r = +0.8 indicates strong positive correlation; r = -0.3 weak negative.
+pit: Correlation does not imply causation.
+note: AP expects interpretation of r values and sign.
+
+@@ ap-psychology.science-practices.set-d.positive-correlation
+def: Two variables move in the same direction (both increase or decrease). / 两个变量同向变化（同增或同减）。
+ex: As hours studied increase, test scores increase.
+pit: Correlation does not imply causation; a positive correlation does not prove one variable causes the other.
+note: AP exam may ask to identify direction from a scatterplot or data table.
+
+@@ ap-psychology.science-practices.set-d.negative-correlation
+def: Two variables move in opposite directions (one increases, the other decreases). / 两个变量反向变化（一增一减）。
+ex: As anxiety increases, test performance decreases.
+pit: Negative correlation ≠ no relationship; it shows a consistent inverse pattern.
+note: Look for negative slope in scatterplot; coefficient near -1 indicates strong negative.
+
+@@ ap-psychology.science-practices.set-d.correlation-coefficient
+def: A numerical index (r) from -1.00 to +1.00 measuring the strength and direction of a linear relationship. / 数值指标（r），范围-1.00到+1.00，衡量线性关系的强度和方向。
+ex: r = -0.85 indicates a strong negative correlation.
+pit: Absolute value indicates strength; sign indicates direction. Perfect correlation (±1) is rare in real data.
+note: AP FRQ often asks to interpret r value and distinguish from causation.
+
+@@ ap-psychology.science-practices.set-e.population
+def: The entire group of interest from which a sample is drawn. / 研究者感兴趣的全部群体，从中抽取样本。
+ex: All high school students in the U.S.
+pit: Population must be clearly defined; confusing population with sample leads to external validity errors.
+note: AP asks: "What is the population in this study?" — answer must match the research question.
+
+@@ ap-psychology.science-practices.set-e.sample
+def: A subset of the population that actually participates in the study. / 实际参与研究的群体子集。
+ex: 200 high school students from one school.
+pit: A biased sample (e.g., only volunteers) may not represent the population.
+note: AP exam tests generalizability: sample must represent population to apply findings.
+
+@@ ap-psychology.science-practices.set-e.representative-sample
+def: A sample that accurately reflects the characteristics of the population. / 准确反映总体特征的样本。
+ex: Matching population’s gender ratio, age distribution, etc.
+pit: Convenience samples are rarely representative; claiming representativeness without evidence is a trap.
+note: Key for external validity; FRQ may ask "Is the sample representative? Why or why not?"
+
+@@ ap-psychology.science-practices.set-e.random-sampling
+def: Every member of the population has an equal chance of being selected. / 总体中每个成员被选中的机会相等。
+ex: Using a random number generator to pick participants from a list.
+pit: Random sampling ≠ random assignment (assignment is for experiments). Random sampling increases generalizability.
+note: AP distinguishes random sampling (selection) from random assignment (condition allocation).
+
+@@ ap-psychology.science-practices.set-e.convenience-sampling
+def: Selecting participants who are easily accessible (e.g., nearby volunteers). / 选择容易接触的参与者（如附近的志愿者）。
+ex: Using psychology class students for a study.
+pit: Often leads to biased, non-representative samples; a common method but weak in external validity.
+note: AP asks to identify sampling method; point out its limitation for generalization.
+
+@@ ap-psychology.science-practices.set-e.representation-of-participants
+def: How well the sample mirrors the population in key traits. / 样本在关键特征上反映总体的程度。
+ex: If population is 50% female, sample should be ~50% female to have good representation.
+pit: Overlooking representation leads to claims that don't apply to subgroups (e.g., gender, culture).
+note: FRQ may ask to discuss representation when critiquing a study's generalizability.
+
+@@ ap-psychology.science-practices.set-e.experimental-group
+def: The group in an experiment that receives the treatment (the manipulated independent variable). / 实验中接受处理（操纵自变量）的组。
+ex: In a drug trial, the group that gets the actual drug.
+pit: Confusing experimental group with control group; both are essential for comparison.
+note: AP asks to identify experimental group in a scenario; remember it's the condition where IV is applied.
+
+@@ ap-psychology.science-practices.set-e.control-group
+def: Group not receiving treatment; used for comparison / 对照组
+ex: In drug trial, group gets placebo.
+pit: Confusing with experimental group (which gets treatment).
+note: Key for identifying cause-effect relationships.
+
+@@ ap-psychology.science-practices.set-e.single-blind-study
+def: Participants unaware of which condition they are in; researcher knows / 单盲实验
+ex: Patients don't know if they got drug or placebo.
+pit: Researcher bias still possible (expectations affect results).
+note: Reduces participant demand characteristics.
+
+@@ ap-psychology.science-practices.set-e.double-blind-study
+def: Both participants and researchers unaware of condition assignment / 双盲实验
+ex: Neither doctor nor patient knows who gets real drug.
+pit: Confusing single-blind with double-blind.
+note: Gold standard to minimize bias.
+
+@@ ap-psychology.science-practices.set-f.operational-definition
+def: Exact procedures used to measure or manipulate a variable / 操作定义
+ex: “Aggression” defined as number of times a child hits a doll.
+pit: Different definitions measure different constructs.
+note: Essential for replicability of experiments.
+
+@@ ap-psychology.science-practices.set-f.case-study
+def: In-depth examination of one individual or small group / 案例研究
+ex: Phineas Gage (personality change after brain injury).
+pit: Cannot generalize findings to the wider population.
+note: Useful for rare or unusual phenomena.
+
+@@ ap-psychology.science-practices.set-f.meta-analysis
+def: Statistical technique that combines results from multiple studies / 元分析
+ex: Averaging effect sizes from 50 studies on therapy effectiveness.
+pit: Not just a narrative literature review.
+note: Increases statistical power and identifies overall trends.
+
+@@ ap-psychology.science-practices.set-f.naturalistic-observation
+def: Observing behavior in a natural setting without interference / 自然观察
+ex: Watching children’s play interactions at a playground.
+pit: Observer effect (reactivity) and lack of control.
+note: High external validity; cannot determine cause-effect.
+
+@@ ap-psychology.science-practices.set-f.structured-interviews
+def: Interview using predetermined questions in a fixed order / 结构化访谈
+ex: Job interview where all applicants answer same questions.
+pit: Less flexible to explore unexpected topics.
+note: Increases reliability and comparability across participants.
+
+@@ ap-psychology.science-practices.set-f.likert-scale
+def: Rating scale with options from strongly agree to strongly disagree / 李克特量表
+ex: “I enjoy puzzles” rated on 1–5 scale.
+pit: Central tendency bias (avoiding extremes).
+note: Common in self-report surveys; yields ordinal data.
+
+@@ ap-psychology.science-practices.set-f.effect-size
+def: Measure of the strength of a relationship or magnitude of a difference / 效应量
+ex: Cohen’s d = 0.8 indicates a large effect.
+pit: Not the same as statistical significance (p-value).
+note: Indicates practical importance, independent of sample size.
+
+@@ ap-psychology.science-practices.set-f.statistical-significance
+def: A result is statistically significant if the probability of it occurring by chance is very low (typically p < .05) / 统计显著性指结果由偶然因素导致的概率极低（通常p<.05）
+ex: A drug trial shows p = .03, indicating only 3% chance results are due to random variation / 药物试验p=0.03，表示结果由随机变异产生的概率仅3%
+pit: Confusing significance with effect size; a tiny effect can be significant with large sample / 混淆显著性与效应量；大样本下微小效应也可能显著
+note: FRQ may ask to interpret “statistically significant” in context – always check p-value threshold / 自由答题可能要求解释“统计显著性”，务必注意p值阈值
+
+@@ ap-psychology.science-practices.set-f.replication
+def: Repeating a study using the same methods to see if results are consistent / 重复研究：用相同方法再次实验，检验结果是否一致
+ex: A memory experiment finding “rehearsal improves recall” is repeated by another lab with new participants / 一个记忆实验发现“复述提高回忆”，另一实验室用新被试重复
+pit: A failed replication does not always mean original was wrong; could be due to hidden variables / 重复失败不意味着原实验错误，可能由隐藏变量导致
+note: AP emphasizes replication crisis – be ready to discuss why replication matters for validity / AP强调“重复危机”，需讨论重复对有效性的意义
+
+@@ ap-psychology.science-practices.set-f.peer-review
+def: Evaluation of research by other experts in the same field before publication / 同行评审：同一领域其他专家在发表前对研究的评估
+ex: A psychologist submits a paper to a journal; anonymous reviewers critique methodology, analysis, conclusions / 心理学家投稿期刊，匿名评审批评方法、分析、结论
+pit: Peer review does not guarantee truth, only that the study meets basic standards / 同行评审不保证正确，仅确保符合基本标准
+note: AP often asks why peer review is important for scientific integrity / AP常问同行评审为何对科学诚信重要
+
+@@ ap-psychology.science-practices.set-g.falsifiability-pertaining-to-hypotheses
+def: A hypothesis must be able to be proven false by evidence / 可证伪性：假设必须能够被证据证明为假
+ex: “All swans are white” is falsifiable; finding one black swan disproves it / “所有天鹅都是白的”可证伪；发现一只黑天鹅即可证伪
+pit: Non‑falsifiable claims (e.g., “there is an invisible dragon in my garage”) cannot be tested scientifically / 不可证伪的断言（如“车库里有一只隐形龙”）无法科学检验
+note: AP sometimes ties falsifiability to Popper and pseudoscience / AP有时将可证伪性与波普尔及伪科学联系起来
+
+@@ ap-psychology.science-practices.set-g.placebo
+def: An inactive substance or condition used as a control in experiments / 安慰剂：实验中用作对照的无活性物质或条件
+ex: In a painkiller trial, some participants receive a sugar pill (placebo) instead of the real drug / 止痛药试验中，部分被试服用糖丸（安慰剂）代替真药
+pit: Placebo is not the same as placebo effect; placebo is the inert treatment / 安慰剂≠安慰剂效应；安慰剂是惰性处理
+note: AP asks how placebo controls help rule out expectancy effects / AP问安慰剂对照如何排除预期效应
+
+@@ ap-psychology.science-practices.set-g.placebo-effect
+def: Improvement resulting from a person's belief or expectation about a treatment, not from the treatment itself / 安慰剂效应：因对治疗的信念或期望产生的改善，非治疗本身所致
+ex: Patients told a sugar pill is a pain reliever report less pain / 被告知糖丸是止痛药的患者报告疼痛减轻
+pit: The placebo effect can occur even with real treatments – it's about psychological response / 安慰剂效应可能发生在真治疗中——它是心理反应
+note: AP connects placebo effect to confounding variables in experiments / AP将安慰剂效应与实验中的混淆变量联系起来
+
+@@ ap-psychology.science-practices.set-g.overconfidence
+def: The tendency to overestimate the accuracy of one’s knowledge, judgments, or abilities / 过度自信：高估自己知识、判断或能力准确性的倾向
+ex: Students often predict they will score higher on an exam than they actually do / 学生常预测自己考试分数高于实际得分
+pit: Overconfidence is not the same as self‑esteem; it's a cognitive bias about accuracy / 过度自信≠自尊；它是关于准确性的认知偏差
+note: AP may cite overconfidence to explain why people make flawed decisions (e.g., investing) / AP可能引用过度自信解释人们为何做出错误决策（如投资）
+
+@@ ap-psychology.science-practices.set-g.directionality-problem-in-correlation
+def: In a correlation, we cannot know which variable causes the other – direction of causation is unclear / 相关中的方向性问题：无法确定哪个变量导致另一个——因果方向不明确
+ex: Ice cream sales and crime rate correlate: does ice cream cause crime, or crime cause ice cream buying? / 冰淇淋销量与犯罪率相关：冰淇淋导致犯罪，还是犯罪导致买冰淇淋？
+pit: Students often assume correlation implies causation; directionality problem shows that's false / 学生常认为相关即因果；方向性问题表明这错误
+note: AP FRQ often asks to identify directionality problem in a given correlation / AP自由答题常要求识别给定相关中的方向性问题
+
+@@ ap-psychology.science-practices.set-g.third-variable-problem-in-correlation
+def: A third variable may be causing both correlated variables, producing a spurious correlation / 第三变量问题：第三个变量可能同时导致两个相关变量，产生伪相关
+ex: Ice cream sales and drowning deaths correlate; the third variable is hot weather (more swimming) / 冰淇淋销量与溺水死亡相关；第三变量是炎热天气（更多游泳）
+pit: Not the same as directionality problem; here a hidden variable explains the link / 不同于方向性问题；这里是隐藏变量解释关联
+note: AP emphasizes that correlational studies cannot establish causation due to third variables / AP强调相关研究因第三变量无法确立因果
+
+@@ ap-psychology.science-practices.set-g.experimenter-bias
+def: When a researcher’s expectations or preferences influence the study results (e.g., data recording, interpretation) / 实验者偏差：研究者的期望或偏好影响研究结果（如数据记录、解释）
+ex: A researcher who expects a new drug to work may unconsciously notice more positive outcomes in the treatment group / 预期新药有效的研究者可能无意识地在治疗组注意到更多积极结果
+pit: Experimenter bias can affect both human and animal subjects if the researcher interacts differently / 实验者偏差可能影响人类和动物被试，因为研究者互动方式不同
+note: AP discusses double‑blind procedures as a way to reduce experimenter bias / AP讨论双盲程序是减少实验者偏差的方法
+
+@@ ap-psychology.science-practices.set-g.social-desirability-bias
+def: Tendency to answer questions in a way that will be viewed favorably by others / 社会赞许性偏差：回答问题时倾向于给出被他人认可的回答
+ex: Survey respondents overreport voting frequency / 受访者高报投票频率
+pit: Confuse with self-report bias; social desirability is about wanting to look good / 易混淆：与自我报告偏差不同，它强调“讨好”他人
+note: Common in self-report surveys; AP asks about its effect on validity / 常考：影响调查效度
+
+@@ ap-psychology.science-practices.set-g.cultural-norms
+def: Shared expectations and rules of behavior within a group / 文化规范：群体内共享的行为期望和规则
+ex: Bowing when greeting in Japan / 日本见面鞠躬
+pit: Not the same as personal values; norms are external expectations / 易混：个人价值观不同，规范是外部期望
+note: AP can ask how norms affect research generalizability / 常考：影响研究推广性
+
+@@ ap-psychology.science-practices.set-g.confirmation-bias
+def: Tendency to search for, interpret, and recall information that confirms one’s preexisting beliefs / 证实偏差：倾向于寻找、解释和回忆支持自己已有信念的信息
+ex: Only reading news that aligns with your political views / 只看符合自己政治观点的新闻
+pit: Confuse with hindsight bias; confirmation bias is about seeking confirming evidence / 易混：后见偏差不同，它是“我早就知道”
+note: Frequently tested in research methods and cognitive biases / 常考：研究方法与认知偏差
+
+@@ ap-psychology.science-practices.set-g.hindsight-bias
+def: Tendency to believe, after an event, that one “knew it all along” / 后见偏差：事后认为“我早就知道”
+ex: After a stock market crash, saying “I knew that would happen” / 股灾后说“我早知道会这样”
+pit: Confuse with overconfidence; hindsight is about post-event certainty / 易混：过度自信不同，这里强调事后聪明
+note: Classic “I-knew-it-all-along” phenomenon; AP loves it in experiments / 经典“事后诸葛亮”，AP实验设计常考
+
+@@ ap-psychology.u1.t1-1.heredity
+def: Genetic transmission of traits from parents to offspring / 遗传：父母将特征通过基因传递给后代
+ex: Eye color passed from mother to child / 母亲传给孩子眼睛颜色
+pit: Heredity ≠ genetics entirely; heredity is the process of passing genes / 易混：遗传是传递过程，不完全是基因本身
+note: Foundation for nature vs nurture debate / 先天后天辩论基础
+
+@@ ap-psychology.u1.t1-1.nature
+def: The influence of genetic inheritance on behavior and mental processes / 天性：基因遗传对行为和心理过程的影响
+ex: Identical twins having similar temperaments / 同卵双生儿气质相似
+pit: Nature is not just biology; it includes evolutionary predispositions / 易混：天性不仅是生物，还包括进化倾向
+note: Compare with nurture in AP essays / AP论文中常与教养对比
+
+@@ ap-psychology.u1.t1-1.nurture
+def: Environmental influences shaping behavior and mental processes / 教养：环境因素对行为和心理过程的塑造
+ex: A child learning language from caregivers / 孩子从看护者那里学语言
+pit: Nurture includes all experience, not just parenting / 易混：教养包括所有经验，不止养育
+note: Interaction with nature is key; not either/or / 关键是与天性相互作用
+
+@@ ap-psychology.u1.t1-1.genetic-predisposition
+def: Increased likelihood of developing a trait or disorder based on genetic makeup / 遗传易感性：基于基因构成而更可能发展出某种特质或障碍
+ex: Family history of depression increases risk / 抑郁家族史增加风险
+pit: Not destiny; environment can trigger or prevent expression / 易混：非注定，环境可触发或阻止表达
+note: AP often links to diathesis-stress model / 常联系“素质-压力模型”
+
+@@ ap-psychology.u1.t1-1.evolutionary-perspective
+def: Approach that explains behavior by how it promotes survival and reproduction / 进化视角：从促进生存和繁殖的角度解释行为
+ex: Fear of snakes helps avoid danger / 怕蛇有助于避开危险
+pit: Not the same as natural selection; this perspective applies evolution to psychology / 易混：不是自然选择本身，而是其心理学应用
+note: Used to explain universal behaviors like mate preferences / 解释普遍行为如择偶偏好
+
+@@ ap-psychology.u1.t1-1.natural-selection
+def: Process by which traits that enhance survival and reproduction are passed on more frequently / 自然选择：增强生存与繁殖的特征更频繁传递的过程
+ex: Antibiotic resistance in bacteria / 细菌的抗生素耐药性
+pit: Confuse with “survival of the fittest” oversimplification; “fittest” means best adapted / 易混：“适者生存”过于简化，适者指适应良好
+note: Basis for evolutionary perspective in psychology / 进化视角的基础
+
+@@ ap-psychology.u1.t1-1.eugenics
+def: The belief that human traits can be improved through selective breeding / 通过选择性繁殖改善人类特质的观点
+ex: Historical forced sterilization of "unfit" individuals in early 20th century US
+pit: Often confused with genetics; eugenics is a social/political movement, not genetics itself
+note: AP Psychology typically tests eugenics as a historical misuse of genetic concepts, not as accepted science.
+
+@@ ap-psychology.u1.t1-1.twin-studies
+def: Research method comparing identical (monozygotic) and fraternal (dizygotic) twins to estimate genetic vs environmental influence / 通过比较同卵和异卵双生子来估计遗传与环境影响的研究方法
+ex: If identical twins show higher concordance for IQ than fraternal twins, it suggests genetic influence
+pit: Assumes identical twins share equal environment; critics point to "equal environments assumption"
+note: AP cue: Twin studies provide key evidence for heritability estimates.
+
+@@ ap-psychology.u1.t1-1.family-studies
+def: Research examining how traits run in families to infer genetic influence / 研究特质在家族中如何传递以推断遗传影响的方法
+ex: Children of depressed parents are more likely to be depressed, but this could be due to shared environment or genetics
+pit: Cannot separate genetic from environmental influences (confound of shared environment)
+note: AP cue: Family studies are correlational; they suggest but do not prove genetic links.
+
+@@ ap-psychology.u1.t1-1.adoption-studies
+def: Comparing adopted children to biological and adoptive parents to separate genetic and environmental effects / 比较被收养孩子与生父母及养父母，以分离遗传与环境影响
+ex: Adopted child's IQ correlates more with biological parents' IQ than adoptive parents' IQ → supports genetic influence
+pit: Adoption may not be random; selective placement can confound results
+note: AP cue: Adoption studies provide stronger evidence than family studies for genetic influences.
+
+@@ ap-psychology.u1.t1-2.central-nervous-system-brain-and-spinal-cord
+def: The brain and spinal cord; the body's decision-making and command center / 大脑和脊髓；身体的决策和指挥中枢
+ex: Reflexes like pulling hand from hot stove are processed in spinal cord without brain
+pit: Confusing CNS with PNS; CNS only includes brain and spinal cord, not nerves
+note: AP cue: CNS is the core; spinal cord handles simple reflexes.
+
+@@ ap-psychology.u1.t1-2.peripheral-nervous-system
+def: All nerves outside the brain and spinal cord; connects CNS to limbs and organs / 大脑和脊髓之外的所有神经；连接中枢神经系统与四肢和器官
+ex: Nerves in your arm that sense pain and move muscles
+pit: Students often think PNS only includes sensory nerves; it also includes motor nerves
+note: AP cue: PNS has two divisions: somatic and autonomic.
+
+@@ ap-psychology.u1.t1-2.autonomic-nervous-system
+def: Division of PNS that controls involuntary functions (heartbeat, digestion, glands) / 自主神经系统：控制心跳、消化、腺体等不随意功能的PNS分支
+ex: Your heart rate increases during exercise automatically
+pit: Called "autonomic" not because it works on its own, but because it regulates self-governing body functions
+note: AP cue: Autonomic = automatic; consists of sympathetic and parasympathetic branches.
+
+@@ ap-psychology.u1.t1-2.sympathetic-nervous-system
+def: Part of ANS that arouses the body for "fight or flight" responses / 交感神经系统：引起身体“战斗或逃跑”反应
+ex: Dilates pupils, accelerates heart rate, inhibits digestion when scared
+pit: Not the same as central nervous system; it's a branch of ANS in PNS
+note: AP cue: Sympathetic = arousing; prepares body for stress.
+
+@@ ap-psychology.u1.t1-2.parasympathetic-nervous-system
+def: Part of ANS that calms the body, promoting "rest and digest" functions / 副交感神经系统：使身体平静，促进“休息和消化”
+ex: Slows heart rate, stimulates digestion after a meal
+pit: Often confused as the opposite of sympathetic; it's actually the antagonist for homeostasis
+note: AP cue: Parasympathetic = calming; conserves energy.
+
+@@ ap-psychology.u1.t1-2.somatic-nervous-system
+def: Division of PNS that controls voluntary movements and transmits sensory information / 躯体神经系统：控制随意运动并传递感觉信息的PNS分支
+ex: You consciously decide to wave your hand; motor neurons carry the signal
+pit: Students sometimes think "somatic" means body (like automatic), but it's voluntary
+note: AP cue: Somatic = sensory and motor neurons; under conscious control.
+
+@@ ap-psychology.u1.t1-3.neurons
+def: Nerve cells that receive, process, and transmit electrochemical information / 神经元：接收、处理并传递电化学信息的神经细胞
+ex: A sensory neuron in your finger sends a signal to your brain when you touch a hot stove
+pit: Students often confuse neurons with glial cells; neurons are the primary communicators, glia support them
+note: AP loves asking about neuron structure (dendrites, axon, cell body) and function in the nervous system
+
+@@ ap-psychology.u1.t1-3.glial-cells
+def: Support cells that nourish, insulate, and protect neurons; also involved in learning and memory / 神经胶质细胞：滋养、绝缘和保护神经元的支持细胞，也参与学习和记忆
+ex: Oligodendrocytes produce myelin sheath in the CNS
+pit: Don't think glial cells only provide "glue"; they also speed up neural transmission via myelination
+note: Myelination by glial cells is a key FRQ concept for action potential speed
+
+@@ ap-psychology.u1.t1-3.reflex-arc
+def: A simple, automatic response to a stimulus involving sensory, interneuron, and motor neurons; bypasses the brain / 反射弧：对刺激的简单自动反应，涉及感觉神经元、中间神经元和运动神经元，绕过大脑
+ex: Knee-jerk reflex: tap patellar tendon → sensory neuron → spinal cord → motor neuron → leg kicks
+pit: Reflex arcs still involve interneurons in the spinal cord; not just two neurons
+note: Often tested as an example of the spinal cord's role without brain involvement
+
+@@ ap-psychology.u1.t1-3.sensory-neurons
+def: Afferent neurons that carry incoming information from sensory receptors to the CNS / 感觉神经元：传入神经元，将来自感受器的信息传入中枢神经系统
+ex: Photoreceptors in the eye activate sensory neurons that send visual info to the brain
+pit: Sensory neurons are afferent (arrive at CNS); motor neurons are efferent (exit CNS)
+note: Key term: "afferent" → feels like "arrive"
+
+@@ ap-psychology.u1.t1-3.motor-neurons
+def: Efferent neurons that carry outgoing commands from the CNS to muscles and glands / 运动神经元：传出神经元，将中枢神经系统的指令传给肌肉和腺体
+ex: Motor neurons cause your biceps to contract when you lift a cup
+pit: Do not confuse with interneurons; motor neurons directly activate effectors
+note: Efferent = exit CNS; opposite of afferent/sensory
+
+@@ ap-psychology.u1.t1-3.interneurons
+def: Neurons within the CNS that connect sensory and motor neurons; involved in processing and reflexes / 中间神经元：中枢神经系统内连接感觉和运动神经元的神经元，参与处理和反射
+ex: In the spinal cord, an interneuron relays the signal from sensory to motor neuron in a reflex arc
+pit: Interneurons are only in the CNS (brain and spinal cord), not in peripheral nerves
+note: They outnumber sensory and motor neurons; critical for complex neural networks
+
+@@ ap-psychology.u1.t1-3.neural-transmission
+def: The process by which an electrical signal travels along a neuron and across a synapse via neurotransmitters / 神经传导：电信号沿神经元传播并通过突触以神经递质传递的过程
+ex: When you decide to move your hand, neural transmission occurs from brain to hand muscles
+pit: Sometimes students think transmission is purely electrical; it switches to chemical at the synapse
+note: Know the steps: action potential → synaptic vesicle release → neurotransmitter binding
+
+@@ ap-psychology.u1.t1-3.action-potential
+def: A brief electrical impulse that travels down the axon, triggered by depolarization past threshold / 动作电位：由去极化超过阈值触发的、沿轴突传播的短暂电脉冲
+ex: When a neuron fires, the action potential "all-or-nothing" message is sent down the axon
+pit: Action potentials are not "stronger" with stronger stimuli; they are all-or-nothing (but frequency can vary)
+note: Typically tested with the "all-or-nothing principle" and ion movement (Na+ in, K+ out)
+
+@@ ap-psychology.u1.t1-3.all-or-nothing-principle
+def: The principle that a neuron fires an action potential at full strength or not at all, depending on whether threshold is reached / 全或无原则：神经元要么以全强度发射动作电位，要么不发射，取决于是否达到阈值
+ex: Like a gun: slight pull may not fire, but once you pull past the threshold, the bullet is always shot with same force
+pit: Stimuli above threshold do not produce bigger action potentials, but can increase firing rate
+note: Multiple choice: "Which principle explains why a strong pinch and a light touch both create an action potential in one neuron?" → All-or-nothing
+
+@@ ap-psychology.u1.t1-3.depolarization
+def: The shift in membrane potential from negative to positive, usually caused by sodium ions entering the cell / 去极化：膜电位从负向正的转变，通常由钠离子内流引起
+ex: When a stimulus opens Na+ channels, the inside of the neuron becomes less negative, leading to depolarization
+pit: Depolarization is NOT the same as action potential; it is the initial phase that leads to it if threshold is reached
+note: Know the three phases: depolarization (Na+ in), repolarization (K+ out), hyperpolarization (more negative)
+
+@@ ap-psychology.u1.t1-3.refractory-period
+def: A brief period after an action potential when the neuron cannot fire again / 不应期：动作电位后神经元无法再次放电的短暂时期
+ex: After a neuron fires, it pauses ~1-2 ms before it can fire again // 神经元放电后暂停约1-2毫秒才能再次放电
+pit: Students confuse it with resting potential; refractory period is the *post-firing* reset, not the resting state // 易混淆为静息电位，不应期是放电后重置期
+note: AP tip: refractory period ensures action potentials travel one direction and limit firing rate // 确保动作电位单向传导并限制放电频率
+
+@@ ap-psychology.u1.t1-3.resting-potential
+def: The stable, negative charge of a neuron when it is not firing (typically -70 mV) / 静息电位：神经元未放电时的稳定负电荷（约-70毫伏）
+ex: Inside of axon is more negative than outside at rest // 静息时轴突内部比外部更负
+pit: Don't think it's zero; it's negative due to more K⁺ inside, Na⁺ outside // 不是零，因内部钾离子多、外部钠离子多而呈负性
+note: AP key: resting potential is maintained by sodium-potassium pump // 由钠钾泵维持
+
+@@ ap-psychology.u1.t1-3.reuptake
+def: Process by which neurotransmitters are reabsorbed into the presynaptic neuron after release / 再摄取：神经递质释放后被突触前神经元重新吸收的过程
+ex: SSRIs block serotonin reuptake to increase mood // SSRIs阻断5-羟色胺再摄取以提升情绪
+pit: Students think reuptake happens *in* the synapse; it happens *into* the presynaptic terminal // 误以为在突触内发生，实际是再摄入突触前末梢
+note: AP exam: drugs that block reuptake (like cocaine, SSRIs) increase neurotransmitter in synapse // 阻断再摄取的药物（可卡因、SSRIs）增加突触递质浓度
+
+@@ ap-psychology.u1.t1-3.threshold
+def: The minimum level of stimulation needed to trigger an action potential (typically -55 mV) / 阈值：触发动作电位所需的最低刺激水平（约-55毫伏）
+ex: If a neuron's voltage reaches threshold, it fires; below, it does not // 若电压达阈值则放电，否则不放电
+pit: All-or-none principle: threshold must be met; partial stimulation does not produce smaller impulse // 全或无原则：必须达到阈值，部分刺激不产生较小脉冲
+note: AP cue: threshold is the tipping point for action potential // 阈值是动作电位的临界点
+
+@@ ap-psychology.u1.t1-3.multiple-sclerosis
+def: An autoimmune disease where the myelin sheath is destroyed, slowing neural impulses / 多发性硬化：自体免疫病破坏髓鞘，减缓神经冲动传导
+ex: Symptoms include numbness, vision loss, fatigue // 症状包括麻木、视力丧失、疲劳
+pit: Confuse with myasthenia gravis; MS affects *myelin* (insulation), not the synapse // 易与重症肌无力混淆，MS影响髓鞘（绝缘层），而非突触
+note: AP tip: illustrates importance of myelin sheath for speed // 说明髓鞘对传导速度的重要性
+
+@@ ap-psychology.u1.t1-3.myasthenia-gravis
+def: A chronic autoimmune disorder causing muscle weakness due to blocked acetylcholine receptors / 重症肌无力：慢性自体免疫病，因乙酰胆碱受体受阻导致肌肉无力
+ex: Drooping eyelids, difficulty swallowing // 眼睑下垂，吞咽困难
+pit: Differentiate from multiple sclerosis: MG affects *receptors* at neuromuscular junction; MS affects *myelin* // 与MS区别：MG影响神经肌肉接头受体，MS影响髓鞘
+note: AP: treatment often includes drugs that inhibit acetylcholinesterase // 治疗常用抑制乙酰胆碱酯酶药物
+
+@@ ap-psychology.u1.t1-3.dopamine
+def: A neurotransmitter involved in movement, reward, and pleasure / 多巴胺：参与运动、奖赏和愉悦的神经递质
+ex: Parkinson’s disease results from dopamine deficiency; addiction linked to dopamine surges // 帕金森病因多巴胺不足成瘾与多巴胺激增有关
+pit: Oversimplify as "pleasure chemical"; it’s more about *anticipation* and motivation // 勿简化成“快乐化学物”，更多与预期和动机相关
+note: AP common: dopamine pathways in schizophrenia (excess) and addiction // 精神分裂症（过度）和成瘾中的多巴胺通路
+
+@@ ap-psychology.u1.t1-3.excitatory-neurotransmitters
+def: Neurotransmitters that increase the likelihood of the postsynaptic neuron firing / 兴奋性神经递质：增加突触后神经元放电可能性的递质
+ex: Acetylcholine at neuromuscular junctions causes muscle contraction // 神经肌肉接头处乙酰胆碱引起肌肉收缩
+pit: Some neurotransmitters (e.g., acetylcholine) can be excitatory *or* inhibitory depending on receptor // 某些递质（如乙酰胆碱）根据受体不同可兴奋或抑制
+note: AP: important for understanding EPSPs (excitatory postsynaptic potentials) // 理解兴奋性突触后电位（EPSP）的基础
+
+@@ ap-psychology.u1.t1-3.inhibitory-neurotransmitters
+def: Neurotransmitters that decrease the likelihood of the postsynaptic neuron firing / 抑制性神经递质：降低突触后神经元放电可能性的递质
+ex: GABA reduces neural activity, calming anxiety // GABA降低神经活动，缓解焦虑
+pit: Don't think "inhibitory" means always slow; they regulate balance // 勿以为“抑制”总是减慢，它们调节平衡
+note: AP cue: hyperpolarization makes neuron less likely to fire // 超极化使神经元更难放电
+
+@@ ap-psychology.u1.t1-3.serotonin
+def: A neurotransmitter that regulates mood, sleep, appetite, and pain / 5-羟色胺（血清素）：调节情绪、睡眠、食欲和疼痛的神经递质
+ex: Low serotonin linked to depression; SSRIs increase serotonin levels // 低血清素与抑郁相关，SSRIs提高血清素水平
+pit: Serotonin is not only about happiness; it affects many functions // 不仅关乎快乐，还影响多种功能
+note: AP: often tested with antidepressants mechanism // 常与抗抑郁药机制一起考查
+
+@@ ap-psychology.u1.t1-3.norepinephrine
+def: A neurotransmitter that increases arousal, alertness, and triggers fight-or-flight response / 一种提高警觉、唤醒并触发“战斗或逃跑”反应的神经递质
+ex: During a sudden loud noise, Norepinephrine surges to prepare for action / 突然听到巨响时，去甲肾上腺素激增以准备行动
+pit: Do not confuse with epinephrine (adrenaline) — norepinephrine is a neurotransmitter, while adrenaline is a hormone in the bloodstream / 勿与肾上腺素混淆——去甲肾上腺素是神经递质，而肾上腺素是血液中的激素
+note: AP often tests Norepinephrine as the "alertness" neurotransmitter / AP考试常测试去甲肾上腺素作为“警觉”神经递质
+
+@@ ap-psychology.u1.t1-3.glutamate
+def: The major excitatory neurotransmitter; involved in learning and memory / 主要的兴奋性神经递质，参与学习和记忆过程
+ex: Excessive glutamate release after a stroke can overstimulate neurons and cause damage / 中风后过量的谷氨酸释放会过度刺激神经元导致损伤
+pit: Confuse with GABA — remember glutamate excites, GABA inhibits / 易与GABA混淆——记住谷氨酸兴奋，GABA抑制
+note: AP may ask which neurotransmitter is excitatory, leading to glutamate / AP可能问哪种神经递质是兴奋性的，答案是谷氨酸
+
+@@ ap-psychology.u1.t1-3.gaba
+def: The major inhibitory neurotransmitter; reduces neural activity and calms the brain / 主要的抑制性神经递质，降低神经活动，使大脑平静
+ex: Anti-anxiety drugs like Valium work by enhancing GABA's effects / 如安定等抗焦虑药物通过增强GABA的作用起效
+pit: Think of GABA as the brain's "brake" — its deficiency is linked to anxiety / 将GABA想象为大脑的“刹车”——其缺乏与焦虑相关
+note: AP often contrasts GABA (inhibitory) with glutamate (excitatory) / AP常对比GABA（抑制）与谷氨酸（兴奋）
+
+@@ ap-psychology.u1.t1-3.endorphins
+def: Natural painkillers produced by the body; also produce feelings of pleasure / 身体产生的天然止痛剂，同时产生愉悦感
+ex: Endorphins cause "runner's high" after prolonged exercise / 内啡肽在长时间运动后引起“跑者高潮”
+pit: Do not confuse with exogenous opioids like morphine — endorphins are endogenous / 勿与外源性阿片类药物（如吗啡）混淆——内啡肽是内源性
+note: AP may link endorphins to pain reduction and reward pathways / AP可能将内啡肽与减痛及奖赏通路联系起来
+
+@@ ap-psychology.u1.t1-3.substance-p
+def: A neurotransmitter involved in transmitting pain signals to the brain / 一种参与将疼痛信号传递到大脑的神经递质
+ex: Substance P levels increase when you touch a hot stove, intensifying pain perception / 触摸热炉时P物质水平升高，增强痛觉感知
+pit: Substance P amplifies pain — opposite effect of endorphins / P物质放大疼痛——作用与内啡肽相反
+note: AP may test Substance P in pain pathways as the "pain" neurotransmitter / AP可能在疼痛通路中测试P物质作为“痛觉”神经递质
+
+@@ ap-psychology.u1.t1-3.acetylcholine
+def: A neurotransmitter that enables muscle contraction, memory, and arousal / 一种促进肌肉收缩、记忆和唤醒的神经递质
+ex: Botox blocks acetylcholine release, causing temporary muscle paralysis / 肉毒杆菌素阻断乙酰胆碱释放，导致暂时性肌肉麻痹
+pit: Alzheimer's disease is associated with acetylcholine deficiency — not dopamine / 阿尔茨海默病与乙酰胆碱缺乏有关——而非多巴胺
+note: AP often tests acetylcholine for both motor (PNS) and memory (CNS) roles / AP常测试乙酰胆碱在运动（外周）和记忆（中枢）中的双重作用
+
+@@ ap-psychology.u1.t1-3.hormones
+def: Chemical messengers secreted by endocrine glands into the bloodstream; act slower but longer than neurotransmitters / 由内分泌腺分泌到血液中的化学信使；比神经递质作用慢但持久
+ex: Cortisol, a stress hormone, is released from the adrenal cortex / 皮质醇是一种压力激素，由肾上腺皮质释放
+pit: Compare with neurotransmitters — hormones travel via blood, neurotransmitters cross synapses / 与神经递质比较——激素通过血液运输，神经递质穿越突触
+note: AP often asks to distinguish endocrine system (hormones) from nervous system (neurotransmitters) / AP常要求区分内分泌系统（激素）与神经系统（神经递质）
+
+@@ ap-psychology.u1.t1-3.adrenaline
+def: A hormone (also called epinephrine) released by the adrenal medulla; triggers fight-or-flight response / 由肾上腺髓质释放的激素（也称肾上腺素）；触发“战斗或逃跑”反应
+ex: Adrenaline increases heart rate and blood sugar when you are frightened / 害怕时肾上腺素提高心率和血糖
+pit: Note that adrenaline acts as a hormone in the blood, but can also function as a neurotransmitter in some contexts / 注意肾上腺素在血液中是激素，但在某些情境下也可作为神经递质
+note: AP often tests adrenaline as the classic stress hormone / AP常测试肾上腺素作为经典压力激素
+
+@@ ap-psychology.u1.t1-3.leptin
+def: A hormone secreted by fat cells that signals the brain to reduce appetite / 由脂肪细胞分泌的激素，向大脑发出减少食欲的信号
+ex: High leptin levels indicate fullness; leptin resistance can lead to obesity / 瘦素水平高表示饱足；瘦素抵抗可导致肥胖
+pit: Do not confuse with ghrelin — leptin signals satiety, ghrelin signals hunger / 勿与饥饿素混淆——瘦素提示饱足，饥饿素提示饥饿
+note: AP links leptin to biological bases of eating behavior and obesity / AP将瘦素与进食行为和肥胖的生物学基础联系起来
+
+@@ ap-psychology.u1.t1-3.ghrelin
+def: A hormone released by the stomach that stimulates hunger / 由胃释放的激素，刺激饥饿感
+ex: Ghrelin levels rise before meals and drop after eating / 饥饿素水平在餐前升高，餐后下降
+pit: Remember: "ghrelin" sounds like "gremlin" — a gremlin makes you hungry / 记忆技巧：“ghrelin”发音像“gremlin”（小精灵）——小精灵让你感到饿
+note: AP often pairs ghrelin and leptin as opposing hunger-regulating hormones / AP常将饥饿素与瘦素作为调节饥饿的对抗激素
