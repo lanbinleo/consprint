@@ -271,12 +271,14 @@ func (i Importer) EnrichFromCompact(path string) error {
 	defer file.Close()
 
 	type entry struct {
+		id    string
 		def   []string
 		ex    []string
 		pit   []string
 		notes []string
 	}
-	entries := map[string]*entry{}
+	var entries []*entry
+	var current *entry
 	currentID := ""
 	scanner := bufio.NewScanner(file)
 	scanner.Buffer(make([]byte, 1024), 1024*1024)
@@ -288,11 +290,12 @@ func (i Importer) EnrichFromCompact(path string) error {
 		if strings.HasPrefix(t, "@@") {
 			currentID = strings.TrimSpace(strings.TrimPrefix(t, "@@"))
 			if currentID != "" {
-				entries[currentID] = &entry{}
+				current = &entry{id: currentID}
+				entries = append(entries, current)
 			}
 			continue
 		}
-		if currentID == "" {
+		if currentID == "" || current == nil {
 			continue
 		}
 		key, value, ok := strings.Cut(t, ":")
@@ -306,13 +309,13 @@ func (i Importer) EnrichFromCompact(path string) error {
 		}
 		switch key {
 		case "def", "definition":
-			entries[currentID].def = append(entries[currentID].def, value)
+			current.def = append(current.def, value)
 		case "ex", "example":
-			entries[currentID].ex = append(entries[currentID].ex, value)
+			current.ex = append(current.ex, value)
 		case "pit", "pitfall":
-			entries[currentID].pit = append(entries[currentID].pit, value)
+			current.pit = append(current.pit, value)
 		case "note":
-			entries[currentID].notes = append(entries[currentID].notes, value)
+			current.notes = append(current.notes, value)
 		}
 	}
 	if err := scanner.Err(); err != nil {
@@ -322,8 +325,8 @@ func (i Importer) EnrichFromCompact(path string) error {
 	updated := 0
 	ordered, indexByID := i.orderedConcepts()
 	lastIndex := -1
-	for conceptID, e := range entries {
-		resolvedID, resolvedIndex := resolveCompactID(conceptID, ordered, indexByID, lastIndex)
+	for _, e := range entries {
+		resolvedID, resolvedIndex := resolveCompactID(e.id, ordered, indexByID, lastIndex)
 		if resolvedID == "" {
 			continue
 		}
