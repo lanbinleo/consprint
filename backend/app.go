@@ -13,6 +13,7 @@ import (
 	"golang.org/x/crypto/bcrypt"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
+	"gorm.io/gorm/clause"
 )
 
 type App struct {
@@ -342,10 +343,24 @@ func (a *App) importRun(c *gin.Context) {
 func (a *App) ensureStates(userID string) {
 	var concepts []Concept
 	a.DB.Select("id").Find(&concepts)
-	for _, concept := range concepts {
-		state := UserConceptState{ID: userID + "." + concept.ID, UserID: userID, ConceptID: concept.ID, Mastery: 0}
-		a.DB.FirstOrCreate(&state, "user_id = ? AND concept_id = ?", userID, concept.ID)
+	if len(concepts) == 0 {
+		return
 	}
+	var existing int64
+	a.DB.Model(&UserConceptState{}).Where("user_id = ?", userID).Count(&existing)
+	if int(existing) >= len(concepts) {
+		return
+	}
+	states := make([]UserConceptState, 0, len(concepts))
+	for _, concept := range concepts {
+		states = append(states, UserConceptState{ID: userID + "." + concept.ID, UserID: userID, ConceptID: concept.ID, Mastery: 0})
+	}
+	a.DB.Clauses(clause.OnConflict{DoNothing: true}).CreateInBatches(states, 200)
+}
+
+func (a *App) ensureState(userID, conceptID string) {
+	state := UserConceptState{ID: userID + "." + conceptID, UserID: userID, ConceptID: conceptID, Mastery: 0}
+	a.DB.Clauses(clause.OnConflict{DoNothing: true}).Create(&state)
 }
 
 func (a *App) stateFor(userID, conceptID string) (UserConceptState, error) {
@@ -353,8 +368,9 @@ func (a *App) stateFor(userID, conceptID string) (UserConceptState, error) {
 	if err := a.DB.First(&concept, "id = ?", conceptID).Error; err != nil {
 		return UserConceptState{}, err
 	}
-	state := UserConceptState{ID: userID + "." + conceptID, UserID: userID, ConceptID: conceptID}
-	a.DB.FirstOrCreate(&state, "user_id = ? AND concept_id = ?", userID, conceptID)
+	a.ensureState(userID, conceptID)
+	var state UserConceptState
+	a.DB.First(&state, "user_id = ? AND concept_id = ?", userID, conceptID)
 	return state, nil
 }
 
