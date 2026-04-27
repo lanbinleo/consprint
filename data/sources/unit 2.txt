@@ -1,0 +1,672 @@
+## 2.1 - Perception
+Bottom-up processing
+Top-down processing
+Schema
+Perceptual set
+Gestalt psychology
+Closure
+Figure and ground
+Proximity
+Similarity
+Attention
+Selective attention
+Cocktail party effect
+Inattentional blindness
+Change blindness
+Binocular depth cues
+Retinal disparity
+Convergence
+Monocular depth cues
+Relative clarity
+Relative size
+Texture gradient
+Linear perspective
+Interposition
+Apparent movement
+
+## 2.2 - Thinking, Problem-Solving, Judgments, and Decision Making
+Prototypes
+Assimilation
+Accommodation
+Algorithms
+Heuristics
+Representativeness heuristic
+Availability heuristic
+Mental set
+Priming
+Framing
+Gambler’s fallacy
+Sunk-cost fallacy
+Executive functions
+Creativity
+Divergent thinking
+Convergent thinking
+Functional fixedness
+
+## 2.3 - Introduction to Memory
+Explicit memory
+Episodic memory
+Semantic memory
+Implicit memory
+Procedural memory
+Prospective memory
+Long-term potentiation
+Working memory model
+Primary memory system
+Central executive
+Phonological loop
+Visuospatial sketchpad
+Long-term memory
+Multi-store model
+Sensory memory
+Iconic memory
+Echoic memory
+Automatic processing
+Effortful processing
+Storage
+Levels of processing model
+Shallow encoding
+Deep encoding 
+Structural, phonemic, semantic
+
+
+## 2.4 - Encoding Memories
+Encoding
+Mnemonic devices
+Method of loci
+Chunking
+Categories (as they pertain to grouping)
+Hierarchies (as they pertain to grouping)
+Spacing effect
+Memory consolidation
+Massed practice
+Distributed practice
+Serial position effect
+Primacy effect
+Recency effect
+
+## 2.5 - Storing Memories
+Sensory memory
+Short-term memory
+Working memory
+Long-term memory
+Maintenance rehearsal
+Elaborative rehearsal
+Memory retention
+Retrograde amnesia
+Autobiographical memory
+Anterograde amnesia
+Alzheimer’s disease
+Infantile amnesia
+
+## 2.6 - Retrieving Memories
+Retrieval
+Recall
+Recognition
+Retrieval cues
+Context-dependent memory
+Mood-congruent memory
+State-dependent memory
+Testing effect
+Metacognition
+
+## 2.7 - Forgetting and Other Memory Challenges
+Forgetting curve
+Encoding failure
+Proactive interference
+Retroactive interference
+Tip-of-the-tongue phenomenon
+Repression (psychodynamic)
+Misinformation effect
+Source amnesia
+Constructive memory
+Imagination inflation
+
+## 2.8 - Intelligence and Achievement
+Intelligence
+g (general intelligence)
+Intelligence quotient (IQ)
+Mental age
+Chronological age
+Standardization
+Validity
+Construct validity
+Predictive validity
+Reliability
+Test-retest reliability
+Split-half reliability
+Stereotype threat
+Stereotype lift
+Flynn Effect
+Achievement tests
+Aptitude tests
+Fixed mindset
+Growth mindset
+---
+2.1 - Perception
+
+   - Bottom-up processing
+      - Processing that begins with raw sensory data and builds up to perception — <red>no prior knowledge</red> involved.
+      - 老外第一次看汉字，一笔一画地拆解，因为没有任何已有知识可以依赖
+
+   - Top-down processing
+      - Using <red>prior knowledge, expectations, and context</red> to interpret sensory information.
+      - 研表究明汉字的序顺并不定一影阅响读，你的大脑自动用已有知识补全了意思
+
+   - Schema
+      - A mental framework that organizes knowledge and guides expectations about the world.
+      - 你对餐厅的schema：进门、点餐、吃饭、买单，去到任何餐厅都会这样预期
+
+   - Perceptual set
+      - A mental predisposition to perceive things in a certain way, influenced by experience, context, culture, emotions, and motivation. <red>Not inherently positive or negative</red> — differs from mental set.
+      - 先入为主，你刚看完恐怖片，走在黑暗的路上，树影都觉得像鬼
+
+   - Gestalt psychology
+      - A school of psychology emphasizing that **the whole is greater than the sum of its parts** — the brain organizes sensory information into meaningful wholes.
+      - 我们看到的不是一堆孤立的点和线，而是一个完整的图形
+
+   - Closure
+      - The tendency to mentally **fill in gaps** in incomplete figures to perceive them as complete.
+      - 一个缺了一块的圆，你的大脑会自动脑补成完整的圆
+
+   - Figure and ground
+      - The brain automatically separates visual input into a main object (**figure**) and its background (**ground**).
+      - 经典的花瓶与人脸图，你要么看到花瓶，要么看到两张对视的脸
+
+   - Proximity
+      - Objects that are <red>close together</red> in space tend to be perceived as belonging to the same group.
+      - 三个点靠在一起、另外三个点靠在一起，你会自动把它们看成两组
+
+   - Similarity
+      - Objects that <red>look alike</red> (color, shape, size) tend to be grouped together.
+      - 一排红点和一排蓝点交替排列，你会按颜色把它们分成不同的组
+
+   - Attention
+      - The process of focusing conscious awareness on a particular stimulus while filtering out others.
+      - 你在教室里专心听老师讲课，忽略了窗外的鸟叫声
+
+   - Selective attention
+      - Focusing on one specific stimulus while ignoring others — acts as a **filter**.
+      - 你在嘈杂的自习室里专心做题，周围的聊天声你完全没在意
+
+   - Cocktail party effect
+      - The ability to detect personally relevant information (like your name) even when not actively attending to it — suggests background monitoring.
+      - 嘈杂的派对上你没在听别人聊天，但远处有人叫你名字，你立刻注意到了
+
+   - Inattentional blindness
+      - Failing to notice a fully visible but unexpected stimulus when attention is focused elsewhere.
+      - 经典大猩猩实验：你专注数传球次数，完全没看到一只大猩猩走过画面
+
+   - Change blindness
+      - Failing to detect obvious changes in a scene when the change occurs during a brief disruption.
+      - 问路实验：你正在给一个人指路，中途被换成另一个人，你竟然没发现
+
+   - Binocular depth cues
+      - Depth cues that require <red>both eyes</red> working together, mainly for judging nearby distances.
+      - 需要两只眼睛才能获得的深度信息
+
+   - Retinal disparity
+      - The slight difference in images projected on the left and right retinas; <red>greater disparity = closer object</red>.
+      - 用左眼和右眼分别看手指，位置不一样，手指越近差异越大
+
+   - Convergence
+      - The inward turning of eyes when viewing a nearby object; <red>more muscle tension = closer object</red>.
+      - 看很近的东西时眼睛会变成斗鸡眼，大脑通过眼部肌肉紧张程度判断远近
+
+   - Monocular depth cues
+      - Depth cues available to <red>each eye alone</red>, useful for perceiving distance in 2D images.
+      - 用一只眼睛看照片也能判断远近的线索
+
+   - Relative clarity
+      - Clearer objects appear <red>closer</red>; hazier objects appear <red>farther</red> away.
+      - 远处的山看起来雾蒙蒙的，近处的树看起来很清晰
+
+   - Relative size
+      - When two objects are assumed to be the same actual size, the <red>smaller image</red> appears farther away.
+      - 两辆一样的车，看起来小的那辆离你更远
+
+   - Texture gradient
+      - Nearby surfaces have <red>detailed, coarse</red> textures; distant surfaces appear <red>dense and smooth</red>.
+      - 脚下的草地纹理清晰可见，远处的草地纹理变得密集模糊
+
+   - Linear perspective
+      - Parallel lines appear to <red>converge</red> in the distance; more convergence = farther.
+      - 铁轨在远方汇聚成一个点
+
+   - Interposition
+      - When one object <red>overlaps/blocks</red> another, the blocked object is perceived as farther away.
+      - 一座楼挡住了另一座楼，被挡住的那座看起来更远
+
+   - Apparent movement
+      - The perception of movement from a rapid series of <red>still images</red> — the basis of film and animation.
+      - 电影本质就是一系列静止图片快速播放，让你觉得画面在动
+
+2.2 - Thinking, Problem-Solving, Judgments, and Decision Making
+
+   - Prototypes
+      - The <red>most typical</red> example of a concept, used as a mental reference for categorization.
+      - 提到鸟，你脑中浮现的是麻雀而不是企鹅，因为麻雀更符合鸟的典型特征
+
+   - Assimilation
+      - Fitting new information <red>into an existing schema</red> without changing the schema.
+      - 小孩知道狗是四条腿会叫的动物，看到新品种的狗也直接归类为狗
+
+   - Accommodation
+      - <red>Modifying an existing schema</red> to incorporate new information that doesn't fit.
+      - 小孩把猫也叫狗，后来发现猫会喵喵叫，于是调整schema区分猫和狗
+
+   - Algorithms
+      - A step-by-step procedure that <red>guarantees</red> a correct solution, but may be slow.
+      - 超市找薯片，一排一排货架挨个找，肯定能找到但很慢
+
+   - Heuristics
+      - Mental shortcuts that allow quick judgments; efficient but <red>not guaranteed</red> to be correct.
+      - 超市找薯片，直接去零食区找，快但可能走错区域
+
+   - Representativeness heuristic
+      - Judging the likelihood of something based on how well it <red>matches a prototype</red>, often ignoring base rates.
+      - 一个安静爱读书的人，你觉得他是图书管理员而不是农民，但其实农民人数远多于图书管理员
+
+   - Availability heuristic
+      - Judging frequency or probability based on how <red>easily examples come to mind</red>.
+      - 新闻总报飞机失事，所以你觉得坐飞机比坐车危险，但其实车祸死亡率更高
+
+   - Mental set
+      - The tendency to use <red>previously successful strategies</red> even when they are no longer effective — leads to rigid thinking.
+      - 你一直用某个数学公式解题，遇到新类型的题还是下意识套用，结果错了
+
+   - Priming
+      - Exposure to a prior stimulus <red>unconsciously influences</red> the response to a subsequent stimulus.
+      - 先看到香蕉这个词，然后填 Y_L___，你更可能写出 YELLOW
+
+   - Framing
+      - The way information is <red>presented</red> significantly influences decisions and judgments.
+      - 手术存活率90%听起来很安全，死亡率10%听起来很危险，其实是同一件事
+
+   - Gambler's fallacy
+      - The false belief that past random events affect future probabilities of <red>independent</red> events.
+      - 连续抛了9次正面，你觉得下一次一定是反面，但每次概率都是50%
+
+   - Sunk-cost fallacy
+      - Continuing an endeavor because of <red>previously invested resources</red>, even when it's no longer rational.
+      - 电影很难看，但已经花了钱买票，就强迫自己看完
+
+   - Executive functions
+      - Higher-order cognitive processes (in the **frontal lobes**) that manage attention, planning, decision-making, and self-regulation.
+      - 你在写作业时控制自己不去刷手机，这就是执行功能在工作
+
+   - Creativity
+      - The ability to produce ideas that are both **novel and valuable**.
+      - 用一块砖头想出几十种用途：盖房子、当哑铃、当画板……
+
+   - Divergent thinking
+      - Thinking that <red>explores multiple possible solutions</red> — open-ended and creative.
+      - 头脑风暴：一块砖头有多少种用途？天马行空地想
+
+   - Convergent thinking
+      - Thinking that <red>narrows down to one correct answer</red> — logical and focused.
+      - AP选择题四选一，你需要排除错误选项，找出唯一正确答案
+
+   - Functional fixedness
+      - The inability to see an object as having a function <red>beyond its typical use</red> — a type of mental set.
+      - 蜡烛问题：你想不到把图钉盒倒空当烛台，因为你被它装图钉的功能固着了
+
+2.3 - Introduction to Memory
+
+   - Explicit memory
+      - Memories that can be <red>consciously recalled</red> and verbally declared. Also called **declarative memory**.
+      - 你能清楚说出昨天晚餐吃了什么，中国的首都是北京
+
+   - Episodic memory
+      - A type of explicit memory for <red>personal experiences</red> tied to specific times and places — like life episodes.
+      - 你记得去年生日派对的场景、声音和当时的感受
+
+   - Semantic memory
+      - A type of explicit memory for <red>general facts and knowledge</red>, independent of personal experience.
+      - 地球是圆的，1+1=2，这些知识不依赖于你的个人经历
+
+   - Implicit memory
+      - Memories that influence behavior <red>without conscious awareness</red>.
+      - 你骑自行车时不需要有意识地想每一步该怎么做
+
+   - Procedural memory
+      - A type of implicit memory for <red>motor skills and habits</red> — "how-to" knowledge.
+      - 骑车、打字、弹钢琴，你会做但说不清楚具体怎么协调的
+
+   - Prospective memory
+      - Remembering to <red>perform a planned action in the future</red> — "remembering to remember."
+      - 记住下午三点要去取快递
+
+   - Long-term potentiation
+      - The <red>strengthening of synaptic connections</red> through repeated stimulation — the biological basis of learning and memory.
+      - 这世上本没有路，走的人多了也便成了路；反复复习就是在强化神经通路
+
+   - Working memory model
+      - An updated model of STM emphasizing <red>active processing</red>, consisting of the central executive, phonological loop, and visuospatial sketchpad.
+      - 短期记忆的升级版，不只是被动存放信息，而是主动加工
+
+   - Primary memory system
+      - An early term for short-term/working memory — the system that <red>actively holds</red> information currently in use.
+      - 你正在使用的临时工作台，比如心算时暂时记住中间结果
+
+   - Central executive
+      - The component of working memory that <red>directs attention</red> and coordinates the phonological loop and visuospatial sketchpad.
+      - 老板角色，分配注意力，协调其他两个子系统的工作
+
+   - Phonological loop
+      - The component of working memory that processes <red>auditory and verbal</red> information — the "inner ear and voice."
+      - 你在脑海里默念一个电话号码来记住它
+
+   - Visuospatial sketchpad
+      - The component of working memory that processes <red>visual and spatial</red> information — the "inner eye."
+      - 你在脑中想象一张地图或者旋转一个三维物体
+
+   - Long-term memory
+      - The relatively <red>permanent and unlimited</red> storage system for knowledge, skills, and experiences.
+      - 你多年前学会的母语、骑车技能、童年回忆都存在这里
+
+   - Multi-store model
+      - Atkinson-Shiffrin model proposing three sequential stages: <red>sensory memory → short-term memory → long-term memory</red>.
+      - 信息先进入感觉记忆，被注意后进入短期记忆，经过复述后存入长期记忆
+
+   - Sensory memory
+      - A brief storage (<red>≤1 second</red>) that holds large amounts of raw sensory input before it fades or is attended to.
+      - 你快速晃动烟花棒时看到的完整光轨，就是视觉感觉记忆
+
+   - Iconic memory
+      - <red>Visual</red> sensory memory, lasting less than a second.
+      - 晃动烟花棒看到完整光轨，闭眼后画面短暂停留
+
+   - Echoic memory
+      - <red>Auditory</red> sensory memory, lasting about 3-4 seconds.
+      - 老师说了一句话你没听清，但几秒内可以在脑中回放刚才的声音
+
+   - Automatic processing
+      - Encoding of information <red>without conscious effort</red> — such as space, time, and frequency.
+      - 你不用刻意去记，就知道今天在路上碰到了好几次同一个朋友
+
+   - Effortful processing
+      - Encoding that requires <red>conscious attention and deliberate effort</red>.
+      - 背单词、复习公式，需要你集中注意力反复练习
+
+   - Storage
+      - The process of <red>maintaining</red> encoded information in memory over time.
+      - 把文件保存到硬盘上
+
+   - Levels of processing model
+      - Craik & Lockhart's theory that memory depends on the <red>depth of processing</red> — deeper processing leads to better memory.
+      - 加工越深记得越牢，理解意义比死记字形效果好得多
+
+   - Shallow encoding
+      - Processing information at a <red>surface level</red> (e.g., appearance or sound), producing weak memory.
+      - 只注意到 Peter Parker 是大写的，或者有几个字母
+
+   - Deep encoding
+      - Processing information at a <red>meaningful level</red> (semantics), producing strong and lasting memory.
+      - 看到 Peter Parker 想到他是蜘蛛侠，和已有知识建立联系
+
+   - Structural, phonemic, semantic
+      - Three levels: **structural** = physical features (shallowest), **phonemic** = sound, **semantic** = meaning (<red>deepest, most effective</red>).
+      - Peter Parker：结构层看字母形状，语音层注意到两个P押头韵，语义层想到他是蜘蛛侠
+
+2.4 - Encoding Memories
+
+   - Encoding
+      - The process of <red>converting</red> sensory information into a form that can be stored in memory.
+      - 用键盘打字，把外界信息变成电子信号存进电脑
+
+   - Mnemonic devices
+      - Memory aids that use <red>strategies</red> (imagery, organization, acronyms) to enhance encoding and recall.
+      - 用 My Very Educated Mother Just Served Us Noodles 记太阳系行星顺序
+
+   - Method of loci
+      - A mnemonic technique that links items to <red>specific locations</red> in a familiar physical space — "memory palace."
+      - 把要记的东西放在你家里不同位置，回忆时在脑中走一遍就能看到它们
+
+   - Chunking
+      - Grouping individual pieces of information into <red>larger, meaningful units</red> to overcome STM capacity limits (7±2).
+      - 手机号 13812345678 分成 138-1234-5678 三组来记
+
+   - Categories (as they pertain to grouping)
+      - Organizing information into <red>meaningful groups</red> based on shared characteristics to aid encoding.
+      - 购物清单分成乳制品、蔬菜、零食等类别来记
+
+   - Hierarchies (as they pertain to grouping)
+      - Organizing information in a <red>structured, ranked order</red> from broad to specific to enhance memory.
+      - 生物分类：动物→哺乳动物→犬科→狗，层层细分更好记
+
+   - Spacing effect
+      - <red>Distributed practice</red> over time produces better long-term retention than massed practice.
+      - 每天复习30分钟，连续一周，比考前通宵抱佛脚效果好得多
+
+   - Memory consolidation
+      - The process of converting fragile short-term memories into <red>stable long-term memories</red>, involving the **hippocampus**.
+      - 电脑把RAM里的临时数据写入硬盘永久保存，睡眠对巩固记忆很重要
+
+   - Massed practice
+      - Cramming — studying intensively in <red>one concentrated session</red>; poor for long-term retention.
+      - 考试前一晚通宵复习，短期可能有用但很快就忘
+
+   - Distributed practice
+      - Spreading study sessions <red>over time</red>; leads to stronger and more durable memory.
+      - 每天学一点，连续一周复习，记忆效果远好于临时抱佛脚
+
+   - Serial position effect
+      - The tendency to best recall items at the <red>beginning and end</red> of a list, with poorest recall in the middle.
+      - 背一长串单词，最容易记住开头和结尾的，中间的最容易忘
+
+   - Primacy effect
+      - Better recall for items at the <red>beginning</red> of a list — due to more rehearsal time, transferring them to LTM.
+      - 列表开头的词你有更多时间反复默念，所以记得牢
+
+   - Recency effect
+      - Better recall for items at the <red>end</red> of a list — because they are still in working memory.
+      - 列表最后几个词刚刚才听到，还留在短期记忆里所以容易想起
+
+2.5 - Storing Memories
+
+   - Sensory memory
+      - The initial, brief storage of sensory information; <red>large capacity but very short duration</red> (≤1s for iconic, ~3-4s for echoic).
+      - 记忆的接待大厅，所有感官信息先到这里，绝大部分迅速消失
+
+   - Short-term memory
+      - Temporary storage with <red>limited capacity (7±2 items)</red> and <red>limited duration (~20-30 seconds)</red> without rehearsal.
+      - 临时记一个验证码，不复述的话30秒内就忘了
+
+   - Working memory
+      - The active processing system (upgraded STM) that <red>manipulates and processes</red> information, not just holds it.
+      - 你做心算时，一边记住中间结果一边计算下一步
+
+   - Long-term memory
+      - The relatively <red>permanent</red> storage with virtually <red>unlimited capacity and duration</red>.
+      - 你的知识、技能和所有经历的永久储存库
+
+   - Maintenance rehearsal
+      - <red>Simple repetition</red> to keep information in STM; does not effectively transfer to LTM.
+      - 不停念叨验证码 583926，但挂了电话马上就忘
+
+   - Elaborative rehearsal
+      - Connecting new information to <red>existing knowledge</red> through meaningful, deep processing — effective for LTM transfer.
+      - 购物清单按乳制品、清洁用品分类来记，把新信息和已有知识深度连接
+
+   - Memory retention
+      - The ability to <red>maintain</red> stored information over time.
+      - 学过的知识过了一个月还能记得多少
+
+   - Retrograde amnesia
+      - Inability to recall memories from <red>before</red> a traumatic event. **Retro = backward**.
+      - 车祸后醒来，不记得自己是谁，不认识家人，丢失的是过去的记忆
+
+   - Autobiographical memory
+      - Personal memory about one's own life, combining both <red>episodic and semantic</red> memories. Key: **better memory about yourself**.
+      - 关于你自己人生故事的记忆，包括个人经历和关于自己的事实
+
+   - Anterograde amnesia
+      - Inability to form <red>new</red> long-term memories after a traumatic event. **Antero = forward**.
+      - Henry Molaison切除海马体后，旧记忆都在，但你离开房间再回来他就不记得见过你
+
+   - Alzheimer's disease
+      - A progressive <red>neurodegenerative</red> disease characterized by memory loss, cognitive decline, and behavioral changes.
+      - 从忘记最近的事开始，逐渐不认识家人、忘记个人信息、丧失自理能力
+
+   - Infantile amnesia
+      - The inability to recall personal experiences from <red>before age 3-4</red>, due to immature hippocampus, incomplete language, and undeveloped sense of self.
+      - 你几乎想不起3岁前发生过什么事
+
+2.6 - Retrieving Memories
+
+   - Retrieval
+      - The process of <red>accessing and bringing stored information</red> back into conscious awareness.
+      - 从记忆库中找到并调出你需要的信息
+
+   - Recall
+      - Retrieving information <red>without</red> external cues — more difficult.
+      - 填空题和简答题，没有提示，你得自己从记忆中把答案找出来
+
+   - Recognition
+      - Identifying previously learned information when it is <red>presented again</red> — easier than recall.
+      - 选择题，正确答案就在眼前，你只需要认出它
+
+   - Retrieval cues
+      - Stimuli that help <red>trigger</red> the recall of stored memories; can be external (scene, smell) or internal (mood, thought).
+      - 闻到某种香水的味道，突然想起一个老朋友
+
+   - Context-dependent memory
+      - Memory retrieval is better when the <red>physical environment</red> at encoding and retrieval match.
+      - 在同一间教室学习和考试，你可能更容易想起复习过的内容
+
+   - Mood-congruent memory
+      - Current mood influences <red>which memories</red> are recalled — we recall memories consistent with our present mood.
+      - 心情好的时候容易想起开心的事，悲伤的时候满脑子都是难过的回忆
+
+   - State-dependent memory
+      - Memory retrieval is better when the <red>physiological/psychological state</red> at encoding and retrieval match.
+      - 学习时喝了咖啡处于兴奋状态，考试前也喝一杯可能帮你更好地回忆
+
+   - Testing effect
+      - <red>Self-testing</red> (retrieval practice) strengthens long-term memory more effectively than simply re-reading material.
+      - 做练习题、考自己、向别人解释概念，比反复看书效果好得多
+
+   - Metacognition
+      - <red>Thinking about your own thinking</red> — monitoring and reflecting on your cognitive processes.
+      - 你意识到自己没听懂老师讲的内容，决定换一种方式学习
+
+2.7 - Forgetting and Other Memory Challenges
+
+   - Forgetting curve
+      - Ebbinghaus's finding that forgetting occurs rapidly after learning (<red>~70% lost within 24 hours</red>) and then levels off. Countered by **distributed practice**.
+      - 新知识学完24小时内忘掉大部分，不复习的话考完试就还给老师了
+
+   - Encoding failure
+      - Information was <red>never properly encoded</red> into LTM in the first place — not truly forgetting, but never stored.
+      - 你天天用硬币但说不出硬币上的头像朝哪边，因为从来没认真编码过
+
+   - Proactive interference
+      - <red>Old</red> memories interfere with the retrieval of <red>new</red> information. **Pro = forward** (old → new).
+      - 搬家了填表格时下意识写出旧地址，旧记忆干扰了新记忆
+
+   - Retroactive interference
+      - <red>New</red> memories interfere with the retrieval of <red>old</red> information. **Retro = backward** (new → old).
+      - 学了一首新曲子后，发现想不起以前那首旧曲子的旋律了
+
+   - Tip-of-the-tongue phenomenon
+      - The feeling of <red>knowing</red> information but being temporarily unable to retrieve it — available but not retrievable.
+      - 那个人叫什么来着……就在嘴边就是说不出来，过一会突然想起来了
+
+   - Repression (psychodynamic)
+      - The <red>unconscious</red> pushing of painful or traumatic memories out of awareness as a defense mechanism. **Controversial** — lacks strong scientific support.
+      - 弗洛伊德认为人会无意识地将创伤记忆排除出意识来保护自己，但这个概念在现代心理学中有争议
+
+   - Misinformation effect
+      - Exposure to <red>misleading post-event information</red> distorts the original memory.
+      - 车祸实验：用 smashed 代替 hit 来提问，参与者估计的车速更高，还声称看到了不存在的碎玻璃
+
+   - Source amnesia
+      - Remembering information but <red>forgetting where, when, or how</red> it was learned.
+      - 你记得一个冷知识但想不起是从哪知道的，既视感（déjà vu）可能也与此有关
+
+   - Constructive memory
+      - Memory is not simply retrieved but <red>actively reconstructed</red> each time, filling gaps with existing knowledge, beliefs, and expectations.
+      - 每次回忆都是一次重新建构，你会用已有经验自动填补记忆中的空白
+
+   - Imagination inflation
+      - <red>Imagining</red> a fictitious event increases confidence that it actually happened.
+      - 反复想象自己小时候在商场走丢，即使从未发生，你可能会觉得这事真的发生过
+
+2.8 - Intelligence and Achievement
+
+   - Intelligence
+      - The ability to <red>learn from experience, solve problems, and adapt</red> to new situations; considered adaptive, involving multiple mental processes, and culture-specific.
+      - 没有统一定义，但一般认为是学习能力、解决问题和适应新环境的能力
+
+   - g (general intelligence)
+      - Spearman's concept of a single <red>underlying general intelligence factor</red> that influences performance across all cognitive tasks.
+      - 好学生啥都好，一项认知测试强的人其他方面往往也不错
+
+   - Intelligence quotient (IQ)
+      - A standardized score representing intellectual ability, with <red>100 as the average</red>, following a normal distribution.
+      - 智商分数，100分为平均值，用来和同龄人比较
+
+   - Mental age
+      - The age level of intellectual performance a person demonstrates on a test, <red>regardless of actual age</red>.
+      - 一个8岁孩子的测试表现和平均10岁孩子一样好，他的心理年龄就是10岁
+
+   - Chronological age
+      - A person's <red>actual age</red> in years from birth.
+      - 你的实际年龄，用来和心理年龄对比计算IQ
+
+   - Standardization
+      - Establishing <red>uniform procedures</red> for administering and scoring a test, with norms from a representative sample.
+      - 所有考生在相同条件下考试，用统一的评分标准改卷，分数才有可比性
+
+   - Validity
+      - The extent to which a test <red>measures what it claims to measure</red>.
+      - 不能站在体重秤上测身高，体重秤测身高就是无效的
+
+   - Construct validity
+      - Whether a test accurately measures the <red>theoretical psychological concept</red> it intends to measure (e.g., anxiety, intelligence).
+      - 一个智力测试是否真的在测量智力这个心理学概念
+
+   - Predictive validity
+      - Whether test scores can effectively <red>predict future behavior</red> or performance.
+      - SAT分数能否预测大学GPA
+
+   - Reliability
+      - The extent to which a test yields <red>consistent, reproducible</red> results.
+      - 能力没变化的情况下，测两次应该得到相近的分数
+
+   - Test-retest reliability
+      - Consistency of scores when the <red>same test is given twice</red> to the same group at different times.
+      - 同一组人隔一个月测两次，看同一个人的分数是否接近
+
+   - Split-half reliability
+      - Consistency between <red>two halves</red> of a single test (e.g., odd vs. even items).
+      - 把试卷的奇数题和偶数题分数做比较，高相关说明在测量同样的东西
+
+   - Stereotype threat
+      - Anxiety that one's performance will <red>confirm a negative stereotype</red> about their group, which impairs performance.
+      - 女生数学不好的刻板印象让女生在数学考试时更紧张，反而考得更差
+
+   - Stereotype lift
+      - <red>Improved</red> performance resulting from awareness of a positive stereotype about one's group.
+      - 亚洲人数学好的刻板印象让亚洲学生在数学考试时更自信
+
+   - Flynn Effect
+      - The observed trend that average IQ scores have been <red>rising across generations</red> worldwide — requiring periodic restandardization.
+      - 全球IQ平均分一代比一代高，可能因为营养、教育和科技进步
+
+   - Achievement tests
+      - Tests that measure <red>what a person has already learned</red>.
+      - AP考试、期末考试、单元测验
+
+   - Aptitude tests
+      - Tests designed to <red>predict future learning ability</red> or potential, not current knowledge.
+      - SAT预测你未来在大学的学习潜力
+
+   - Fixed mindset
+      - The belief that intelligence is <red>innate and unchangeable</red>; failure = lack of ability.
+      - 觉得智力天生固定，害怕挑战，因为失败意味着自己不聪明
+
+   - Growth mindset
+      - The belief that intelligence can be <red>developed through effort and learning</red>; failure = opportunity to grow.
+      - 觉得能力可以通过努力提升，失败是学习和成长的机会

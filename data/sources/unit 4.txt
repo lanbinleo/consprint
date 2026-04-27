@@ -1,0 +1,667 @@
+## 4.1 - Attribution Theory and Person Perception
+Attributions
+Dispositional attributions
+Situational attributions
+Explanatory style
+Optimistic explanatory style
+Pessimistic explanatory style
+Actor/observer bias
+Fundamental attribution error
+Self-serving bias
+Internal locus of control
+External locus of control
+Mere exposure effect
+Self-fulfilling prophecy
+Social comparison
+Upward social comparison
+Downward social comparison
+Relative deprivation
+
+## 4.2 - Attitude Formation and Attitude Change
+Stereotype
+Prejudice
+Discrimination
+Implicit attitudes
+Ethnocentrism
+Just-world phenomenon
+Out-group homogeneity bias
+In-group bias
+Belief perseverance
+Confirmation bias
+Cognitive dissonance
+Cognitive load
+
+## 4.3 - Psychology of Social Situations
+Social norms
+Social influence theory
+Normative social influence
+Informational social influence
+Persuasion
+Elaboration likelihood model
+Central route
+Peripheral route
+Halo effect
+Foot-in-the-door technique
+Door-in-the-face technique
+Conformity
+Obedience
+Individualism
+Collectivism
+Multiculturalism
+Group polarization
+Groupthink
+Diffusion of responsibility
+Social loafing
+Deindividuation
+Social facilitation
+False consensus effect
+Superordinate goals
+Social traps
+Industrial-organizational (I/O) psychologists
+Burnout
+Altruism
+Prosocial behavior
+Social debt
+Social reciprocity norm
+Social responsibility norm
+Bystander effect
+Situational variables
+Attentional variables
+
+
+## 4.4 - Psychodynamic and Humanistic Theories of Personality
+Psychodynamic theory
+Unconscious processes
+Ego defense mechanisms
+Denial
+Displacement
+Projection
+Rationalization
+Reaction formation
+Regression
+Repression
+Sublimation
+Projective tests
+Preconscious mind
+Unconscious mind
+Humanistic psychology
+Unconditional regard
+Self-actualizing tendency
+
+## 4.5 - Social-Cognitive and Trait Theories of Personality
+Social-cognitive theory
+Reciprocal determinism
+Self-concept
+Self-efficacy
+Self-esteem
+Trait theories
+Big Five theory
+Agreeableness
+Extraversion
+Conscientiousness
+Openness to experience
+Emotional Stability
+Personality inventories
+Factor analysis
+
+## 4.6 - Motivation
+Drive-reduction theory
+Homeostasis
+Arousal theory
+Optimal level of arousal
+Yerkes-Dodson Law
+Self-determination theory
+Intrinsic motivation
+Extrinsic motivation
+Incentive theory
+Instincts
+Lewin’s motivational conflicts theory
+Approach-approach conflicts
+Approach-avoidance conflicts
+Avoidance-avoidance conflicts
+Sensation-seeking theory
+Thrill seeking
+Adventure seeking
+Disinhibition
+Boredom susceptibility
+Hunger
+Satiety
+
+## 4.7 - Emotion
+Affect
+Physiological experiences
+Cognitive experiences
+Cognitive label
+Facial-feedback hypothesis
+Broaden-and-build theory of emotion
+Cognitive appraisal
+Display rules
+Emotional elicitors
+
+---
+
+4.1 - Attribution Theory and Person Perception
+
+   - Attributions
+      - How we explain the causes of events or behaviors — either internal or external.
+      - 我们怎么解释一件事发生的原因，比如他为什么迟到
+
+   - Dispositional attributions
+      - Explaining behavior as caused by <red>internal</red> factors like personality, ability, or effort.
+      - 他考试考得好，是因为他聪明
+
+   - Situational attributions
+      - Explaining behavior as caused by <red>external</red> factors like luck, context, or difficulty.
+      - 他考试考得好，是因为这次题目简单
+
+   - Explanatory style
+      - A person's habitual way of explaining events, either optimistically or pessimistically.
+      - 一个人习惯性地怎么解释发生在自己身上的事
+
+   - Optimistic explanatory style
+      - Bad events are seen as **temporary, external, and specific**.
+      - 考试考砸了：这次题太偏了，下次不会这样
+
+   - Pessimistic explanatory style
+      - Bad events are seen as **permanent, internal, and global**.
+      - 考试考砸了：我就是笨，什么都学不好
+
+   - Actor/observer bias
+      - When we are the **actor**, we blame the situation; when we are the **observer**, we blame the person's character. It highlights the <red>double standard</red> between judging self vs. others.
+      - 自己迟到是因为堵车，别人迟到是因为没有时间观念
+
+   - Fundamental attribution error
+      - The tendency to <red>overestimate dispositional factors</red> and underestimate situational factors **when judging others**.
+      - 看到别人考试挂了，觉得他就是不努力，而不考虑他可能生病了
+
+   - Self-serving bias
+      - Attributing **success to internal** factors and **failure to external** factors to protect self-esteem.
+      - AP考了5分：我是天才；考了2分：题出得太偏了
+
+   - Internal locus of control
+      - Belief that you **control your own outcomes** through effort and decisions.
+      - 考前认真刷题，相信努力能改变结果
+
+   - External locus of control
+      - Belief that outcomes are determined by **luck, fate, or others**. Can lead to *learned helplessness*.
+      - 考前转发锦鲤，觉得考多少分是命
+
+   - Mere exposure effect
+      - Simply being exposed to something repeatedly increases our <red>liking</red> for it.
+      - 一首歌刚听觉得一般，循环十遍后觉得真上头；广告反复轰炸也是这个原理
+
+   - Self-fulfilling prophecy
+      - A belief leads to behavior that makes the belief come true: **belief → behavior → outcome**.
+      - 老师觉得Leo是好学生，给他更多关注，Leo更努力，最终真的成了好学生
+
+   - Social comparison
+      - Evaluating ourselves by comparing with others.
+      - 看看身边同学考了多少分来判断自己考得好不好
+
+   - Upward social comparison
+      - Comparing with someone **better** — can motivate or cause feelings of inadequacy.
+      - 和年级第一比，觉得自己还要更努力，或者觉得自卑
+
+   - Downward social comparison
+      - Comparing with someone **worse** — boosts self-esteem but may reduce motivation.
+      - 和倒数第一比，觉得自己还不错嘛
+
+   - Relative deprivation
+      - Feeling deprived or dissatisfied **after comparing** with others who have more.
+      - 本来对工资很满意，知道同事比自己多两千后就不开心了
+
+
+
+4.2 - Attitude Formation and Attitude Change
+
+   - Stereotype
+      - An **overgeneralized belief** about a group of people; a cognitive shortcut (heuristic). Not necessarily negative but ignores individual differences.
+      - 亚洲人都擅长数学，法国人都很浪漫
+
+   - Prejudice
+      - An <red>unjustified negative attitude</red> toward a group — this is the **emotional** level.
+      - 我就是不喜欢吃榴莲的人
+
+   - Discrimination
+      - <red>Unjust behavior</red> toward a group — this is the **action** level, often caused by prejudice.
+      - 因为不喜欢吃榴莲的人，所以不让他们加入我的小组
+
+   - Implicit attitudes
+      - Attitudes that are **unconscious** and automatically activated; people may not be aware they hold them.
+      - 嘴上说不歧视，但在无意识的测试中表现出对某群体的偏见（如IAT内隐联想测试）
+
+   - Ethnocentrism
+      - Believing your own culture is **superior** and judging other cultures by your own standards.
+      - 看到别人用手吃饭就觉得脏、落后，而不是理解这是不同的文化习俗
+
+   - Just-world phenomenon
+      - The belief that people **get what they deserve**, which often leads to <red>blaming the victim</red>.
+      - 看到路边的乞丐就想：他肯定是年轻时不努力才沦落到这样
+
+   - Out-group homogeneity bias
+      - Perceiving members of an **out-group as all alike**, while seeing your own group as diverse.
+      - 你能分清重金属、朋克、独立摇滚的区别，但觉得K-pop的歌听起来全是一个调子
+
+   - In-group bias
+      - Favoring members of your **own group** over out-group members.
+      - 平时吐槽自己学校，但跟外校比赛时觉得我校最棒
+
+   - Belief perseverance
+      - Clinging to initial beliefs <red>even after they have been discredited</red> by evidence.
+      - 阴谋论者看到科学证据证明地球是圆的，说这都是伪造的，地球就是平的
+
+   - Confirmation bias
+      - Seeking information that **supports** existing beliefs and ignoring contradictory evidence.
+      - 觉得每次洗车后都下雨，是因为只记住了洗车后下雨的次数，忘了没下雨的
+
+   - Cognitive dissonance
+      - The psychological <red>discomfort</red> when attitudes and behaviors are **inconsistent**. To reduce it, we change either the attitude or the behavior.
+      - 知道抽烟有害还继续抽，于是说服自己：抽烟能减压嘛。吃不到葡萄说葡萄酸
+
+   - Cognitive load
+      - The amount of **mental effort** being used in working memory. High cognitive load makes it harder to think critically and easier to rely on heuristics.
+      - 一边开车一边打电话，大脑超负荷，容易出错
+
+
+
+4.3 - Psychology of Social Situations
+
+   - Social norms
+      - Unwritten rules about how to behave in a group or society.
+      - 在图书馆要安静，电梯里面朝门站
+
+   - Social influence theory
+      - The theory that our behavior is influenced by others through **normative** or **informational** pathways.
+      - 我们的行为受到身边人的影响，不管是为了合群还是为了获取信息
+
+   - Normative social influence
+      - Conforming to be <red>accepted</red> by the group, even if you know they're wrong.
+      - 一群朋友都抽烟，你明知不好但为了合群也跟着抽
+
+   - Informational social influence
+      - Conforming because you believe others have <red>better information</red> than you.
+      - 第一次吃西餐不知道怎么用刀叉，偷看隔壁桌怎么做
+
+   - Persuasion
+      - The process of changing someone's attitudes or behaviors through communication.
+      - 广告、演讲、谈判中试图改变你的想法
+
+   - Elaboration likelihood model
+      - A model explaining two routes of persuasion: **central** (logic) and **peripheral** (surface cues).
+      - 我们被说服有两条路径：走脑子或走感觉
+
+   - Central route
+      - Persuasion through <red>logic, evidence, and careful thinking</red>. Leads to **lasting** attitude change.
+      - 买电脑时仔细对比CPU、内存和价格
+
+   - Peripheral route
+      - Persuasion through <red>surface cues</red> like attractiveness or celebrity endorsement. Effect is **temporary**.
+      - 我家哥哥代言联想电脑，买！
+
+   - Halo effect
+      - The tendency to let one positive trait (often **attractiveness**) influence overall judgment of a person.
+      - 长得好看的人，别人会觉得他性格也好、能力也强
+
+   - Foot-in-the-door technique
+      - Getting someone to agree to a **small request first**, then following with a larger one.
+      - 先请你签名支持环保，然后问你能不能捐100块
+
+   - Door-in-the-face technique
+      - Starting with a **large request** that will be refused, then following with a smaller one.
+      - 先问借5000买iPad，被拒后说那借100吃个饭总行吧
+
+   - Conformity
+      - Adjusting behavior or thinking to match **group standards**.
+      - 电梯里所有人都面朝后站，你不自觉也转过身去
+
+   - Obedience
+      - Complying with direct commands from an <red>authority figure</red>. (Conformity = peers; Obedience = authority)
+      - 警察说不许动，你就不动了
+
+   - Individualism
+      - Cultural emphasis on **personal goals, independence, and self-expression**.
+      - 美国文化强调个人自由和独立思考
+
+   - Collectivism
+      - Cultural emphasis on **group harmony, duty, and interdependence**.
+      - 东亚文化强调家庭和集体利益
+
+   - Multiculturalism
+      - Valuing and integrating **diverse cultural perspectives** within a society.
+      - 一个社区里不同文化背景的人互相尊重、和平共处
+
+   - Group polarization
+      - Group discussion makes members' views become <red>more extreme</red> than their initial positions.
+      - 一群观点相似的人讨论后，观点变得更加极端，比如越聊越激动地蛐蛐某个人
+
+   - Groupthink
+      - Desire for group harmony suppresses **dissenting opinions**, leading to poor decisions.
+      - 开会时大家都觉得方案有问题，但没人敢说，结果项目失败了
+
+   - Diffusion of responsibility
+      - The more people present, the <red>less personal responsibility</red> each person feels to act.
+      - 有人倒在路上，围观的人越多，每个人越觉得别人会去帮忙
+
+   - Social loafing
+      - Individuals exert **less effort** when working in a group because their contribution can't be individually measured.
+      - 三个和尚没水吃，小组作业总有人摸鱼
+
+   - Deindividuation
+      - Loss of self-awareness and self-restraint in group situations due to **anonymity and arousal**.
+      - 演唱会上疯狂尖叫跟唱，键盘侠在网上骂人
+
+   - Social facilitation
+      - Presence of others **improves** performance on simple/well-practiced tasks but **impairs** performance on complex/new tasks.
+      - 台球高手有人看打得更准，但第一次演讲有人看反而忘词
+
+   - False consensus effect
+      - Overestimating how much others **agree** with our own beliefs or behaviors.
+      - 你觉得香菜奶茶超好喝，以为大家都喜欢，买了一堆请全班结果没人喝
+
+   - Superordinate goals
+      - A shared goal that requires <red>cooperation</red> between conflicting groups, helping to reduce hostility.
+      - 两个互相仇视的小队必须一起推出陷在泥里的卡车，推完关系就好了
+
+   - Social traps
+      - Individuals pursuing **short-term self-interest** that leads to **long-term collective harm**.
+      - 大家都开私家车图方便，结果导致严重拥堵和雾霾
+
+   - Industrial-organizational (I/O) psychologists
+      - Psychologists who apply psychological principles to the **workplace** to improve productivity and employee well-being.
+      - 公司请心理学家设计面试题，或优化办公室布局让员工更高效
+
+   - Burnout
+      - Physical and emotional **exhaustion** caused by prolonged work-related stress.
+      - 连续加班几个月后感到身心俱疲，对工作完全失去热情
+
+   - Altruism
+      - Selfless concern for the well-being of others, with **no expectation of reward**.
+      - 匿名捐款给灾区，不求任何回报
+
+   - Prosocial behavior
+      - Any action intended to **help others**, which may or may not be selfless.
+      - 帮老奶奶过马路，扶起摔倒的小朋友
+
+   - Social debt
+      - The feeling of **owing** someone after they have helped you.
+      - 朋友帮你搬家后，你觉得欠了个人情
+
+   - Social reciprocity norm
+      - The expectation that people will **return favors** — help those who have helped you.
+      - 别人帮了我，我以后也要帮他
+
+   - Social responsibility norm
+      - The expectation that people should **help those in need**, even if they can't repay.
+      - 帮助弱势群体，即使他们无法回报
+
+   - Bystander effect
+      - The more people present at an emergency, the <red>less likely</red> any individual is to help.
+      - 大街上有人晕倒，围观的人很多但没人打120
+
+   - Situational variables
+      - External factors in the environment that influence whether someone will help.
+      - 天黑、偏僻的地方，人们更不愿意伸出援手
+
+   - Attentional variables
+      - Whether a person **notices** the event and recognizes it as an emergency, affecting helping behavior.
+      - 戴着耳机走路，根本没注意到有人摔倒了
+
+
+
+4.4 - Psychodynamic and Humanistic Theories of Personality
+
+   - Psychodynamic theory
+      - Freud's approach emphasizing <red>unconscious processes, childhood experiences, and internal conflicts</red> as drivers of personality and behavior.
+      - 弗洛伊德认为人的行为受潜意识驱动，童年经历影响一生
+
+   - Unconscious processes
+      - Thoughts, desires, and memories that are outside conscious awareness but still influence behavior. The deepest level of Freud's iceberg model.
+      - 被压抑的童年创伤记忆，自己想不起来但影响着现在的行为
+
+   - Ego defense mechanisms
+      - Unconscious strategies the **ego** uses to reduce anxiety from conflicts between the id, superego, and reality.
+      - 大脑自动启动的心理保护机制，用来缓解焦虑
+
+   - Denial
+      - Refusing to accept a painful reality.
+      - 亲人去世后说：这不可能，一定是搞错了！
+
+   - Displacement
+      - Redirecting emotions toward a <red>safer or weaker target</red>.
+      - 被老板骂了不敢还嘴，回家对家人撒气
+
+   - Projection
+      - Attributing your own unacceptable thoughts or feelings to **someone else**.
+      - 以小人之心度君子之腹，自己自私却觉得别人都自私
+
+   - Rationalization
+      - Creating logical-sounding excuses to justify unacceptable behavior or feelings.
+      - 考砸了说不是没努力，是考试太难了
+
+   - Reaction formation
+      - Behaving in a way <red>opposite</red> to one's true feelings.
+      - 喜欢一个人却故意对他冷淡甚至刻薄
+
+   - Regression
+      - Reverting to **childlike** behaviors when stressed.
+      - 成年人遇到压力大哭大闹要找妈妈
+
+   - Repression
+      - Unconsciously **blocking** disturbing thoughts or memories from awareness. (The most basic defense mechanism)
+      - 完全想不起小时候被伤害的经历，不是故意忘而是真的记不起来
+
+   - Sublimation
+      - Channeling unacceptable impulses into **socially acceptable** or productive activities.
+      - 化悲愤为力量，失恋后疯狂健身
+
+   - Projective tests
+      - Personality assessments using **ambiguous stimuli** (e.g., inkblots) to reveal unconscious thoughts. Limited in *reliability and validity*.
+      - 罗夏墨迹测验：给你看一团墨迹，让你说看到了什么，以此推断潜意识
+
+   - Preconscious mind
+      - Information not currently in awareness but **easily retrievable**.
+      - 你现在没在想你早餐吃了什么，但一问你马上就能想起来
+
+   - Unconscious mind
+      - The deepest level containing <red>repressed</red> thoughts, desires, and memories that are not accessible to conscious awareness.
+      - 被压抑的痛苦记忆和不可接受的欲望，自己根本意识不到
+
+   - Humanistic psychology
+      - An approach emphasizing **free will, self-actualization, and inherent goodness**. Key figure: Carl Rogers.
+      - 每个人都有积极向上的潜能，强调人的自由意志
+
+   - Unconditional regard
+      - Accepting and loving someone <red>without judgment or conditions</red>. (Unconditional Positive Regard)
+      - 无论孩子做了什么，父母都表达接纳和爱，不附带条件
+
+   - Self-actualizing tendency
+      - The innate drive to **grow, develop, and fulfill one's potential**.
+      - 人天生就有不断追求成为更好自己的内在驱动力
+
+
+
+4.5 - Social-Cognitive and Trait Theories of Personality
+
+   - Social-cognitive theory
+      - Personality is shaped by the **interaction** of personal cognitive factors, behavior, and environment.
+      - 人的性格是认知、行为和环境三者相互影响的结果
+
+   - Reciprocal determinism
+      - Bandura's concept that **personal factors, behavior, and environment** all mutually influence each other.
+      - 一个被贴上坏学生标签的孩子（环境）→ 自我认知变差（认知）→ 不想学习（行为）→ 成绩更差（环境强化）→ 恶性循环
+
+   - Self-concept
+      - A person's overall perception and belief about **who they are**. (Answers "Who am I?")
+      - 我是一个内向的、喜欢画画的高中生
+
+   - Self-efficacy
+      - Belief in one's ability to <red>succeed at a specific task</red>.
+      - 我相信我能通过明天的AP考试
+
+   - Self-esteem
+      - One's overall <red>sense of self-worth</red>. Unlike self-efficacy, it's about general value, not task-specific.
+      - 无论考好考差，我都觉得自己是有价值的人
+
+   - Trait theories
+      - Theories that describe personality as a set of **stable, measurable characteristics** (traits).
+      - 用一组稳定的特质来描述人格，比如外向、尽责
+
+   - Big Five theory
+      - The most widely accepted trait model: **OCEAN** — Openness, Conscientiousness, Extraversion, Agreeableness, Neuroticism (Emotional Stability).
+      - 用五个维度描述人格的模型
+
+   - Agreeableness
+      - Tendency toward trust, altruism, kindness, and cooperation. Low = competitive or manipulative.
+      - 高分：主动帮助同事；低分：为达目的不择手段
+
+   - Extraversion
+      - Tendency toward sociability, talkativeness, and positive emotions. Low (introversion) = reserved, needs alone time.
+      - 高分：参加派对很兴奋；低分：独处才能充电
+
+   - Conscientiousness
+      - Tendency toward being organized, dependable, and self-disciplined. Low = careless, procrastinating.
+      - 高分：每天列待办清单；低分：经常忘记截止日期
+
+   - Openness to experience
+      - Tendency toward curiosity, creativity, and appreciation of new ideas. Low = conventional, prefers routine.
+      - 高分：喜欢探索艺术和哲学；低分：喜欢按部就班
+
+   - Emotional Stability
+      - The opposite end of **Neuroticism**. High stability = calm, resilient; Low stability (high neuroticism) = anxious, moody.
+      - 高分：泰山崩于前而色不变；低分：遇到小事就焦虑
+
+   - Personality inventories
+      - Standardized **self-report questionnaires** designed to assess personality traits.
+      - MMPI、大五人格问卷，通过一系列问题来评估你的人格特质
+
+   - Factor analysis
+      - A **statistical method** used to identify clusters of correlated traits, which was used to develop the Big Five.
+      - 通过统计方法把大量人格数据归纳成几个核心因素，大五人格就是这么来的
+
+
+
+4.6 - Motivation
+
+   - Drive-reduction theory
+      - Physiological needs create a state of tension (**drive**) that motivates behavior to reduce the drive and restore <red>homeostasis</red>.
+      - 口渴（需要）→ 想喝水（驱力）→ 喝水（行为）→ 不渴了（平衡恢复）
+
+   - Homeostasis
+      - The body's tendency to maintain a **stable internal state** (e.g., temperature, blood sugar).
+      - 身体自动维持体温在37度左右
+
+   - Arousal theory
+      - We are motivated to maintain an <red>optimal level of arousal</red> — not too high, not too low.
+      - 无聊时想找点刺激，太紧张时想放松
+
+   - Optimal level of arousal
+      - The ideal amount of physiological activation for **best performance**, which varies by person and task.
+      - 考试时适度紧张发挥最好，太放松或太焦虑都不行
+
+   - Yerkes-Dodson Law
+      - Performance increases with arousal up to a point; **easy tasks** benefit from higher arousal, **difficult tasks** benefit from lower arousal.
+      - 简单任务：来点压力表现更好；困难任务：太紧张反而失常
+
+   - Self-determination theory
+      - Motivation is driven by three innate needs: **autonomy, competence, and relatedness**.
+      - 人需要自主感、胜任感和归属感才能保持内在动力
+
+   - Intrinsic motivation
+      - Doing something because it is inherently <red>interesting or enjoyable</red>.
+      - 因为喜欢画画而画画，不是为了获奖
+
+   - Extrinsic motivation
+      - Doing something for <red>external rewards</red> (money, grades, praise).
+      - 为了奖金完成销售目标
+
+   - Incentive theory
+      - Behavior is motivated by **external stimuli** (incentives) that pull us toward them.
+      - 看到美食图片就产生食欲，闻到咖啡香就想喝
+
+   - Instincts
+      - Innate, **fixed patterns** of behavior that are biologically driven (evolutionary perspective).
+      - 婴儿天生会吮吸，母亲保护孩子的本能
+
+   - Lewin's motivational conflicts theory
+      - Kurt Lewin's framework describing three types of conflicts when choosing between goals.
+      - 做选择时内心的纠结可以分为三种类型
+
+   - Approach-approach conflicts
+      - Choosing between **two equally attractive** options.
+      - 清华还是北大，两个都想去
+
+   - Approach-avoidance conflicts
+      - A single goal has both <red>attractive and unattractive</red> aspects.
+      - 想吃甜食但又怕胖
+
+   - Avoidance-avoidance conflicts
+      - Choosing between **two equally undesirable** options.
+      - 补作业还是请家长，两个都不想
+
+   - Sensation-seeking theory
+      - People differ in their need for **novel, complex, and intense** stimulation.
+      - 有些人天生就爱冒险、追求刺激
+
+   - Thrill seeking
+      - Seeking exciting experiences that often involve **physical risk**.
+      - 跳伞、蹦极、极限运动
+
+   - Adventure seeking
+      - Desire for **novel physical activities** and exploration.
+      - 喜欢旅行探险、尝试新的户外运动
+
+   - Disinhibition
+      - Seeking social stimulation through behaviors that are normally **restrained by social norms**.
+      - 在派对上放飞自我，做平时不敢做的事
+
+   - Boredom susceptibility
+      - Intolerance of **repetitive, monotonous, or predictable** situations.
+      - 稳定但无聊的工作干不下去，非要换个刺激的
+
+   - Hunger
+      - A motivational state driven by physiological signals (e.g., **ghrelin** from empty stomach, **hypothalamus**) and psychological/environmental cues.
+      - 肚子咕咕叫是因为胃分泌了饥饿素，到了饭点也会条件反射地饿
+
+   - Satiety
+      - The feeling of **fullness** that signals the body to stop eating, regulated by hormones like **leptin**.
+      - 吃饱了大脑收到瘦素信号，告诉你别吃了
+
+
+
+4.7 - Emotion
+
+   - Affect
+      - A broad term for the experience of **feeling or emotion**.
+      - 泛指所有的情绪情感体验
+
+   - Physiological experiences
+      - The **bodily responses** associated with emotion, such as increased heart rate, sweating, or muscle tension.
+      - 紧张时心跳加速、手心出汗
+
+   - Cognitive experiences
+      - The **thoughts and interpretations** that accompany an emotional state.
+      - 看到蛇时脑子里想到：我在危险中
+
+   - Cognitive label
+      - The <red>interpretation</red> we assign to physiological arousal, which determines the emotion we feel. Key to **Schachter-Singer Two-Factor Theory**.
+      - 同样是心跳加速，在考场上解读为焦虑，在过山车上解读为兴奋
+
+   - Facial-feedback hypothesis
+      - Facial muscle movements can <red>trigger or intensify</red> the corresponding emotion.
+      - 即使心情一般，强迫自己微笑也会让你感觉好一点
+
+   - Broaden-and-build theory of emotion
+      - **Positive emotions** broaden our awareness and encourage building new skills, resources, and social connections.
+      - 快乐时更愿意探索新事物、交新朋友，积累更多资源
+
+   - Cognitive appraisal
+      - The process of **evaluating an event's significance** to determine the emotional response. Central to **Lazarus's theory**.
+      - 你把考试定义为威胁还是挑战，决定了你后续是焦虑还是兴奋
+
+   - Display rules
+      - Cultural norms dictating **when, where, and how** emotions should be expressed.
+      - 有些文化提倡喜形于色，有些文化觉得公开哭泣是不成熟的
+
+   - Emotional elicitors
+      - Stimuli or events that <red>trigger</red> emotional responses, influenced by gender, age, and culture.
+      - 蛇是恐惧的诱因，收到礼物是快乐的诱因

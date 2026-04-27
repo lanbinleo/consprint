@@ -1,0 +1,724 @@
+## 5.1 - Introduction to Health Psychology 
+Health psychology
+Stress
+Hypertension
+Immune suppression
+Stressors
+Eustress (motivating)
+Distress (debilitating)
+Adverse childhood experiences (ACEs)
+General adaptation syndrome (GAS)
+Alarm reaction phase
+Resistance phase
+Flight-flight-freeze response
+Exhaustion phase
+Tend-and-befriend theory
+Problem-focused coping
+Emotion-focused coping 
+
+ 
+## 5.2 - Positive Psychology 
+Positive psychology
+Well-being
+Resilience
+Positive emotions
+Gratitude
+Positive subjective experiences
+Subjective well-being
+Signature strengths
+Virtues
+Positive objective experiences
+Happiness
+Subjective well-being
+Categories of virtues
+Posttraumatic growth
+
+ 
+
+ 
+## 5.3 - Explaining and Classifying Psychological Disorders
+Dysfunction
+Distress
+Deviation from the social norm
+Cultural/societal norms
+Stigma
+Racism
+Sexism
+Ageism
+Discrimination
+Diagnostic and Statistical Manual of Mental Disorders (DSM)
+International Classification of Mental Disorders (ICD)
+Eclectic approach
+Behavioral perspective
+Maladaptive learned associations
+Humanistic perspective
+Cognitive perspective
+Psychodynamic perspective
+Evolutionary perspective
+Sociocultural perspective
+Biological perspective
+Biopsychosocial model
+Diathesis-stress model
+ 
+
+## 5.4 - Selection of Categories of Psychological Disorders
+Neurodevelopmental disorders
+Attention-deficit / hyperactivity disorder (ADHD)
+Autism Spectrum Disorder (ASD)
+Schizophrenic Spectrum Disorders
+Delusions
+Hallucinations
+Disorganized thinking
+Disorganized speech
+Disorganized motor behavior
+Negative symptoms
+Positive symptoms
+Delusions
+Delusions of persecution
+Delusions of grandeur
+Hallucinations
+Word salad
+Catatonia
+Flat affect
+Catatonic stupor
+Dopamine hypothesis
+Depressive disorders
+Major Depressive Disorder
+Persistent Depressive Disorder
+Bipolar disorders
+Cycling
+Mania
+Depression
+Bipolar I Disorder
+Bipolar II Disorder
+Anxiety disorders
+Specific phobia
+Acrophobia
+Arachnophobia
+Agoraphobia
+Panic disorder
+Panic attack
+Ataque de nervios
+Social anxiety disorder
+Taijin kyofusho
+Generalized anxiety disorder (GAD)
+Obsessive-compulsive and related disorders
+Obsessions
+Compulsions
+Obsessive-compulsive disorder
+Hoarding disorder
+Dissociative disorders
+Dissociation
+Dissociative amnesia
+Dissociative identity disorder
+Trauma and stressor-related disorders
+Hypervigilance
+Flashbacks
+Insomnia
+Emotional detachment
+Hostility
+Posttraumatic stress disorder
+Feeding and eating disorders
+Anorexia nervosa
+Bulimia nervosa
+Personality disorders
+Cluster A (odd or eccentric cluster)
+Paranoid personality disorder
+Schizoid personality disorder
+Schizotypal personality disorder
+Cluster B (dramatic, emotional, or erratic cluster)
+Antisocial personality disorder
+Histrionic personality disorder
+Narcissistic personality disorder
+Borderline personality disorder
+Cluster C (anxious or fearful cluster)
+Avoidant personality disorder
+Dependent personality disorder
+Obsessive-compulsive personality disorder
+ 
+
+## 5.5 - Treatment of Psychological Disorders
+Evidence-based interventions
+Cultural humility
+Therapeutic alliance
+Psychotropic medication
+Nonmaleficence
+Fidelity
+Integrity
+Respect for people’s rights and dignity
+Psychodynamic therapies
+Free association
+Dream interpretation
+Cognitive therapies
+Cognitive restructuring
+Fear hierarchies
+Combating maladaptive thinking
+Cognitive triad
+Applied behavior analysis
+Exposure therapies
+Systematic desensitization
+Aversion therapies
+Token economies
+Biofeedback
+Cognitive-behavioral therapies
+Dialectical behavior therapy
+Rational emotive behavior therapy (REBT)
+Person-centered therapy
+Unconditional positive regard
+Active listening
+Group therapy
+Hypnosis
+Psychoactive medication
+Antidepressants
+Antianxiety drugs
+Lithium
+Antipsychotic medications
+Tardive dyskinesia
+Psychosurgery
+Lesioning
+TMS (transcranial magnetic stimulation)
+Electroconvulsive therapy
+Lobotomy 
+
+
+--- 
+
+5.1 - Introduction to Health Psychology
+
+ - Health psychology
+    - A subfield of psychology focused on promoting health and preventing/treating illness, including **psychological responses** to being sick.
+    - 研究人生病时的心理反应、应对方式，以及如何改善医疗系统
+ - Stress
+    - A state of **physiological and psychological tension** caused by stressors. Chronic stress weakens the immune system.
+    - 期末考试周感到身心俱疲、睡不好觉
+ - Hypertension
+    - **High blood pressure**, a common physical consequence of chronic stress.
+    - 长期高压工作导致血压升高
+ - Immune suppression
+    - Chronic stress **weakens the immune system**, making the body more vulnerable to illness.
+    - 考试周压力太大反而感冒了
+ - Stressors
+    - Events or conditions in the environment that **trigger** the stress response.
+    - 考试、失恋、经济困难、噪音
+ - Eustress (motivating)
+    - **Positive stress** from beneficial events that provides motivation and enhances performance.
+    - 比赛前的兴奋紧张感让你发挥更好
+ - Distress (debilitating)
+    - **Negative stress** that impairs motivation, performance, and causes emotional/physical harm.
+    - 亲人去世、失业带来的持续痛苦
+ - Adverse childhood experiences (ACEs)
+    - Potentially **traumatic events occurring before age 18** that can have lasting negative effects.
+    - 童年时期经历家暴、父母酗酒、被忽视
+ - General adaptation syndrome (GAS)
+    - <red>Hans Selye</red> 提出的三阶段压力反应模型：**Alarm → Resistance → Exhaustion**，描述身体在持续压力下如何逐步耗竭。
+    - 刚接到坏消息时心跳加速（警觉）→ 几周后似乎适应了（抵抗）→ 几个月后身体垮了（衰竭）
+ - Alarm reaction phase
+    - The **initial reaction** to a stressor; the body activates the fight-or-flight response, releasing adrenaline and cortisol.
+    - 突然被老师点名，心跳猛地加速、手心出汗
+ - Resistance phase
+    - The body attempts to **adapt and cope** with the ongoing stressor; appears to be managing but resources are being consumed.
+    - 连续加班几周，表面上还撑得住，但身体已经在消耗储备
+ - Fight-flight-freeze response
+    - Activation of the **sympathetic nervous system**: heart rate increases, adrenaline surges, preparing the body to fight, flee, or freeze.
+    - 走夜路遇到可疑的人，瞬间心跳加速、腿发软跑不动（freeze）
+ - Exhaustion phase
+    - Body's resources are **depleted** after prolonged stress, leading to weakened immunity, burnout, and vulnerability to illness.
+    - 长期高压工作后免疫力崩溃，反复生病、极度疲劳
+ - Tend-and-befriend theory
+    - A stress response (especially in women) involving **nurturing others (tend)** and **seeking social support (befriend)**, rather than fighting or fleeing.
+    - 地震后母亲先安抚孩子，然后联系亲友互相支持
+ - Problem-focused coping
+    - Coping by **directly addressing the stressor** — changing the situation or one's interaction with it.
+    - 考试压力大 → 制定详细的复习计划来解决问题
+ - Emotion-focused coping
+    - Coping by **managing emotional reactions** when the stressor itself cannot be changed.
+    - 亲人去世无法改变 → 通过冥想、深呼吸、找朋友倾诉来缓解悲伤
+
+
+5.2 - Positive Psychology
+
+ - Positive psychology
+    - The scientific study of **optimal human functioning**, advocated by <red>Martin Seligman</red>. Focuses on strengths, virtues, and what helps people thrive.
+    - 不只研究心理疾病，而是研究什么让人活得好、活得有意义
+ - Well-being
+    - A broad concept encompassing **physical, emotional, and social health** — an overall sense of flourishing.
+    - 身体健康、情绪稳定、人际关系良好的综合状态
+ - Resilience
+    - The ability to **recover and bounce back** from adversity, trauma, or stress.
+    - 创业失败后重新振作，从头再来
+ - Positive emotions
+    - Emotions such as joy, gratitude, and hope that **broaden thinking** and build psychological resources.
+    - 帮助别人后感到的满足和快乐
+ - Gratitude
+    - A positive emotion emphasized in PP; research shows regularly expressing gratitude **significantly improves long-term well-being**.
+    - 每天写三件感恩的事，长期坚持后幸福感明显提升
+ - Positive subjective experiences
+    - **Internal, self-reported** experiences of happiness, satisfaction, and fulfillment.
+    - 回忆一次旅行时内心涌起的幸福感
+ - Subjective well-being
+    - A person's **self-evaluation** of their life satisfaction and happiness — how happy *they feel* they are.
+    - 收入不高但觉得自己生活很幸福，主观幸福感就高
+ - Signature strengths
+    - The **core character strengths** most central to a person's identity, organized under six virtues. Using them boosts well-being.
+    - 一个人最突出的特质可能是好奇心和创造力
+ - Virtues
+    - Six broad categories under which signature strengths are organized: **Wisdom, Courage, Humanity, Justice, Temperance, Transcendence**.
+    - 智慧（好奇心）、勇气（毅力）、人道（善良）、正义（公平）、节制（自控）、超越（感恩、希望）
+ - Positive objective experiences
+    - **External, measurable** indicators of well-being, such as income, education, health status.
+    - 稳定的收入、良好的健康指标、受教育程度
+ - Happiness
+    - A state of well-being characterized by positive emotions and life satisfaction; influenced by both **genetics and circumstances**.
+    - 做自己喜欢的事时感到的愉悦和满足
+ - Categories of virtues
+    - The six categories: **Wisdom, Courage, Humanity, Justice, Temperance, Transcendence** — each containing specific character strengths.
+    - 同上 Virtues
+ - Posttraumatic growth
+    - **Positive psychological change** that emerges after struggling with a major crisis or trauma — deeper understanding of life, stronger relationships, increased personal strength.
+    - 经历重病后更珍惜生活，人际关系变得更深刻，内心更强大
+
+
+5.3 - Explaining and Classifying Psychological Disorders
+
+ - Dysfunction
+    - One of the <red>Four Ds</red>: inability to **maintain daily functioning** — self-care, social relationships, or work.
+    - 抑郁到无法起床上学、无法维持基本社交
+ - Distress
+    - One of the Four Ds: the individual experiences **subjective suffering** from their own thoughts, emotions, or behaviors.
+    - 强迫症患者因反复洗手感到极度痛苦
+ - Deviation from the social norm
+    - One of the Four Ds (**Deviance**): behavior that significantly departs from cultural/social norms, with **statistical infrequency**. 但罕见≠障碍（天才也罕见）。
+    - 在公共场合对着空气大声说话
+ - Cultural/societal norms
+    - Standards of acceptable behavior that **vary across cultures and time periods**; what is "abnormal" is partly defined by these norms.
+    - 同性恋曾被DSM列为障碍，1980年被移除——说明诊断标准随社会价值观变化
+ - Stigma
+    - **Negative social attitudes** toward mental illness, leading to stereotypes, prejudice, and discrimination.
+    - 别人知道你看心理医生后对你另眼相看、疏远你
+ - Racism
+    - Prejudice and discrimination based on **race/ethnicity**.
+    - 因种族背景在求职中被歧视
+ - Sexism
+    - Prejudice and discrimination based on **sex/gender**.
+    - 女性在职场中因性别被低估能力
+ - Ageism
+    - Prejudice and discrimination based on **age**.
+    - 认为老年人学不会新技术
+ - Discrimination
+    - **Behavioral** component of prejudice — unfair treatment of individuals based on group membership.
+    - 因心理疾病诊断标签而被拒绝录用
+ - Diagnostic and Statistical Manual of Mental Disorders (DSM)
+    - Published by the **APA** (American Psychiatric Association). Current version is <red>DSM-5</red> (2013), containing **541 diagnoses**. Serves as the standard classification system in the US and basis for insurance.
+    - 1952年首版仅128种诊断；1980年删除同性恋条目
+ - International Classification of Mental Disorders (ICD)
+    - Published by the **WHO**; a globally used classification system for clinical descriptions and diagnostic codes.
+    - 全球通用的疾病分类标准，不限于心理障碍
+ - Eclectic approach
+    - Rejecting single-factor explanations; **integrating multiple perspectives** (biological, psychological, social) to understand and treat disorders.
+    - 治疗抑郁症时同时考虑药物、认知疗法和社会支持
+ - Behavioral perspective
+    - Psychological disorders result from **maladaptive learned associations** through classical and operant conditioning.
+    - 被狗咬过后对所有狗产生恐惧（经典条件反射）
+ - Maladaptive learned associations
+    - Unhealthy **stimulus-response connections** formed through learning that maintain problematic behavior.
+    - 每次焦虑就喝酒缓解，形成了不健康的应对联结
+ - Humanistic perspective
+    - Disorders arise when **self-actualization is blocked** or growth environment is deficient; emphasizes unconditional positive regard.
+    - 一个人因长期被否定而无法发挥潜能，需要无条件的接纳和支持
+ - Cognitive perspective
+    - Disorders stem from **maladaptive thinking patterns** and cognitive distortions; treatment involves identifying and correcting negative automatic thoughts.
+    - 一次考试没考好就认为自己什么都做不好（以偏概全的认知扭曲）
+ - Psychodynamic perspective
+    - Disorders originate from **unconscious conflicts and childhood experiences**; treatment involves uncovering and processing these.
+    - 童年被忽视的经历导致成年后的信任问题
+ - Evolutionary perspective
+    - Certain psychological traits or disorders may have been **adaptive in ancestral environments**.
+    - 焦虑反应在远古时期帮助人类警觉危险、存活下来
+ - Sociocultural perspective
+    - Disorders arise from conflicts between the individual and **social/cultural norms and environments**.
+    - 移民因文化冲突产生适应障碍
+ - Biological perspective
+    - Disorders result from **neurochemical imbalances, genetic factors, or brain structure abnormalities**; treated with medication, stimulation, or surgery.
+    - 抑郁症与血清素水平低有关，用药物调节神经递质
+ - Biopsychosocial model
+    - An **integrative model**: disorders result from the interaction of <red>biological × psychological × social</red> factors. The mainstream approach in modern clinical practice.
+    - 抑郁症 = 基因易感性（bio）+ 消极思维模式（psych）+ 社会孤立（social）
+ - Diathesis-stress model
+    - Disorders are triggered when **innate genetic vulnerability (diathesis/nature)** interacts with **environmental stressors (stress/nurture)**. Having a family history ≠ inevitably developing the disorder.
+    - 有精神分裂症家族史（素质），但只有在经历重大压力事件后才发病（压力触发）
+
+5.4 - Selection of Categories of Psychological Disorders
+
+
+ - Neurodevelopmental disorders
+    - A group of brain dysfunctions present at **birth or early childhood**, affecting behavior, memory, attention, and/or learning. Causes include genetic, physiological, and environmental factors.
+    - ADHD和ASD都属于这一类
+ - Attention-deficit/hyperactivity disorder (ADHD)
+    - Characterized by persistent patterns of **inattention** and/or **hyperactivity-impulsivity** that interfere with functioning. Requires ≥6 symptoms for ≥6 months, onset **before age 12**, across multiple settings.
+    - 上课无法集中注意力，坐不住，经常打断别人说话
+ - Autism Spectrum Disorder (ASD)
+    - Characterized by deficits in **social-emotional reciprocity, nonverbal communication, and relationship maintenance**, plus **restricted/repetitive** behaviors, interests, or activities. Onset in early childhood.
+    - 不理解社交暗示，对特定话题有极度强烈的兴趣，重复同样的动作
+
+
+ - Schizophrenic Spectrum Disorders
+    - A <red>psychotic disorder</red> involving deterioration in functioning due to abnormal perceptions, bizarre thinking, emotional dysregulation, and motor abnormalities. 不是人格分裂（split mind 是心智的分裂）。Diagnosis requires ≥2 symptoms for ≥1 month, with ≥5 months of impairment.
+    - 一个人出现幻觉、妄想，无法正常工作和社交
+ - Positive symptoms
+    - Symptoms that represent an <red>excess or addition</red> to normal functioning — things present that shouldn't be.
+    - 妄想、幻觉、言语紊乱、紧张症
+ - Delusions
+    - **False beliefs** maintained despite contradictory evidence.
+    - 坚信自己被监视，即使没有任何证据
+ - Delusions of persecution
+    - Belief that one is being **persecuted, watched, or conspired against** by others. 最常见的妄想类型。
+    - 坚信有人在食物里下毒
+ - Delusions of grandeur
+    - Belief that one is an **extraordinarily powerful or important** person with special abilities.
+    - 相信自己是某个王室的继承人
+ - Hallucinations
+    - **False sensory perceptions** that feel vivid and real; content is usually negative. <red>Auditory hallucinations</red> are the most common type. Research shows the brain actually generates neural signals that produce the sounds.
+    - 听到有声音命令自己做事，但周围没有人
+ - Disorganized thinking
+    - Disrupted thought processes reflected in incoherent or illogical patterns of reasoning.
+    - 无法按逻辑组织想法，思维跳跃混乱
+ - Disorganized speech
+    - Incoherent or meaningless speech patterns, such as jumping between unrelated topics or inappropriate word use.
+    - 说话完全没有逻辑，听的人无法理解
+ - Word salad
+    - Completely **scrambled, incoherent speech** — an extreme form of disorganized speech.
+    - 苹果飞机紫色跳舞……完全无法理解的词语堆砌
+ - Disorganized motor behavior
+    - Excessive, **purposeless motor activity** including agitation, bizarre postures, pacing, repetitive movements, or even aggression.
+    - 反复踱步、模仿别人的动作、摆出怪异姿势
+ - Catatonia
+    - As a positive symptom: excessive purposeless movement. As a negative symptom: **lack of movement or responsiveness** (catatonic stupor).
+    - 阳性：不停踱步、做重复动作；阴性：保持一个诡异的姿势一动不动
+ - Negative symptoms
+    - Symptoms that represent a <red>reduction or absence</red> of normal functioning. 可能被误认为抑郁或懒惰。
+    - 情感平淡、缺乏动力、社交退缩
+ - Flat affect
+    - Severely **diminished emotional expression**: unchanging facial expression, poor eye contact, monotone voice, reduced gestures.
+    - 听到好消息或坏消息时表情完全没有变化，说话语调平平
+ - Catatonic stupor
+    - A negative symptom: **lack of movement or responsiveness** to the environment; may hold unusual postures and resist being moved.
+    - 像雕塑一样保持一个姿势几个小时不动，不回应任何人
+ - Dopamine hypothesis
+    - The theory that **highly fluctuating dopamine levels** contribute to schizophrenia symptoms. Dopamine is the key neurotransmitter associated with schizophrenia.
+    - 多巴胺水平异常波动导致幻觉和妄想等症状
+
+
+ - Depressive disorders
+    - A category of mood disorders characterized by persistent **low mood, loss of motivation**, and impaired functioning.
+    - 持续的悲伤、对事物失去兴趣
+ - Major Depressive Disorder
+    - <red>Unipolar</red> depression: intense depressive mood, decreased interest/pleasure, energy loss, and decision-making problems for **at least 2 weeks**. Requires depressed mood or loss of interest plus ≥3-4 additional symptoms.
+    - 连续两周以上每天都感到极度悲伤，无法上学上班，反复想到死亡
+ - Persistent Depressive Disorder
+    - A chronic, **longer-lasting** form of depression lasting **at least 2 years**, with symptoms such as appetite changes, sleep disturbances, low energy, and negative self-perception.
+    - 两年多来大部分时间都情绪低落，虽然没有重度抑郁那么严重，但一直好不了
+
+
+ - Bipolar disorders
+    - Mood disorders involving **alternating episodes** between depression and mania.
+    - 情绪在极度亢奋和极度低落之间来回波动
+ - Cycling
+    - The **switching between manic and depressive states**; duration and intensity can vary.
+    - 这个月躁狂、下个月抑郁，反复循环
+ - Mania
+    - Elevated mood, **increased energy**, decreased need for sleep, racing thoughts, impulsive/risky behavior, inflated self-esteem, more talkative and sociable.
+    - 连续几天不睡觉但精力充沛，疯狂消费，觉得自己无所不能
+ - Depression
+    - Persistent sadness, fatigue, insomnia or hypersomnia, difficulty concentrating, feelings of worthlessness, **withdrawal** from activities and people, suicidal thoughts.
+    - 躁狂期过后陷入极度疲惫和绝望，不想见任何人
+ - Bipolar I Disorder
+    - Characterized by at least one full **manic episode**; may have hypomanic or major depressive episodes. <red>More severe</red> than Bipolar II.
+    - 经历过完整的躁狂发作，可能住院治疗
+ - Bipolar II Disorder
+    - Characterized by at least one **hypomanic episode** and one major depressive episode; **never** a full manic episode. Less severe than Bipolar I.
+    - 有过轻躁狂（情绪高涨但没有严重到影响功能）和重度抑郁发作
+
+
+ - Anxiety disorders
+    - The **most common** psychological disorders in the US (19 million adults). Pathological anxiety is disruptive, irrational, and uncontrollable.
+    - 焦虑本身正常，但病理性焦虑是过度的、无法控制的
+ - Generalized anxiety disorder (GAD)
+    - Excessive anxiety about **almost everything** for ≥6 months, with ≥3 of: edginess, fatigue, poor concentration, irritability, muscle tension, sleep problems. <red>Free-floating anxiety</red> — no specific trigger.
+    - 什么都担心，工作、健康、家人，但说不清楚到底怕什么
+ - Panic disorder
+    - Characterized by recurrent, **unpredictable panic attacks** with severe physical symptoms (chest pain, choking, sweating). Lasting minutes to hours, no specific trigger. Requires ≥1 month of worry about recurrence or maladaptive behavioral changes.
+    - 突然心跳加速、胸痛、感觉快要窒息，以为自己心脏病发作
+ - Panic attack
+    - An episode of **intense, acute anxiety** with severe physical symptoms such as chest pain, sweating, choking, and muscle tightness.
+    - 突然感到极度恐惧，全身发抖、呼吸困难，持续几分钟
+ - Ataque de nervios
+    - A <red>culture-bound syndrome</red> common in **Latin American and Mediterranean** cultures, characterized by emotional outbursts — screaming, crying, trembling, or fainting — as a response to intense emotional events.
+    - 在拉丁文化中，亲人去世后出现尖叫、哭泣、颤抖甚至昏厥的情绪爆发
+ - Specific phobia
+    - An intense, **irrational fear** of a specific stimulus, lasting ≥6 months, causing immediate fear upon exposure and avoidance behavior.
+    - 看到蜘蛛就尖叫逃跑，明知过度但无法控制
+ - Acrophobia
+    - Fear of **heights**.
+    - 站在高楼阳台上就双腿发软、头晕
+ - Arachnophobia
+    - Fear of **spiders**.
+    - 看到蜘蛛就极度恐慌
+ - Agoraphobia
+    - Fear of **open or public spaces** where escape might be difficult.
+    - 害怕去商场、广场等开阔公共场所
+ - Social anxiety disorder
+    - Intense fear and anxiety in **social situations** where one might be scrutinized; fear of being negatively evaluated. Lasts ≥6 months, disproportionate to actual threat.
+    - 在课堂上被叫起来回答问题时极度恐惧，害怕被同学笑话
+ - Taijin kyofusho
+    - A <red>culture-bound syndrome</red> from **Japan**: intense fear of **offending or embarrassing others** with one's appearance or behavior (contrast with Western social anxiety which focuses on fear of being judged oneself).
+    - 日本文化中，极度害怕自己的存在让别人感到不舒服
+
+
+ - Obsessive-compulsive and related disorders
+    - A category of disorders involving **obsessions, compulsions, or related repetitive behaviors** that create distress and interfere with daily functioning. Includes conditions such as OCD and hoarding disorder.
+    - 一类以强迫观念、强迫行为或相关重复行为为核心的障碍，会带来痛苦并影响日常生活，包括强迫症和囤积障碍
+ - Obsessive-compulsive disorder (OCD)
+    - A disorder involving both **obsessions** (intrusive, unwanted thoughts) and **compulsions** (ritualistic behaviors performed to reduce anxiety). Time-consuming and causes significant distress.
+    - 反复想到门没锁好（强迫观念），于是回去检查五六次（强迫行为）
+ - Obsessions
+    - Persistent, intrusive, **unwanted thoughts** the individual cannot get rid of: contamination fears, harm fears, need for symmetry, intrusive violent/sexual thoughts.
+    - 脑海里不停出现自己会伤害家人的画面，越想停越停不下来
+ - Compulsions
+    - **Repetitive ritualistic behaviors** performed to reduce the anxiety caused by obsessions: excessive washing, checking, arranging, counting, hoarding.
+    - 每天洗手几十次直到手都裂了
+ - Hoarding disorder
+    - Persistent difficulty **discarding possessions** due to a perceived need to save them, causing severe clutter and significant distress or impairment.
+    - 家里堆满了旧报纸和塑料袋，完全无法丢弃，连走路的空间都没有
+
+
+ - Dissociative disorders
+    - Characterized by **disruptions in consciousness, memory, identity, or perception**, causing significant impairment. Dissociation itself can be normal (e.g., highway hypnosis).
+    - 开车时进入自动驾驶状态，到达目的地后完全不记得路上发生了什么
+ - Dissociation
+    - A **disconnection** from one's thoughts, feelings, surroundings, or identity; can range from normal (daydreaming) to pathological.
+    - 压力极大时感觉自己灵魂出窍，像在看别人的生活
+ - Dissociative amnesia
+    - Inability to recall **important autobiographical information**, usually of a traumatic nature — beyond ordinary forgetting.
+    - 经历车祸后完全记不起事故发生的过程
+ - Dissociative identity disorder (DID)
+    - Presence of **≥2 distinct personality states**, each with its own way of perceiving and interacting with the world, causing memory gaps. Often associated with severe childhood physical/sexual abuse.
+    - 一个人有多个不同的人格，彼此之间可能互不知道对方的存在
+
+
+ - Trauma and stressor-related disorders
+    - Disorders involving psychological distress after exposure to traumatic/stressful events, featuring hypervigilance, severe anxiety, flashbacks, insomnia, emotional detachment, and hostility.
+    - 经历战争或灾难后出现一系列心理症状
+ - Hypervigilance
+    - A state of **heightened alertness** and scanning for threats.
+    - 退伍军人听到巨响就立刻趴下寻找掩护
+ - Flashbacks
+    - **Intrusive, vivid re-experiencing** of traumatic events as if they are happening again.
+    - 突然感觉自己又回到了事故现场，画面和声音都栩栩如生
+ - Insomnia
+    - Difficulty **falling or staying asleep**, commonly associated with trauma-related disorders.
+    - 经历创伤后每晚都难以入睡，反复惊醒
+ - Emotional detachment
+    - A state of **emotional numbness** or disconnection from one's feelings and from others.
+    - 经历创伤后对任何事都感觉麻木，无法感受到快乐或悲伤
+ - Hostility
+    - Increased **irritability and aggression** as a symptom of trauma-related disorders.
+    - 创伤后变得暴躁易怒，经常对家人发脾气
+ - Posttraumatic stress disorder (PTSD)
+    - Persistent psychological distress after trauma exposure, characterized by <red>intrusive memories/flashbacks, avoidance of reminders, negative cognitive/emotional changes, and heightened reactivity</red>. Symptoms last **>1 month** and cause significant impairment. Onset can be delayed months or years.
+    - 士兵从战场回来后反复做噩梦，回避任何与战争相关的事物，听到烟花声就恐慌
+
+
+ - Feeding and eating disorders
+    - Disorders defined by **altered food consumption or absorption** — too little or too much — impairing health and psychological functioning.
+    - 饮食行为严重异常，影响身体健康和心理功能
+ - Anorexia nervosa
+    - Characterized by **restricted food intake**, intense fear of gaining weight, and **distorted body image**, leading to significant weight loss and health complications.
+    - 已经很瘦了但照镜子觉得自己很胖，极度节食
+ - Bulimia nervosa
+    - Characterized by recurrent **binge eating** followed by inappropriate compensatory behaviors (self-induced vomiting, fasting, excessive exercise) to prevent weight gain.
+    - 一次性吃掉大量食物，然后跑到厕所催吐
+
+
+ - Personality disorders
+    - Long-standing, **rigid, maladaptive** patterns of thinking and behavior that impair social functioning. Individuals typically lack insight. <red>Not diagnosed before age 18</red> because personality is still developing. Must deviate markedly from cultural norms.
+    - 一个人长期的行为模式极端且僵化，影响人际关系，但自己意识不到问题
+ - Cluster A (odd or eccentric)
+    - 关键词：<red>Weird</red>（怪异）
+ - Paranoid personality disorder
+    - Pattern of **distrust and suspicion** of others' motives; accusatory; misreads others' intentions.
+    - 总觉得朋友在背后说自己坏话，从不向任何人吐露心事
+ - Schizoid personality disorder
+    - Persistent **avoidance of social relationships** and very little emotional expression; genuinely prefers being alone; appears **cold/aloof**. More common in males.
+    - 真心喜欢独处，对交朋友和谈恋爱毫无兴趣
+ - Schizotypal personality disorder
+    - **Bizarre thinking, perceptions, and eccentric behavior**; distorted thinking; avoids close relationships.
+    - 相信自己有心灵感应能力，穿着打扮非常怪异，让人感觉很奇怪
+ - Cluster B (dramatic, emotional, or erratic)
+    - 关键词：<red>Wild</red>（狂野）
+ - Antisocial personality disorder (APD)
+    - Pattern of **disregarding and violating others' rights**; manipulative, exploitative, irresponsible; no guilt. Closely linked to criminal behavior. More common in males.
+    - 反复欺骗和利用他人，完全没有愧疚感，有犯罪记录
+ - Borderline personality disorder
+    - **Instability** in relationships, self-image, and emotions, plus **impulsivity**; unpredictable; suicidal threats common. More common in females.
+    - 对朋友的态度一天之内从极度依赖变成极度厌恶，经常用自伤威胁别人
+ - Histrionic personality disorder
+    - Pattern of **excessive emotionality** (dramatic) and **attention-seeking**; self-centered; exaggerates. More common in females.
+    - 说话夸张戏剧化，总要成为全场焦点，稍微被忽视就受不了
+ - Narcissistic personality disorder
+    - Pattern of **grandiosity, need for admiration, and lack of empathy**; cannot accept criticism; expects special treatment. More common in males.
+    - 觉得自己比所有人都优秀，要求特殊对待，完全不在乎别人的感受
+ - Cluster C (anxious or fearful)
+    - 关键词：<red>Worried</red>（担忧）
+ - Avoidant personality disorder
+    - Persistent **discomfort in social situations**, overwhelming feelings of inadequacy, and extreme sensitivity to **rejection/negative evaluation**.
+    - 很想交朋友但极度害怕被拒绝，所以干脆回避一切社交
+ - Dependent personality disorder
+    - Pattern of **clinging, submissive behavior**; fear of separation; constant need to be cared for; lets others make all decisions. More common in females.
+    - 什么事都让别人替自己决定，极度害怕被抛弃
+ - Obsessive-compulsive personality disorder
+    - Intense preoccupation with **orderliness, perfectionism, and control**, to the point of losing flexibility and efficiency. 注意：这是人格障碍，和OCD不同。
+    - 对规则和细节极度执着，一份报告改了二十遍还不满意，反而什么都完不成
+
+
+5.5 - Treatment of Psychological Disorders
+
+
+ - Evidence-based interventions
+    - Treatment methods supported by **scientific research and empirical evidence**, ensuring effectiveness and reliability.
+    - 使用经过临床试验验证有效的疗法，而不是凭感觉治疗
+ - Cultural humility
+    - Ongoing **self-reflection** and learning about clients' cultural backgrounds to provide culturally sensitive treatment.
+    - 治疗师主动了解来访者的文化背景，尊重文化差异
+ - Therapeutic alliance
+    - The **collaborative, trusting relationship** between therapist and client — a key factor in treatment effectiveness regardless of approach.
+    - 来访者感到被治疗师理解和信任，愿意敞开心扉
+ - Nonmaleficence
+    - <red>Do no harm</red> — avoid causing physical, emotional, or psychological harm to clients.
+    - 治疗师不能使用可能伤害来访者的方法
+ - Fidelity
+    - Maintaining **trust, honesty, and commitment** in the therapeutic relationship.
+    - 信守与来访者的咨询契约和承诺
+ - Integrity
+    - Maintaining **honesty, transparency, and consistency** in professional conduct.
+    - 对来访者坦诚，不隐瞒治疗方案的利弊
+ - Respect for people's rights and dignity
+    - Protecting clients' **privacy, confidentiality, and autonomy** — including the right to pause or stop treatment.
+    - 来访者有权随时暂停或终止治疗
+ - Psychotropic medication
+    - Medications that affect **brain chemistry** to treat psychological disorders; based on the premise that many disorders involve biological factors.
+    - 通过影响神经递质来缓解心理障碍的症状
+
+
+ - Psychodynamic therapies
+    - Based on **psychoanalysis**: uncovering unconscious content to relieve psychological tension. Traditional format: 2-3 sessions/week, up to 7 years.
+    - 通过探索潜意识冲突和童年经历来理解当前的心理问题
+ - Free association
+    - Client freely expresses whatever comes to mind — thoughts, feelings, memories — to **uncover unconscious conflicts**. <red>Freudian slips</red> (口误) are seen as revealing true thoughts.
+    - 来访者躺在沙发上想到什么就说什么，治疗师从中寻找潜意识线索
+ - Dream interpretation
+    - Analyzing dream content to reveal **unconscious thoughts and unresolved conflicts**.
+    - 通过分析梦境中反复出现的场景来发现潜意识中的恐惧
+
+
+ - Cognitive therapies
+    - Based on the idea that **thinking colors our feelings** — thoughts mediate between events and emotional reactions.
+    - 改变你对事件的想法，就能改变你的情绪反应
+ - Cognitive restructuring
+    - Identifying and replacing **negative, irrational beliefs** with more positive, realistic thoughts.
+    - 把考试没考好就觉得自己一无是处的想法，替换为这只是一次考试，下次可以改进
+ - Combating maladaptive thinking
+    - Identifying and challenging **negative, irrational thought patterns** that cause emotional distress and dysfunction.
+    - 意识到自己总是灾难化思维（一件小事就觉得天要塌了），然后主动纠正
+ - Cognitive triad
+    - <red>Beck's</red> concept: negative views of **self, world, and future** — the core of depression.
+    - 我不行（自我）、世界很糟糕（世界）、未来没有希望（未来）
+ - Fear hierarchies
+    - A ranked list of feared situations from **least to most anxiety-provoking**, used in systematic desensitization.
+    - 怕蜘蛛：看蜘蛛图片（低）→ 看真蜘蛛（中）→ 触摸蜘蛛（高）
+
+
+ - Applied behavior analysis
+    - The application of **learning principles** (classical and operant conditioning) to modify behavior.
+    - 用行为学原理系统地改变问题行为
+ - Exposure therapies
+    - Gradual, repeated exposure to feared objects/situations in a **controlled environment** to reduce anxiety. Applicable to phobias, panic disorder, social anxiety, OCD, PTSD, GAD.
+    - 让恐高症患者从低楼层开始逐步适应高度
+ - Systematic desensitization
+    - Combines a **fear hierarchy** with progressive **relaxation training**; based on the principle of <red>reciprocal inhibition</red> — you cannot be deeply relaxed and deeply afraid at the same time.
+    - 先学会深度放松，然后在放松状态下从最轻微的恐惧场景开始逐步面对
+ - Aversion therapies
+    - Pairing an **unwanted behavior with an unpleasant stimulus** to create a negative association. Can be harmful if improperly administered.
+    - 让酗酒者在喝酒时同时服用引起恶心的药物，建立喝酒=恶心的联结
+ - Token economies
+    - Using **tokens as rewards** for desired behaviors (self-care, medication compliance); tokens can be exchanged for privileges. Based on operant conditioning.
+    - 精神病院里患者按时吃药和整理床铺就获得代币，攒够可以换零食或活动时间
+ - Biofeedback
+    - Using **electronic monitoring** to give individuals real-time information about physiological states (heart rate, muscle tension), enabling them to learn **self-regulation**. Used for stress management.
+    - 通过屏幕实时看到自己的心率，练习用呼吸把心率降下来
+
+
+ - Cognitive-behavioral therapies (CBT)
+    - Integrates cognitive and behavioral approaches: **thoughts, behaviors, and emotions are interconnected**. Treats depression, anxiety, PTSD, OCD.
+    - 同时改变消极想法和不良行为来改善情绪
+ - Rational emotive behavior therapy (REBT)
+    - Developed by <red>Albert Ellis</red>; identifies and restructures **irrational beliefs**. Considered a precursor to CBT.
+    - 挑战我必须让所有人喜欢我这种非理性信念
+ - Dialectical behavior therapy (DBT)
+    - Combines **acceptance of self** with **changing unhealthy patterns**. Core skills: emotional regulation, distress tolerance, interpersonal effectiveness, mindfulness. Treats <red>BPD</red>, depression, anxiety, PTSD, eating disorders.
+    - 接受自己当下的情绪，同时学习更健康的应对方式
+
+
+ - Person-centered therapy
+    - Provides a **supportive environment** for self-discovery and growth; focuses on the **present and future** rather than the past.
+    - 治疗师不给建议，而是创造安全环境让来访者自己找到答案
+ - Unconditional positive regard
+    - The therapist offers **complete acceptance and support** regardless of what the client says or does.
+    - 无论来访者说了什么，治疗师都不评判，给予完全的接纳
+ - Active listening
+    - The therapist **fully attends to, understands, responds to, and remembers** what the client expresses, validating their feelings.
+    - 治疗师认真复述来访者的话，确认理解正确，让来访者感到被听见
+
+
+ - Group therapy
+    - Therapy conducted with multiple clients simultaneously. **Advantages**: shared experiences, peer support, reduced isolation, diverse perspectives. **Disadvantages**: less individual attention, discomfort sharing in front of others.
+    - 几个有社交焦虑的人一起做团体治疗，互相分享经历和支持
+ - Hypnosis
+    - A state of **lowered conscious resistance** where the patient is more receptive to therapeutic suggestions; enhances access to the subconscious. **Effective** for pain and anxiety. <red>Not effective</red> for extracting accurate memories or age regression.
+    - 用催眠帮助患者缓解慢性疼痛，但不能用来恢复准确的记忆
+
+
+ - Psychoactive medication
+    - Same as psychotropic medication — drugs that alter **brain chemistry** to treat mental disorders.
+    - 通过调节神经递质来治疗心理障碍的药物
+ - Antidepressants
+    - Improve mood by affecting neurotransmitters, primarily <red>serotonin</red>. **SSRI** (Prozac, Zoloft, Lexapro): block serotonin reuptake, most common. **SNRI** (Effexor): serotonin + norepinephrine. **NDRI** (Wellbutrin): norepinephrine + dopamine.
+    - 医生给抑郁症患者开了Prozac（一种SSRI），帮助提升血清素水平
+ - Antianxiety drugs
+    - Reduce sympathetic brain activity, promote relaxation. **Benzodiazepines** (Xanax, Valium): fast-acting but <red>addictive</red>. **Azapirones** (Buspar): non-sedating, lower dependency risk but slower onset.
+    - 焦虑发作时服用Xanax可以快速镇静，但长期使用有成瘾风险
+ - Lithium
+    - A **mood stabilizer** commonly used to treat <red>bipolar disorder</red>; reduces the frequency and severity of manic and depressive episodes.
+    - 双相障碍患者服用锂盐来稳定情绪波动
+ - Antipsychotic medications
+    - Eliminate positive symptoms of schizophrenia (hallucinations, delusions) by reducing **dopamine receptor activity**. **Typical/1st gen** (Haldol): effective for positive symptoms, high motor side-effect risk. **Atypical/2nd gen** (Risperdal, Zyprexa, Abilify): effective for both positive and negative symptoms, fewer motor side effects.
+    - 精神分裂症患者服用抗精神病药后幻觉和妄想明显减少
+ - Tardive dyskinesia
+    - A potential side effect of long-term antipsychotic use: **involuntary, repetitive movements** of the face, jaw, and limbs, related to dopamine dysregulation.
+    - 长期服用抗精神病药后出现无法控制的面部抽动和嘴巴咀嚼动作
+
+
+ - Psychosurgery
+    - Surgically altering brain tissue; a **last resort** when other treatments fail. Irreversible. Performed by psychiatrists and neurosurgeons collaboratively.
+    - 在所有其他治疗都无效后，作为最后手段进行脑部手术
+ - Lesioning
+    - Making small, **targeted destructions** to specific brain areas.
+    - 对特定脑区进行精确的小范围损毁来改变行为
+ - Lobotomy
+    - Severing connections to the **prefrontal cortex**; now largely <red>abandoned</red> due to severe side effects.
+    - 早期切断前额叶连接的手术，导致患者变得像行尸走肉，现已基本废弃
+ - Electroconvulsive therapy (ECT)
+    - Sending small electrical currents through the brain to induce brief seizures; used for **severe, treatment-resistant depression**. May cause short-term memory loss.
+    - 对药物无效的重度抑郁患者使用电休克治疗，可能导致短暂记忆丧失
+ - TMS (transcranial magnetic stimulation)
+    - **Non-invasive**; places a pulsed magnetic coil over the prefrontal area to stimulate nerve cells. Treats depression with minimal side effects.
+    - 用磁场无创地刺激大脑前额叶区域来治疗抑郁，副作用比ECT小很多

@@ -1,0 +1,766 @@
+## 3.1 - Themes and Methods in Developmental Psychology
+Chronological development
+Continuous development
+Discontinuous development
+Lifespan development
+Stability and change
+Nature and nurture
+
+## 3.2 - Physical Development Across the Lifespan
+Teratogens
+Fine motor coordination
+Gross motor coordination
+Maturation
+Reflexes
+Rooting reflex
+Visual cliff
+Critical periods
+Sensitive periods
+Imprinting
+Growth spurt
+Puberty
+Primary sex characteristics
+Secondary sex characteristics
+Menarche
+Spermarche
+Menopause
+
+## 3.3 - Gender and Sexual Orientation
+(No specific terms for this topic)
+
+## 3.4 - Cognitive Development Across the Lifespan
+Schemas
+Assimilation
+Accommodation
+Sensorimotor stage
+Preoperational stage
+Concrete operational stage
+Formal operational stage
+Object permanence
+Mental symbols
+Pretend play
+Conservation
+Reversibility
+Animism
+Egocentrism
+Theory of mind
+Systematic thinking
+Abstract thinking
+Hypothetical thinking
+Scaffolding (as it pertains to Vygotsky)
+Zone of proximal development
+Crystallized intelligence
+Fluid intelligence
+Dementia
+
+## 3.5 - Communication and Language Development
+Phonemes
+Morphemes
+Semantics
+Grammar
+Syntax
+Cooing
+Babbling
+One-word stage
+Telegraphic speech
+Overgeneralization of language rules
+
+## 3.6 - Social-Emotional Development Across the Lifespan
+Ecological systems theory
+Microsystem
+Mesosystem
+Exosystem
+Macrosystem
+Chronosystem
+Authoritarian parenting
+Authoritative parenting
+Permissive parenting
+Attachment styles
+Secure attachment
+Insecure attachment
+Avoidant attachment
+Anxious attachment
+Disorganized attachment
+Separation anxiety
+Temperament
+Parallel play
+Imaginary audience
+Personal fable
+Social clock
+Emerging adulthood
+Stage theory of psychosocial development (Erikson)
+Trust and mistrust
+Autonomy and shame and doubt
+Initiative and guilt
+Industry and inferiority
+Identity and role confusion
+Intimacy and isolation
+Generativity and stagnation
+Integrity and despair
+Adverse childhood experiences (ACEs)
+Achievement (adolescent identity development)
+Diffusion (adolescent identity development)
+Foreclosure (adolescent identity development)
+Moratorium (adolescent identity development)
+Racial/ethnic identity
+Sexual orientation
+Religious identity
+Occupational identity
+Familial identity
+Possible selves
+
+## 3.7 - Classical Conditioning
+Behavioral perspective
+Classical conditioning
+Association
+Acquisition
+Associative learning
+Unconditioned stimulus
+Unconditioned response
+Conditioned stimulus
+Conditioned response
+Extinction
+Spontaneous recovery
+Stimulus discrimination
+Stimulus generalization
+Higher-order conditioning
+Counterconditioning
+Taste aversion
+One-trial conditioning
+One-trial learning
+Biological preparedness
+Habituation
+
+## 3.8 - Operant Conditioning
+Operant conditioning
+Reinforcement
+Punishment
+Law of Effect
+Superstitious behavior
+Learned helplessness
+Positive reinforcement
+Primary reinforcers
+Secondary reinforcer
+Reinforcement discrimination
+Reinforcement generalization
+Shaping
+Instinctive drift
+Negative reinforcement
+Reinforcement schedules
+Continuous reinforcement
+Partial reinforcement
+Fixed interval
+Variable interval
+Fixed ratio
+Variable ratio
+Scalloped graph
+
+## 3.9 - Social, Cognitive, and Neurological Factors in Learning
+Social learning theory
+Vicarious conditioning
+Modeling
+Insight learning
+Latent learning
+Cognitive maps
+
+---
+
+3.1 - Themes and Methods in Developmental Psychology
+
+   - Chronological development
+      - Studying development by following **age-related changes** over time.
+      - 按年龄顺序研究人从婴儿到老年的变化
+
+   - Continuous development
+      - Development is a <red>gradual, smooth</red> process without distinct stages.
+      - 像一个斜坡，能力慢慢增长，没有突然的跳跃
+
+   - Discontinuous development
+      - Development occurs in <red>distinct stages</red>, each qualitatively different from the last.
+      - 像爬楼梯，每上一层就有质的变化
+
+   - Lifespan development
+      - Development is a process that continues **from conception to death**, not just childhood.
+      - 人一辈子都在发展，不只是小时候
+
+   - Stability and change
+      - The debate over whether traits remain consistent or change across the lifespan.
+      - 小时候内向的人长大了还会内向吗？
+
+   - Nature and nurture
+      - The debate over the relative contributions of <red>genetics</red> vs. <red>environment</red> to development.
+      - 智商是天生的还是后天培养的？两者都有影响
+
+3.2 - Physical Development Across the Lifespan
+
+   - Teratogens
+      - Harmful agents (drugs, alcohol, viruses) that can cause birth defects during <red>prenatal</red> development.
+      - 孕妇喝酒可能导致胎儿酒精综合征
+
+   - Fine motor coordination
+      - Control of **small muscles**, especially in the hands and fingers.
+      - 用筷子、写字、系鞋带
+
+   - Gross motor coordination
+      - Control of **large muscles** used for walking, running, and jumping.
+      - 走路、跑步、跳跃
+
+   - Maturation
+      - The **biologically driven** sequence of growth and development that is relatively unaffected by experience.
+      - 所有婴儿都是先会坐再会走，这个顺序不需要教
+
+   - Reflexes
+      - Involuntary, **automatic responses** to stimuli that are present at birth.
+      - 新生儿天生就有的自动反应，比如抓握反射
+
+   - Rooting reflex
+      - When a newborn's cheek is touched, it turns toward the stimulus and opens its mouth to feed.
+      - 碰婴儿脸颊，他会自动把头转过来找奶吃
+
+   - Visual cliff
+      - A laboratory device used to test **depth perception** in infants; most infants avoid the "deep" side by 6-14 months.
+      - 把婴儿放在玻璃桌上，下面看起来是悬崖，婴儿不敢爬过去，说明已有深度知觉
+
+   - Critical periods
+      - A <red>strict</red> time window during which certain experiences **must** occur for normal development; missing it causes irreversible effects.
+      - 如果孩子在7岁前没有接触语言，语言能力可能永久受损
+
+   - Sensitive periods
+      - An <red>optimal</red> but not absolute time window when the organism is especially responsive to certain experiences.
+      - 幼儿期学语言最容易，但成年后也不是完全学不会
+
+   - Imprinting
+      - A rapid form of attachment in certain animals during a critical period, typically to the <red>first moving object</red> they see; **not found in humans**.
+      - 小鹅出生后把第一个看到的移动物体当妈，这是动物特有的，人类没有印刻
+
+   - Growth spurt
+      - A period of **rapid physical growth**, especially during puberty.
+      - 青春期突然长高了很多
+
+   - Puberty
+      - The period of physical maturation involving hormonal surges and the development of **sexual maturity**.
+      - 青春期身体开始发育，出现各种生理变化
+
+   - Primary sex characteristics
+      - Body structures directly involved in <red>reproduction</red> (e.g., ovaries, testes, uterus).
+      - 和生殖直接相关的器官，如卵巢、子宫、睾丸
+
+   - Secondary sex characteristics
+      - Physical features <red>not directly</red> involved in reproduction that appear at puberty.
+      - 男生长喉结和胡须，女生乳房发育
+
+   - Menarche
+      - A female's **first menstrual period**, signaling reproductive maturity.
+      - 女生第一次来月经
+
+   - Spermarche
+      - A male's **first ejaculation**, signaling reproductive maturity.
+      - 男生第一次遗精
+
+   - Menopause
+      - The cessation of menstruation in women, typically around age **50**, ending reproductive capacity.
+      - 女性大约50岁左右停经，伴随荷尔蒙变化和各种身心不适
+
+3.4 - Cognitive Development Across the Lifespan
+
+   - Schemas
+      - Mental frameworks or concepts that help us **organize and interpret** information.
+      - 小孩脑中有一个「狗」的框架：四条腿、毛茸茸、会叫
+
+   - Assimilation
+      - Interpreting new experiences in terms of <red>existing</red> schemas.
+      - 小孩第一次看到猫，叫它「狗狗」，因为也是四条腿毛茸茸的
+
+   - Accommodation
+      - <red>Modifying</red> existing schemas or creating new ones to incorporate new information.
+      - 小孩发现猫会喵喵叫，和狗不一样，于是建立了新的「猫」的概念
+
+   - Sensorimotor stage
+      - Piaget's **Stage 1** (birth to ~2 years): infants learn through senses and motor actions; develop <red>object permanence</red>.
+      - 婴儿通过抓、咬、看来认识世界，活在当下
+
+   - Preoperational stage
+      - Piaget's **Stage 2** (~2-7 years): symbolic thinking develops but children lack <red>conservation</red> and are <red>egocentric</red>.
+      - 会用语言和假装游戏，但认为把水倒进高杯子水就变多了
+
+   - Concrete operational stage
+      - Piaget's **Stage 3** (~7-11 years): children gain <red>logical thinking</red> about concrete events; master conservation and reversibility.
+      - 知道8+4=12所以12-4=8，但还不能思考抽象假设性问题
+
+   - Formal operational stage
+      - Piaget's **Stage 4** (~12+): capacity for <red>abstract, hypothetical, and systematic</red> thinking.
+      - 能理解正义、自由这些抽象概念，能设计科学实验
+
+   - Object permanence
+      - The understanding that objects continue to <red>exist even when not seen</red>; develops around 8-10 months.
+      - 把玩具藏在毯子下面，婴儿知道去掀开毯子找
+
+   - Mental symbols
+      - Internal representations of objects or events that allow thinking **without direct sensory experience**.
+      - 婴儿可以在脑中「想到」一个不在眼前的东西
+
+   - Pretend play
+      - Using objects or actions to **represent** other objects or actions symbolically; emerges in preoperational stage.
+      - 小孩拿香蕉当电话打，过家家
+
+   - Conservation
+      - The understanding that quantity remains the same despite changes in <red>shape or appearance</red>.
+      - 把同样多的水倒进高瘦杯子和矮胖杯子，水量不变
+
+   - Reversibility
+      - The ability to mentally **reverse** an action or operation.
+      - 知道8+4=12，也就知道12-4=8
+
+   - Animism
+      - The belief that <red>inanimate objects are alive</red> and have feelings; common in preoperational stage.
+      - 小孩说太阳公公在对我笑，觉得玩具熊会疼
+
+   - Egocentrism
+      - The inability to take <red>another person's perspective</red>; characteristic of preoperational stage.
+      - 三山实验：小孩觉得别人看到的山和自己看到的一样
+
+   - Theory of mind
+      - The ability to understand that <red>others have different thoughts, beliefs, and perspectives</red> than one's own.
+      - 知道别人可能不知道你知道的事情，大约在4-5岁发展出来
+
+   - Systematic thinking
+      - The ability to approach problems in an **organized, logical** manner; develops in concrete operational stage.
+      - 能有条理地一步步解决问题，而不是乱猜
+
+   - Abstract thinking
+      - The ability to think about concepts that are <red>not physically present</red>; develops in formal operational stage.
+      - 能思考「正义是什么」「y=ax+b里x代表什么」
+
+   - Hypothetical thinking
+      - The ability to consider **"what if"** scenarios; develops in formal operational stage.
+      - 如果地球没有引力会怎样？
+
+   - Scaffolding (as it pertains to Vygotsky)
+      - Temporary support provided by a more knowledgeable person to help a learner accomplish a task within their <red>ZPD</red>.
+      - 老师先给你提示和框架，等你学会了就慢慢撤掉帮助
+
+   - Zone of proximal development
+      - The gap between what a learner can do <red>independently</red> and what they can do <red>with guidance</red>.
+      - 你自己解不出这道数学题，但老师提示一下你就会了，这个区间就是ZPD
+
+   - Crystallized intelligence
+      - Accumulated **knowledge and verbal skills** that tend to <red>increase</red> with age.
+      - 老人的词汇量、常识、经验比年轻人丰富
+
+   - Fluid intelligence
+      - The ability to think quickly, abstractly, and solve novel problems; tends to <red>decline</red> with age.
+      - 年轻人反应快、学新东西快，这种能力随年龄下降
+
+   - Dementia
+      - A **progressive decline** in cognitive function (memory, reasoning, language) severe enough to interfere with daily life.
+      - 老人记忆力严重衰退，忘记家人的名字，无法独立生活
+
+3.5 - Communication and Language Development
+
+   - Phonemes
+      - The **smallest units of sound** that distinguish meaning in a language.
+      - /b/ 和 /p/ 是不同的音位，bat 和 pat 意思不同
+
+   - Morphemes
+      - The **smallest units of meaning** in a language.
+      - un-believe-able 有三个语素：un表示不，believe表示相信，able表示能够
+
+   - Semantics
+      - The study of **meaning** in language — what words and sentences actually convey.
+      - 理解「他很冷」可能是说温度低，也可能是说这个人冷漠
+
+   - Grammar
+      - The **system of rules** governing the structure and use of a language.
+      - 英语中主语+谓语+宾语的规则
+
+   - Syntax
+      - Rules for **combining words into grammatically correct sentences**.
+      - The dog bit the man 和 The man bit the dog 语序不同意思完全不同
+
+   - Cooing
+      - Vowel-like sounds produced by infants beginning around **2 months**.
+      - 婴儿发出「噢噢啊啊」的声音，在练习发声器官
+
+   - Babbling
+      - Repetitive consonant-vowel combinations beginning around **4 months**.
+      - ba-ba-ba, ma-ma-ma，开始练习母语的音位
+
+   - One-word stage
+      - Around **12 months**, children use single words to express whole ideas (holophrases).
+      - 指着门说「出！」意思是我想出去玩
+
+   - Telegraphic speech
+      - Two-word sentences (around age **2**) that contain mostly nouns and verbs, like a telegram.
+      - 妈妈走、要球球，只有关键词没有语法词
+
+   - Overgeneralization of language rules
+      - Applying grammatical rules <red>too broadly</red>, including to exceptions.
+      - 孩子说 goed 而不是 went，说 mouses 而不是 mice
+
+3.6 - Social-Emotional Development Across the Lifespan
+
+   - Ecological systems theory
+      - Bronfenbrenner's theory that development is influenced by **multiple nested environmental systems**.
+      - 一个孩子的发展受到家庭、学校、社区、文化等多层环境的影响
+
+   - Microsystem
+      - The <red>immediate</red> environments a person directly interacts with.
+      - 家庭、学校、同伴、老师
+
+   - Mesosystem
+      - The <red>interactions between</red> microsystems.
+      - 家长和老师沟通孩子的表现，家庭和学校之间的联系
+
+   - Exosystem
+      - External environments that <red>indirectly</red> affect the individual.
+      - 爸爸公司裁员导致家庭经济紧张，间接影响孩子
+
+   - Macrosystem
+      - The broader <red>cultural values, laws, and customs</red> that shape all other systems.
+      - 中国文化重视教育，影响了家庭对孩子学习的要求
+
+   - Chronosystem
+      - The dimension of <red>time</red> — historical events and life transitions that influence development.
+      - 经历新冠疫情的这一代孩子的成长与之前的不同
+
+   - Authoritarian parenting
+      - <red>High demands, low responsiveness</red>; strict rules with little warmth.
+      - 我说什么你就做什么，不许反驳，但也不关心你的感受
+
+   - Authoritative parenting
+      - <red>High demands, high responsiveness</red>; firm but warm and communicative. **Best outcomes.**
+      - 对你有要求有规矩，但也倾听你、支持你，讲道理
+
+   - Permissive parenting
+      - <red>Low demands, high responsiveness</red>; warm but few rules or structure.
+      - 宠溺孩子，什么都答应，不设规矩
+
+   - Attachment styles
+      - Patterns of bonding between infant and caregiver, shaped by caregiver **responsiveness**.
+      - 婴儿和照顾者之间形成的依恋模式，影响一生的人际关系
+
+   - Secure attachment
+      - Child uses caregiver as a **safe base**; distressed when caregiver leaves, happy when they return.
+      - 妈妈在就安心探索，妈妈走了会哭，妈妈回来了很开心，最健康的依恋
+
+   - Insecure attachment
+      - A general category for attachment patterns that are <red>not secure</red>, including avoidant, anxious, and disorganized.
+      - 不安全的依恋，有几种不同的表现形式
+
+   - Avoidant attachment
+      - Child shows <red>little distress</red> when caregiver leaves and avoids them upon return; suppresses emotional needs.
+      - 妈妈走了无所谓，回来了也无所谓，内心压抑情感需求
+
+   - Anxious attachment
+      - Child is <red>clingy</red> when caregiver is present, extremely distressed when they leave, and **ambivalent** upon return.
+      - 妈妈在就黏着，妈妈走了崩溃大哭，妈妈回来了又推开她又要抱
+
+   - Disorganized attachment
+      - Child shows <red>no consistent pattern</red> of behavior; often linked to abuse or trauma. **Most unhealthy.**
+      - 行为混乱没有规律，一会靠近一会远离，通常和虐待或创伤有关
+
+   - Separation anxiety
+      - Distress displayed by infants when separated from their primary caregiver, typically emerging around **8 months**.
+      - 妈妈一离开视线婴儿就哭闹不安
+
+   - Temperament
+      - An infant's **inborn** disposition — easy, difficult, or slow to warm up.
+      - 有的宝宝天生好带，有的天生难带，有的慢热
+
+   - Parallel play
+      - Children play **side by side** but do not interact with each other.
+      - 两个小孩坐在一起各玩各的积木，互不干涉
+
+   - Imaginary audience
+      - Adolescents' belief that <red>everyone is watching and judging</red> them.
+      - 长了个痘觉得全世界都在看，觉得自己站在舞台中央
+
+   - Personal fable
+      - Adolescents' belief that they are <red>unique and invulnerable</red>.
+      - 觉得自己与众不同、刀枪不入，不好的事不会发生在自己身上
+
+   - Social clock
+      - The culturally preferred timing for major life events like marriage, career, and retirement.
+      - 社会觉得你该什么年龄结婚、生孩子、退休，带来无形压力
+
+   - Emerging adulthood
+      - The transitional period from late teens to mid-20s, characterized by **identity exploration** and instability.
+      - 18到25岁左右，不完全是青少年也不完全是成年人，还在探索
+
+   - Stage theory of psychosocial development (Erikson)
+      - Erikson's **8-stage** theory proposing that personality develops through a series of crises across the lifespan.
+      - 每个人生阶段都有一个核心心理冲突要解决
+
+   - Trust and mistrust
+      - **Stage 1** (infancy): Can I trust the world? Consistent caregiving leads to trust.
+      - 婴儿期：照顾者靠谱就信任世界，不靠谱就不信任
+
+   - Autonomy and shame and doubt
+      - **Stage 2** (toddlerhood): Can I do things myself? Encouragement leads to autonomy.
+      - 幼儿期：鼓励孩子自己做事就有自主感，总批评就会自我怀疑
+
+   - Initiative and guilt
+      - **Stage 3** (preschool): Can I make things happen? Support leads to initiative.
+      - 学前期：让孩子主动探索就有主动性，总阻止就会内疚
+
+   - Industry and inferiority
+      - **Stage 4** (school age): Can I succeed? Mastery leads to competence.
+      - 学龄期：在学校获得成就感就勤奋，总是失败就自卑
+
+   - Identity and role confusion
+      - **Stage 5** (adolescence): Who am I? Successful exploration leads to a strong sense of identity.
+      - 青春期：探索自我，我是谁，我要成为什么样的人
+
+   - Intimacy and isolation
+      - **Stage 6** (young adulthood): Can I love? Forming close relationships vs. feeling alone.
+      - 青年期：能不能建立亲密关系，还是孤独一人
+
+   - Generativity and stagnation
+      - **Stage 7** (middle adulthood): Am I contributing to the next generation?
+      - 中年期：为下一代和社会做贡献，还是停滞不前觉得人生没意义
+
+   - Integrity and despair
+      - **Stage 8** (late adulthood): Did I live a meaningful life?
+      - 老年期：回顾一生觉得满足，还是充满遗憾和绝望
+
+   - Adverse childhood experiences (ACEs)
+      - Traumatic events in childhood (abuse, neglect, household dysfunction) that have <red>lasting negative effects</red> on health and development.
+      - 童年遭受虐待、忽视、家庭暴力等，对身心健康产生长期负面影响
+
+   - Achievement (adolescent identity development)
+      - Marcia's status: the individual has **explored and committed** to an identity.
+      - 经过探索后做出了明确的选择，比如想清楚了要学什么专业
+
+   - Diffusion (adolescent identity development)
+      - Marcia's status: <red>no exploration, no commitment</red>.
+      - 没想过也不在乎自己是谁、要做什么，随波逐流
+
+   - Foreclosure (adolescent identity development)
+      - Marcia's status: <red>commitment without exploration</red>; identity adopted from others (e.g., parents).
+      - 爸妈说你要当医生，那就当医生吧，自己从没想过别的可能
+
+   - Moratorium (adolescent identity development)
+      - Marcia's status: <red>actively exploring but no commitment</red> yet.
+      - 正在尝试各种可能性，还没做出最终决定
+
+   - Racial/ethnic identity
+      - One's sense of belonging to a particular **racial or ethnic group** and how it shapes self-concept.
+      - 作为华裔对自己民族文化身份的认同和理解
+
+   - Sexual orientation
+      - An enduring pattern of emotional, romantic, and/or sexual attraction to others.
+      - 一个人对同性、异性或两性的持久吸引力倾向
+
+   - Religious identity
+      - One's sense of self as shaped by **religious beliefs and practices**.
+      - 信仰佛教或基督教对自我认同的影响
+
+   - Occupational identity
+      - One's sense of self related to **career choices and professional roles**.
+      - 我想成为交易员，这是我职业身份的一部分
+
+   - Familial identity
+      - One's sense of self shaped by **family roles and relationships**.
+      - 作为家里的长子，对自己的角色和责任的认知
+
+   - Possible selves
+      - Mental representations of what one **hopes to become, expects to become, or fears becoming**.
+      - 我希望成为的自己、我害怕变成的自己
+
+3.7 - Classical Conditioning
+
+   - Behavioral perspective
+      - The psychological approach that focuses on <red>observable behavior</red> and how it is learned from the environment.
+      - 只关注能观察到的行为，不深究内心想法
+
+   - Classical conditioning
+      - A type of learning where a **neutral stimulus** becomes associated with an **unconditioned stimulus** to produce a conditioned response.
+      - 巴甫洛夫的狗：铃声反复和食物配对后，听到铃声就流口水
+
+   - Association
+      - The mental link formed between two stimuli or between a stimulus and a response.
+      - 把铃声和食物联系在一起
+
+   - Acquisition
+      - The initial stage of learning, when a response is <red>first established</red> and gradually strengthened.
+      - 小猫逐渐学会听到罐头声就跑去厨房
+
+   - Associative learning
+      - Learning that certain events **occur together**; includes both classical and operant conditioning.
+      - 通过一个刺激预测另一个刺激的出现
+
+   - Unconditioned stimulus
+      - A stimulus that <red>naturally and automatically</red> triggers a response without prior learning.
+      - 食物自动引发流口水，打针的疼痛自动引发哭泣
+
+   - Unconditioned response
+      - The <red>natural, unlearned</red> reaction to the unconditioned stimulus.
+      - 吃到食物自然流口水，被打针自然会哭
+
+   - Conditioned stimulus
+      - A previously **neutral stimulus** that, after association with the US, now <red>triggers a learned response</red>.
+      - 铃声本来不会让狗流口水，但和食物配对多次后就可以了
+
+   - Conditioned response
+      - The <red>learned</red> response to the conditioned stimulus; typically similar to the UR.
+      - 听到铃声就流口水，看到白大褂就害怕
+
+   - Extinction
+      - The diminishing of a conditioned response when the CS is <red>repeatedly presented without the US</red>.
+      - 铃声响了很多次但没有食物，狗慢慢不再流口水了
+
+   - Spontaneous recovery
+      - The <red>reappearance</red> of an extinguished conditioned response after a rest period.
+      - 消退一段时间后，铃声再响，狗又流口水了
+
+   - Stimulus discrimination
+      - The ability to <red>distinguish</red> between the CS and other similar stimuli.
+      - 小猫只对特定罐头声有反应，对其他类似声音不反应
+
+   - Stimulus generalization
+      - The tendency to respond to stimuli that are <red>similar</red> to the CS.
+      - 小猫听到任何类似罐头的声音都跑去厨房
+
+   - Higher-order conditioning
+      - A procedure where a <red>CS is used as a US</red> to condition a new neutral stimulus.
+      - 白大褂让你害怕，白大褂总和某段音乐一起出现，后来听到那段音乐也害怕了
+
+   - Counterconditioning
+      - Replacing an unwanted CR with a new, <red>incompatible</red> response to the same CS.
+      - 怕狗的人通过在狗旁边吃最喜欢的零食，慢慢把恐惧替换成愉悦
+
+   - Taste aversion
+      - A learned avoidance of a specific food after it was followed by **illness**; often requires <red>only one trial</red>.
+      - 生病时吃了豆花，从此再也不想吃豆花了
+
+   - One-trial conditioning
+      - Classical conditioning that occurs after <red>a single</red> pairing of the CS and US.
+      - 只被狗咬了一次就从此怕狗
+
+   - One-trial learning
+      - Learning that occurs from <red>a single experience</red>, often involving strong emotional or biological significance.
+      - 摸了一次火炉被烫到，再也不敢摸了
+
+   - Biological preparedness
+      - An evolutionary predisposition to more easily learn associations that are <red>survival-relevant</red>.
+      - 人天生更容易怕蛇和蜘蛛，而不是怕花朵，因为前者对生存有威胁
+
+   - Habituation
+      - <red>Decreased responsiveness</red> to a repeated, insignificant stimulus; a CNS-level learned process, **not** sensory adaptation.
+      - 住在铁路旁边的人慢慢不再注意到火车的声音了
+
+3.8 - Operant Conditioning
+
+   - Operant conditioning
+      - A type of learning where behavior is strengthened or weakened by its <red>consequences</red> (reinforcement or punishment).
+      - 行为的后果决定这个行为以后会不会再做
+
+   - Reinforcement
+      - Any consequence that <red>increases</red> the likelihood of a behavior being repeated.
+      - 任何让你更想重复某个行为的后果
+
+   - Punishment
+      - Any consequence that <red>decreases</red> the likelihood of a behavior being repeated.
+      - 任何让你不想再做某个行为的后果
+
+   - Law of Effect
+      - Thorndike's principle: behaviors followed by **satisfying** consequences are more likely to recur; those followed by **unpleasant** consequences are less likely.
+      - 效果好的行为会重复，效果差的行为会减少
+
+   - Superstitious behavior
+      - A behavior that is repeated because a reinforcer <red>coincidentally</red> followed it, even though there is no causal relationship.
+      - 考试穿了某件衣服考得好，以后每次考试都穿那件
+
+   - Learned helplessness
+      - A condition where repeated exposure to unavoidable negative events leads to <red>passivity and giving up</red>.
+      - 反正怎么努力都没用，干脆摆烂算了
+
+   - Positive reinforcement
+      - <red>Adding</red> a pleasant stimulus after a behavior to **increase** that behavior. 加好。
+      - 考试考好了给奖金，工作表现好发奖金
+
+   - Primary reinforcers
+      - Stimuli that are <red>innately</red> reinforcing, satisfying biological needs.
+      - 食物、水、睡眠，不需要学习就知道它们好
+
+   - Secondary reinforcer
+      - Stimuli that become reinforcing through <red>learned association</red> with primary reinforcers.
+      - 钱、分数、小红花，本身没意义但可以换成食物或认可
+
+   - Reinforcement discrimination
+      - Responding differently to stimuli that **signal** whether reinforcement is available.
+      - 只在老板在的时候认真工作，因为知道老板在才有可能被表扬
+
+   - Reinforcement generalization
+      - Responding similarly to stimuli that are <red>similar</red> to those previously associated with reinforcement.
+      - 在一个老师那里认真学习得到表扬，在其他老师那里也认真
+
+   - Shaping
+      - Reinforcing **successive approximations** toward a desired behavior, step by step.
+      - 教狗翻滚：先奖励它躺下，再奖励它侧翻，最后奖励它完整翻滚
+
+   - Instinctive drift
+      - The tendency for an animal to <red>revert to innate behaviors</red> that interfere with conditioned behavior.
+      - 训练猪把硬币放进存钱罐，但猪总是忍不住用鼻子拱硬币，因为这是本能
+
+   - Negative reinforcement
+      - <red>Removing</red> an unpleasant stimulus after a behavior to **increase** that behavior. 减坏。
+      - 系安全带后烦人的警报声停了，以后上车就系安全带
+
+   - Reinforcement schedules
+      - Rules that determine **when and how often** a behavior is reinforced.
+      - 决定什么时候给强化的规则
+
+   - Continuous reinforcement
+      - Reinforcing the behavior <red>every time</red> it occurs. Fastest learning, fastest extinction.
+      - 每次按按钮都出饮料，一次不出就不按了
+
+   - Partial reinforcement
+      - Reinforcing behavior only <red>some of the time</red>. Slower learning, but much more resistant to extinction.
+      - 老虎机不是每次都中奖，但人们还是不停地玩
+
+   - Fixed interval
+      - Reinforcement after a <red>fixed time period</red>; response rate increases as the time approaches.
+      - 按月发工资，月底前才开始努力工作；考前突击
+
+   - Variable interval
+      - Reinforcement after <red>unpredictable time periods</red>; produces steady, consistent responding.
+      - 随堂测验不知道什么时候考，所以每天都要准备；刷社交媒体等点赞
+
+   - Fixed ratio
+      - Reinforcement after a <red>fixed number</red> of responses; produces high rate with brief pauses after reinforcement.
+      - 计件工资，每做50个产品得20块；买十杯咖啡送一杯
+
+   - Variable ratio
+      - Reinforcement after an <red>unpredictable number</red> of responses; produces the **highest and most consistent** response rate.
+      - 老虎机、抽卡游戏，不知道什么时候中但就是停不下来
+
+   - Scalloped graph
+      - The response pattern seen in <red>fixed interval</red> schedules — low responding after reinforcement, then a sharp increase as the next reinforcement approaches.
+      - 固定间隔强化的图表长得像扇贝壳，刚拿完工资就摸鱼，快发工资了才干活
+
+3.9 - Social, Cognitive, and Neurological Factors in Learning
+
+   - Social learning theory
+      - Bandura's theory that we learn by <red>observing and imitating</red> others, not just through direct experience.
+      - 小孩看到大人打充气娃娃，自己也跟着打（Bobo doll实验）
+
+   - Vicarious conditioning
+      - Learning by observing the <red>consequences of others'</red> behavior.
+      - 看到同学上课说话被罚站，自己就不敢说话了
+
+   - Modeling
+      - The process of **observing and imitating** a specific behavior.
+      - 小孩模仿爸爸刮胡子的动作
+
+   - Insight learning
+      - A sudden realization of a problem's solution, an <red>"aha" moment</red>, without trial and error.
+      - 想了很久的数学题突然灵光一闪就会了
+
+   - Latent learning
+      - Learning that occurs <red>without reinforcement</red> and is not demonstrated until there is a reason to do so.
+      - 你每天坐车经过同一条路，虽然没刻意记，但有一天需要自己走就发现其实认识路
+
+   - Cognitive maps
+      - Mental representations of the <red>layout of an environment</red>.
+      - 你脑中有一张学校的地图，知道哪里是食堂哪里是教室
