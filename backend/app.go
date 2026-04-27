@@ -331,7 +331,21 @@ func (a *App) importStatus(c *gin.Context) {
 	a.DB.Model(&Topic{}).Count(&topics)
 	a.DB.Model(&Concept{}).Count(&concepts)
 	a.DB.Model(&Concept{}).Where("content_status <> ?", "pending").Count(&ready)
-	c.JSON(200, gin.H{"units": units, "topics": topics, "concepts": concepts, "readyConcepts": ready, "runs": runs})
+	var byUnit []struct {
+		UnitID   string `json:"unitId"`
+		Unit     string `json:"unit"`
+		Concepts int    `json:"concepts"`
+		Ready    int    `json:"ready"`
+	}
+	a.DB.Raw(`
+		select u.id as unit_id, u.title as unit, count(c.id) as concepts,
+		       sum(case when c.content_status <> 'pending' then 1 else 0 end) as ready
+		from units u
+		left join concepts c on c.unit_id = u.id
+		group by u.id, u.title, u.position
+		order by u.position asc
+	`).Scan(&byUnit)
+	c.JSON(200, gin.H{"units": units, "topics": topics, "concepts": concepts, "readyConcepts": ready, "byUnit": byUnit, "runs": runs})
 }
 
 func (a *App) importRun(c *gin.Context) {

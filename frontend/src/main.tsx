@@ -28,6 +28,7 @@ type ImportStatus = {
   topics: number
   concepts: number
   readyConcepts: number
+  byUnit: { unitId: string; unit: string; concepts: number; ready: number }[]
   runs: { id: string; source: string; status: string; message: string; counts: string; createdAt: string }[]
 }
 
@@ -304,6 +305,15 @@ function DataView() {
         <Metric label="Topics" value={status?.topics ?? 0} />
         <Metric label="Concepts" value={status?.concepts ?? 0} />
         <Metric label="Enriched" value={status?.readyConcepts ?? 0} />
+      </div>
+      <div className="unit-health">
+        {status?.byUnit.map((unit) => (
+          <div key={unit.unitId}>
+            <span>{unit.unit}</span>
+            <strong>{unit.ready} / {unit.concepts}</strong>
+            <div className="mastery-bar"><i style={{ width: `${unit.concepts ? (unit.ready / unit.concepts) * 100 : 0}%` }} /></div>
+          </div>
+        ))}
       </div>
       <div className="run-list">
         {status?.runs.map((run) => (
