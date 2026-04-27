@@ -320,9 +320,16 @@ func (i Importer) EnrichFromCompact(path string) error {
 	}
 
 	updated := 0
+	ordered, indexByID := i.orderedConcepts()
+	lastIndex := -1
 	for conceptID, e := range entries {
+		resolvedID, resolvedIndex := resolveCompactID(conceptID, ordered, indexByID, lastIndex)
+		if resolvedID == "" {
+			continue
+		}
+		lastIndex = resolvedIndex
 		var concept Concept
-		if err := i.DB.First(&concept, "id = ?", conceptID).Error; err != nil {
+		if err := i.DB.First(&concept, "id = ?", resolvedID).Error; err != nil {
 			continue
 		}
 		if concept.ContentStatus == "ready" {
@@ -353,6 +360,42 @@ func (i Importer) EnrichFromCompact(path string) error {
 	}
 	run := ImportRun{ID: NewID("imp"), Source: "ai-enrichment.compact", Status: "ok", Message: "Imported compact AI enrichment", Counts: fmt.Sprintf("concepts=%d", updated)}
 	return i.DB.Create(&run).Error
+}
+
+func (i Importer) orderedConcepts() ([]Concept, map[string]int) {
+	var concepts []Concept
+	i.DB.
+		Joins("join units on units.id = concepts.unit_id").
+		Joins("join topics on topics.id = concepts.topic_id").
+		Order("units.position asc, topics.position asc, concepts.position asc").
+		Find(&concepts)
+	index := map[string]int{}
+	for n, concept := range concepts {
+		index[concept.ID] = n
+	}
+	return concepts, index
+}
+
+func resolveCompactID(raw string, concepts []Concept, indexByID map[string]int, lastIndex int) (string, int) {
+	raw = strings.TrimSpace(raw)
+	if idx, ok := indexByID[raw]; ok {
+		return raw, idx
+	}
+	if raw == "" {
+		return "", lastIndex
+	}
+	suffix := "." + Slugify(raw)
+	for idx := lastIndex + 1; idx < len(concepts); idx++ {
+		if strings.HasSuffix(concepts[idx].ID, suffix) {
+			return concepts[idx].ID, idx
+		}
+	}
+	for idx, concept := range concepts {
+		if strings.HasSuffix(concept.ID, suffix) {
+			return concept.ID, idx
+		}
+	}
+	return "", lastIndex
 }
 
 func (i Importer) applyNotes(entries map[string][]string, source string, confidence float64) error {

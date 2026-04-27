@@ -33,3 +33,23 @@ func TestNextMastery(t *testing.T) {
 		t.Fatalf("unknown should clamp at 0, got %f", got)
 	}
 }
+
+func TestResolveCompactID(t *testing.T) {
+	concepts := []Concept{
+		{ID: "ap-psychology.u2.t2-1.relative-clarity"},
+		{ID: "ap-psychology.u2.t2-1.relative-size"},
+		{ID: "ap-psychology.u3.t3-4.assimilation"},
+	}
+	index := map[string]int{}
+	for i, concept := range concepts {
+		index[concept.ID] = i
+	}
+	id, idx := resolveCompactID("relative-size", concepts, index, 0)
+	if id != concepts[1].ID || idx != 1 {
+		t.Fatalf("expected ordered slug resolution, got %s %d", id, idx)
+	}
+	id, idx = resolveCompactID(concepts[2].ID, concepts, index, idx)
+	if id != concepts[2].ID || idx != 2 {
+		t.Fatalf("expected exact resolution, got %s %d", id, idx)
+	}
+}
