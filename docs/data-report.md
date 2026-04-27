@@ -6,6 +6,7 @@
 - Canonical concepts imported: 794
 - Units: 6
 - Topics: 41
+- Concepts with ready card-back content after local + AI enrichment: 794
 
 The difference between parsed rows and canonical concepts comes from exact duplicate terms inside the same topic:
 
@@ -25,3 +26,4 @@ Current deterministic enrichment uses:
 
 Definitions, examples, pitfalls, and notes are extracted conservatively. The app remains usable when enrichment is pending because every concept has a recognition card.
 
+After the compact AI enrichment pass, every canonical concept has at least a ready definition-style back side. Local note sources still take priority when they already provide stronger content.
