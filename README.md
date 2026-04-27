@@ -2,6 +2,16 @@
 
 A local-first AP Psychology sprint platform with React, Go/Gin, GORM, and SQLite.
 
+![alt text](docs/image.png)
+
+![alt text](docs/image-1.png)
+
+![alt text](docs/image-2.png)
+
+![alt text](docs/image-3.png)
+
+![alt text](docs/image-4.png)
+
 ## What It Does
 
 - Imports the canonical AP Psychology concept list from `data/sources/keyterms.md`.
