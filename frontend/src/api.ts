@@ -59,8 +59,15 @@ export type ConceptRow = Concept & {
 
 export type AuthPayload = {
   token: string
-  user: { id: string; name: string; email: string }
+  user: { id: string; name: string; email: string; role: 'admin' | 'student'; avatarDataUrl?: string }
   tenant: { id: string; name: string }
+}
+
+export type StatBucket = {
+  label: string
+  reviews: number
+  learned: number
+  averageMastery: number
 }
 
 const API_BASE = import.meta.env.VITE_API_BASE ?? ''
@@ -106,4 +113,3 @@ export class ApiClient {
 }
 
 export const api = new ApiClient()
-
