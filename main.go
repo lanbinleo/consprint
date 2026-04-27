@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"os"
 
 	"ap-psych-final/backend/backend"
 )
@@ -11,7 +12,17 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	if err := app.Router().Run(":8080"); err != nil {
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
+
+	host := os.Getenv("HOST")
+	if host == "" {
+		host = "localhost"
+	}
+	log.Printf("Server is running at http://%s:%s", host, port)
+	if err := app.Router().Run(host + ":" + port); err != nil {
 		log.Fatal(err)
 	}
 }

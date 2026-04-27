@@ -16,14 +16,16 @@ type Tenant struct {
 }
 
 type User struct {
-	ID           string         `gorm:"primaryKey" json:"id"`
-	TenantID     string         `gorm:"index;not null" json:"tenantId"`
-	Name         string         `gorm:"not null" json:"name"`
-	Email        string         `gorm:"uniqueIndex;not null" json:"email"`
-	PasswordHash string         `gorm:"not null" json:"-"`
-	CreatedAt    time.Time      `json:"createdAt"`
-	UpdatedAt    time.Time      `json:"updatedAt"`
-	DeletedAt    gorm.DeletedAt `gorm:"index" json:"-"`
+	ID            string         `gorm:"primaryKey" json:"id"`
+	TenantID      string         `gorm:"index;not null" json:"tenantId"`
+	Name          string         `gorm:"not null" json:"name"`
+	Email         string         `gorm:"uniqueIndex;not null" json:"email"`
+	Role          string         `gorm:"not null;default:student" json:"role"`
+	AvatarDataURL string         `json:"avatarDataUrl"`
+	PasswordHash  string         `gorm:"not null" json:"-"`
+	CreatedAt     time.Time      `json:"createdAt"`
+	UpdatedAt     time.Time      `json:"updatedAt"`
+	DeletedAt     gorm.DeletedAt `gorm:"index" json:"-"`
 }
 
 type Course struct {

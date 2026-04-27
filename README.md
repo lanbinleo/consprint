@@ -4,9 +4,11 @@ A local-first AP Psychology sprint platform with React, Go/Gin, GORM, and SQLite
 
 ## What It Does
 
-- Imports the canonical AP Psychology concept list from `keyterms.md`.
+- Imports the canonical AP Psychology concept list from `data/sources/keyterms.md`.
 - Preserves local notes and downloaded source material under `data/sources/`.
 - Supports multi-tenant registration and login.
+- Separates global concept data from each user's ratings, review events, and progress.
+- Restricts data import and concept-content editing to admin users.
 - Lets each user rate every concept from 0 to 5.
 - Provides a recognition-first review flow.
 - Tracks review events and mastery changes.
@@ -84,12 +86,8 @@ cd frontend
 npm run build
 ```
 
-## Default Manual Test Account
+## Accounts And Admin Access
 
-The UI defaults to:
+The login form intentionally starts blank. Register a local account on first launch.
 
-- Email: `student@example.com`
-- Password: `ap-psych`
-
-You can register that account on first launch.
-
+The first registered account is created as an admin so it can access the Data page. Later accounts are regular student users unless their role is changed directly in local development.

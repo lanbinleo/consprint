@@ -103,6 +103,86 @@ func TestRatingAndReviewFlow(t *testing.T) {
 	}
 }
 
+func TestProfileAndContentUpdateFlow(t *testing.T) {
+	app, err := NewApp(filepath.Join(t.TempDir(), "app.db"), filepath.Join("..", "data", "sources"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	sqlDB, err := app.DB.DB()
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer sqlDB.Close()
+	router := app.Router()
+	token := registerTestUser(t, router, "profile@example.com")
+
+	avatar := "data:image/png;base64,iVBORw0KGgo="
+	req := httptest.NewRequest(http.MethodPatch, "/api/me", bytes.NewBufferString(`{"name":"David","tenantName":"AP Room","avatarDataUrl":"`+avatar+`"}`))
+	req.Header.Set("Content-Type", "application/json")
+	req.Header.Set("Authorization", "Bearer "+token)
+	w := httptest.NewRecorder()
+	router.ServeHTTP(w, req)
+	if w.Code != http.StatusOK {
+		t.Fatalf("profile update failed: %d %s", w.Code, w.Body.String())
+	}
+	var profile struct {
+		User   User   `json:"user"`
+		Tenant Tenant `json:"tenant"`
+	}
+	if err := json.Unmarshal(w.Body.Bytes(), &profile); err != nil {
+		t.Fatal(err)
+	}
+	if profile.User.Name != "David" || profile.Tenant.Name != "AP Room" || profile.User.AvatarDataURL != avatar || profile.User.Role != "admin" {
+		t.Fatalf("profile was not updated: %#v", profile)
+	}
+
+	conceptID := "ap-psychology.science-practices.set-a.random-assignment"
+	req = httptest.NewRequest(http.MethodPatch, "/api/concepts/"+conceptID+"/content", bytes.NewBufferString(`{
+		"definition":[{"type":"paragraph","text":"Manual definition"}],
+		"examples":[{"type":"paragraph","text":"Manual example"}],
+		"pitfalls":[],
+		"notes":[],
+		"source":"manual-test"
+	}`))
+	req.Header.Set("Content-Type", "application/json")
+	req.Header.Set("Authorization", "Bearer "+token)
+	w = httptest.NewRecorder()
+	router.ServeHTTP(w, req)
+	if w.Code != http.StatusOK {
+		t.Fatalf("content update failed: %d %s", w.Code, w.Body.String())
+	}
+	var concept Concept
+	if err := json.Unmarshal(w.Body.Bytes(), &concept); err != nil {
+		t.Fatal(err)
+	}
+	if concept.Content == nil || concept.Content.Source != "manual-test" {
+		t.Fatalf("content was not saved: %#v", concept.Content)
+	}
+}
+
+func TestAdminOnlyDataRoutes(t *testing.T) {
+	app, err := NewApp(filepath.Join(t.TempDir(), "app.db"), filepath.Join("..", "data", "sources"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	sqlDB, err := app.DB.DB()
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer sqlDB.Close()
+	router := app.Router()
+	_ = registerTestUser(t, router, "admin@example.com")
+	studentToken := registerTestUser(t, router, "student@example.com")
+
+	req := httptest.NewRequest(http.MethodGet, "/api/import/status", nil)
+	req.Header.Set("Authorization", "Bearer "+studentToken)
+	w := httptest.NewRecorder()
+	router.ServeHTTP(w, req)
+	if w.Code != http.StatusForbidden {
+		t.Fatalf("student should not read import status: %d %s", w.Code, w.Body.String())
+	}
+}
+
 func registerTestUser(t *testing.T, router http.Handler, email string) string {
 	t.Helper()
 	body := bytes.NewBufferString(`{"tenantName":"Test","name":"Student","email":"` + email + `","password":"secret"}`)
