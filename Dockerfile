@@ -18,9 +18,11 @@ FROM alpine:3.22
 RUN apk add --no-cache ca-certificates tzdata
 WORKDIR /app
 COPY --from=backend /out/ap-psych-final ./ap-psych-final
+COPY --from=frontend /src/frontend/dist ./frontend/dist
 COPY data/sources ./data/sources
 ENV APP_ENV=production \
     GIN_MODE=release \
+    HOST=0.0.0.0 \
     PORT=8080
 EXPOSE 8080
 CMD ["./ap-psych-final"]

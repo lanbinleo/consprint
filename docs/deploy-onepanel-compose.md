@@ -59,6 +59,7 @@ Required production values:
 ```env
 APP_ENV=production
 GIN_MODE=release
+HOST=0.0.0.0
 PORT=8080
 JWT_SECRET=replace-with-a-long-random-secret-at-least-32-chars
 REGISTRATION_INVITE_CODE=change-me-class-code
