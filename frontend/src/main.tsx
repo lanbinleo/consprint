@@ -6,6 +6,7 @@ import {
   ChevronLeft,
   ChevronRight,
   Check,
+  Clock3,
   Database,
   Edit3,
   Eye,
@@ -13,6 +14,7 @@ import {
   Gauge,
   History,
   Keyboard,
+  ListChecks,
   Languages,
   Loader2,
   LogOut,
@@ -27,6 +29,7 @@ import {
   SkipForward,
   Sparkles,
   Sun,
+  TrendingUp,
   Upload,
   User,
 } from 'lucide-react'
@@ -47,9 +50,19 @@ type Lang = 'en' | 'zh'
 type Theme = 'light' | 'dark'
 
 type DashboardSummary = { totalConcepts: number; readyConcepts: number }
-type DashboardProgress = { reviewedConcepts: number; ratedConcepts: number; weakConcepts: number; averageMastery: number }
+type DashboardProgress = {
+  reviewedConcepts: number
+  ratedConcepts: number
+  weakConcepts: number
+  averageMastery: number
+  todayReviews: number
+  todayMasteryGain: number
+  shortTermReviews: number
+  streakDays: number
+}
 type DashboardTrends = { daily: StatBucket[]; hourly: StatBucket[] }
-type DashboardAlerts = { recent: unknown[]; weakConcepts: Concept[] }
+type WeakArea = { label: string; weak: number; averageMastery: number }
+type DashboardAlerts = { recent: unknown[]; weakConcepts: Concept[]; weakUnits: WeakArea[]; weakTopics: WeakArea[] }
 
 type ImportStatus = {
   units: number
@@ -82,10 +95,19 @@ const copy = {
     enrichedTerms: 'Study content',
     ratedTerms: 'Rated terms',
     weakTerms: 'Needs practice',
+    todayReviews: 'Today',
+    todayGain: 'Mastery gain',
+    shortTerm: 'Short-term queue',
+    streak: 'Streak',
     averageMastery: 'Average mastery',
+    coverage: 'Coverage',
     countdown: 'AP exam countdown',
     countdownSmall: 'Target: 2026-05-12 12:00 UTC+8',
     dailyReviews: 'Daily reviews',
+    last24h: 'Last 24h',
+    weakUnits: 'Weak units',
+    weakTopics: 'Weak topics',
+    noWeakAreas: 'No weak rated areas yet.',
     cumulativeLearned: 'Cumulative learned',
     reminders: 'Reminders',
     noReminders: 'No weak rated terms yet.',
@@ -158,6 +180,7 @@ const copy = {
     login: 'Login',
     email: 'Email',
     password: 'Password',
+    inviteCode: 'Class code',
     createWorkspace: 'Create workspace',
     enterWorkspace: 'Enter workspace',
   },
@@ -182,10 +205,19 @@ const copy = {
     enrichedTerms: '可学内容',
     ratedTerms: '已打分',
     weakTerms: '需加强',
+    todayReviews: '今日复习',
+    todayGain: '今日增长',
+    shortTerm: '短期复习',
+    streak: '连续天数',
     averageMastery: '平均掌握度',
+    coverage: '覆盖情况',
     countdown: 'AP 考试倒计时',
     countdownSmall: '目标：2026-05-12 12:00 UTC+8',
     dailyReviews: '每日复习',
+    last24h: '过去 24 小时',
+    weakUnits: '薄弱单元',
+    weakTopics: '薄弱主题',
+    noWeakAreas: '目前没有已标记的薄弱区域。',
     cumulativeLearned: '累计掌握',
     reminders: '提醒',
     noReminders: '目前还没有已标记的不熟词汇。',
@@ -258,6 +290,7 @@ const copy = {
     login: '登录',
     email: '邮箱',
     password: '密码',
+    inviteCode: '班级码',
     createWorkspace: '创建工作区',
     enterWorkspace: '进入工作区',
   },
@@ -379,6 +412,7 @@ function AuthScreen({ onAuth, t }: { onAuth: (payload: AuthPayload) => void; t: 
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [inviteCode, setInviteCode] = useState('')
   const [error, setError] = useState('')
   const [busy, setBusy] = useState(false)
 
@@ -388,7 +422,7 @@ function AuthScreen({ onAuth, t }: { onAuth: (payload: AuthPayload) => void; t: 
     try {
       const payload =
         mode === 'register'
-          ? await api.register({ tenantName, name, email, password })
+          ? await api.register({ tenantName, name, email, password, inviteCode })
           : await api.login({ email, password })
       api.setToken(payload.token)
       onAuth(payload)
@@ -416,6 +450,7 @@ function AuthScreen({ onAuth, t }: { onAuth: (payload: AuthPayload) => void; t: 
             <>
               <label>{t.tenant}<input placeholder="AP Study Room" value={tenantName} onChange={(e) => setTenantName(e.target.value)} /></label>
               <label>{t.name}<input placeholder="Student" value={name} onChange={(e) => setName(e.target.value)} /></label>
+              <label>{t.inviteCode}<input value={inviteCode} onChange={(e) => setInviteCode(e.target.value)} /></label>
             </>
           )}
           <label>{t.email}<input placeholder="student@example.com" value={email} onChange={(e) => setEmail(e.target.value)} /></label>
@@ -445,6 +480,8 @@ function DashboardView({ t, goReview, goQuick }: { t: typeof copy.en; goReview: 
 
   const countdown = examCountdown(now)
   const cumulative = cumulativeLearned(trends?.daily ?? [])
+  const readyPct = percent(summary?.readyConcepts ?? 0, summary?.totalConcepts ?? 0)
+  const ratedPct = percent(progress?.ratedConcepts ?? 0, summary?.totalConcepts ?? 0)
 
   return (
     <section className="page">
@@ -454,10 +491,17 @@ function DashboardView({ t, goReview, goQuick }: { t: typeof copy.en; goReview: 
         action={<div className="action-row"><button className="secondary" onClick={goQuick}><Keyboard size={16} /> {t.quickRate}</button><button className="primary" onClick={goReview}><Sparkles size={16} /> {t.createReview}</button></div>}
       />
       <div className="metrics">
-        <Metric label={t.totalTerms} value={summary?.totalConcepts ?? 0} loading={!summary} />
-        <Metric label={t.enrichedTerms} value={summary?.readyConcepts ?? 0} loading={!summary} />
-        <Metric label={t.ratedTerms} value={progress?.ratedConcepts ?? 0} loading={!progress} />
-        <Metric label={t.weakTerms} value={progress?.weakConcepts ?? 0} loading={!progress} />
+        <Metric label={t.todayReviews} value={progress?.todayReviews ?? 0} loading={!progress} />
+        <Metric label={t.todayGain} value={progress?.todayMasteryGain ?? 0} loading={!progress} />
+        <Metric label={t.shortTerm} value={progress?.shortTermReviews ?? 0} loading={!progress} />
+        <Metric label={t.streak} value={progress?.streakDays ?? 0} loading={!progress} />
+      </div>
+      <div className="coverage-strip">
+        <span>{t.coverage}</span>
+        <strong>{t.totalTerms}: {summary?.totalConcepts ?? 0}</strong>
+        <strong>{t.enrichedTerms}: {summary ? `${summary.readyConcepts} (${readyPct}%)` : '...'}</strong>
+        <strong>{t.ratedTerms}: {progress && summary ? `${progress.ratedConcepts} (${ratedPct}%)` : '...'}</strong>
+        <strong>{t.weakTerms}: {progress?.weakConcepts ?? 0}</strong>
       </div>
       <div className="dashboard-grid">
         <div className="progress-band">
@@ -480,9 +524,14 @@ function DashboardView({ t, goReview, goQuick }: { t: typeof copy.en; goReview: 
         </div>
         <button className="secondary" onClick={goReview}>{t.reviewWeak}</button>
       </div>
-      <div className="chart-grid">
+      <div className="chart-grid three">
         <ChartCard title={t.dailyReviews} icon={<BarChart3 size={17} />} data={trends?.daily ?? []} mode="reviews" />
+        <ChartCard title={t.last24h} icon={<TrendingUp size={17} />} data={trends?.hourly ?? []} mode="gain" />
         <ChartCard title={t.cumulativeLearned} icon={<History size={17} />} data={cumulative} mode="learned" />
+      </div>
+      <div className="insight-grid">
+        <WeakAreaCard title={t.weakUnits} icon={<ListChecks size={17} />} rows={alerts?.weakUnits ?? []} empty={t.noWeakAreas} />
+        <WeakAreaCard title={t.weakTopics} icon={<Clock3 size={17} />} rows={alerts?.weakTopics ?? []} empty={t.noWeakAreas} />
       </div>
     </section>
   )
@@ -685,11 +734,17 @@ function ReviewView({ t }: { t: typeof copy.en }) {
   useEffect(() => {
     function handleKey(event: KeyboardEvent) {
       if (!started || !current) return
-      if (!staged && event.key.toLowerCase() === 'a') setStaged('know')
-      if (!staged && event.key.toLowerCase() === 's') setStaged('fuzzy')
-      if (!staged && event.key.toLowerCase() === 'd') setStaged('unknown')
-      if (staged && event.key === 'Enter') void commit(staged === 'unknown' ? 'fuzzy' : staged)
-      if (staged && event.key.toLowerCase() === 'u') setStaged(null)
+      const key = event.key.toLowerCase()
+      if (!staged) {
+        if (key === 'a') setStaged('know')
+        if (key === 's') setStaged('fuzzy')
+        if (key === 'd') setStaged('unknown')
+        return
+      }
+      if (key === 'u') setStaged(null)
+      if (staged === 'know' && (key === 'd' || event.key === 'Enter')) void commit('know')
+      if (staged !== 'know' && (key === 'a' || event.key === 'Enter')) void commit('fuzzy')
+      if (staged !== 'know' && key === 's') void commit('unknown')
     }
     window.addEventListener('keydown', handleKey)
     return () => window.removeEventListener('keydown', handleKey)
@@ -751,9 +806,15 @@ function ReviewView({ t }: { t: typeof copy.en }) {
     )
   }
 
+  const reviewHint = !staged
+    ? `A ${t.know} / S ${t.fuzzy} / D ${t.dontKnow}`
+    : staged === 'know'
+      ? `D ${t.next} / U ${t.undo}`
+      : `A ${t.understandNow} / S ${t.stillWeak} / U ${t.undo}`
+
   return (
     <section className="page focus-page">
-      <Header eyebrow={t.review} title={`${index + 1} / ${queue.length}`} action={<KeyboardHint text={`A ${t.know} / S ${t.fuzzy} / D ${t.dontKnow}`} />} />
+      <Header eyebrow={t.review} title={`${index + 1} / ${queue.length}`} action={<KeyboardHint text={reviewHint} />} />
       <div className="review-card">
         <small>{current.topic?.title}</small>
         <h2>{current.term}</h2>
@@ -768,13 +829,13 @@ function ReviewView({ t }: { t: typeof copy.en }) {
             <RichContent t={t} content={current.content} />
             <div className="review-actions">
               <button className="secondary" onClick={() => setStaged(null)}><RotateCcw size={16} /> {t.undo}</button>
-              {staged === 'unknown' ? (
+              {staged === 'fuzzy' || staged === 'unknown' ? (
                 <>
-                  <button className="success" onClick={() => commit('fuzzy')}>{t.understandNow}</button>
-                  <button className="danger" onClick={() => commit('unknown')}>{t.stillWeak}</button>
+                  <button className="success" onClick={() => commit('fuzzy')}>A {t.understandNow}</button>
+                  <button className="danger" onClick={() => commit('unknown')}>S {t.stillWeak}</button>
                 </>
               ) : (
-                <button className="primary" onClick={() => commit(staged)}>{t.next}</button>
+                <button className="primary" onClick={() => commit(staged)}>D {t.next}</button>
               )}
             </div>
           </>
@@ -1012,17 +1073,37 @@ function Rating({ value, onRate }: { value: number; onRate: (rating: number) => 
   )
 }
 
-function ChartCard({ title, icon, data, mode }: { title: string; icon: ReactNode; data: StatBucket[]; mode: 'reviews' | 'learned' }) {
-  const max = Math.max(1, ...data.map((row) => mode === 'reviews' ? row.reviews : row.learned))
+function ChartCard({ title, icon, data, mode }: { title: string; icon: ReactNode; data: StatBucket[]; mode: 'reviews' | 'learned' | 'gain' }) {
+  const values = data.map((row) => chartValue(row, mode))
+  const max = Math.max(1, ...values)
   return (
     <div className="chart-card">
       <h3>{icon}{title}</h3>
       {data.length === 0 ? <p className="muted">No review history yet.</p> : (
-        <div className="bars">
+        <div className={`bars ${mode}`}>
           {data.map((row) => {
-            const value = mode === 'reviews' ? row.reviews : row.learned
-            return <div key={row.label} title={`${row.label}: ${value}`}><i style={{ height: `${Math.max(8, (value / max) * 100)}%` }} /><span>{shortLabel(row.label)}</span></div>
+            const value = chartValue(row, mode)
+            return <div key={row.label} title={`${row.label}: ${formatChartValue(value, mode)}`}><i style={{ height: `${value > 0 ? Math.max(8, (value / max) * 100) : 0}%` }} /><span>{shortLabel(row.label)}</span></div>
           })}
+        </div>
+      )}
+    </div>
+  )
+}
+
+function WeakAreaCard({ title, icon, rows, empty }: { title: string; icon: ReactNode; rows: WeakArea[]; empty: string }) {
+  return (
+    <div className="insight-card">
+      <h3>{icon}{title}</h3>
+      {rows.length === 0 ? <p className="muted">{empty}</p> : (
+        <div className="weak-list">
+          {rows.map((row) => (
+            <div key={row.label}>
+              <span>{row.label}</span>
+              <strong>{row.weak}</strong>
+              <small>{row.averageMastery.toFixed(1)} / 5</small>
+            </div>
+          ))}
         </div>
       )}
     </div>
@@ -1100,6 +1181,21 @@ function cumulativeLearned(rows: StatBucket[]) {
     total += row.learned
     return { ...row, learned: total }
   })
+}
+
+function chartValue(row: StatBucket, mode: 'reviews' | 'learned' | 'gain') {
+  if (mode === 'reviews') return row.reviews
+  if (mode === 'learned') return row.learned
+  return row.masteryGain
+}
+
+function formatChartValue(value: number, mode: 'reviews' | 'learned' | 'gain') {
+  return mode === 'gain' ? value.toFixed(2) : String(value)
+}
+
+function percent(value: number, total: number) {
+  if (total <= 0) return 0
+  return Math.round((value / total) * 100)
 }
 
 function shortLabel(label: string) {

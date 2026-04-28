@@ -101,6 +101,30 @@ func TestRatingAndReviewFlow(t *testing.T) {
 	if payload.State.Mastery <= 3 || payload.State.Mastery > 5 {
 		t.Fatalf("expected mastery to increase from 3, got %f", payload.State.Mastery)
 	}
+
+	req = httptest.NewRequest(http.MethodGet, "/api/dashboard/progress", nil)
+	req.Header.Set("Authorization", "Bearer "+token)
+	w = httptest.NewRecorder()
+	router.ServeHTTP(w, req)
+	if w.Code != http.StatusOK {
+		t.Fatalf("dashboard progress failed: %d %s", w.Code, w.Body.String())
+	}
+	var progress struct {
+		RatedConcepts    int     `json:"ratedConcepts"`
+		TodayReviews     int     `json:"todayReviews"`
+		TodayMasteryGain float64 `json:"todayMasteryGain"`
+		ShortTermReviews int     `json:"shortTermReviews"`
+		StreakDays       int     `json:"streakDays"`
+	}
+	if err := json.Unmarshal(w.Body.Bytes(), &progress); err != nil {
+		t.Fatal(err)
+	}
+	if progress.RatedConcepts == 0 || progress.TodayReviews != 1 || progress.TodayMasteryGain <= 0 || progress.StreakDays == 0 {
+		t.Fatalf("dashboard progress did not reflect review: %#v", progress)
+	}
+	if progress.ShortTermReviews != 0 {
+		t.Fatalf("known response should not stay in short-term review: %#v", progress)
+	}
 }
 
 func TestProfileAndContentUpdateFlow(t *testing.T) {
@@ -180,6 +204,38 @@ func TestAdminOnlyDataRoutes(t *testing.T) {
 	router.ServeHTTP(w, req)
 	if w.Code != http.StatusForbidden {
 		t.Fatalf("student should not read import status: %d %s", w.Code, w.Body.String())
+	}
+}
+
+func TestRegistrationInviteCode(t *testing.T) {
+	t.Setenv("REGISTRATION_INVITE_CODE", "class-2026")
+	app, err := NewApp(filepath.Join(t.TempDir(), "app.db"), filepath.Join("..", "data", "sources"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	sqlDB, err := app.DB.DB()
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer sqlDB.Close()
+	router := app.Router()
+
+	body := bytes.NewBufferString(`{"tenantName":"Test","name":"Student","email":"blocked@example.com","password":"secret"}`)
+	req := httptest.NewRequest(http.MethodPost, "/api/auth/register", body)
+	req.Header.Set("Content-Type", "application/json")
+	w := httptest.NewRecorder()
+	router.ServeHTTP(w, req)
+	if w.Code != http.StatusForbidden {
+		t.Fatalf("registration without invite should be forbidden: %d %s", w.Code, w.Body.String())
+	}
+
+	body = bytes.NewBufferString(`{"tenantName":"Test","name":"Student","email":"invited@example.com","password":"secret","inviteCode":"class-2026"}`)
+	req = httptest.NewRequest(http.MethodPost, "/api/auth/register", body)
+	req.Header.Set("Content-Type", "application/json")
+	w = httptest.NewRecorder()
+	router.ServeHTTP(w, req)
+	if w.Code != http.StatusOK {
+		t.Fatalf("registration with invite failed: %d %s", w.Code, w.Body.String())
 	}
 }
 

@@ -62,12 +62,41 @@ go run .
 
 After the frontend is built, the Go server also serves the built site from `http://localhost:8080`.
 
+## Local Configuration
+
+Runtime configuration lives in `.env`. Dashboard time buckets default to Shanghai time:
+
+```text
+JWT_SECRET=replace-with-a-long-random-secret
+CORS_ORIGIN=https://your-domain.example
+REGISTRATION_INVITE_CODE=optional-class-code
+APP_TIMEZONE=Asia/Shanghai
+APP_USE_SYSTEM_TIMEZONE=false
+```
+
+Set `APP_USE_SYSTEM_TIMEZONE=true` to use the machine's current timezone instead.
+
+For deployment, set `APP_ENV=production` or `GIN_MODE=release`. In production mode the server refuses to start unless `JWT_SECRET` is set to a unique value of at least 32 characters.
+
+`REGISTRATION_INVITE_CODE` is optional. When set, new accounts must enter that code on the registration form; existing users can still log in normally.
+
 ## AI Enrichment
 
 The compact enrichment tool reads `.env`, calls the configured OpenAI-compatible chat endpoint, and writes:
 
 ```text
 data/sources/ai-enrichment.compact
+```
+
+Required when running enrichment:
+
+```text
+OPENAI_API_KEY=
+OPENAI_BASE_URL=https://api.openai.com/v1
+OPENAI_MODEL=gpt-4.1-mini
+AI_BATCH_SIZE=10
+AI_TIMEOUT_MS=60000
+AI_RETRIES=1
 ```
 
 Run a small batch:

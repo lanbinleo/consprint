@@ -329,6 +329,7 @@ nav button:hover,
 .editor-panel,
 .run-row,
 .chart-card,
+.insight-card,
 .countdown-card,
 .setup-card,
 .settings-card,
@@ -346,11 +347,39 @@ nav button:hover,
 
 .dashboard-grid,
 .chart-grid,
+.insight-grid,
 .settings-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
   margin-top: 12px;
+}
+
+.chart-grid.three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.coverage-strip {
+  margin-top: 12px;
+  padding: 11px 14px;
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  flex-wrap: wrap;
+  color: var(--muted);
+  background: color-mix(in srgb, var(--surface) 72%, transparent);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.coverage-strip span {
+  font-weight: 700;
+  color: var(--text);
+}
+
+.coverage-strip strong {
+  font-size: 13px;
+  font-weight: 600;
 }
 
 .progress-band,
@@ -409,7 +438,8 @@ nav button:hover,
   min-height: 240px;
 }
 
-.chart-card h3 {
+.chart-card h3,
+.insight-card h3 {
   margin: 0 0 14px;
   display: flex;
   gap: 8px;
@@ -440,10 +470,58 @@ nav button:hover,
   background: var(--blue);
 }
 
+.bars.gain i {
+  background: var(--green);
+}
+
+.bars.learned i {
+  background: var(--orange);
+}
+
 .bars span {
   color: var(--muted);
   font-size: 11px;
   text-align: center;
+}
+
+.insight-card {
+  padding: 16px;
+  min-height: 220px;
+}
+
+.weak-list {
+  display: grid;
+  gap: 8px;
+}
+
+.weak-list > div {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  gap: 10px;
+  align-items: center;
+  padding: 9px 0;
+  border-top: 1px solid var(--line);
+}
+
+.weak-list > div:first-child {
+  border-top: 0;
+}
+
+.weak-list span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 600;
+}
+
+.weak-list strong {
+  color: var(--orange);
+}
+
+.weak-list small {
+  color: var(--muted);
 }
 
 .browse-layout,
@@ -591,6 +669,11 @@ nav button:hover,
   display: grid;
   gap: 12px;
   margin-top: 16px;
+}
+
+.review-card .rich-content + .review-actions,
+.review-card > .muted + .review-actions {
+  margin-top: 26px;
 }
 
 .block-group {
@@ -927,6 +1010,8 @@ textarea {
   .auth-panel,
   .dashboard-grid,
   .chart-grid,
+  .chart-grid.three,
+  .insight-grid,
   .settings-grid {
     grid-template-columns: 1fr;
   }

@@ -67,6 +67,7 @@ export type StatBucket = {
   label: string
   reviews: number
   learned: number
+  masteryGain: number
   averageMastery: number
 }
 
@@ -103,7 +104,7 @@ export class ApiClient {
     return res.json() as Promise<T>
   }
 
-  register(input: { tenantName: string; name: string; email: string; password: string }) {
+  register(input: { tenantName: string; name: string; email: string; password: string; inviteCode: string }) {
     return this.request<AuthPayload>('/api/auth/register', { method: 'POST', body: JSON.stringify(input) })
   }
 

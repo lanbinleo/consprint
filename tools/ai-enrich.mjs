@@ -1,15 +1,60 @@
 import fs from 'node:fs'
 import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 
-const root = process.cwd()
-const envText = fs.existsSync('.env') ? fs.readFileSync('.env', 'utf8') : ''
-const key = envText.match(/^KEY=(.+)$/m)?.[1]?.trim() ?? process.env.KEY ?? process.env.OPENAI_API_KEY
-const baseURL = envText.match(/https?:\/\/[^\s'"]+/)?.[0] ?? process.env.OPENAI_BASE_URL
-const model = envText.includes('deepseek-v4-flash') ? 'deepseek-v4-flash' : (process.env.OPENAI_MODEL ?? 'deepseek-v4-flash')
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
+loadEnvFile(path.join(root, '.env'))
 
-if (!key || !baseURL) {
-  console.error('Missing KEY or base URL in .env')
+const key = firstEnv('OPENAI_API_KEY', 'AI_API_KEY', 'KEY')
+const baseURL = env('OPENAI_BASE_URL', 'https://api.openai.com/v1')
+const model = env('OPENAI_MODEL', 'gpt-4.1-mini')
+const batchSize = clampNumber(envNumber('AI_BATCH_SIZE', 10), 1, 25)
+const timeoutMS = clampNumber(envNumber('AI_TIMEOUT_MS', 60000), 5000, 180000)
+const retries = clampNumber(envNumber('AI_RETRIES', 1), 0, 3)
+
+if (!key) {
+  console.error('Missing OPENAI_API_KEY in .env or environment')
   process.exit(1)
+}
+
+function loadEnvFile(file) {
+  if (!fs.existsSync(file)) return
+  const lines = fs.readFileSync(file, 'utf8').split(/\r?\n/)
+  for (const raw of lines) {
+    let line = raw.trim()
+    if (!line || line.startsWith('#')) continue
+    if (line.startsWith('export ')) line = line.slice('export '.length).trim()
+    const eq = line.indexOf('=')
+    if (eq < 1) continue
+    const name = line.slice(0, eq).trim()
+    let value = line.slice(eq + 1).trim()
+    if ((value.startsWith('"') && value.endsWith('"')) || (value.startsWith("'") && value.endsWith("'"))) {
+      value = value.slice(1, -1)
+    }
+    if (!process.env[name]) process.env[name] = value
+  }
+}
+
+function env(name, fallback) {
+  const value = process.env[name]?.trim()
+  return value || fallback
+}
+
+function firstEnv(...names) {
+  for (const name of names) {
+    const value = process.env[name]?.trim()
+    if (value) return value
+  }
+  return ''
+}
+
+function envNumber(name, fallback) {
+  const value = Number(process.env[name])
+  return Number.isFinite(value) ? value : fallback
+}
+
+function clampNumber(value, min, max) {
+  return Math.min(max, Math.max(min, value))
 }
 
 function parseKeyterms(file) {
@@ -82,20 +127,32 @@ async function callAI(batch) {
     temperature: 0.2,
     stream: false,
   }
-  const res = await fetch(`${baseURL.replace(/\/$/, '')}/chat/completions`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${key}`,
-    },
-    body: JSON.stringify(body),
-    signal: AbortSignal.timeout(60000),
-  })
-  if (!res.ok) {
-    throw new Error(`AI request failed ${res.status}: ${await res.text()}`)
+  for (let attempt = 0; attempt <= retries; attempt++) {
+    try {
+      const res = await fetch(`${baseURL.replace(/\/$/, '')}/chat/completions`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${key}`,
+        },
+        body: JSON.stringify(body),
+        signal: AbortSignal.timeout(timeoutMS),
+      })
+      if (!res.ok) {
+        throw new Error(`AI request failed ${res.status}: ${await res.text()}`)
+      }
+      const json = await res.json()
+      return json.choices?.[0]?.message?.content?.trim() ?? ''
+    } catch (error) {
+      if (attempt >= retries) throw error
+      await sleep(750 * (attempt + 1))
+    }
   }
-  const json = await res.json()
-  return json.choices?.[0]?.message?.content?.trim() ?? ''
+  return ''
+}
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms))
 }
 
 const rows = withIds(parseKeyterms(path.join(root, 'data/sources/keyterms.md')))
@@ -110,12 +167,11 @@ const candidates = unique.filter((row) => !done.has(row.id) && (!topicArg || row
 fs.mkdirSync(path.dirname(outPath), { recursive: true })
 if (!existing) fs.writeFileSync(outPath, '# Compact AI enrichment for AP Psych Final Sprint\n\n')
 
-for (let i = 0; i < candidates.length; i += 10) {
-  const batch = candidates.slice(i, i + 10)
+for (let i = 0; i < candidates.length; i += batchSize) {
+  const batch = candidates.slice(i, i + batchSize)
   console.log(`enriching ${i + 1}-${i + batch.length} / ${candidates.length}`)
   const text = await callAI(batch)
-  fs.appendFileSync(outPath, `\n${text}\n`)
+  if (text) fs.appendFileSync(outPath, `\n${text}\n`)
 }
 
 console.log(`wrote ${outPath}`)
-
