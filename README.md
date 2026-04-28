@@ -62,6 +62,16 @@ go run .
 
 After the frontend is built, the Go server also serves the built site from `http://localhost:8080`.
 
+## Docker Compose
+
+The Docker setup builds the frontend, compiles the Go server, and serves everything from one container. Runtime data is mounted from `./data`:
+
+```powershell
+docker compose up -d --build
+```
+
+See [docs/deploy-onepanel-compose.md](docs/deploy-onepanel-compose.md) for the full OnePanel/server deployment flow.
+
 ## Local Configuration
 
 Runtime configuration lives in `.env`. Dashboard time buckets default to Shanghai time:

@@ -1,0 +1,15 @@
+.git
+.env
+*.log
+node_modules
+frontend/node_modules
+frontend/dist
+data/*.db
+data/*.db-shm
+data/*.db-wal
+data/app.db
+data/generated
+data/ai-output
+data/logs
+coverage
+.DS_Store
