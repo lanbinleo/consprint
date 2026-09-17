@@ -30,13 +30,29 @@ func (a *App) auth() gin.HandlerFunc {
 }
 
 func (a *App) requireAdmin() gin.HandlerFunc {
+	return a.requireRole("admin")
+}
+
+// requireRole gates a route to the given roles and stores the user in the
+// request context for handlers.
+func (a *App) requireRole(roles ...string) gin.HandlerFunc {
+	allowed := make(map[string]bool, len(roles))
+	for _, role := range roles {
+		allowed[role] = true
+	}
 	return func(c *gin.Context) {
 		var user User
-		if err := a.DB.First(&user, "id = ?", c.GetString("userID")).Error; err != nil || user.Role != "admin" {
-			c.JSON(403, gin.H{"error": "admin permission required"})
+		if err := a.DB.First(&user, "id = ?", c.GetString("userID")).Error; err != nil {
+			c.JSON(403, gin.H{"error": "permission required"})
 			c.Abort()
 			return
 		}
+		if !allowed[user.Role] {
+			c.JSON(403, gin.H{"error": "permission required"})
+			c.Abort()
+			return
+		}
+		c.Set("role", user.Role)
 		c.Next()
 	}
 }

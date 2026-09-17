@@ -153,7 +153,7 @@ func TestProfileAndContentUpdateFlow(t *testing.T) {
 	token := registerTestUser(t, router, "profile@example.com")
 
 	avatar := "data:image/png;base64,iVBORw0KGgo="
-	req := httptest.NewRequest(http.MethodPatch, "/api/me", bytes.NewBufferString(`{"name":"David","tenantName":"AP Room","avatarDataUrl":"`+avatar+`"}`))
+	req := httptest.NewRequest(http.MethodPatch, "/api/me", bytes.NewBufferString(`{"name":"David","avatarDataUrl":"`+avatar+`"}`))
 	req.Header.Set("Content-Type", "application/json")
 	req.Header.Set("Authorization", "Bearer "+token)
 	w := httptest.NewRecorder()
@@ -168,8 +168,11 @@ func TestProfileAndContentUpdateFlow(t *testing.T) {
 	if err := json.Unmarshal(w.Body.Bytes(), &profile); err != nil {
 		t.Fatal(err)
 	}
-	if profile.User.Name != "David" || profile.Tenant.Name != "AP Room" || profile.User.AvatarDataURL != avatar || profile.User.Role != "admin" {
+	if profile.User.Name != "David" || profile.User.AvatarDataURL != avatar || profile.User.Role != "admin" {
 		t.Fatalf("profile was not updated: %#v", profile)
+	}
+	if profile.Tenant.ID != "school" {
+		t.Fatalf("expected single school tenant, got %#v", profile.Tenant)
 	}
 
 	conceptID := "ap-psychology.science-practices.set-a.random-assignment"
@@ -197,6 +200,7 @@ func TestProfileAndContentUpdateFlow(t *testing.T) {
 }
 
 func TestAdminOnlyDataRoutes(t *testing.T) {
+	t.Setenv("ADMIN_EMAILS", "admin@example.com")
 	app, err := NewApp(filepath.Join(t.TempDir(), "app.db"), filepath.Join("..", "data", "sources"))
 	if err != nil {
 		t.Fatal(err)
@@ -216,6 +220,38 @@ func TestAdminOnlyDataRoutes(t *testing.T) {
 	router.ServeHTTP(w, req)
 	if w.Code != http.StatusForbidden {
 		t.Fatalf("student should not read import status: %d %s", w.Code, w.Body.String())
+	}
+}
+
+func TestAdminEmailBootstrap(t *testing.T) {
+	t.Setenv("ADMIN_EMAILS", "leo.huo_27@tsinglan.org")
+	app, err := NewApp(filepath.Join(t.TempDir(), "app.db"), filepath.Join("..", "data", "sources"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	sqlDB, err := app.DB.DB()
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer sqlDB.Close()
+	router := app.Router()
+
+	body := bytes.NewBufferString(`{"name":"Leo","email":"leo.huo_27@tsinglan.org","password":"secret"}`)
+	req := httptest.NewRequest(http.MethodPost, "/api/auth/register", body)
+	req.Header.Set("Content-Type", "application/json")
+	w := httptest.NewRecorder()
+	router.ServeHTTP(w, req)
+	if w.Code != http.StatusOK {
+		t.Fatalf("register failed: %d %s", w.Code, w.Body.String())
+	}
+	var auth struct {
+		User User `json:"user"`
+	}
+	if err := json.Unmarshal(w.Body.Bytes(), &auth); err != nil {
+		t.Fatal(err)
+	}
+	if auth.User.Role != "admin" {
+		t.Fatalf("ADMIN_EMAILS address should register as admin, got %q", auth.User.Role)
 	}
 }
 

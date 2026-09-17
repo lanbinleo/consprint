@@ -8,12 +8,10 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt/v5"
 	"golang.org/x/crypto/bcrypt"
-	"gorm.io/gorm"
 )
 
 func (a *App) register(c *gin.Context) {
 	var req struct {
-		TenantName string `json:"tenantName"`
 		Name       string `json:"name"`
 		Email      string `json:"email"`
 		Password   string `json:"password"`
@@ -32,21 +30,25 @@ func (a *App) register(c *gin.Context) {
 		c.JSON(500, gin.H{"error": "could not hash password"})
 		return
 	}
-	var userCount int64
-	a.DB.Model(&User{}).Count(&userCount)
-	role := "student"
-	if userCount == 0 {
-		role = "admin"
+	var tenant Tenant
+	if err := a.DB.First(&tenant, "id = ?", schoolTenantID).Error; err != nil {
+		c.JSON(500, gin.H{"error": "school workspace missing"})
+		return
 	}
-	tenant := Tenant{ID: NewID("ten"), Name: fallback(req.TenantName, "Personal")}
-	user := User{ID: NewID("usr"), TenantID: tenant.ID, Name: fallback(req.Name, "Student"), Email: strings.ToLower(req.Email), Role: role, PasswordHash: string(hash)}
-	err = a.DB.Transaction(func(tx *gorm.DB) error {
-		if err := tx.Create(&tenant).Error; err != nil {
-			return err
+	role := "student"
+	if isAdminEmail(req.Email) {
+		role = "admin"
+	} else {
+		// Fallback for local development: without ADMIN_EMAILS the very
+		// first account keeps the deployment usable by becoming admin.
+		var admins int64
+		a.DB.Model(&User{}).Where("role = ?", "admin").Count(&admins)
+		if admins == 0 {
+			role = "admin"
 		}
-		return tx.Create(&user).Error
-	})
-	if err != nil {
+	}
+	user := User{ID: NewID("usr"), TenantID: tenant.ID, Name: fallback(req.Name, "Student"), Email: strings.ToLower(req.Email), Role: role, Provider: "local", PasswordHash: string(hash)}
+	if err := a.DB.Create(&user).Error; err != nil {
 		c.JSON(409, gin.H{"error": "email already exists"})
 		return
 	}
@@ -97,7 +99,6 @@ func (a *App) me(c *gin.Context) {
 func (a *App) updateMe(c *gin.Context) {
 	var req struct {
 		Name          string `json:"name"`
-		TenantName    string `json:"tenantName"`
 		AvatarDataURL string `json:"avatarDataUrl"`
 	}
 	if err := c.ShouldBindJSON(&req); err != nil {
@@ -105,12 +106,10 @@ func (a *App) updateMe(c *gin.Context) {
 		return
 	}
 	var user User
-	var tenant Tenant
 	if err := a.DB.First(&user, "id = ?", c.GetString("userID")).Error; err != nil {
 		c.JSON(404, gin.H{"error": "user not found"})
 		return
 	}
-	a.DB.First(&tenant, "id = ?", c.GetString("tenantID"))
 	if strings.TrimSpace(req.Name) != "" {
 		user.Name = strings.TrimSpace(req.Name)
 	}
@@ -121,10 +120,8 @@ func (a *App) updateMe(c *gin.Context) {
 		}
 		user.AvatarDataURL = req.AvatarDataURL
 	}
-	if strings.TrimSpace(req.TenantName) != "" {
-		tenant.Name = strings.TrimSpace(req.TenantName)
-	}
 	a.DB.Save(&user)
-	a.DB.Save(&tenant)
+	var tenant Tenant
+	a.DB.First(&tenant, "id = ?", user.TenantID)
 	c.JSON(200, gin.H{"user": user, "tenant": tenant})
 }
