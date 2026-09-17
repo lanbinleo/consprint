@@ -129,13 +129,10 @@ nav button,
 .page-header span,
 .metric span,
 .concept-row small,
-.review-card small,
-.quick-card small,
 .muted,
 .source-line,
 .countdown-card span,
-.countdown-card small,
-.unit-health span {
+.countdown-card small {
   color: var(--muted);
 }
 
@@ -323,18 +320,14 @@ nav button:hover,
 .metric,
 .progress-band,
 .auth-card,
-.review-card,
-.quick-card,
 .concept-panel,
 .editor-panel,
-.run-row,
 .chart-card,
 .insight-card,
 .countdown-card,
 .setup-card,
 .settings-card,
-.empty-state,
-.unit-health > div {
+.empty-state {
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -357,29 +350,6 @@ nav button:hover,
 
 .chart-grid.three {
   grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-.coverage-strip {
-  margin-top: 12px;
-  padding: 11px 14px;
-  display: flex;
-  gap: 14px;
-  align-items: center;
-  flex-wrap: wrap;
-  color: var(--muted);
-  background: color-mix(in srgb, var(--surface) 72%, transparent);
-  border: 1px solid var(--line);
-  border-radius: 8px;
-}
-
-.coverage-strip span {
-  font-weight: 700;
-  color: var(--text);
-}
-
-.coverage-strip strong {
-  font-size: 13px;
-  font-weight: 600;
 }
 
 .progress-band,
@@ -419,20 +389,6 @@ nav button:hover,
   margin-top: 5px;
 }
 
-.mastery-bar {
-  margin-top: 14px;
-  height: 10px;
-  background: var(--canvas);
-  border-radius: 999px;
-  overflow: hidden;
-}
-
-.mastery-bar i {
-  display: block;
-  height: 100%;
-  background: var(--blue);
-}
-
 .chart-card {
   padding: 16px;
   min-height: 240px;
@@ -470,11 +426,11 @@ nav button:hover,
   background: var(--blue);
 }
 
-.bars.gain i {
+.bars.stacked i {
   background: var(--green);
 }
 
-.bars.learned i {
+.bars.cumulative i {
   background: var(--orange);
 }
 
@@ -626,25 +582,6 @@ nav button:hover,
   white-space: nowrap;
 }
 
-.rating {
-  display: inline-flex;
-  gap: 3px;
-  flex-shrink: 0;
-}
-
-.rating button {
-  width: 28px;
-  height: 28px;
-  border: 1px solid var(--line);
-  background: var(--surface);
-  border-radius: 4px;
-}
-
-.rating button.active {
-  background: var(--blue);
-  color: #fff;
-}
-
 .concept-panel,
 .editor-panel {
   position: sticky;
@@ -671,11 +608,6 @@ nav button:hover,
   margin-top: 16px;
 }
 
-.review-card .rich-content + .review-actions,
-.review-card > .muted + .review-actions {
-  margin-top: 26px;
-}
-
 .block-group {
   border-top: 1px solid var(--line);
   padding-top: 10px;
@@ -697,56 +629,6 @@ nav button:hover,
 
 .focus-page {
   max-width: 960px;
-}
-
-.review-card,
-.quick-card {
-  max-width: 760px;
-  margin: 28px auto;
-  padding: 28px;
-}
-
-.review-card h2,
-.quick-card h2 {
-  font-size: 44px;
-  margin: 12px 0 24px;
-  letter-spacing: 0;
-}
-
-.quick-card {
-  text-align: center;
-}
-
-.quick-card .rating {
-  justify-content: center;
-}
-
-.quick-card .rating button {
-  width: 48px;
-  height: 42px;
-}
-
-.quick-toolbar {
-  max-width: 860px;
-  margin: 0 auto 12px;
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-}
-
-.jump-box {
-  display: flex;
-  grid-template-columns: none;
-  flex-direction: row;
-  gap: 6px;
-  align-items: center;
-  font-weight: 400;
-}
-
-.jump-box input {
-  width: 112px;
 }
 
 .setup-card,
@@ -858,33 +740,6 @@ textarea {
 
 .check-line input {
   width: auto;
-}
-
-.run-list,
-.unit-health {
-  display: grid;
-  gap: 8px;
-  margin-top: 16px;
-}
-
-.unit-health {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.unit-health > div,
-.run-row {
-  padding: 14px;
-}
-
-.unit-health span,
-.unit-health strong {
-  display: block;
-}
-
-.run-row {
-  display: grid;
-  grid-template-columns: 220px 1fr auto;
-  gap: 12px;
 }
 
 .auth-page {
@@ -1031,7 +886,6 @@ textarea {
 @media (max-width: 620px) {
   .workspace { padding: 18px; }
   .metrics,
-  .unit-health,
   .scope-grid,
   .segmented.four,
   nav { grid-template-columns: 1fr; }
@@ -1039,9 +893,7 @@ textarea {
     align-items: flex-start;
     flex-direction: column;
   }
-  .auth-copy h1,
-  .review-card h2,
-  .quick-card h2 {
+  .auth-copy h1 {
     font-size: 38px;
   }
 }

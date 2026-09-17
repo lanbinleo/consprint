@@ -1,6 +1,6 @@
 import { Link } from 'react-router'
 import { useQuery } from '@tanstack/react-query'
-import { ClipboardList, Clock3, Zap } from 'lucide-react'
+import { Clock3, Zap } from 'lucide-react'
 import { api } from '../lib/api'
 import { useSession } from '../hooks/session'
 import { Header, ListSkeleton } from '../components/ui'
@@ -61,8 +61,4 @@ export function Practice() {
       )}
     </section>
   )
-}
-
-export function PracticeIcon() {
-  return <ClipboardList size={16} />
 }
