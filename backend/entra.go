@@ -130,6 +130,16 @@ func (a *App) authProviders(c *gin.Context) {
 	c.JSON(200, gin.H{"entra": entraConfigured()})
 }
 
+// appMeta exposes public client configuration: available login providers,
+// the configurable AP exam date, and the app timezone.
+func (a *App) appMeta(c *gin.Context) {
+	c.JSON(200, gin.H{
+		"entra":    entraConfigured(),
+		"examDate": env("AP_EXAM_DATE", ""),
+		"timezone": env("APP_TIMEZONE", "Asia/Shanghai"),
+	})
+}
+
 func (a *App) entraLogin(c *gin.Context) {
 	if !entraConfigured() {
 		c.JSON(http.StatusServiceUnavailable, gin.H{"error": "microsoft sign-in is not configured"})

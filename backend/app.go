@@ -33,7 +33,7 @@ func NewApp(dbPath, sources string) (*App, error) {
 	if err != nil {
 		return nil, err
 	}
-	if err := db.AutoMigrate(&Tenant{}, &User{}, &Course{}, &Unit{}, &Topic{}, &Concept{}, &ConceptContent{}, &UserConceptState{}, &ReviewEvent{}, &ImportRun{}); err != nil {
+	if err := db.AutoMigrate(&Tenant{}, &User{}, &Course{}, &Unit{}, &Topic{}, &Concept{}, &ConceptContent{}, &UserConceptState{}, &ReviewEvent{}, &ImportRun{}, &Tag{}, &Question{}, &PracticeSet{}, &PracticeSetItem{}, &PracticeAttempt{}, &PracticeAnswer{}); err != nil {
 		return nil, err
 	}
 	if err := ensureSchoolTenant(db); err != nil {
