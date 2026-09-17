@@ -81,7 +81,6 @@ func (i Importer) ImportKeyterms(path string) error {
 				Position:       item.Position,
 				ContentStatus:  "pending",
 			}
-			card := Card{ID: conceptID + ".recognition", ConceptID: conceptID, Type: "recognition", Prompt: item.Term, Back: ""}
 			if err := tx.Clauses(clause.OnConflict{UpdateAll: true}).Create(&unit).Error; err != nil {
 				return err
 			}
@@ -92,9 +91,6 @@ func (i Importer) ImportKeyterms(path string) error {
 				Columns:   []clause.Column{{Name: "id"}},
 				DoUpdates: clause.AssignmentColumns([]string{"term", "normalized_term", "unit_id", "topic_id", "position"}),
 			}).Create(&concept).Error; err != nil {
-				return err
-			}
-			if err := tx.Clauses(clause.OnConflict{UpdateAll: true}).Create(&card).Error; err != nil {
 				return err
 			}
 		}

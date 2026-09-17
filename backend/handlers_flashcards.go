@@ -9,6 +9,10 @@ import (
 	"gorm.io/gorm/clause"
 )
 
+func validConceptStatus(status string) bool {
+	return status == "" || status == "proficient" || status == "fuzzy" || status == "unknown"
+}
+
 func (a *App) reviewNext(c *gin.Context) {
 	userID := c.GetString("userID")
 	a.ensureStates(userID)
@@ -28,18 +32,20 @@ func (a *App) reviewNext(c *gin.Context) {
 		Joins("join topics on topics.id = concepts.topic_id").
 		Preload("Unit").
 		Preload("Topic").
-		Preload("Content").
-		Preload("Cards")
+		Preload("Content")
 	if unitID := c.Query("unitId"); unitID != "" {
 		q = q.Where("concepts.unit_id = ?", unitID)
 	}
 	if topicID := c.Query("topicId"); topicID != "" {
 		q = q.Where("concepts.topic_id = ?", topicID)
 	}
+	if status := c.Query("status"); status != "" && validConceptStatus(status) {
+		q = q.Where("s.status = ?", status)
+	}
 	if order == "outline" {
 		q = q.Order("units.position asc, topics.position asc, concepts.position asc")
 	} else {
-		q = q.Order("s.short_term_review desc, s.mastery asc, random()")
+		q = q.Order("s.short_term_review desc, case s.status when 'unknown' then 0 when 'fuzzy' then 1 when 'proficient' then 2 else 3 end asc, random()")
 	}
 	q.Limit(limit).Find(&concepts)
 	c.JSON(200, concepts)
@@ -48,7 +54,6 @@ func (a *App) reviewNext(c *gin.Context) {
 func (a *App) reviewEvent(c *gin.Context) {
 	var req struct {
 		ConceptID  string `json:"conceptId"`
-		CardID     string `json:"cardId"`
 		Response   string `json:"response"`
 		DurationMS int    `json:"durationMs"`
 	}
@@ -56,8 +61,8 @@ func (a *App) reviewEvent(c *gin.Context) {
 		c.JSON(400, gin.H{"error": "invalid request"})
 		return
 	}
-	if req.Response != "know" && req.Response != "fuzzy" && req.Response != "unknown" {
-		c.JSON(400, gin.H{"error": "response must be know, fuzzy, or unknown"})
+	if req.Response != "proficient" && req.Response != "fuzzy" && req.Response != "unknown" {
+		c.JSON(400, gin.H{"error": "response must be proficient, fuzzy, or unknown"})
 		return
 	}
 	userID := c.GetString("userID")
@@ -66,14 +71,12 @@ func (a *App) reviewEvent(c *gin.Context) {
 		c.JSON(404, gin.H{"error": "concept not found"})
 		return
 	}
-	before := state.Mastery
-	after := nextMastery(before, req.Response)
 	now := time.Now()
-	state.Mastery = after
+	state.Status = req.Response
 	state.ReviewCount++
 	state.LastReviewedAt = &now
-	state.ShortTermReview = req.Response == "unknown" || req.Response == "fuzzy"
-	event := ReviewEvent{ID: NewID("rev"), UserID: userID, ConceptID: req.ConceptID, CardID: req.CardID, Response: req.Response, MasteryBefore: before, MasteryAfter: after, DurationMS: req.DurationMS, CreatedAt: now}
+	state.ShortTermReview = req.Response != "proficient"
+	event := ReviewEvent{ID: NewID("rev"), UserID: userID, ConceptID: req.ConceptID, Response: req.Response, DurationMS: req.DurationMS, CreatedAt: now}
 	a.DB.Transaction(func(tx *gorm.DB) error {
 		if err := tx.Save(&state).Error; err != nil {
 			return err
@@ -96,13 +99,13 @@ func (a *App) ensureStates(userID string) {
 	}
 	states := make([]UserConceptState, 0, len(concepts))
 	for _, concept := range concepts {
-		states = append(states, UserConceptState{ID: userID + "." + concept.ID, UserID: userID, ConceptID: concept.ID, Mastery: 0})
+		states = append(states, UserConceptState{ID: userID + "." + concept.ID, UserID: userID, ConceptID: concept.ID})
 	}
 	a.DB.Clauses(clause.OnConflict{DoNothing: true}).CreateInBatches(states, 200)
 }
 
 func (a *App) ensureState(userID, conceptID string) {
-	state := UserConceptState{ID: userID + "." + conceptID, UserID: userID, ConceptID: conceptID, Mastery: 0}
+	state := UserConceptState{ID: userID + "." + conceptID, UserID: userID, ConceptID: conceptID}
 	a.DB.Clauses(clause.OnConflict{DoNothing: true}).Create(&state)
 }
 
@@ -115,17 +118,4 @@ func (a *App) stateFor(userID, conceptID string) (UserConceptState, error) {
 	var state UserConceptState
 	a.DB.First(&state, "user_id = ? AND concept_id = ?", userID, conceptID)
 	return state, nil
-}
-
-func nextMastery(current float64, response string) float64 {
-	switch response {
-	case "know":
-		return Clamp(current+0.45*(1-current/5), 0, 5)
-	case "fuzzy":
-		return Clamp(current+0.18*(1-current/5), 0, 5)
-	case "unknown":
-		return Clamp(current-0.12, 0, 5)
-	default:
-		return current
-	}
 }

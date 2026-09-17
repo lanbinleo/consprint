@@ -12,22 +12,22 @@ func (a *App) dashboard(c *gin.Context) {
 	trends := a.dashboardTrendsPayload(c.GetString("userID"))
 	alerts := a.dashboardAlertsPayload(c.GetString("userID"))
 	c.JSON(200, gin.H{
-		"totalConcepts":    summary["totalConcepts"],
-		"readyConcepts":    summary["readyConcepts"],
-		"reviewedConcepts": progress["reviewedConcepts"],
-		"ratedConcepts":    progress["ratedConcepts"],
-		"weakConcepts":     progress["weakConcepts"],
-		"averageMastery":   progress["averageMastery"],
-		"todayReviews":     progress["todayReviews"],
-		"todayMasteryGain": progress["todayMasteryGain"],
-		"shortTermReviews": progress["shortTermReviews"],
-		"streakDays":       progress["streakDays"],
-		"recent":           alerts["recent"],
-		"weakUnits":        alerts["weakUnits"],
-		"weakTopics":       alerts["weakTopics"],
-		"weakConceptsList": alerts["weakConcepts"],
-		"daily":            trends["daily"],
-		"hourly":           trends["hourly"],
+		"totalConcepts":      summary["totalConcepts"],
+		"readyConcepts":      summary["readyConcepts"],
+		"reviewedConcepts":   progress["reviewedConcepts"],
+		"markedConcepts":     progress["markedConcepts"],
+		"proficientConcepts": progress["proficientConcepts"],
+		"fuzzyConcepts":      progress["fuzzyConcepts"],
+		"unknownConcepts":    progress["unknownConcepts"],
+		"shortTermReviews":   progress["shortTermReviews"],
+		"todayReviews":       progress["todayReviews"],
+		"streakDays":         progress["streakDays"],
+		"recent":             alerts["recent"],
+		"weakConcepts":       alerts["weakConcepts"],
+		"weakUnits":          alerts["weakUnits"],
+		"weakTopics":         alerts["weakTopics"],
+		"daily":              trends["daily"],
+		"hourly":             trends["hourly"],
 	})
 }
 
@@ -57,25 +57,31 @@ func (a *App) dashboardSummaryPayload(userID string) gin.H {
 
 func (a *App) dashboardProgressPayload(userID string) gin.H {
 	a.ensureStates(userID)
-	var reviewed, weak, rated int64
+	count := func(status string) int64 {
+		var n int64
+		q := a.DB.Model(&UserConceptState{}).Where("user_id = ?", userID)
+		if status == "marked" {
+			q = q.Where("status <> ''")
+		} else if status != "" {
+			q = q.Where("status = ?", status)
+		}
+		q.Count(&n)
+		return n
+	}
+	var reviewed int64
 	a.DB.Model(&UserConceptState{}).Where("user_id = ? AND review_count > 0", userID).Count(&reviewed)
-	a.DB.Model(&UserConceptState{}).Where("user_id = ? AND mastery > 0", userID).Count(&rated)
-	a.DB.Model(&UserConceptState{}).Where("user_id = ? AND mastery > 0 AND mastery < ?", userID, 3).Count(&weak)
 	var shortTerm int64
 	a.DB.Model(&UserConceptState{}).Where("user_id = ? AND short_term_review = ?", userID, true).Count(&shortTerm)
-	type Avg struct{ Avg float64 }
-	var avg Avg
-	a.DB.Raw("select coalesce(avg(mastery), 0) as avg from user_concept_states where user_id = ?", userID).Scan(&avg)
 	today := todayStats(a.reviewEvents(userID))
 	return gin.H{
-		"reviewedConcepts": reviewed,
-		"ratedConcepts":    rated,
-		"weakConcepts":     weak,
-		"averageMastery":   avg.Avg,
-		"todayReviews":     today.Reviews,
-		"todayMasteryGain": today.Gain,
-		"shortTermReviews": shortTerm,
-		"streakDays":       a.streakDays(userID),
+		"reviewedConcepts":   reviewed,
+		"markedConcepts":     count("marked"),
+		"proficientConcepts": count("proficient"),
+		"fuzzyConcepts":      count("fuzzy"),
+		"unknownConcepts":    count("unknown"),
+		"shortTermReviews":   shortTerm,
+		"todayReviews":       today.Reviews,
+		"streakDays":         a.streakDays(userID),
 	}
 }
 
@@ -91,19 +97,19 @@ func (a *App) dashboardAlertsPayload(userID string) gin.H {
 	a.DB.Model(&Concept{}).
 		Select("concepts.*").
 		Joins("join user_concept_states s on s.concept_id = concepts.id and s.user_id = ?", userID).
-		Where("s.mastery > 0 and s.mastery < ?", 3).
-		Order("s.mastery asc, s.updated_at desc").
+		Where("s.status in ('fuzzy', 'unknown')").
+		Order("s.updated_at desc").
 		Limit(6).
 		Find(&weak)
 	return gin.H{"recent": recent, "weakConcepts": weak, "weakUnits": a.weakUnitStats(userID), "weakTopics": a.weakTopicStats(userID)}
 }
 
 type statBucket struct {
-	Label          string  `json:"label"`
-	Reviews        int     `json:"reviews"`
-	Learned        int     `json:"learned"`
-	MasteryGain    float64 `json:"masteryGain"`
-	AverageMastery float64 `json:"averageMastery"`
+	Label      string `json:"label"`
+	Reviews    int    `json:"reviews"`
+	Proficient int    `json:"proficient"`
+	Fuzzy      int    `json:"fuzzy"`
+	Unknown    int    `json:"unknown"`
 }
 
 func (a *App) reviewEvents(userID string) []ReviewEvent {
@@ -136,13 +142,11 @@ func dayStart(t time.Time) time.Time {
 
 func todayStats(events []ReviewEvent) struct {
 	Reviews int
-	Gain    float64
 } {
 	start := dayStart(appNow())
 	end := start.AddDate(0, 0, 1)
 	stats := struct {
 		Reviews int
-		Gain    float64
 	}{}
 	for _, event := range events {
 		at := event.CreatedAt.In(appTimeLocation())
@@ -150,9 +154,6 @@ func todayStats(events []ReviewEvent) struct {
 			continue
 		}
 		stats.Reviews++
-		if event.MasteryAfter > event.MasteryBefore {
-			stats.Gain += event.MasteryAfter - event.MasteryBefore
-		}
 	}
 	return stats
 }
@@ -168,23 +169,14 @@ func (a *App) dailyStats(userID string) []statBucket {
 	for i, row := range rows {
 		indexByLabel[row.Label] = i
 	}
-	averageCounts := make([]int, len(rows))
 	for _, event := range a.reviewEvents(userID) {
 		at := event.CreatedAt.In(appTimeLocation())
 		if at.Before(start) {
 			continue
 		}
 		label := at.Format("2006-01-02")
-		index, ok := indexByLabel[label]
-		if !ok {
-			continue
-		}
-		addEventToBucket(&rows[index], event)
-		averageCounts[index]++
-	}
-	for i := range rows {
-		if averageCounts[i] > 0 {
-			rows[i].AverageMastery /= float64(averageCounts[i])
+		if index, ok := indexByLabel[label]; ok {
+			addEventToBucket(&rows[index], event)
 		}
 	}
 	return rows
@@ -201,22 +193,13 @@ func (a *App) hourlyStats(userID string) []statBucket {
 	for i := range rows {
 		indexByLabel[start.Add(time.Duration(i)*time.Hour).Format("2006-01-02 15:00")] = i
 	}
-	averageCounts := make([]int, len(rows))
 	for _, event := range a.reviewEvents(userID) {
 		at := event.CreatedAt.In(appTimeLocation()).Truncate(time.Hour)
 		if at.Before(start) {
 			continue
 		}
-		index, ok := indexByLabel[at.Format("2006-01-02 15:00")]
-		if !ok {
-			continue
-		}
-		addEventToBucket(&rows[index], event)
-		averageCounts[index]++
-	}
-	for i := range rows {
-		if averageCounts[i] > 0 {
-			rows[i].AverageMastery /= float64(averageCounts[i])
+		if index, ok := indexByLabel[at.Format("2006-01-02 15:00")]; ok {
+			addEventToBucket(&rows[index], event)
 		}
 	}
 	return rows
@@ -224,33 +207,34 @@ func (a *App) hourlyStats(userID string) []statBucket {
 
 func addEventToBucket(bucket *statBucket, event ReviewEvent) {
 	bucket.Reviews++
-	if event.MasteryBefore < 4 && event.MasteryAfter >= 4 {
-		bucket.Learned++
+	switch event.Response {
+	case "proficient":
+		bucket.Proficient++
+	case "fuzzy":
+		bucket.Fuzzy++
+	case "unknown":
+		bucket.Unknown++
 	}
-	if event.MasteryAfter > event.MasteryBefore {
-		bucket.MasteryGain += event.MasteryAfter - event.MasteryBefore
-	}
-	bucket.AverageMastery += event.MasteryAfter
 }
 
 type weakArea struct {
-	Label          string  `json:"label"`
-	Weak           int     `json:"weak"`
-	AverageMastery float64 `json:"averageMastery"`
+	Label  string `json:"label"`
+	Weak   int    `json:"weak"`
+	Marked int    `json:"marked"`
 }
 
 func (a *App) weakUnitStats(userID string) []weakArea {
 	rows := make([]weakArea, 0)
 	a.DB.Raw(`
 		select u.title as label,
-		       sum(case when s.mastery > 0 and s.mastery < 3 then 1 else 0 end) as weak,
-		       coalesce(avg(case when s.mastery > 0 then s.mastery end), 0) as average_mastery
+		       sum(case when s.status in ('fuzzy', 'unknown') then 1 else 0 end) as weak,
+		       sum(case when s.status <> '' then 1 else 0 end) as marked
 		from units u
 		join concepts c on c.unit_id = u.id
 		join user_concept_states s on s.concept_id = c.id and s.user_id = ?
 		group by u.id, u.title
 		having weak > 0
-		order by weak desc, average_mastery asc
+		order by weak desc, marked desc
 		limit 5
 	`, userID).Scan(&rows)
 	return rows
@@ -260,14 +244,14 @@ func (a *App) weakTopicStats(userID string) []weakArea {
 	rows := make([]weakArea, 0)
 	a.DB.Raw(`
 		select t.title as label,
-		       sum(case when s.mastery > 0 and s.mastery < 3 then 1 else 0 end) as weak,
-		       coalesce(avg(case when s.mastery > 0 then s.mastery end), 0) as average_mastery
+		       sum(case when s.status in ('fuzzy', 'unknown') then 1 else 0 end) as weak,
+		       sum(case when s.status <> '' then 1 else 0 end) as marked
 		from topics t
 		join concepts c on c.topic_id = t.id
 		join user_concept_states s on s.concept_id = c.id and s.user_id = ?
 		group by t.id, t.title
 		having weak > 0
-		order by weak desc, average_mastery asc
+		order by weak desc, marked desc
 		limit 5
 	`, userID).Scan(&rows)
 	return rows

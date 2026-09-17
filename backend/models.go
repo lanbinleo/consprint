@@ -20,7 +20,9 @@ type User struct {
 	TenantID      string         `gorm:"index;not null" json:"tenantId"`
 	Name          string         `gorm:"not null" json:"name"`
 	Email         string         `gorm:"uniqueIndex;not null" json:"email"`
-	Role          string         `gorm:"not null;default:student" json:"role"`
+	Role          string         `gorm:"not null;default:student" json:"role"` // student | teacher | admin
+	Provider      string         `gorm:"not null;default:local" json:"provider"`
+	EntraOID      *string        `gorm:"uniqueIndex" json:"-"`
 	AvatarDataURL string         `json:"avatarDataUrl"`
 	PasswordHash  string         `gorm:"not null" json:"-"`
 	CreatedAt     time.Time      `json:"createdAt"`
@@ -64,7 +66,6 @@ type Concept struct {
 	Position       int             `json:"position"`
 	ContentStatus  string          `gorm:"not null;default:pending" json:"contentStatus"`
 	Content        *ConceptContent `json:"content,omitempty"`
-	Cards          []Card          `json:"cards,omitempty"`
 	Unit           Unit            `json:"unit,omitempty"`
 	Topic          Topic           `json:"topic,omitempty"`
 	CreatedAt      time.Time       `json:"createdAt"`
@@ -85,22 +86,13 @@ type ConceptContent struct {
 	UpdatedAt   time.Time      `json:"updatedAt"`
 }
 
-type Card struct {
-	ID        string    `gorm:"primaryKey" json:"id"`
-	ConceptID string    `gorm:"index;not null" json:"conceptId"`
-	Type      string    `gorm:"index;not null" json:"type"`
-	Prompt    string    `gorm:"not null" json:"prompt"`
-	Back      string    `json:"back"`
-	CreatedAt time.Time `json:"createdAt"`
-	UpdatedAt time.Time `json:"updatedAt"`
-}
-
+// UserConceptState tracks each learner's three-tier self-assessment per concept.
+// Status is "" (not yet marked), "proficient", "fuzzy", or "unknown".
 type UserConceptState struct {
 	ID              string     `gorm:"primaryKey" json:"id"`
 	UserID          string     `gorm:"uniqueIndex:idx_user_concept;not null" json:"userId"`
 	ConceptID       string     `gorm:"uniqueIndex:idx_user_concept;not null" json:"conceptId"`
-	Mastery         float64    `gorm:"not null;default:0" json:"mastery"`
-	ManualRating    *int       `json:"manualRating"`
+	Status          string     `gorm:"index;not null;default:''" json:"status"`
 	ReviewCount     int        `json:"reviewCount"`
 	ShortTermReview bool       `json:"shortTermReview"`
 	LastReviewedAt  *time.Time `json:"lastReviewedAt"`
@@ -108,16 +100,14 @@ type UserConceptState struct {
 	UpdatedAt       time.Time  `json:"updatedAt"`
 }
 
+// ReviewEvent is the append-only log of flashcard self-assessments.
 type ReviewEvent struct {
-	ID            string    `gorm:"primaryKey" json:"id"`
-	UserID        string    `gorm:"index;not null" json:"userId"`
-	ConceptID     string    `gorm:"index;not null" json:"conceptId"`
-	CardID        string    `gorm:"index" json:"cardId"`
-	Response      string    `gorm:"index;not null" json:"response"`
-	MasteryBefore float64   `json:"masteryBefore"`
-	MasteryAfter  float64   `json:"masteryAfter"`
-	DurationMS    int       `json:"durationMs"`
-	CreatedAt     time.Time `json:"createdAt"`
+	ID         string    `gorm:"primaryKey" json:"id"`
+	UserID     string    `gorm:"index;not null" json:"userId"`
+	ConceptID  string    `gorm:"index;not null" json:"conceptId"`
+	Response   string    `gorm:"index;not null" json:"response"` // proficient | fuzzy | unknown
+	DurationMS int       `json:"durationMs"`
+	CreatedAt  time.Time `json:"createdAt"`
 }
 
 type ImportRun struct {

@@ -36,7 +36,7 @@ func (a *App) Router() *gin.Engine {
 	protected.GET("/units", a.units)
 	protected.GET("/concepts", a.concepts)
 	protected.GET("/concepts/:id", a.concept)
-	protected.PATCH("/concepts/:id/rating", a.rateConcept)
+	protected.PATCH("/concepts/:id/status", a.setConceptStatus)
 	protected.GET("/review/next", a.reviewNext)
 	protected.POST("/review/events", a.reviewEvent)
 	admin := protected.Group("")

@@ -41,7 +41,7 @@ func TestAuthAndDashboardFlow(t *testing.T) {
 	}
 }
 
-func TestRatingAndReviewFlow(t *testing.T) {
+func TestConceptStatusAndReviewFlow(t *testing.T) {
 	app, err := NewApp(filepath.Join(t.TempDir(), "app.db"), filepath.Join("..", "data", "sources"))
 	if err != nil {
 		t.Fatal(err)
@@ -65,7 +65,7 @@ func TestRatingAndReviewFlow(t *testing.T) {
 		ID    string `json:"id"`
 		Term  string `json:"term"`
 		State struct {
-			Mastery float64 `json:"mastery"`
+			Status string `json:"status"`
 		} `json:"state"`
 	}
 	if err := json.Unmarshal(w.Body.Bytes(), &concepts); err != nil || len(concepts) != 1 {
@@ -73,16 +73,26 @@ func TestRatingAndReviewFlow(t *testing.T) {
 	}
 	conceptID := concepts[0].ID
 
-	req = httptest.NewRequest(http.MethodPatch, "/api/concepts/"+conceptID+"/rating", bytes.NewBufferString(`{"rating":3}`))
+	req = httptest.NewRequest(http.MethodPatch, "/api/concepts/"+conceptID+"/status", bytes.NewBufferString(`{"status":"fuzzy"}`))
 	req.Header.Set("Content-Type", "application/json")
 	req.Header.Set("Authorization", "Bearer "+token)
 	w = httptest.NewRecorder()
 	router.ServeHTTP(w, req)
 	if w.Code != http.StatusOK {
-		t.Fatalf("rating failed: %d %s", w.Code, w.Body.String())
+		t.Fatalf("status update failed: %d %s", w.Code, w.Body.String())
+	}
+	var state struct {
+		Status          string `json:"status"`
+		ShortTermReview bool   `json:"shortTermReview"`
+	}
+	if err := json.Unmarshal(w.Body.Bytes(), &state); err != nil {
+		t.Fatal(err)
+	}
+	if state.Status != "fuzzy" || !state.ShortTermReview {
+		t.Fatalf("fuzzy status should enter short-term review: %#v", state)
 	}
 
-	req = httptest.NewRequest(http.MethodPost, "/api/review/events", bytes.NewBufferString(`{"conceptId":"`+conceptID+`","response":"know"}`))
+	req = httptest.NewRequest(http.MethodPost, "/api/review/events", bytes.NewBufferString(`{"conceptId":"`+conceptID+`","response":"proficient"}`))
 	req.Header.Set("Content-Type", "application/json")
 	req.Header.Set("Authorization", "Bearer "+token)
 	w = httptest.NewRecorder()
@@ -92,14 +102,16 @@ func TestRatingAndReviewFlow(t *testing.T) {
 	}
 	var payload struct {
 		State struct {
-			Mastery float64 `json:"mastery"`
+			Status          string `json:"status"`
+			ShortTermReview bool   `json:"shortTermReview"`
+			ReviewCount     int    `json:"reviewCount"`
 		} `json:"state"`
 	}
 	if err := json.Unmarshal(w.Body.Bytes(), &payload); err != nil {
 		t.Fatal(err)
 	}
-	if payload.State.Mastery <= 3 || payload.State.Mastery > 5 {
-		t.Fatalf("expected mastery to increase from 3, got %f", payload.State.Mastery)
+	if payload.State.Status != "proficient" || payload.State.ShortTermReview || payload.State.ReviewCount != 1 {
+		t.Fatalf("proficient response should clear short-term review: %#v", payload.State)
 	}
 
 	req = httptest.NewRequest(http.MethodGet, "/api/dashboard/progress", nil)
@@ -110,20 +122,20 @@ func TestRatingAndReviewFlow(t *testing.T) {
 		t.Fatalf("dashboard progress failed: %d %s", w.Code, w.Body.String())
 	}
 	var progress struct {
-		RatedConcepts    int     `json:"ratedConcepts"`
-		TodayReviews     int     `json:"todayReviews"`
-		TodayMasteryGain float64 `json:"todayMasteryGain"`
-		ShortTermReviews int     `json:"shortTermReviews"`
-		StreakDays       int     `json:"streakDays"`
+		MarkedConcepts     int `json:"markedConcepts"`
+		ProficientConcepts int `json:"proficientConcepts"`
+		TodayReviews       int `json:"todayReviews"`
+		ShortTermReviews   int `json:"shortTermReviews"`
+		StreakDays         int `json:"streakDays"`
 	}
 	if err := json.Unmarshal(w.Body.Bytes(), &progress); err != nil {
 		t.Fatal(err)
 	}
-	if progress.RatedConcepts == 0 || progress.TodayReviews != 1 || progress.TodayMasteryGain <= 0 || progress.StreakDays == 0 {
+	if progress.MarkedConcepts == 0 || progress.ProficientConcepts != 1 || progress.TodayReviews != 1 || progress.StreakDays == 0 {
 		t.Fatalf("dashboard progress did not reflect review: %#v", progress)
 	}
 	if progress.ShortTermReviews != 0 {
-		t.Fatalf("known response should not stay in short-term review: %#v", progress)
+		t.Fatalf("proficient response should not stay in short-term review: %#v", progress)
 	}
 }
 

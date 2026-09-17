@@ -22,18 +22,6 @@ func TestParseKeyterms(t *testing.T) {
 	}
 }
 
-func TestNextMastery(t *testing.T) {
-	if got := nextMastery(0, "know"); got <= 0 || got >= 1 {
-		t.Fatalf("know at 0 should increase modestly, got %f", got)
-	}
-	if got := nextMastery(4.9, "know"); got <= 4.9 || got > 5 {
-		t.Fatalf("know at high mastery should still grow toward cap, got %f", got)
-	}
-	if got := nextMastery(0.05, "unknown"); got != 0 {
-		t.Fatalf("unknown should clamp at 0, got %f", got)
-	}
-}
-
 func TestResolveCompactID(t *testing.T) {
 	concepts := []Concept{
 		{ID: "ap-psychology.u2.t2-1.relative-clarity"},

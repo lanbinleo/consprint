@@ -36,12 +36,12 @@ func (a *App) concepts(c *gin.Context) {
 	if progress := c.Query("progress"); progress != "" {
 		q = q.Joins("join user_concept_states filter_state on filter_state.concept_id = concepts.id and filter_state.user_id = ?", userID)
 		switch progress {
-		case "zero":
-			q = q.Where("filter_state.mastery = 0")
-		case "nonzero":
-			q = q.Where("filter_state.mastery > 0")
-		case "weak":
-			q = q.Where("filter_state.mastery > 0 and filter_state.mastery < 3")
+		case "unmarked":
+			q = q.Where("filter_state.status = ''")
+		case "marked":
+			q = q.Where("filter_state.status <> ''")
+		case "proficient", "fuzzy", "unknown":
+			q = q.Where("filter_state.status = ?", progress)
 		}
 	}
 	var concepts []Concept
@@ -74,7 +74,7 @@ func (a *App) concept(c *gin.Context) {
 	userID := c.GetString("userID")
 	a.ensureStates(userID)
 	var concept Concept
-	if err := a.DB.Preload("Unit").Preload("Topic").Preload("Content").Preload("Cards").First(&concept, "id = ?", c.Param("id")).Error; err != nil {
+	if err := a.DB.Preload("Unit").Preload("Topic").Preload("Content").First(&concept, "id = ?", c.Param("id")).Error; err != nil {
 		c.JSON(404, gin.H{"error": "not found"})
 		return
 	}
@@ -83,12 +83,12 @@ func (a *App) concept(c *gin.Context) {
 	c.JSON(200, gin.H{"concept": concept, "state": state})
 }
 
-func (a *App) rateConcept(c *gin.Context) {
+func (a *App) setConceptStatus(c *gin.Context) {
 	var req struct {
-		Rating int `json:"rating"`
+		Status string `json:"status"`
 	}
-	if err := c.ShouldBindJSON(&req); err != nil || req.Rating < 0 || req.Rating > 5 {
-		c.JSON(400, gin.H{"error": "rating must be 0-5"})
+	if err := c.ShouldBindJSON(&req); err != nil || !validConceptStatus(req.Status) {
+		c.JSON(400, gin.H{"error": "status must be proficient, fuzzy, unknown, or empty"})
 		return
 	}
 	userID := c.GetString("userID")
@@ -97,8 +97,8 @@ func (a *App) rateConcept(c *gin.Context) {
 		c.JSON(404, gin.H{"error": "concept not found"})
 		return
 	}
-	state.Mastery = float64(req.Rating)
-	state.ManualRating = &req.Rating
+	state.Status = req.Status
+	state.ShortTermReview = req.Status == "fuzzy" || req.Status == "unknown"
 	a.DB.Save(&state)
 	c.JSON(200, state)
 }
@@ -136,7 +136,7 @@ func (a *App) updateConceptContent(c *gin.Context) {
 	}
 	a.DB.Model(&Concept{}).Where("id = ?", conceptID).Update("content_status", "ready")
 	var out Concept
-	a.DB.Preload("Unit").Preload("Topic").Preload("Content").Preload("Cards").First(&out, "id = ?", conceptID)
+	a.DB.Preload("Unit").Preload("Topic").Preload("Content").First(&out, "id = ?", conceptID)
 	c.JSON(200, out)
 }
 

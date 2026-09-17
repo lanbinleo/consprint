@@ -29,7 +29,7 @@ func NewApp(dbPath, sources string) (*App, error) {
 	if err != nil {
 		return nil, err
 	}
-	if err := db.AutoMigrate(&Tenant{}, &User{}, &Course{}, &Unit{}, &Topic{}, &Concept{}, &ConceptContent{}, &Card{}, &UserConceptState{}, &ReviewEvent{}, &ImportRun{}); err != nil {
+	if err := db.AutoMigrate(&Tenant{}, &User{}, &Course{}, &Unit{}, &Topic{}, &Concept{}, &ConceptContent{}, &UserConceptState{}, &ReviewEvent{}, &ImportRun{}); err != nil {
 		return nil, err
 	}
 	db.Model(&User{}).Where("role = '' OR role IS NULL").Update("role", "student")
