@@ -3,9 +3,14 @@ package backend
 import (
 	"crypto/rand"
 	"encoding/hex"
+	"encoding/json"
+	"errors"
+	"os"
 	"regexp"
 	"strings"
 	"unicode"
+
+	"gorm.io/datatypes"
 )
 
 func NewID(prefix string) string {
@@ -75,3 +80,50 @@ func Clamp(v, min, max float64) float64 {
 	}
 	return v
 }
+
+func env(key, fallbackValue string) string {
+	if v := os.Getenv(key); strings.TrimSpace(v) != "" {
+		return v
+	}
+	return fallbackValue
+}
+
+func envBool(key string, fallbackValue bool) bool {
+	value := strings.ToLower(strings.TrimSpace(os.Getenv(key)))
+	if value == "" {
+		return fallbackValue
+	}
+	return value == "1" || value == "true" || value == "yes" || value == "on"
+}
+
+func fallback(v, d string) string {
+	if strings.TrimSpace(v) == "" {
+		return d
+	}
+	return strings.TrimSpace(v)
+}
+
+func marshalBlocks(blocks []map[string]string) datatypes.JSON {
+	if len(blocks) == 0 {
+		return datatypes.JSON([]byte("[]"))
+	}
+	normalized := make([]map[string]string, 0, len(blocks))
+	for _, block := range blocks {
+		text := strings.TrimSpace(block["text"])
+		if text == "" {
+			continue
+		}
+		kind := strings.TrimSpace(block["type"])
+		if kind == "" {
+			kind = "paragraph"
+		}
+		normalized = append(normalized, map[string]string{"type": kind, "text": text})
+	}
+	if len(normalized) == 0 {
+		return datatypes.JSON([]byte("[]"))
+	}
+	out, _ := json.Marshal(normalized)
+	return datatypes.JSON(out)
+}
+
+var errNotFound = errors.New("not found")
