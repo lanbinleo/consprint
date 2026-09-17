@@ -64,6 +64,8 @@ func (a *App) Router() *gin.Engine {
 	staff.POST("/admin/sets", a.createSet)
 	staff.GET("/admin/sets/:id", a.getSet)
 	staff.PATCH("/admin/sets/:id", a.updateSet)
+	staff.GET("/admin/analytics/overview", a.analyticsOverview)
+	staff.GET("/admin/analytics/users/:id", a.analyticsUserDetail)
 	admin := protected.Group("")
 	admin.Use(a.requireAdmin())
 	admin.PATCH("/concepts/:id/content", a.updateConceptContent)

@@ -275,3 +275,29 @@ func postJSON(t *testing.T, router http.Handler, token, method, path, body strin
 	}
 	return payload
 }
+
+func TestAnalyticsEndpoints(t *testing.T) {
+	_, router := newTestApp(t)
+	adminToken := registerTestUser(t, router, "stats-admin@example.com")
+	studentToken := registerTestUser(t, router, "stats-student@example.com")
+
+	// Student cannot read class analytics.
+	req := httptest.NewRequest(http.MethodGet, "/api/admin/analytics/overview", nil)
+	req.Header.Set("Authorization", "Bearer "+studentToken)
+	w := httptest.NewRecorder()
+	router.ServeHTTP(w, req)
+	if w.Code != http.StatusForbidden {
+		t.Fatalf("student should not read analytics: %d", w.Code)
+	}
+
+	overview := postJSON(t, router, adminToken, "GET", "/api/admin/analytics/overview", "")
+	students := overview["students"].([]any)
+	if len(students) != 2 {
+		t.Fatalf("expected 2 students in overview, got %d", len(students))
+	}
+	first := students[0].(map[string]any)
+	detail := postJSON(t, router, adminToken, "GET", "/api/admin/analytics/users/"+first["id"].(string), "")
+	if detail["user"].(map[string]any)["id"] != first["id"] {
+		t.Fatal("user detail mismatch")
+	}
+}
