@@ -5,6 +5,7 @@ import { api } from '../lib/api'
 import { formatDateTime } from '../lib/format'
 import { useSession } from '../hooks/session'
 import { Header, ListSkeleton } from '../components/ui'
+import { praiseKey } from '../lib/i18n'
 import { useUnits } from '../components/ScopePicker'
 import type { WrongEntry } from '../lib/types'
 
@@ -14,10 +15,12 @@ export function WrongBook() {
   const [unitFilter, setUnitFilter] = useState('')
   const params = new URLSearchParams()
   if (unitFilter) params.set('unitId', unitFilter)
-  const { data: entries = [], isPending } = useQuery({
+  const { data, isPending } = useQuery({
     queryKey: ['wrongbook', unitFilter],
-    queryFn: () => api.request<WrongEntry[]>(`/api/practice/wrongbook?${params.toString()}`),
+    queryFn: async () => (await api.request<WrongEntry[] | null>(`/api/practice/wrongbook?${params.toString()}`)) ?? [],
   })
+  const entries = data ?? []
+  const praise = t[praiseKey()]
 
   return (
     <section className="page">
@@ -38,7 +41,10 @@ export function WrongBook() {
       {isPending ? (
         <ListSkeleton rows={5} />
       ) : entries.length === 0 ? (
-        <div className="empty-state">{t.wrongbookEmpty}</div>
+        <div className="empty-state celebrate">
+          <strong>{t.wrongbookEmpty}</strong>
+          <span className="muted">{praise}</span>
+        </div>
       ) : (
         <div className="table">
           {entries.map((entry) => (
@@ -54,7 +60,7 @@ export function WrongBook() {
                     </small>
                   )}
                   <small>{formatDateTime(entry.lastAt)}</small>
-                  {entry.question.tags.map((tag) => (
+                  {(entry.question.tags ?? []).map((tag) => (
                     <span className="pill" key={tag.id}>
                       {tag.name}
                     </span>

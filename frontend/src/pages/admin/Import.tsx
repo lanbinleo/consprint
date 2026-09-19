@@ -25,9 +25,9 @@ export function Import() {
       form.append('file', file)
       const payload = await api.request<ImportPreview>('/api/admin/questions/import/preview', { method: 'POST', body: form })
       setPreview(payload)
-      setSelected(new Set(payload.items.map((_, index) => index)))
+      setSelected(new Set((payload.items ?? []).map((_, index) => index)))
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'import failed')
+      setError(err instanceof Error ? err.message : t.importFailed)
     } finally {
       setBusy(false)
     }
@@ -46,7 +46,7 @@ export function Import() {
       setPreview(null)
       void queryClient.invalidateQueries({ queryKey: ['admin-questions'] })
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'import failed')
+      setError(err instanceof Error ? err.message : t.importFailed)
     } finally {
       setBusy(false)
     }
@@ -67,9 +67,12 @@ export function Import() {
         eyebrow={t.admin}
         title={t.importTitle}
         action={
-          <a className="secondary" href="/api/admin/questions/import/template" download>
+          <button
+            className="secondary"
+            onClick={() => void api.download('/api/admin/questions/import/template', 'question-import-template.csv')}
+          >
             <Download size={16} /> {t.importTemplate}
-          </a>
+          </button>
         }
       />
       <p className="muted">{t.importHint}</p>
@@ -94,7 +97,7 @@ export function Import() {
         <div className="import-preview">
           <div className="import-summary">
             <strong>
-              {t.previewResult}: {preview.valid} {t.validRows} · {preview.errors.length} {t.invalidRows} ({preview.channel.toUpperCase()})
+              {t.previewResult}: {preview.valid} {t.validRows} · {(preview.errors ?? []).length} {t.invalidRows} ({preview.channel.toUpperCase()})
             </strong>
             <div className="action-row">
               <button className="primary" disabled={busy || selected.size === 0} onClick={() => commit(false)}>
@@ -105,10 +108,10 @@ export function Import() {
               </button>
             </div>
           </div>
-          {preview.errors.length > 0 && (
+          {(preview.errors ?? []).length > 0 && (
             <div className="import-errors">
               <strong>{t.rowErrors}</strong>
-              {preview.errors.map((issue) => (
+              {(preview.errors ?? []).map((issue) => (
                 <p key={issue.index} className="error">
                   {t.row} {issue.index + 1}: {issue.message}
                 </p>
@@ -116,7 +119,7 @@ export function Import() {
             </div>
           )}
           <div className="table">
-            {preview.items.map((item, index) => (
+            {(preview.items ?? []).map((item, index) => (
               <label className="concept-row import-row" key={index}>
                 <input type="checkbox" checked={selected.has(index)} onChange={() => toggle(index)} />
                 <span>

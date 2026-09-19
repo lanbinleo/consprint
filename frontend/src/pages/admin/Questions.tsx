@@ -22,12 +22,24 @@ export function Questions() {
   if (status) params.set('status', status)
   if (unitId) params.set('unitId', unitId)
   if (search) params.set('search', search)
-  const { data: questions = [], isPending } = useQuery({
+  const { data, isPending } = useQuery({
     queryKey: ['admin-questions', type, status, unitId, search],
-    queryFn: () => api.request<Question[]>(`/api/admin/questions?${params.toString()}`),
+    queryFn: async () => (await api.request<Question[] | null>(`/api/admin/questions?${params.toString()}`)) ?? [],
   })
+  const questions = data ?? []
+  const [actionError, setActionError] = useState('')
 
   const refresh = () => queryClient.invalidateQueries({ queryKey: ['admin-questions'] })
+
+  async function patchStatus(id: string, status: 'published' | 'archived') {
+    setActionError('')
+    try {
+      await api.request(`/api/admin/questions/${id}`, { method: 'PATCH', body: JSON.stringify({ status }) })
+      void refresh()
+    } catch (err) {
+      setActionError(err instanceof Error ? err.message : t.errorGeneric)
+    }
+  }
 
   return (
     <div>
@@ -64,6 +76,7 @@ export function Questions() {
           ))}
         </select>
       </div>
+      {actionError && <div className="error" style={{ marginTop: 12 }}>{actionError}</div>}
       {isPending ? (
         <ListSkeleton />
       ) : questions.length === 0 ? (
@@ -76,37 +89,20 @@ export function Questions() {
                 <span>
                   <strong>{question.stem.slice(0, 140)}</strong>
                   <small>
-                    {question.type === 'mcq' ? t.mcq : t.subjective} · {question.status} ·{' '}
-                    {question.tags.map((tag) => tag.name).join(', ')}
+                    {question.type === 'mcq' ? t.mcq : t.subjective} ·{' '}
+                    {question.status === 'published' ? t.published : question.status === 'draft' ? t.draft : t.archived} ·{' '}
+                    {(question.tags ?? []).map((tag) => tag.name).join(', ')}
                   </small>
                 </span>
               </button>
               <div className="row-actions">
                 {question.status !== 'published' && (
-                  <button
-                    className="secondary"
-                    onClick={async () => {
-                      await api.request(`/api/admin/questions/${question.id}`, {
-                        method: 'PATCH',
-                        body: JSON.stringify({ status: 'published' }),
-                      })
-                      void refresh()
-                    }}
-                  >
+                  <button className="secondary" onClick={() => void patchStatus(question.id, 'published')}>
                     {t.publish}
                   </button>
                 )}
                 {question.status === 'published' && (
-                  <button
-                    className="secondary"
-                    onClick={async () => {
-                      await api.request(`/api/admin/questions/${question.id}`, {
-                        method: 'PATCH',
-                        body: JSON.stringify({ status: 'archived' }),
-                      })
-                      void refresh()
-                    }}
-                  >
+                  <button className="secondary" onClick={() => void patchStatus(question.id, 'archived')}>
                     {t.unpublish}
                   </button>
                 )}
@@ -148,7 +144,7 @@ function QuestionEditor({
       : [{ label: 'A', prompt: '', referenceAnswer: '', rubric: '' }],
   )
   const [unitRef, setUnitRef] = useState(question?.unitId ?? '')
-  const [tags, setTags] = useState(question?.tags.map((tag) => tag.name).join('; ') ?? '')
+  const [tags, setTags] = useState((question?.tags ?? []).map((tag) => tag.name).join('; '))
   const [error, setError] = useState('')
   const [busy, setBusy] = useState(false)
 
@@ -196,7 +192,7 @@ function QuestionEditor({
       onSaved()
       onClose()
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'error')
+      setError(err instanceof Error ? err.message : t.errorGeneric)
     } finally {
       setBusy(false)
     }
@@ -219,7 +215,7 @@ function QuestionEditor({
           <textarea rows={3} value={stem} onChange={(e) => setStem(e.target.value)} />
         </label>
         <label>
-          {t.materials} <small className="muted">Title :: text（one per line）</small>
+          {t.materials} <small className="muted">{t.materialsHint}</small>
           <textarea rows={3} value={materials} onChange={(e) => setMaterials(e.target.value)} />
         </label>
         {type === 'mcq' ? (

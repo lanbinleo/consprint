@@ -1,5 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react'
-import { api } from '../lib/api'
+import { api, ApiError } from '../lib/api'
+import { queryClient } from '../lib/queryClient'
 import { getCopy, detectLang, type Copy } from '../lib/i18n'
 import type { AppMeta, AuthPayload, Lang, User } from '../lib/types'
 
@@ -30,7 +31,12 @@ export function SessionProvider({ children }: { children: ReactNode }) {
   const [tenant, setTenant] = useState<{ id: string; name: string } | null>(null)
   const [meta, setMeta] = useState<AppMeta | null>(null)
   const [lang, setLangState] = useState<Lang>(detectLang)
-  const [theme, setThemeState] = useState<Theme>((localStorage.getItem('apPsychTheme') as Theme) || 'light')
+  const [theme, setThemeState] = useState<Theme>(() => {
+    const stored = localStorage.getItem('apPsychTheme')
+    if (stored === 'light' || stored === 'dark') return stored
+    // Follow the system when the user has never picked a theme.
+    return window.matchMedia?.('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+  })
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme
@@ -57,10 +63,16 @@ export function SessionProvider({ children }: { children: ReactNode }) {
       const payload = await api.request<Omit<AuthPayload, 'token'>>('/api/me')
       setUser(payload.user)
       setTenant(payload.tenant)
-    } catch {
-      api.logout()
-      setUser(null)
-      setTenant(null)
+    } catch (err) {
+      // Only a rejected token ends the session; transient network/backend errors keep the user.
+      if (err instanceof ApiError && err.status === 401) {
+        api.logout()
+        setUser(null)
+        setTenant(null)
+        // Drop cached queries: on a shared machine the next login may be a
+        // different user, and fresh-but-wrong cached data would flash.
+        queryClient.clear()
+      }
     } finally {
       setReady(true)
     }
@@ -86,6 +98,9 @@ export function SessionProvider({ children }: { children: ReactNode }) {
       setTheme: setThemeState,
       onAuthed: (payload) => {
         api.setToken(payload.token)
+        // A new sign-in may be a different user on the same browser: never
+        // serve the previous account's cached queries.
+        queryClient.clear()
         setUser(payload.user)
         setTenant(payload.tenant)
       },
@@ -94,6 +109,7 @@ export function SessionProvider({ children }: { children: ReactNode }) {
         api.logout()
         setUser(null)
         setTenant(null)
+        queryClient.clear()
       },
     }
   }, [ready, user, tenant, meta, lang, theme, refreshUser])

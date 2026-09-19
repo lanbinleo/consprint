@@ -12,6 +12,8 @@ export type Topic = {
   id: string
   unitId: string
   title: string
+  // Per-user metadata from /api/units; lets the setup screen total cards locally.
+  counts?: { total: number; proficient: number; fuzzy: number; unknown: number }
 }
 
 export type Block = {
@@ -38,6 +40,8 @@ export type Concept = {
   unit?: Unit
   topic?: Topic
   content?: ConceptContent
+  // Present on review-queue payloads (/api/review/next); absent elsewhere.
+  state?: ConceptState
 }
 
 export type ConceptState = {
@@ -45,6 +49,7 @@ export type ConceptState = {
   status: ConceptStatus
   reviewCount: number
   shortTermReview: boolean
+  starred: boolean
 }
 
 export type ConceptRow = Concept & {
@@ -73,15 +78,64 @@ export type AppMeta = {
   timezone: string
 }
 
-export type StatBucket = {
-  label: string
-  reviews: number
-  proficient: number
-  fuzzy: number
-  unknown: number
+export type DashboardSummary = {
+  totalConcepts: number
+  readyConcepts: number
+  quote?: Quote | null
 }
 
-export type DashboardSummary = { totalConcepts: number; readyConcepts: number }
+// ---- Dashboard boards: announcements, calendar, quotes, stars ----
+
+export type Announcement = {
+  id: string
+  title: string
+  body: string
+  pinned: boolean
+  status: 'draft' | 'published' | 'archived'
+  createdBy: string
+  authorName: string
+  createdAt: string
+  updatedAt: string
+}
+
+export type CalendarEventKind = 'assignment' | 'assessment' | 'quiz' | 'holiday' | 'event'
+
+export type CalendarEvent = {
+  id: string
+  title: string
+  date: string // YYYY-MM-DD
+  endDate?: string | null
+  time?: string | null // HH:MM, null = all day
+  kind: CalendarEventKind
+  note: string
+  createdBy: string
+  createdAt: string
+  updatedAt: string
+}
+
+export type Quote = {
+  id: number
+  textZh: string
+  textEn: string
+  source: string
+}
+
+export type StarredConcept = {
+  conceptId: string
+  term: string
+  unitTitle: string
+  topicTitle: string
+  status: ConceptStatus
+}
+
+export type RecentConcept = {
+  conceptId: string
+  term: string
+  unitTitle: string
+  topicTitle: string
+  response: 'proficient' | 'fuzzy' | 'unknown'
+  lastAt: string
+}
 
 export type DashboardProgress = {
   reviewedConcepts: number
@@ -98,7 +152,7 @@ export type WeakArea = { label: string; weak: number; marked: number }
 
 export type DashboardAlerts = {
   recent: ReviewEvent[]
-  weakConcepts: Concept[]
+  weakConcepts: StarredConcept[]
   weakUnits: WeakArea[]
   weakTopics: WeakArea[]
 }
@@ -213,7 +267,6 @@ export type RunnerQuestion = {
   answerKey?: string
   explanation?: string
   parts?: (QuestionPart & { referenceAnswer?: string; rubric?: string[] })[]
-  myCorrect?: boolean
 }
 
 export type WrongEntry = {
@@ -229,13 +282,6 @@ export type AccuracyRow = {
   answered: number
   correct: number
   accuracy: number
-}
-
-export type PracticeStats = {
-  attempts: number
-  byUnit: AccuracyRow[]
-  byTopic: AccuracyRow[]
-  selfRatings: { rating: string; count: number }[]
 }
 
 // ---- Admin analytics ----
@@ -280,4 +326,24 @@ export type ImportStatus = {
   readyConcepts: number
   byUnit: { unitId: string; unit: string; concepts: number; ready: number }[]
   runs: { id: string; source: string; status: string; message: string; counts: string; createdAt: string }[]
+}
+
+// ---- Notes page resource tabs ----
+
+export type NoteResourceItem = {
+  id: string
+  resourceId: string
+  label: string
+  url: string
+  kind: 'embed' | 'pdf' | 'image' | 'link'
+  position: number
+}
+
+export type NoteResource = {
+  id: string
+  title: string
+  description: string
+  status: 'draft' | 'published' | 'archived'
+  position: number
+  items: NoteResourceItem[]
 }

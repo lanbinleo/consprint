@@ -1,6 +1,6 @@
-import type { ReactNode } from 'react'
-import { Keyboard, Loader2, User } from 'lucide-react'
-import { initials } from '../lib/format'
+import { useEffect, type ReactNode } from 'react'
+import { Keyboard, Loader2, UserRound, X } from 'lucide-react'
+import { useSession } from '../hooks/session'
 
 export function Header({ eyebrow, title, action }: { eyebrow?: string; title: string; action?: ReactNode }) {
   return (
@@ -23,18 +23,57 @@ export function Metric({ label, value, loading = false }: { label: string; value
   )
 }
 
+// Default avatars: pre-generated "Notionists" style from DiceBear
+// (https://dicebear.com, CC BY 4.0), stored under public/avatars/.
+// One of the 24 fixed seeds is assigned deterministically by name hash.
+const DEFAULT_AVATAR_COUNT = 24
+
+function hashName(name: string) {
+  let hash = 0
+  for (let i = 0; i < name.length; i++) hash = (hash * 31 + name.charCodeAt(i)) >>> 0
+  return hash
+}
+
 export function Avatar({ user }: { user: { name: string; avatarDataUrl?: string } }) {
   if (user.avatarDataUrl) return <img className="avatar" src={user.avatarDataUrl} alt="" />
-  return (
-    <span className="avatar">
-      <User size={17} />
-      {initials(user.name)}
-    </span>
-  )
+  if (!user.name.trim()) {
+    return (
+      <span className="avatar icon-fallback">
+        <UserRound size={16} />
+      </span>
+    )
+  }
+  const index = (hashName(user.name) % DEFAULT_AVATAR_COUNT) + 1
+  return <img className="avatar" src={`/avatars/default-${String(index).padStart(2, '0')}.svg`} alt="" />
 }
 
 export function SetupCard({ children }: { children: ReactNode }) {
   return <div className="setup-card">{children}</div>
+}
+
+// Lightweight dialog: scrim click and Escape close it, clicks inside pass
+// through. Used for the dashboard calendar day details and admin editors.
+export function Modal({ title, onClose, children }: { title: string; onClose: () => void; children: ReactNode }) {
+  useEffect(() => {
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') onClose()
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [onClose])
+  return (
+    <div className="modal-backdrop" onClick={onClose}>
+      <div className="modal" role="dialog" aria-modal="true" aria-label={title} onClick={(event) => event.stopPropagation()}>
+        <div className="modal-head">
+          <h3>{title}</h3>
+          <button className="icon-btn" onClick={onClose} aria-label="close">
+            <X size={16} />
+          </button>
+        </div>
+        <div className="modal-body">{children}</div>
+      </div>
+    </div>
+  )
 }
 
 export function KeyboardHint({ text }: { text: string }) {
@@ -70,6 +109,9 @@ export function SpinnerButton({
 }
 
 export function StatusPill({ status }: { status: string }) {
+  const { t } = useSession()
   const tone = status === 'proficient' ? 'ok' : status === 'fuzzy' ? 'warn' : status === 'unknown' ? 'bad' : ''
-  return <span className={`pill ${tone}`}>{status || 'unmarked'}</span>
+  const label =
+    status === 'proficient' ? t.proficient : status === 'fuzzy' ? t.fuzzy : status === 'unknown' ? t.unknown : t.unmarked
+  return <span className={`pill ${tone}`}>{label}</span>
 }

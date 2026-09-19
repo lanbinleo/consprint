@@ -1,17 +1,9 @@
+import { getCopy } from './i18n'
+import type { Lang } from './types'
+
 export function percent(value: number, total: number) {
   if (total <= 0) return 0
   return Math.round((value / total) * 100)
-}
-
-export function initials(name: string) {
-  return (
-    name
-      .split(/\s+/)
-      .filter(Boolean)
-      .slice(0, 2)
-      .map((part) => part[0]?.toUpperCase())
-      .join('') || 'AP'
-  )
 }
 
 export function examCountdown(target: string | undefined, now = Date.now()) {
@@ -33,20 +25,17 @@ export function formatClock(totalSeconds: number) {
   return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`
 }
 
-export function shortLabel(label: string) {
-  if (label.includes('-')) return label.slice(5)
-  return label
-}
-
-export function sourceLabel(source?: string) {
+export function sourceLabel(source: string | undefined, lang: Lang) {
   const clean = (source ?? '').trim()
-  if (!clean || clean === 'pending') return 'Awaiting Study Content'
+  const t = getCopy(lang)
+  if (!clean || clean === 'pending') return t.sourcePending
   if (clean === 'unit0.md') return 'Unit 0 Key Terms'
   if (clean === 'unit1.md') return 'Unit 1 Study Notes'
-  if (clean === 'ai-enrichment.compact') return 'AI AP Psych Notes'
+  if (clean === 'ai-enrichment.compact' || clean === 'ai-enrichment-v2.compact') return 'AI AP Psych Notes'
+  if (clean === 'cards.compact') return t.sourceCards
   if (clean.includes('AP Psychology Notes')) return 'AP Psychology Notes'
-  if (clean === 'manual') return 'Teacher Edited'
-  if (clean.startsWith('manual')) return 'Reviewed Notes'
+  if (clean === 'manual') return t.sourceTeacher
+  if (clean.startsWith('manual')) return t.sourceReviewed
   return clean.replace(/\.(md|txt|opml)$/i, '').replace(/[-_]/g, ' ')
 }
 

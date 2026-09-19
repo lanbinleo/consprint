@@ -1,6 +1,6 @@
 import { Link } from 'react-router'
 import { useQuery } from '@tanstack/react-query'
-import { Clock3, Zap } from 'lucide-react'
+import { Clock3, NotebookPen, Zap } from 'lucide-react'
 import { api } from '../lib/api'
 import { useSession } from '../hooks/session'
 import { Header, ListSkeleton } from '../components/ui'
@@ -10,7 +10,7 @@ export function Practice() {
   const { t } = useSession()
   const { data: sets = [], isPending } = useQuery({
     queryKey: ['practice-sets'],
-    queryFn: () => api.request<PracticeSet[]>('/api/practice/sets'),
+    queryFn: async () => (await api.request<PracticeSet[] | null>('/api/practice/sets')) ?? [],
   })
 
   return (
@@ -19,7 +19,10 @@ export function Practice() {
       {isPending ? (
         <ListSkeleton rows={4} />
       ) : sets.length === 0 ? (
-        <div className="empty-state">{t.noSets}</div>
+        <div className="empty-state">
+          <NotebookPen size={28} />
+          <p className="muted">{t.noSets}</p>
+        </div>
       ) : (
         <div className="set-grid">
           {sets.map((set) => {

@@ -5,10 +5,11 @@ import { ArrowLeft, CheckCircle2, Clock3, XCircle } from 'lucide-react'
 import { api } from '../lib/api'
 import { formatClock } from '../lib/format'
 import { useSession } from '../hooks/session'
+import { praiseKey } from '../lib/i18n'
 import { Header } from '../components/ui'
 import type { PracticeAnswer, PracticeAttempt, PracticeSet, RunnerQuestion } from '../lib/types'
 
-type Stage = 'loading' | 'running' | 'finished'
+type Stage = 'loading' | 'running' | 'finished' | 'error'
 
 export function PracticeRunner() {
   const { setId = '' } = useParams()
@@ -23,6 +24,7 @@ export function PracticeRunner() {
   const [busy, setBusy] = useState(false)
   const [now, setNow] = useState(Date.now())
   const [showConfirm, setShowConfirm] = useState(false)
+  const [error, setError] = useState('')
 
   const { data: set } = useQuery({
     queryKey: ['practice-set', setId],
@@ -49,7 +51,7 @@ export function PracticeRunner() {
         if (cancelled) return
         await loadAttempt(started.attempt)
       } catch {
-        if (!cancelled) setStage('finished')
+        if (!cancelled) setStage('error')
       }
     }
     void boot()
@@ -59,9 +61,9 @@ export function PracticeRunner() {
       )
       if (cancelled) return
       setAttempt(detail.attempt)
-      setQuestions(detail.questions)
+      setQuestions(detail.questions ?? [])
       const answerMap: Record<string, PracticeAnswer> = {}
-      for (const answer of detail.answers) answerMap[answer.questionId] = answer
+      for (const answer of detail.answers ?? []) answerMap[answer.questionId] = answer
       setAnswers(answerMap)
       if (detail.attempt.finishedAt) setStage('finished')
       else setStage('running')
@@ -83,22 +85,28 @@ export function PracticeRunner() {
   }, [attempt, now])
 
   const finish = useCallback(async () => {
-    if (!attempt) return
+    if (!attempt || busy) return
     setBusy(true)
+    setError('')
     try {
       const summary = await api.request<{ attempt: PracticeAttempt; questions: RunnerQuestion[]; answers: PracticeAnswer[]; correct: number }>(
         `/api/practice/attempts/${attempt.id}/finish`,
         { method: 'POST', body: '{}' },
       )
       setAttempt(summary.attempt)
-      setQuestions(summary.questions)
-      setAnswers(Object.fromEntries(summary.answers.map((answer) => [answer.questionId, answer])))
+      setQuestions(summary.questions ?? [])
+      setAnswers(Object.fromEntries((summary.answers ?? []).map((answer) => [answer.questionId, answer])))
       setStage('finished')
       void queryClient.invalidateQueries({ queryKey: ['practice-sets'] })
+      void queryClient.invalidateQueries({ queryKey: ['practice-set', setId] })
+      // Fresh wrong answers only show up once the derived wrong book refetches.
+      void queryClient.invalidateQueries({ queryKey: ['wrongbook'] })
+    } catch (err) {
+      setError(err instanceof Error ? err.message : t.errorGeneric)
     } finally {
       setBusy(false)
     }
-  }, [attempt, queryClient])
+  }, [attempt, busy, queryClient, setId, t])
 
   // Auto-submit when the server deadline passes.
   useEffect(() => {
@@ -108,6 +116,7 @@ export function PracticeRunner() {
   async function submitMCQ(question: RunnerQuestion, choiceKey: string) {
     if (!attempt || busy) return
     setBusy(true)
+    setError('')
     try {
       const payload = await api.request<{ answer: PracticeAnswer; question?: RunnerQuestion }>(
         `/api/practice/attempts/${attempt.id}/answers`,
@@ -117,6 +126,8 @@ export function PracticeRunner() {
       if (payload.question) {
         setQuestions((rows) => rows.map((row) => (row.id === question.id ? payload.question! : row)))
       }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : t.errorGeneric)
     } finally {
       setBusy(false)
     }
@@ -125,6 +136,7 @@ export function PracticeRunner() {
   async function submitSubjective(question: RunnerQuestion, textAnswer: string) {
     if (!attempt || busy) return
     setBusy(true)
+    setError('')
     try {
       const payload = await api.request<{ answer: PracticeAnswer; question?: RunnerQuestion }>(
         `/api/practice/attempts/${attempt.id}/answers`,
@@ -135,6 +147,8 @@ export function PracticeRunner() {
         setQuestions((rows) => rows.map((row) => (row.id === question.id ? payload.question! : row)))
         setRevealed((current) => ({ ...current, [question.id]: true }))
       }
+    } catch (err) {
+      setError(err instanceof Error ? err.message : t.errorGeneric)
     } finally {
       setBusy(false)
     }
@@ -142,17 +156,38 @@ export function PracticeRunner() {
 
   async function selfRate(question: RunnerQuestion, rating: 'proficient' | 'partial' | 'weak') {
     if (!attempt) return
-    const answer = await api.request<PracticeAnswer>(`/api/practice/attempts/${attempt.id}/answers/${question.id}/self-rating`, {
-      method: 'POST',
-      body: JSON.stringify({ rating }),
-    })
-    setAnswers((current) => ({ ...current, [question.id]: answer }))
+    try {
+      const answer = await api.request<PracticeAnswer>(`/api/practice/attempts/${attempt.id}/answers/${question.id}/self-rating`, {
+        method: 'POST',
+        body: JSON.stringify({ rating }),
+      })
+      setAnswers((current) => ({ ...current, [question.id]: answer }))
+    } catch (err) {
+      setError(err instanceof Error ? err.message : t.errorGeneric)
+    }
   }
 
   if (stage === 'loading') {
     return (
       <section className="page">
         <p className="muted">{t.loading}…</p>
+      </section>
+    )
+  }
+
+  if (stage === 'error') {
+    return (
+      <section className="page">
+        <Header eyebrow={t.practice} title={t.errorGeneric} />
+        <div className="error">{t.errorGeneric}</div>
+        <div className="action-row" style={{ marginTop: 12 }}>
+          <button className="primary" onClick={() => window.location.reload()}>
+            {t.start}
+          </button>
+          <Link className="secondary" to="/practice">
+            {t.back}
+          </Link>
+        </div>
       </section>
     )
   }
@@ -173,6 +208,18 @@ export function PracticeRunner() {
           }
         />
         {attempt?.deadlineAt && secondsLeft !== null && secondsLeft <= 0 && <div className="error">{t.timeUp}</div>}
+        {(() => {
+          // 80%+ (or a subjective-only set) gets the cheering cat; the rest
+          // get the thinking cat and an invitation to review.
+          const total = attempt?.totalMcq ?? mcqCount
+          const great = total === 0 || (attempt?.score ?? correctCount) / total >= 0.8
+          return (
+            <div className="result-celebrate">
+              <strong>{great ? t.cheerGreat : t.cheerKeep}</strong>
+              {great && <span className="muted">{t[praiseKey()]}</span>}
+            </div>
+          )
+        })()}
         <div className="metrics">
           <div className="metric">
             <span>{t.score}</span>
@@ -202,11 +249,7 @@ export function PracticeRunner() {
                   {i + 1}. {question.stem.slice(0, 120)}
                   {question.stem.length > 120 ? '…' : ''}
                 </strong>
-                {answers[question.id] && (
-                  <span className={`pill ${answers[question.id].isCorrect ? 'ok' : 'bad'}`}>
-                    {answers[question.id].isCorrect ? t.correct : question.type === 'mcq' ? t.incorrect : ''}
-                  </span>
-                )}
+                {answers[question.id] && <ResultPill answer={answers[question.id]} type={question.type} />}
               </div>
               {question.type === 'mcq' && (
                 <div className="review-detail">
@@ -228,6 +271,30 @@ export function PracticeRunner() {
                       {part.rubric && part.rubric.length > 0 && <p>{part.rubric.join(' · ')}</p>}
                     </div>
                   ))}
+                  {answers[question.id]?.textAnswer && (
+                    <>
+                      <p className="muted" style={{ marginTop: 8 }}>
+                        {t.selfAssess}
+                      </p>
+                      <div className="self-rating">
+                        {(
+                          [
+                            ['proficient', t.selfProficient],
+                            ['partial', t.selfPartial],
+                            ['weak', t.selfWeak],
+                          ] as const
+                        ).map(([value, label]) => (
+                          <button
+                            key={value}
+                            className={answers[question.id]?.selfRating === value ? 'active' : ''}
+                            onClick={() => void selfRate(question, value)}
+                          >
+                            {label}
+                          </button>
+                        ))}
+                      </div>
+                    </>
+                  )}
                 </div>
               )}
             </div>
@@ -321,7 +388,7 @@ export function PracticeRunner() {
               })}
             </div>
           ) : showSubjectiveForm ? (
-            <SubjectiveForm busy={busy} onSubmit={(text) => void submitSubjective(current, text)} />
+            <SubjectiveForm key={current.id} busy={busy} onSubmit={(text) => void submitSubjective(current, text)} />
           ) : null}
 
           {showFeedback && (
@@ -376,6 +443,7 @@ export function PracticeRunner() {
           )}
         </div>
       )}
+      {error && <div className="error">{error}</div>}
       <div className="runner-footer">
         <button className="secondary" disabled={index === 0} onClick={() => setIndex((value) => value - 1)}>
           {t.previous}
@@ -413,6 +481,21 @@ export function PracticeRunner() {
       )}
     </section>
   )
+}
+
+// Graded pill for the finished review list. MCQ answers are auto-graded;
+// subjective answers carry no isCorrect and show their self-rating instead.
+function ResultPill({ answer, type }: { answer: PracticeAnswer; type: string }) {
+  const { t } = useSession()
+  if (answer.isCorrect != null) {
+    return <span className={`pill ${answer.isCorrect ? 'ok' : 'bad'}`}>{answer.isCorrect ? t.correct : t.incorrect}</span>
+  }
+  if (type === 'subjective' && answer.selfRating) {
+    const label =
+      answer.selfRating === 'proficient' ? t.selfProficient : answer.selfRating === 'partial' ? t.selfPartial : t.selfWeak
+    return <span className="pill">{label}</span>
+  }
+  return null
 }
 
 function SubjectiveForm({ busy, onSubmit }: { busy: boolean; onSubmit: (text: string) => void }) {

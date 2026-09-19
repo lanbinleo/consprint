@@ -1,6 +1,6 @@
 import type { AuthPayload } from './types'
 
-const API_BASE = import.meta.env.VITE_API_BASE ?? ''
+export const API_BASE = import.meta.env.VITE_API_BASE ?? ''
 
 export class ApiError extends Error {
   status: number
@@ -48,6 +48,22 @@ export class ApiClient {
 
   register(input: { name: string; email: string; password: string; inviteCode?: string }) {
     return this.request<AuthPayload>('/api/auth/register', { method: 'POST', body: JSON.stringify(input) })
+  }
+
+  // Authenticated file download (browser <a href> navigation cannot send the
+  // Authorization header, so protected downloads must go through fetch).
+  async download(path: string, filename: string) {
+    const headers = new Headers()
+    if (this.token) headers.set('Authorization', `Bearer ${this.token}`)
+    const res = await fetch(`${API_BASE}${path}`, { headers })
+    if (!res.ok) throw new ApiError(`Request failed: ${res.status}`, res.status)
+    const blob = await res.blob()
+    const url = URL.createObjectURL(blob)
+    const anchor = document.createElement('a')
+    anchor.href = url
+    anchor.download = filename
+    anchor.click()
+    URL.revokeObjectURL(url)
   }
 }
 

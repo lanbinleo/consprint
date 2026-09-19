@@ -13,13 +13,25 @@ export function Sets() {
   const [editingId, setEditingId] = useState<string | null>(null)
   const [creating, setCreating] = useState(false)
 
-  const { data: sets = [] } = useQuery({
+  const { data } = useQuery({
     queryKey: ['admin-sets'],
-    queryFn: () =>
-      api.request<(import('../../lib/types').PracticeSet & { questionCount: number })[]>('/api/admin/sets'),
+    queryFn: async () =>
+      (await api.request<(import('../../lib/types').PracticeSet & { questionCount: number })[] | null>('/api/admin/sets')) ?? [],
   })
+  const sets = data ?? []
+  const [actionError, setActionError] = useState('')
 
   const refresh = () => queryClient.invalidateQueries({ queryKey: ['admin-sets'] })
+
+  async function patchStatus(id: string, status: 'published' | 'archived') {
+    setActionError('')
+    try {
+      await api.request(`/api/admin/sets/${id}`, { method: 'PATCH', body: JSON.stringify({ status }) })
+      void refresh()
+    } catch (err) {
+      setActionError(err instanceof Error ? err.message : t.errorGeneric)
+    }
+  }
 
   return (
     <div>
@@ -48,24 +60,12 @@ export function Sets() {
               </button>
               <div className="row-actions">
                 {set.status !== 'published' && (
-                  <button
-                    className="secondary"
-                    onClick={async () => {
-                      await api.request(`/api/admin/sets/${set.id}`, { method: 'PATCH', body: JSON.stringify({ status: 'published' }) })
-                      void refresh()
-                    }}
-                  >
+                  <button className="secondary" onClick={() => void patchStatus(set.id, 'published')}>
                     {t.publish}
                   </button>
                 )}
                 {set.status === 'published' && (
-                  <button
-                    className="secondary"
-                    onClick={async () => {
-                      await api.request(`/api/admin/sets/${set.id}`, { method: 'PATCH', body: JSON.stringify({ status: 'archived' }) })
-                      void refresh()
-                    }}
-                  >
+                  <button className="secondary" onClick={() => void patchStatus(set.id, 'archived')}>
                     {t.unpublish}
                   </button>
                 )}
@@ -84,6 +84,7 @@ export function Sets() {
           onSaved={refresh}
         />
       )}
+      {actionError && <div className="error" style={{ marginTop: 12 }}>{actionError}</div>}
     </div>
   )
 }
@@ -103,6 +104,8 @@ function SetEditor({ setId, onClose, onSaved }: { setId: string | null; onClose:
   const [timeLimitMin, setTimeLimitMin] = useState(20)
   const [items, setItems] = useState<Question[]>([])
   const [loadedSetId, setLoadedSetId] = useState<string | null>(null)
+  const [busy, setBusy] = useState(false)
+  const [error, setError] = useState('')
 
   // Load existing set detail once.
   const detailQuery = useQuery({
@@ -116,7 +119,7 @@ function SetEditor({ setId, onClose, onSaved }: { setId: string | null; onClose:
     setDescription(detailQuery.data.set.description)
     setMode(detailQuery.data.set.mode)
     setTimeLimitMin(Math.max(1, Math.round((detailQuery.data.set.timeLimitSec ?? 1200) / 60)))
-    setItems(detailQuery.data.questions)
+    setItems(detailQuery.data.questions ?? [])
   }
 
   // Picker filters
@@ -129,41 +132,53 @@ function SetEditor({ setId, onClose, onSaved }: { setId: string | null; onClose:
   if (filterTag) pickerParams.set('tags', filterTag)
   if (filterUnit) pickerParams.set('unitId', filterUnit)
   if (filterType) pickerParams.set('type', filterType)
-  const { data: candidates = [] } = useQuery({
+  const { data: candidateData } = useQuery({
     queryKey: ['admin-questions', 'picker', filterTag, filterUnit, filterType],
-    queryFn: () => api.request<Question[]>(`/api/admin/questions?${pickerParams.toString()}`),
+    queryFn: async () =>
+      (await api.request<Question[] | null>(`/api/admin/questions?${pickerParams.toString()}`)) ?? [],
   })
-  const { data: allTags = [] } = useQuery({
+  const candidates = candidateData ?? []
+  const { data: tagData } = useQuery({
     queryKey: ['admin-tags'],
-    queryFn: () => api.request<{ name: string; questions: number }[]>('/api/admin/tags'),
+    queryFn: async () => (await api.request<{ name: string; questions: number }[] | null>('/api/admin/tags')) ?? [],
   })
+  const allTags = tagData ?? []
 
   const itemIDs = new Set(items.map((question) => question.id))
 
   async function save(status: 'draft' | 'published') {
-    const body = {
-      title,
-      description,
-      mode,
-      timeLimitSec: mode === 'exam' ? timeLimitMin * 60 : null,
-      status,
-      questionIds: items.map((question) => question.id),
+    setBusy(true)
+    setError('')
+    try {
+      const body = {
+        title,
+        description,
+        mode,
+        timeLimitSec: mode === 'exam' ? timeLimitMin * 60 : null,
+        status,
+        questionIds: items.map((question) => question.id),
+      }
+      if (setId) {
+        await api.request(`/api/admin/sets/${setId}`, { method: 'PATCH', body: JSON.stringify(body) })
+      } else {
+        await api.request('/api/admin/sets', { method: 'POST', body: JSON.stringify(body) })
+      }
+      onSaved()
+      onClose()
+      void queryClient.invalidateQueries({ queryKey: ['admin-sets'] })
+      void queryClient.invalidateQueries({ queryKey: ['admin-set-detail'] })
+      void queryClient.invalidateQueries({ queryKey: ['practice-sets'] })
+    } catch (err) {
+      setError(err instanceof Error ? err.message : t.errorGeneric)
+    } finally {
+      setBusy(false)
     }
-    if (setId) {
-      await api.request(`/api/admin/sets/${setId}`, { method: 'PATCH', body: JSON.stringify(body) })
-    } else {
-      await api.request('/api/admin/sets', { method: 'POST', body: JSON.stringify(body) })
-    }
-    onSaved()
-    onClose()
-    void queryClient.invalidateQueries({ queryKey: ['admin-sets'] })
-    void queryClient.invalidateQueries({ queryKey: ['practice-sets'] })
   }
 
   return (
     <div className="modal-backdrop" onClick={onClose}>
       <div className="modal wide" onClick={(event) => event.stopPropagation()}>
-        <h3>{setId ? t.editQuestion : t.newSet}</h3>
+        <h3>{setId ? t.editSet : t.newSet}</h3>
         <label>
           {t.setTitle}
           <input value={title} onChange={(e) => setTitle(e.target.value)} />
@@ -268,7 +283,7 @@ function SetEditor({ setId, onClose, onSaved }: { setId: string | null; onClose:
                   <span>
                     <strong>{question.stem.slice(0, 110)}</strong>
                     <small>
-                      {question.type} · {question.tags.map((tag) => tag.name).join(', ')}
+                      {question.type} · {(question.tags ?? []).map((tag) => tag.name).join(', ')}
                     </small>
                   </span>
                 </label>
@@ -286,14 +301,15 @@ function SetEditor({ setId, onClose, onSaved }: { setId: string | null; onClose:
             {t.addSelected} ({picked.size})
           </button>
         </div>
+        {error && <div className="error">{error}</div>}
         <div className="action-row">
           <button className="secondary" onClick={onClose}>
             {t.cancel}
           </button>
-          <button className="secondary" disabled={!title.trim() || items.length === 0} onClick={() => save('draft')}>
+          <button className="secondary" disabled={busy || !title.trim() || items.length === 0} onClick={() => void save('draft')}>
             {t.saveDraft}
           </button>
-          <button className="primary" disabled={!title.trim() || items.length === 0} onClick={() => save('published')}>
+          <button className="primary" disabled={busy || !title.trim() || items.length === 0} onClick={() => void save('published')}>
             {t.publishSet}
           </button>
         </div>

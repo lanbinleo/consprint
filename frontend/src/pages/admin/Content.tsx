@@ -5,27 +5,33 @@ import { api } from '../../lib/api'
 import { sourceLabel } from '../../lib/format'
 import { useSession } from '../../hooks/session'
 import { Header, ListSkeleton, Metric, SpinnerButton } from '../../components/ui'
+import { InlineMarkdown } from '../../components/InlineMarkdown'
+import { imageOnlyBlock } from '../../lib/inlineMarkdown'
 import type { Block, Concept, ConceptRow, ImportStatus } from '../../lib/types'
 
 export function Content() {
-  const { t } = useSession()
+  const { t, lang } = useSession()
   const queryClient = useQueryClient()
   const [search, setSearch] = useState('')
   const [selected, setSelected] = useState<ConceptRow | null>(null)
   const [busy, setBusy] = useState(false)
+  const [error, setError] = useState('')
 
   const { data: status } = useQuery({ queryKey: ['import-status'], queryFn: () => api.request<ImportStatus>('/api/import/status') })
   const { data: concepts = [], isPending } = useQuery({
     queryKey: ['concepts-admin', search],
-    queryFn: () => api.request<ConceptRow[]>(`/api/concepts?search=${encodeURIComponent(search)}`),
+    queryFn: async () => (await api.request<ConceptRow[] | null>(`/api/concepts?search=${encodeURIComponent(search)}`)) ?? [],
   })
 
   async function runImport() {
     setBusy(true)
+    setError('')
     try {
       await api.request('/api/import/run', { method: 'POST', body: '{}' })
       await queryClient.invalidateQueries({ queryKey: ['import-status'] })
       await queryClient.invalidateQueries({ queryKey: ['concepts-admin'] })
+    } catch (err) {
+      setError(err instanceof Error ? err.message : t.errorGeneric)
     } finally {
       setBusy(false)
     }
@@ -42,6 +48,7 @@ export function Content() {
           </SpinnerButton>
         }
       />
+      {error && <div className="error">{error}</div>}
       <div className="data-layout">
         <div className="data-list">
           <div className="metrics compact">
@@ -64,7 +71,7 @@ export function Content() {
                 >
                   <span>
                     <strong>{concept.term}</strong>
-                    <small>{sourceLabel(concept.content?.source ?? concept.contentStatus)}</small>
+                    <small>{sourceLabel(concept.content?.source ?? concept.contentStatus, lang)}</small>
                   </span>
                   <Edit3 size={16} />
                 </button>
@@ -84,8 +91,10 @@ function ConceptEditor({ concept, onSaved }: { concept: ConceptRow | null; onSav
   const [examples, setExamples] = useState('')
   const [pitfalls, setPitfalls] = useState('')
   const [notes, setNotes] = useState('')
+  const [preview, setPreview] = useState(false)
   const [saved, setSaved] = useState(false)
   const [busy, setBusy] = useState(false)
+  const [error, setError] = useState('')
 
   useEffect(() => {
     setDefinition(blocksToText(concept?.content?.definition))
@@ -99,6 +108,7 @@ function ConceptEditor({ concept, onSaved }: { concept: ConceptRow | null; onSav
   async function save() {
     if (!concept) return
     setBusy(true)
+    setError('')
     try {
       const updated = await api.request<Concept>(`/api/concepts/${concept.id}/content`, {
         method: 'PATCH',
@@ -113,35 +123,83 @@ function ConceptEditor({ concept, onSaved }: { concept: ConceptRow | null; onSav
       onSaved(updated)
       setSaved(true)
       setTimeout(() => setSaved(false), 1200)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : t.errorGeneric)
     } finally {
       setBusy(false)
     }
   }
 
+  const fields = (
+    <>
+      <label>
+        {t.definition}
+        {preview ? <FieldPreview text={definition} /> : <textarea value={definition} onChange={(e) => setDefinition(e.target.value)} />}
+      </label>
+      <label>
+        {t.examples}
+        {preview ? <FieldPreview text={examples} /> : <textarea value={examples} onChange={(e) => setExamples(e.target.value)} />}
+      </label>
+      <label>
+        {t.pitfalls}
+        {preview ? <FieldPreview text={pitfalls} tone="warn" /> : <textarea value={pitfalls} onChange={(e) => setPitfalls(e.target.value)} />}
+      </label>
+      <label>
+        {t.contentNotes}
+        {preview ? <FieldPreview text={notes} /> : <textarea value={notes} onChange={(e) => setNotes(e.target.value)} />}
+      </label>
+    </>
+  )
+
   return (
     <aside className="editor-panel">
       <small>{concept.topic?.title}</small>
       <h2>{concept.term}</h2>
-      <label>
-        {t.definition}
-        <textarea value={definition} onChange={(e) => setDefinition(e.target.value)} />
-      </label>
-      <label>
-        {t.examples}
-        <textarea value={examples} onChange={(e) => setExamples(e.target.value)} />
-      </label>
-      <label>
-        {t.pitfalls}
-        <textarea value={pitfalls} onChange={(e) => setPitfalls(e.target.value)} />
-      </label>
-      <label>
-        {t.notes}
-        <textarea value={notes} onChange={(e) => setNotes(e.target.value)} />
-      </label>
+      <div className="editor-toolbar">
+        <div className="segmented inline">
+          <button className={!preview ? 'active' : ''} onClick={() => setPreview(false)}>
+            {t.editingContent}
+          </button>
+          <button className={preview ? 'active' : ''} onClick={() => setPreview(true)}>
+            {t.previewContent}
+          </button>
+        </div>
+      </div>
+      {fields}
+      {error && <div className="error">{error}</div>}
       <SpinnerButton busy={busy} onClick={save}>
         <Save size={16} /> {saved ? t.saved : t.saveContent}
       </SpinnerButton>
     </aside>
+  )
+}
+
+// Renders one edited field exactly the way RichContent will show it to
+// students: one paragraph per line, image-only lines become figures.
+function FieldPreview({ text, tone = '' }: { text: string; tone?: string }) {
+  const lines = text
+    .split(/\n+/)
+    .map((line) => line.trim())
+    .filter(Boolean)
+  if (!lines.length) return <p className="muted">—</p>
+  return (
+    <div className={`rich-content preview ${tone}`}>
+      {lines.map((line, index) => {
+        const figure = imageOnlyBlock(line)
+        if (figure) {
+          return (
+            <figure key={index}>
+              <img src={figure.src} alt={figure.alt} loading="lazy" />
+            </figure>
+          )
+        }
+        return (
+          <p key={index}>
+            <InlineMarkdown text={line} />
+          </p>
+        )
+      })}
+    </div>
   )
 }
 

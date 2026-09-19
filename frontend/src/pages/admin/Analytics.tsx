@@ -19,8 +19,11 @@ export function Analytics() {
     return <StudentDetail userId={studentId} onBack={() => setStudentId('')} />
   }
 
-  const tierCount = (status: string) => overview?.flashcard.find((row) => row.status === status)?.count ?? 0
-  const totalMarked = overview?.flashcard.reduce((sum, row) => (row.status ? sum + row.count : sum), 0) ?? 0
+  const flashcardStatus = overview?.flashcard ?? []
+  const tierCount = (status: string) => flashcardStatus.find((row) => row.status === status)?.count ?? 0
+  const totalMarked = flashcardStatus.reduce((sum, row) => (row.status ? sum + row.count : sum), 0)
+  const accuracyByUnit = overview?.accuracyByUnit ?? []
+  const students = overview?.students ?? []
 
   return (
     <div>
@@ -34,11 +37,11 @@ export function Analytics() {
       <div className="dashboard-grid">
         <div className="chart-card">
           <h3>{t.accuracyByUnit}</h3>
-          {(overview?.accuracyByUnit ?? []).length === 0 ? (
+          {accuracyByUnit.length === 0 ? (
             <p className="muted">{t.empty}</p>
           ) : (
             <div className="accuracy-list">
-              {overview!.accuracyByUnit.map((row) => (
+              {accuracyByUnit.map((row) => (
                 <div key={row.id || row.label}>
                   <span>{row.label}</span>
                   <div className="accuracy-bar">
@@ -85,7 +88,7 @@ export function Analytics() {
         </div>
       </div>
       <h3 className="section-title">
-        {t.studentsTitle} ({overview?.students.length ?? 0})
+        {t.studentsTitle} ({students.length})
       </h3>
       <div className="student-table">
         <div className="student-row head">
@@ -95,7 +98,7 @@ export function Analytics() {
           <span>{t.markedConcepts}</span>
           <span />
         </div>
-        {(overview?.students ?? []).map((student) => (
+        {students.map((student) => (
           <div className="student-row" key={student.id}>
             <span>
               <strong>{student.name}</strong>
@@ -116,12 +119,25 @@ export function Analytics() {
 
 function StudentDetail({ userId, onBack }: { userId: string; onBack: () => void }) {
   const { t } = useSession()
-  const { data } = useQuery({
+  const { data, isError } = useQuery({
     queryKey: ['analytics-user', userId],
     queryFn: () => api.request<AnalyticsUserDetail>(`/api/admin/analytics/users/${userId}`),
   })
+  if (isError) {
+    return (
+      <div>
+        <button className="secondary" onClick={onBack}>
+          <ArrowLeft size={16} /> {t.backToOverview}
+        </button>
+        <div className="error" style={{ marginTop: 12 }}>{t.errorGeneric}</div>
+      </div>
+    )
+  }
   if (!data) return <p className="muted">{t.loading}…</p>
-  const tierCount = (status: string) => data.flashcard.find((row) => row.status === status)?.count ?? 0
+  const flashcard = data.flashcard ?? []
+  const accuracyByUnit = data.accuracyByUnit ?? []
+  const attempts = data.attempts ?? []
+  const tierCount = (status: string) => flashcard.find((row) => row.status === status)?.count ?? 0
   return (
     <div>
       <Header
@@ -142,11 +158,11 @@ function StudentDetail({ userId, onBack }: { userId: string; onBack: () => void 
       <div className="dashboard-grid">
         <div className="chart-card">
           <h3>{t.accuracyByUnit}</h3>
-          {data.accuracyByUnit.length === 0 ? (
+          {accuracyByUnit.length === 0 ? (
             <p className="muted">{t.empty}</p>
           ) : (
             <div className="accuracy-list">
-              {data.accuracyByUnit.map((row) => (
+              {accuracyByUnit.map((row) => (
                 <div key={row.id || row.label}>
                   <span>{row.label}</span>
                   <div className="accuracy-bar">
@@ -163,7 +179,7 @@ function StudentDetail({ userId, onBack }: { userId: string; onBack: () => void 
         <div className="chart-card">
           <h3>{t.practice}</h3>
           <div className="attempt-list">
-            {data.attempts.map((attempt) => (
+            {attempts.map((attempt) => (
               <div key={attempt.id}>
                 <span>{attempt.setTitle}</span>
                 <small>{formatDateTime(attempt.startedAt)}</small>
@@ -172,7 +188,7 @@ function StudentDetail({ userId, onBack }: { userId: string; onBack: () => void 
                 </strong>
               </div>
             ))}
-            {data.attempts.length === 0 && <p className="muted">{t.empty}</p>}
+            {attempts.length === 0 && <p className="muted">{t.empty}</p>}
           </div>
         </div>
       </div>

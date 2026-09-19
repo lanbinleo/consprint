@@ -6,10 +6,11 @@ import { Avatar, Header } from '../components/ui'
 import type { AuthPayload } from '../lib/types'
 
 export function Profile() {
-  const { t, user, refreshUser } = useSession()
+  const { t, user, refreshUser, theme, setTheme, lang, setLang } = useSession()
   const [name, setName] = useState(user?.name ?? '')
   const [avatarDataUrl, setAvatarDataUrl] = useState(user?.avatarDataUrl ?? '')
   const [saved, setSaved] = useState(false)
+  const [error, setError] = useState('')
 
   useEffect(() => {
     setName(user?.name ?? '')
@@ -17,13 +18,18 @@ export function Profile() {
   }, [user])
 
   async function save() {
-    await api.request<Omit<AuthPayload, 'token'>>('/api/me', {
-      method: 'PATCH',
-      body: JSON.stringify({ name, avatarDataUrl }),
-    })
-    await refreshUser()
-    setSaved(true)
-    setTimeout(() => setSaved(false), 1200)
+    setError('')
+    try {
+      await api.request<Omit<AuthPayload, 'token'>>('/api/me', {
+        method: 'PATCH',
+        body: JSON.stringify({ name, avatarDataUrl }),
+      })
+      await refreshUser()
+      setSaved(true)
+      setTimeout(() => setSaved(false), 1200)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : t.errorGeneric)
+    }
   }
 
   function loadAvatar(file?: File) {
@@ -52,20 +58,42 @@ export function Profile() {
           </label>
           <label>
             {t.email}
-            <input value={user?.email ?? ''} disabled />
+            <input value={user?.email ?? ''} disabled readOnly />
+            <small className="field-hint">{t.emailLocked}</small>
           </label>
-          <button className="primary" onClick={save}>
+          {error && <div className="error">{error}</div>}
+          <button className="primary" onClick={() => void save()}>
             <Save size={16} /> {saved ? t.saved : t.saveProfile}
           </button>
         </div>
         <div className="settings-card">
           <h3>{t.settings}</h3>
-          <p className="muted">
-            {t.theme} / {t.language} — {t.collapse}
-          </p>
-          <p className="muted">
-            {t.role}: {user?.role} · {user?.provider === 'entra' ? t.providerEntra : t.providerLocal}
-          </p>
+          <div className="settings-row">
+            <span>{t.theme}</span>
+            <div className="segmented inline">
+              <button className={theme === 'light' ? 'active' : ''} onClick={() => setTheme('light')}>
+                {t.light}
+              </button>
+              <button className={theme === 'dark' ? 'active' : ''} onClick={() => setTheme('dark')}>
+                {t.dark}
+              </button>
+            </div>
+          </div>
+          <div className="settings-row">
+            <span>{t.language}</span>
+            <div className="segmented inline">
+              <button className={lang === 'en' ? 'active' : ''} onClick={() => setLang('en')}>
+                English
+              </button>
+              <button className={lang === 'zh' ? 'active' : ''} onClick={() => setLang('zh')}>
+                中文
+              </button>
+            </div>
+          </div>
+          <div className="settings-row">
+            <span>{t.provider}</span>
+            <strong>{user?.provider === 'entra' ? t.providerEntra : t.providerLocal}</strong>
+          </div>
         </div>
       </div>
     </section>
