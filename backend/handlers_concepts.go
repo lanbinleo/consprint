@@ -160,9 +160,11 @@ func (a *App) concepts(c *gin.Context) {
 			return
 		}
 		// Stored datetimes carry the server's timezone offset while the
-		// client's boundary may carry another; SQLite compares them as
-		// strings, so normalize both sides with datetime() first.
-		q = q.Where("datetime(concepts.updated_at) >= datetime(?)", raw)
+		// client's boundary may carry another, and SQLite compares them as
+		// strings; normalize both sides to UTC millisecond strings first
+		// (datetime() alone would truncate to whole seconds and swallow the
+		// bulk-import burst into one bucket).
+		q = q.Where("strftime('%Y-%m-%dT%H:%M:%f', concepts.updated_at) >= strftime('%Y-%m-%dT%H:%M:%f', ?)", raw)
 	}
 	var concepts []Concept
 	limit, _ := strconv.Atoi(c.DefaultQuery("limit", "1000"))
