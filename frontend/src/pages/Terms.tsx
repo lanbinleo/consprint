@@ -1,12 +1,13 @@
-import { useEffect, useState, type CSSProperties, type PointerEvent as ReactPointerEvent } from 'react'
+import { useEffect, useMemo, useState, type CSSProperties, type PointerEvent as ReactPointerEvent } from 'react'
 import { useSearchParams } from 'react-router'
-import { useQuery, useQueryClient } from '@tanstack/react-query'
+import { useQueryClient } from '@tanstack/react-query'
 import { Eye, EyeOff, PanelLeftClose, PanelLeftOpen, Search, Star, X } from 'lucide-react'
 import { api } from '../lib/api'
 import { useSession } from '../hooks/session'
 import { Header, ListSkeleton, StatusPill } from '../components/ui'
 import { RichContent } from '../components/RichContent'
 import { useUnits } from '../components/ScopePicker'
+import { conceptsKey, markConceptState, useConceptRows } from '../lib/conceptStore'
 import type { Concept, ConceptRow, ConceptStatus } from '../lib/types'
 
 // Column resize bounds (px), matched by the grid-template fallbacks in styles.css.
@@ -29,38 +30,67 @@ export function Terms() {
   const [error, setError] = useState('')
   const [savingMark, setSavingMark] = useState(false)
 
+  // The whole corpus comes from the localStorage-backed concept store — one
+  // cached fetch instead of a server round-trip per filter/keystroke.
+  const { rows: conceptRows, isPending } = useConceptRows()
+
   // Deep link (?concept=<id>, used by the dashboard starred card): open the
-  // concept directly on first mount.
+  // concept from the store; only a id missing after the corpus loaded falls
+  // back to the detail endpoint.
+  const deepLinkId = searchParams.get('concept')
+  const [deepLinkHandled, setDeepLinkHandled] = useState(false)
   useEffect(() => {
-    const conceptId = searchParams.get('concept')
-    if (!conceptId) return
+    if (!deepLinkId || deepLinkHandled || isPending) return
+    const found = conceptRows.find((row) => row.id === deepLinkId)
+    setDeepLinkHandled(true)
+    if (found) {
+      setActive(found)
+      return
+    }
     api
-      .request<{ concept: Concept; state: ConceptRow['state'] }>(`/api/concepts/${conceptId}`)
+      .request<{ concept: Concept; state: ConceptRow['state'] }>(`/api/concepts/${deepLinkId}`)
       .then((payload) => setActive({ ...payload.concept, state: payload.state }))
       .catch(() => {})
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [deepLinkId, deepLinkHandled, isPending, conceptRows])
 
-  const params = new URLSearchParams()
-  if (selectedTopic) params.set('topicId', selectedTopic)
-  else if (selectedUnit) params.set('unitId', selectedUnit)
-  if (search) params.set('search', search)
-  const { data: concepts = [], isPending } = useQuery({
-    queryKey: ['concepts', selectedUnit, selectedTopic, search],
-    // Normalize null (Go nil slice) so the default above actually applies.
-    queryFn: async () => (await api.request<ConceptRow[] | null>(`/api/concepts?${params.toString()}`)) ?? [],
-  })
+  // Unit/topic/search filtering happens client-side over the cached corpus —
+  // typing in the search box costs no network. Search matches the term and its
+  // normalized (English) alias, case-insensitive.
+  const concepts = useMemo(() => {
+    let rows = conceptRows
+    if (selectedTopic) rows = rows.filter((row) => row.topicId === selectedTopic)
+    else if (selectedUnit) rows = rows.filter((row) => row.unitId === selectedUnit)
+    const q = search.trim().toLowerCase()
+    if (q) {
+      rows = rows.filter(
+        (row) => row.term.toLowerCase().includes(q) || (row.normalizedTerm ?? '').toLowerCase().includes(q),
+      )
+    }
+    return rows
+  }, [conceptRows, selectedTopic, selectedUnit, search])
 
-  function applyState(conceptId: string, state: ConceptRow['state']) {
+  function applyState(conceptId: string, state: ConceptRow['state'], rollbackFrom?: ConceptRow['state']) {
     setActive((current) => (current?.id === conceptId ? { ...current, state } : current))
-    queryClient.setQueryData<ConceptRow[]>(['concepts', selectedUnit, selectedTopic, search], (rows) =>
-      (rows ?? []).map((row) => (row.id === conceptId ? { ...row, state } : row)),
-    )
+    if (rollbackFrom) {
+      // Rollback: only overwrite the row when the optimistic state is still
+      // current, so a newer mark that landed meanwhile survives.
+      queryClient.setQueryData<ConceptRow[]>(conceptsKey, (rows) =>
+        rows?.map((row) => (row.id === conceptId && row.state === rollbackFrom ? { ...row, state } : row)),
+      )
+      return
+    }
+    markConceptState(queryClient, conceptId, {
+      status: state.status,
+      reviewCount: state.reviewCount,
+      shortTermReview: state.shortTermReview,
+      starred: state.starred,
+    })
   }
 
   // Optimistic marking: the pill flips instantly, the request follows. On
   // failure the previous state is restored — unless another mark has landed
-  // since — and the banner invites a retry (clicking again re-sends).
+  // since — and the banner invites a retry (clicking again re-sends). The
+  // store row is patched in place; no list refetch.
   async function mark(concept: ConceptRow, status: ConceptStatus) {
     setError('')
     const prev = concept.state
@@ -77,17 +107,13 @@ export function Terms() {
         body: JSON.stringify({ status }),
       })
       applyState(concept.id, state)
-      void queryClient.invalidateQueries({ queryKey: ['concepts'] })
       void queryClient.invalidateQueries({ queryKey: ['dashboard'] })
       void queryClient.invalidateQueries({ queryKey: ['units'] })
     } catch (err) {
       // Roll back only if the optimistic state is still current — a newer
       // mark (clicked while this request was in flight) must survive.
-      const rollback = (row: ConceptRow) => (row.state === optimistic ? { ...row, state: prev } : row)
-      setActive((current) => (current?.id === concept.id ? rollback(current) : current))
-      queryClient.setQueryData<ConceptRow[]>(['concepts', selectedUnit, selectedTopic, search], (rows) =>
-        (rows ?? []).map((row) => (row.id === concept.id ? rollback(row) : row)),
-      )
+      setActive((current) => (current?.id === concept.id && current.state === optimistic ? { ...current, state: prev } : current))
+      applyState(concept.id, prev, optimistic)
       setError(err instanceof Error ? err.message : t.errorGeneric)
     } finally {
       setSavingMark(false)
