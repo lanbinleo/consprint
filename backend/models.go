@@ -250,16 +250,16 @@ type Announcement struct {
 }
 
 // CalendarEvent is a teacher-managed deadline on the student dashboard
-// calendar: assignments, assessments, quizzes, holidays or generic events.
-// Dates are local "YYYY-MM-DD" strings so timezone conversion can never shift
-// the day the teacher picked; Time is a nil-able "HH:MM" (nil = all day).
+// calendar. Dates are local "YYYY-MM-DD" strings so timezone conversion can
+// never shift the day the teacher picked; Time is a nil-able "HH:MM" (nil =
+// all day). A nil EndDate means the event occupies only its start day.
 type CalendarEvent struct {
 	ID        string    `gorm:"primaryKey" json:"id"`
 	Title     string    `gorm:"not null" json:"title"`
 	Date      string    `gorm:"index;not null" json:"date"`
 	EndDate   *string   `gorm:"index" json:"endDate,omitempty"`
 	Time      *string   `json:"time,omitempty"`
-	Kind      string    `gorm:"index;not null;default:event" json:"kind"` // assignment | assessment | quiz | holiday | event
+	Kind      string    `gorm:"index;not null;default:event" json:"kind"` // assignment | quiz | unit-test | exam | holiday | event
 	Note      string    `json:"note"`
 	CreatedBy string    `json:"createdBy"`
 	CreatedAt time.Time `json:"createdAt"`

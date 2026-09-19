@@ -48,6 +48,7 @@ func NewApp(dbPath, sources string) (*App, error) {
 		return nil, err
 	}
 	migrateLegacyEntraOID(db)
+	migrateCalendarKinds(db)
 	if err := ensureSchoolTenant(db); err != nil {
 		return nil, err
 	}
@@ -84,6 +85,12 @@ func NewApp(dbPath, sources string) (*App, error) {
 		return nil, err
 	}
 	return app, nil
+}
+
+// migrateCalendarKinds folds the retired generic "assessment" kind into the
+// more specific "exam" (midterm/final). Idempotent.
+func migrateCalendarKinds(db *gorm.DB) {
+	db.Exec("update calendar_events set kind = 'exam' where kind = 'assessment'")
 }
 
 func ensureSchoolTenant(db *gorm.DB) error {

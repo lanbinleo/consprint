@@ -245,7 +245,7 @@ func (a *App) displayNameFor(userID string) string {
 // ---------------------------------------------------------------------------
 
 func validEventKind(kind string) bool {
-	return kind == "assignment" || kind == "assessment" || kind == "quiz" || kind == "holiday" || kind == "event"
+	return kind == "assignment" || kind == "quiz" || kind == "unit-test" || kind == "exam" || kind == "holiday" || kind == "event"
 }
 
 func validLocalDate(s string) bool {
@@ -303,7 +303,7 @@ func validateCalendarPayload(req calendarPayload) string {
 		return "time must be HH:MM"
 	}
 	if !validEventKind(req.Kind) {
-		return "kind must be assignment, assessment, quiz, holiday or event"
+		return "kind must be assignment, quiz, unit-test, exam, holiday or event"
 	}
 	if len(req.Note) > maxCalendarNote {
 		return "note exceeds the 2000-character limit"

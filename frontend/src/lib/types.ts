@@ -98,7 +98,7 @@ export type Announcement = {
   updatedAt: string
 }
 
-export type CalendarEventKind = 'assignment' | 'assessment' | 'quiz' | 'holiday' | 'event'
+export type CalendarEventKind = 'assignment' | 'quiz' | 'unit-test' | 'exam' | 'holiday' | 'event'
 
 export type CalendarEvent = {
   id: string

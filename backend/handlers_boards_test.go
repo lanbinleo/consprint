@@ -152,12 +152,21 @@ func TestCalendarCRUD(t *testing.T) {
 	for _, bad := range []map[string]any{
 		{"title": "bad date", "date": "2026-9-1", "kind": "event"},
 		{"title": "bad kind", "date": "2026-09-01", "kind": "party"},
+		{"title": "retired kind", "date": "2026-09-01", "kind": "assessment"},
 		{"title": "bad time", "date": "2026-09-01", "kind": "event", "time": "9am"},
 		{"title": "reversed range", "date": "2026-09-10", "endDate": "2026-09-01", "kind": "event"},
 		{"title": "", "date": "2026-09-01", "kind": "event"},
 	} {
 		if w := notesRequest(t, router, http.MethodPost, "/api/admin/calendar", teacher, bad); w.Code != http.StatusBadRequest {
 			t.Fatalf("invalid event should 400: %d %s", w.Code, w.Body.String())
+		}
+	}
+
+	// The granular test kinds are accepted.
+	for _, kind := range []string{"quiz", "unit-test", "exam"} {
+		payload := map[string]any{"title": "Kind check " + kind, "date": "2026-09-01", "kind": kind}
+		if w := notesRequest(t, router, http.MethodPost, "/api/admin/calendar", teacher, payload); w.Code != http.StatusOK {
+			t.Fatalf("kind %s should be valid: %d %s", kind, w.Code, w.Body.String())
 		}
 	}
 

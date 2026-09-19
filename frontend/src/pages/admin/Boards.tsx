@@ -10,8 +10,9 @@ import type { Announcement, CalendarEvent, CalendarEventKind } from '../../lib/t
 
 const KIND_KEYS: Record<CalendarEventKind, string> = {
   assignment: 'kindAssignment',
-  assessment: 'kindAssessment',
   quiz: 'kindQuiz',
+  'unit-test': 'kindUnitTest',
+  exam: 'kindExam',
   holiday: 'kindHoliday',
   event: 'kindEvent',
 }

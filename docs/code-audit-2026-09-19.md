@@ -68,6 +68,11 @@ Excel「CSV UTF-8」导出会在首个表头单元格前加 U+FEFF，`TrimSpace`
 - 考试计时用客户端时钟（服务端 410 + resume 自动判分已兜底）；管理员弹窗误点背景丢表单；头像上传无压缩——低危，留待后续。
 - LIKE 通配符未转义（搜索 `%` 会全量匹配）：影响仅限搜索噪声。
 
+## 五点五、审计后追加修复（用户复核时指出）
+
+- **日历"无截止日期事件无限延续"**（审计四路均未抓到）：`Dashboard.tsx` 的 `eventCovers` 把 `endDate == null` 当作"延伸到无穷远"，事件从开始日起在此后每一天都显示圆点。修复为无 endDate 只占开始日当天（`end = endDate ?? date`）。后端查询本来就是这个语义，纯前端 bug。
+- **日历事件类型细分**：按用户口径重排为 作业 `assignment`（homework/project 归此）、小测 `quiz`、单元测试 `unit-test`（新）、考试 `exam`（新，midterm/final 归此）、假期 `holiday`、活动 `event`；旧的泛化 `assessment` 启动时一次性迁移为 `exam`（`migrateCalendarKinds`），校验与 UI 选项中退役。新增图例/配色（unit-test 青绿 #0e9888，exam 沿用红色）与 zh/en 词条。
+
 ## 六、验证
 
 - `go build ./...`、`go vet ./...`、`gofmt` 全部干净；`go test ./backend` 全套通过（39.5s，含 4 个新审计测试）。

@@ -21,8 +21,9 @@ import type {
 
 const KIND_LABELS: Record<CalendarEventKind, keyof Copy> = {
   assignment: 'kindAssignment',
-  assessment: 'kindAssessment',
   quiz: 'kindQuiz',
+  'unit-test': 'kindUnitTest',
+  exam: 'kindExam',
   holiday: 'kindHoliday',
   event: 'kindEvent',
 }
@@ -41,7 +42,10 @@ function shiftMonth(month: string, delta: number) {
 }
 
 function eventCovers(event: CalendarEvent, iso: string) {
-  return event.date <= iso && (!event.endDate || event.endDate >= iso)
+  // A nil endDate means the event occupies only its start day — never an
+  // open-ended span stretching into every following month.
+  const end = event.endDate ?? event.date
+  return event.date <= iso && iso <= end
 }
 
 export function Dashboard() {

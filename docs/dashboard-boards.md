@@ -22,7 +22,7 @@
 
 ### 日历（新后端，与练习卷解耦）
 
-- 模型 `CalendarEvent{Title, Date(YYYY-MM-DD), EndDate?, Time?(HH:MM), Kind(assignment|assessment|quiz|holiday|event), Note}`，日期存本地字符串不受时区影响。
+- 模型 `CalendarEvent{Title, Date(YYYY-MM-DD), EndDate?, Time?(HH:MM), Kind(assignment|quiz|unit-test|exam|holiday|event), Note}`，日期存本地字符串不受时区影响。
 - 学生 `GET /api/calendar?month=YYYY-MM`（重叠该月，含跨月多天事件）；staff `GET/POST/PATCH/DELETE /api/admin/calendar`。
 - 颜色：作业=橘、考试=红、小测=紫、假期=绿、活动=蓝。
 

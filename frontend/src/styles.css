@@ -957,8 +957,9 @@ button.cal-day.has-events:hover { background: color-mix(in srgb, var(--accent) 1
 .cal-legend span { display: inline-flex; align-items: center; gap: 4px; }
 
 .ev-assignment { background: var(--orange); }
-.ev-assessment { background: var(--red); }
 .ev-quiz { background: var(--accent); }
+.ev-unit-test { background: #0e9888; }
+.ev-exam { background: var(--red); }
 .ev-holiday { background: var(--green); }
 .ev-event { background: #4a8fd4; }
 
@@ -974,8 +975,9 @@ button.cal-day.has-events:hover { background: color-mix(in srgb, var(--accent) 1
 }
 
 .day-event.ev-assignment { border-left-color: var(--orange); }
-.day-event.ev-assessment { border-left-color: var(--red); }
 .day-event.ev-quiz { border-left-color: var(--accent); }
+.day-event.ev-unit-test { border-left-color: #0e9888; }
+.day-event.ev-exam { border-left-color: var(--red); }
 .day-event.ev-holiday { border-left-color: var(--green); }
 .day-event.ev-event { border-left-color: #4a8fd4; }
 
