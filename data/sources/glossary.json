@@ -1,0 +1,3178 @@
+{
+ "ap-psychology.science-practices.set-a.independent-variables": {
+  "term": "Independent variables",
+  "zh": "自变量"
+ },
+ "ap-psychology.science-practices.set-a.confounding-variables": {
+  "term": "Confounding variables",
+  "zh": "混淆变量（第三变量）"
+ },
+ "ap-psychology.science-practices.set-a.dependent-variables": {
+  "term": "Dependent variables",
+  "zh": "因变量"
+ },
+ "ap-psychology.science-practices.set-a.random-assignment": {
+  "term": "Random assignment",
+  "zh": "随机分配"
+ },
+ "ap-psychology.science-practices.set-a.hypothesis": {
+  "term": "Hypothesis",
+  "zh": "假设"
+ },
+ "ap-psychology.science-practices.set-a.generalizability": {
+  "term": "Generalizability",
+  "zh": "可推广性"
+ },
+ "ap-psychology.science-practices.set-a.quantitative-data": {
+  "term": "Quantitative data",
+  "zh": "定量数据"
+ },
+ "ap-psychology.science-practices.set-a.qualitative-data": {
+  "term": "Qualitative data",
+  "zh": "定性数据"
+ },
+ "ap-psychology.science-practices.set-b.institutional-review": {
+  "term": "Institutional review",
+  "zh": "机构伦理审查（IRB）"
+ },
+ "ap-psychology.science-practices.set-b.informed-consent": {
+  "term": "Informed consent",
+  "zh": "知情同意"
+ },
+ "ap-psychology.science-practices.set-b.informed-assent": {
+  "term": "Informed assent",
+  "zh": "知情赞同"
+ },
+ "ap-psychology.science-practices.set-b.protection-from-harm": {
+  "term": "Protection from harm",
+  "zh": "免受伤害原则"
+ },
+ "ap-psychology.science-practices.set-b.confidentiality": {
+  "term": "Confidentiality",
+  "zh": "保密性（≠匿名）"
+ },
+ "ap-psychology.science-practices.set-b.deception": {
+  "term": "Deception",
+  "zh": "欺骗（隐瞒）"
+ },
+ "ap-psychology.science-practices.set-b.debriefing": {
+  "term": "Debriefing",
+  "zh": "事后解说"
+ },
+ "ap-psychology.science-practices.set-c.central-tendency": {
+  "term": "Central tendency",
+  "zh": "集中趋势"
+ },
+ "ap-psychology.science-practices.set-c.mean": {
+  "term": "Mean",
+  "zh": "平均数"
+ },
+ "ap-psychology.science-practices.set-c.median": {
+  "term": "Median",
+  "zh": "中位数"
+ },
+ "ap-psychology.science-practices.set-c.mode": {
+  "term": "Mode",
+  "zh": "众数"
+ },
+ "ap-psychology.science-practices.set-c.variation": {
+  "term": "Variation",
+  "zh": "变异性"
+ },
+ "ap-psychology.science-practices.set-c.percentile-rank": {
+  "term": "Percentile rank",
+  "zh": "百分位等级"
+ },
+ "ap-psychology.science-practices.set-c.range": {
+  "term": "Range",
+  "zh": "全距"
+ },
+ "ap-psychology.science-practices.set-d.normal-curve": {
+  "term": "Normal curve",
+  "zh": "正态曲线"
+ },
+ "ap-psychology.science-practices.set-d.bimodal-distribution": {
+  "term": "Bimodal distribution",
+  "zh": "双峰分布"
+ },
+ "ap-psychology.science-practices.set-d.standard-deviation": {
+  "term": "Standard deviation",
+  "zh": "标准差"
+ },
+ "ap-psychology.science-practices.set-d.regression-toward-the-mean": {
+  "term": "Regression toward the mean",
+  "zh": "向均数回归"
+ },
+ "ap-psychology.science-practices.set-d.positive-skew": {
+  "term": "Positive skew",
+  "zh": "正偏态（右偏）"
+ },
+ "ap-psychology.science-practices.set-d.negative-skew": {
+  "term": "Negative skew",
+  "zh": "负偏态（左偏）"
+ },
+ "ap-psychology.science-practices.set-d.scatterplot": {
+  "term": "Scatterplot",
+  "zh": "散点图"
+ },
+ "ap-psychology.science-practices.set-d.correlation": {
+  "term": "Correlation",
+  "zh": "相关"
+ },
+ "ap-psychology.science-practices.set-d.positive-correlation": {
+  "term": "Positive Correlation",
+  "zh": "正相关"
+ },
+ "ap-psychology.science-practices.set-d.negative-correlation": {
+  "term": "Negative Correlation",
+  "zh": "负相关"
+ },
+ "ap-psychology.science-practices.set-d.correlation-coefficient": {
+  "term": "Correlation coefficient",
+  "zh": "相关系数（r值）"
+ },
+ "ap-psychology.science-practices.set-e.population": {
+  "term": "Population",
+  "zh": "总体"
+ },
+ "ap-psychology.science-practices.set-e.sample": {
+  "term": "Sample",
+  "zh": "样本"
+ },
+ "ap-psychology.science-practices.set-e.representative-sample": {
+  "term": "Representative sample",
+  "zh": "代表性样本"
+ },
+ "ap-psychology.science-practices.set-e.random-sampling": {
+  "term": "Random sampling",
+  "zh": "随机抽样"
+ },
+ "ap-psychology.science-practices.set-e.convenience-sampling": {
+  "term": "Convenience sampling",
+  "zh": "便利抽样"
+ },
+ "ap-psychology.science-practices.set-e.representation-of-participants": {
+  "term": "Representation of participants",
+  "zh": "被试代表性"
+ },
+ "ap-psychology.science-practices.set-e.experimental-group": {
+  "term": "Experimental group",
+  "zh": "实验组"
+ },
+ "ap-psychology.science-practices.set-e.control-group": {
+  "term": "Control group",
+  "zh": "对照组"
+ },
+ "ap-psychology.science-practices.set-e.single-blind-study": {
+  "term": "Single-blind study",
+  "zh": "单盲实验"
+ },
+ "ap-psychology.science-practices.set-e.double-blind-study": {
+  "term": "Double-blind study",
+  "zh": "双盲实验"
+ },
+ "ap-psychology.science-practices.set-f.operational-definition": {
+  "term": "Operational definition",
+  "zh": "操作性定义"
+ },
+ "ap-psychology.science-practices.set-f.case-study": {
+  "term": "Case study",
+  "zh": "个案研究"
+ },
+ "ap-psychology.science-practices.set-f.meta-analysis": {
+  "term": "Meta-analysis",
+  "zh": "元分析"
+ },
+ "ap-psychology.science-practices.set-f.naturalistic-observation": {
+  "term": "Naturalistic observation",
+  "zh": "自然观察法"
+ },
+ "ap-psychology.science-practices.set-f.structured-interviews": {
+  "term": "Structured interviews",
+  "zh": "结构化访谈"
+ },
+ "ap-psychology.science-practices.set-f.likert-scale": {
+  "term": "Likert scale",
+  "zh": "李克特量表"
+ },
+ "ap-psychology.science-practices.set-f.effect-size": {
+  "term": "Effect size",
+  "zh": "效应量"
+ },
+ "ap-psychology.science-practices.set-f.statistical-significance": {
+  "term": "Statistical significance",
+  "zh": "统计显著性"
+ },
+ "ap-psychology.science-practices.set-f.replication": {
+  "term": "Replication",
+  "zh": "重复实验"
+ },
+ "ap-psychology.science-practices.set-f.peer-review": {
+  "term": "Peer review",
+  "zh": "同行评审"
+ },
+ "ap-psychology.science-practices.set-g.falsifiability-pertaining-to-hypotheses": {
+  "term": "Falsifiability (pertaining to hypotheses)",
+  "zh": "可证伪性"
+ },
+ "ap-psychology.science-practices.set-g.placebo": {
+  "term": "Placebo",
+  "zh": "安慰剂"
+ },
+ "ap-psychology.science-practices.set-g.placebo-effect": {
+  "term": "Placebo effect",
+  "zh": "安慰剂效应"
+ },
+ "ap-psychology.science-practices.set-g.overconfidence": {
+  "term": "Overconfidence",
+  "zh": "过度自信"
+ },
+ "ap-psychology.science-practices.set-g.directionality-problem-in-correlation": {
+  "term": "Directionality problem (in correlation)",
+  "zh": "方向性问题"
+ },
+ "ap-psychology.science-practices.set-g.third-variable-problem-in-correlation": {
+  "term": "Third variable problem (in correlation)",
+  "zh": "第三变量问题"
+ },
+ "ap-psychology.science-practices.set-g.experimenter-bias": {
+  "term": "Experimenter bias",
+  "zh": "实验者偏差"
+ },
+ "ap-psychology.science-practices.set-g.social-desirability-bias": {
+  "term": "Social desirability bias",
+  "zh": "社会赞许性偏差"
+ },
+ "ap-psychology.science-practices.set-g.cultural-norms": {
+  "term": "Cultural norms",
+  "zh": "文化规范"
+ },
+ "ap-psychology.science-practices.set-g.confirmation-bias": {
+  "term": "Confirmation bias",
+  "zh": "证实性偏见"
+ },
+ "ap-psychology.science-practices.set-g.hindsight-bias": {
+  "term": "Hindsight bias",
+  "zh": "后见之明（马后炮）"
+ },
+ "ap-psychology.u1.t1-1.heredity": {
+  "term": "Heredity",
+  "zh": "遗传"
+ },
+ "ap-psychology.u1.t1-1.nature": {
+  "term": "Nature",
+  "zh": "先天"
+ },
+ "ap-psychology.u1.t1-1.nurture": {
+  "term": "Nurture",
+  "zh": "后天（养育）"
+ },
+ "ap-psychology.u1.t1-1.genetic-predisposition": {
+  "term": "Genetic predisposition",
+  "zh": "遗传易感性（遗传倾向）"
+ },
+ "ap-psychology.u1.t1-1.evolutionary-perspective": {
+  "term": "Evolutionary perspective",
+  "zh": "进化论视角"
+ },
+ "ap-psychology.u1.t1-1.natural-selection": {
+  "term": "Natural selection",
+  "zh": "自然选择"
+ },
+ "ap-psychology.u1.t1-1.eugenics": {
+  "term": "Eugenics",
+  "zh": "优生学"
+ },
+ "ap-psychology.u1.t1-1.twin-studies": {
+  "term": "Twin studies",
+  "zh": "双生子研究"
+ },
+ "ap-psychology.u1.t1-1.family-studies": {
+  "term": "Family studies",
+  "zh": "家族研究"
+ },
+ "ap-psychology.u1.t1-1.adoption-studies": {
+  "term": "Adoption studies",
+  "zh": "领养研究"
+ },
+ "ap-psychology.u1.t1-2.central-nervous-system-brain-and-spinal-cord": {
+  "term": "Central nervous system (brain and spinal cord)",
+  "zh": "中枢神经系统（CNS）"
+ },
+ "ap-psychology.u1.t1-2.peripheral-nervous-system": {
+  "term": "Peripheral nervous system",
+  "zh": "周围神经系统（PNS）"
+ },
+ "ap-psychology.u1.t1-2.autonomic-nervous-system": {
+  "term": "Autonomic nervous system",
+  "zh": "自主神经系统（ANS）"
+ },
+ "ap-psychology.u1.t1-2.sympathetic-nervous-system": {
+  "term": "Sympathetic nervous system",
+  "zh": "交感神经系统"
+ },
+ "ap-psychology.u1.t1-2.parasympathetic-nervous-system": {
+  "term": "Parasympathetic nervous system",
+  "zh": "副交感神经系统"
+ },
+ "ap-psychology.u1.t1-2.somatic-nervous-system": {
+  "term": "Somatic nervous system",
+  "zh": "躯体神经系统"
+ },
+ "ap-psychology.u1.t1-3.neurons": {
+  "term": "Neurons",
+  "zh": "神经元"
+ },
+ "ap-psychology.u1.t1-3.glial-cells": {
+  "term": "Glial cells",
+  "zh": "胶质细胞"
+ },
+ "ap-psychology.u1.t1-3.reflex-arc": {
+  "term": "Reflex arc",
+  "zh": "反射弧"
+ },
+ "ap-psychology.u1.t1-3.sensory-neurons": {
+  "term": "Sensory neurons",
+  "zh": "感觉神经元（传入神经元）"
+ },
+ "ap-psychology.u1.t1-3.motor-neurons": {
+  "term": "Motor neurons",
+  "zh": "运动神经元（传出神经元）"
+ },
+ "ap-psychology.u1.t1-3.interneurons": {
+  "term": "Interneurons",
+  "zh": "中间神经元"
+ },
+ "ap-psychology.u1.t1-3.neural-transmission": {
+  "term": "Neural transmission",
+  "zh": "神经传导"
+ },
+ "ap-psychology.u1.t1-3.action-potential": {
+  "term": "Action potential",
+  "zh": "动作电位"
+ },
+ "ap-psychology.u1.t1-3.all-or-nothing-principle": {
+  "term": "All-or-nothing principle",
+  "zh": "全有或全无法则"
+ },
+ "ap-psychology.u1.t1-3.depolarization": {
+  "term": "Depolarization",
+  "zh": "去极化"
+ },
+ "ap-psychology.u1.t1-3.refractory-period": {
+  "term": "Refractory period",
+  "zh": "不应期"
+ },
+ "ap-psychology.u1.t1-3.resting-potential": {
+  "term": "Resting potential",
+  "zh": "静息电位"
+ },
+ "ap-psychology.u1.t1-3.reuptake": {
+  "term": "Reuptake",
+  "zh": "再摄取"
+ },
+ "ap-psychology.u1.t1-3.threshold": {
+  "term": "Threshold",
+  "zh": "阈值"
+ },
+ "ap-psychology.u1.t1-3.multiple-sclerosis": {
+  "term": "Multiple sclerosis",
+  "zh": "多发性硬化症（MS）"
+ },
+ "ap-psychology.u1.t1-3.myasthenia-gravis": {
+  "term": "Myasthenia gravis",
+  "zh": "重症肌无力"
+ },
+ "ap-psychology.u1.t1-3.dopamine": {
+  "term": "Dopamine",
+  "zh": "多巴胺"
+ },
+ "ap-psychology.u1.t1-3.excitatory-neurotransmitters": {
+  "term": "Excitatory neurotransmitters",
+  "zh": "兴奋性神经递质"
+ },
+ "ap-psychology.u1.t1-3.inhibitory-neurotransmitters": {
+  "term": "Inhibitory neurotransmitters",
+  "zh": "抑制性神经递质"
+ },
+ "ap-psychology.u1.t1-3.serotonin": {
+  "term": "Serotonin",
+  "zh": "血清素（5-HT）"
+ },
+ "ap-psychology.u1.t1-3.norepinephrine": {
+  "term": "Norepinephrine",
+  "zh": "去甲肾上腺素"
+ },
+ "ap-psychology.u1.t1-3.glutamate": {
+  "term": "Glutamate",
+  "zh": "谷氨酸"
+ },
+ "ap-psychology.u1.t1-3.gaba": {
+  "term": "GABA",
+  "zh": "GABA（γ-氨基丁酸）"
+ },
+ "ap-psychology.u1.t1-3.endorphins": {
+  "term": "Endorphins",
+  "zh": "内啡肽"
+ },
+ "ap-psychology.u1.t1-3.substance-p": {
+  "term": "Substance p",
+  "zh": "P物质"
+ },
+ "ap-psychology.u1.t1-3.acetylcholine": {
+  "term": "Acetylcholine",
+  "zh": "乙酰胆碱（ACh）"
+ },
+ "ap-psychology.u1.t1-3.hormones": {
+  "term": "Hormones",
+  "zh": "激素"
+ },
+ "ap-psychology.u1.t1-3.adrenaline": {
+  "term": "Adrenaline",
+  "zh": "肾上腺素"
+ },
+ "ap-psychology.u1.t1-3.leptin": {
+  "term": "Leptin",
+  "zh": "瘦素"
+ },
+ "ap-psychology.u1.t1-3.ghrelin": {
+  "term": "Ghrelin",
+  "zh": "饥饿素"
+ },
+ "ap-psychology.u1.t1-3.melatonin": {
+  "term": "Melatonin",
+  "zh": "褪黑素"
+ },
+ "ap-psychology.u1.t1-3.oxytocin": {
+  "term": "Oxytocin",
+  "zh": "催产素"
+ },
+ "ap-psychology.u1.t1-3.psychoactive-drugs": {
+  "term": "Psychoactive drugs",
+  "zh": "精神活性药物"
+ },
+ "ap-psychology.u1.t1-3.agonists": {
+  "term": "Agonists",
+  "zh": "激动剂"
+ },
+ "ap-psychology.u1.t1-3.antagonists": {
+  "term": "Antagonists",
+  "zh": "拮抗剂"
+ },
+ "ap-psychology.u1.t1-3.reuptake-inhibitors": {
+  "term": "Reuptake inhibitors",
+  "zh": "再摄取抑制剂"
+ },
+ "ap-psychology.u1.t1-3.stimulants": {
+  "term": "Stimulants",
+  "zh": "兴奋剂"
+ },
+ "ap-psychology.u1.t1-3.caffeine": {
+  "term": "Caffeine",
+  "zh": "咖啡因"
+ },
+ "ap-psychology.u1.t1-3.cocaine": {
+  "term": "Cocaine",
+  "zh": "可卡因"
+ },
+ "ap-psychology.u1.t1-3.depressants": {
+  "term": "Depressants",
+  "zh": "镇静剂"
+ },
+ "ap-psychology.u1.t1-3.alcohol": {
+  "term": "Alcohol",
+  "zh": "酒精"
+ },
+ "ap-psychology.u1.t1-3.hallucinogens": {
+  "term": "Hallucinogens",
+  "zh": "致幻剂"
+ },
+ "ap-psychology.u1.t1-3.marijuana": {
+  "term": "Marijuana",
+  "zh": "大麻"
+ },
+ "ap-psychology.u1.t1-3.opioids": {
+  "term": "Opioids",
+  "zh": "阿片类药物"
+ },
+ "ap-psychology.u1.t1-3.heroin": {
+  "term": "Heroin",
+  "zh": "海洛因"
+ },
+ "ap-psychology.u1.t1-3.tolerance": {
+  "term": "Tolerance",
+  "zh": "耐受"
+ },
+ "ap-psychology.u1.t1-3.addiction": {
+  "term": "Addiction",
+  "zh": "成瘾"
+ },
+ "ap-psychology.u1.t1-3.withdrawal": {
+  "term": "Withdrawal",
+  "zh": "戒断反应"
+ },
+ "ap-psychology.u1.t1-4.brain-stem": {
+  "term": "Brain stem",
+  "zh": "脑干"
+ },
+ "ap-psychology.u1.t1-4.medulla": {
+  "term": "Medulla",
+  "zh": "延髓"
+ },
+ "ap-psychology.u1.t1-4.reticular-activating-system-ras": {
+  "term": "Reticular activating system (RAS)",
+  "zh": "网状激活系统（网状结构）"
+ },
+ "ap-psychology.u1.t1-4.reward-center": {
+  "term": "Reward center",
+  "zh": "奖赏中心"
+ },
+ "ap-psychology.u1.t1-4.cerebellum": {
+  "term": "Cerebellum",
+  "zh": "小脑"
+ },
+ "ap-psychology.u1.t1-4.cerebral-cortex": {
+  "term": "Cerebral cortex",
+  "zh": "大脑皮层"
+ },
+ "ap-psychology.u1.t1-4.limbic-system": {
+  "term": "Limbic system",
+  "zh": "边缘系统"
+ },
+ "ap-psychology.u1.t1-4.thalamus": {
+  "term": "Thalamus",
+  "zh": "丘脑"
+ },
+ "ap-psychology.u1.t1-4.hypothalamus": {
+  "term": "Hypothalamus",
+  "zh": "下丘脑"
+ },
+ "ap-psychology.u1.t1-4.pituitary-gland": {
+  "term": "Pituitary gland",
+  "zh": "脑垂体（主腺体）"
+ },
+ "ap-psychology.u1.t1-4.hippocampus": {
+  "term": "Hippocampus",
+  "zh": "海马体"
+ },
+ "ap-psychology.u1.t1-4.amygdala": {
+  "term": "Amygdala",
+  "zh": "杏仁核"
+ },
+ "ap-psychology.u1.t1-4.corpus-callosum": {
+  "term": "Corpus callosum",
+  "zh": "胼胝体"
+ },
+ "ap-psychology.u1.t1-4.occipital-lobes": {
+  "term": "Occipital lobes",
+  "zh": "枕叶"
+ },
+ "ap-psychology.u1.t1-4.temporal-lobes": {
+  "term": "Temporal lobes",
+  "zh": "颞叶"
+ },
+ "ap-psychology.u1.t1-4.parietal-lobes": {
+  "term": "Parietal lobes",
+  "zh": "顶叶"
+ },
+ "ap-psychology.u1.t1-4.association-areas": {
+  "term": "Association areas",
+  "zh": "联合区"
+ },
+ "ap-psychology.u1.t1-4.somatosensory-cortex": {
+  "term": "Somatosensory cortex",
+  "zh": "体感皮层"
+ },
+ "ap-psychology.u1.t1-4.frontal-lobes": {
+  "term": "Frontal lobes",
+  "zh": "额叶"
+ },
+ "ap-psychology.u1.t1-4.linguistic-processing": {
+  "term": "Linguistic processing",
+  "zh": "语言加工"
+ },
+ "ap-psychology.u1.t1-4.higher-order-thinking": {
+  "term": "Higher-order thinking",
+  "zh": "高阶思维"
+ },
+ "ap-psychology.u1.t1-4.executive-functioning": {
+  "term": "Executive functioning",
+  "zh": "执行功能"
+ },
+ "ap-psychology.u1.t1-4.prefrontal-cortex": {
+  "term": "Prefrontal cortex",
+  "zh": "前额叶皮质"
+ },
+ "ap-psychology.u1.t1-4.motor-cortex": {
+  "term": "Motor cortex",
+  "zh": "运动皮层"
+ },
+ "ap-psychology.u1.t1-4.split-brain-research": {
+  "term": "Split brain research",
+  "zh": "裂脑研究"
+ },
+ "ap-psychology.u1.t1-4.hemispheric-specialization": {
+  "term": "Hemispheric specialization",
+  "zh": "功能偏侧化"
+ },
+ "ap-psychology.u1.t1-4.broca-s-area": {
+  "term": "Broca’s area",
+  "zh": "布洛卡区"
+ },
+ "ap-psychology.u1.t1-4.wernicke-s-area": {
+  "term": "Wernicke’s area",
+  "zh": "韦尼克区"
+ },
+ "ap-psychology.u1.t1-4.aphasia-broca-s-and-wernicke-s": {
+  "term": "Aphasia (Broca’s and Wernicke’s)",
+  "zh": "失语症"
+ },
+ "ap-psychology.u1.t1-4.contralateral-hemispheric-organization": {
+  "term": "Contralateral hemispheric organization",
+  "zh": "对侧控制"
+ },
+ "ap-psychology.u1.t1-4.plasticity": {
+  "term": "Plasticity",
+  "zh": "神经可塑性"
+ },
+ "ap-psychology.u1.t1-4.eeg": {
+  "term": "EEG",
+  "zh": "脑电图（EEG）"
+ },
+ "ap-psychology.u1.t1-4.fmri": {
+  "term": "fMRI",
+  "zh": "功能性核磁共振成像"
+ },
+ "ap-psychology.u1.t1-4.lesioning": {
+  "term": "Lesioning",
+  "zh": "损毁法"
+ },
+ "ap-psychology.u1.t1-5.consciousness": {
+  "term": "Consciousness",
+  "zh": "意识"
+ },
+ "ap-psychology.u1.t1-5.circadian-rhythm-sleep-wake-cycle": {
+  "term": "Circadian rhythm (sleep/wake cycle)",
+  "zh": "昼夜节律"
+ },
+ "ap-psychology.u1.t1-5.jet-lag": {
+  "term": "Jet lag",
+  "zh": "时差反应"
+ },
+ "ap-psychology.u1.t1-5.shift-work": {
+  "term": "Shift work",
+  "zh": "轮班工作"
+ },
+ "ap-psychology.u1.t1-5.nrem-stage-1": {
+  "term": "NREM stage 1",
+  "zh": "NREM一期（浅睡）"
+ },
+ "ap-psychology.u1.t1-5.hypnagogic-sensations": {
+  "term": "Hypnagogic sensations",
+  "zh": "入睡前幻觉"
+ },
+ "ap-psychology.u1.t1-5.nrem-stage-2": {
+  "term": "NREM stage 2",
+  "zh": "NREM二期"
+ },
+ "ap-psychology.u1.t1-5.nrem-stage-3": {
+  "term": "NREM stage 3",
+  "zh": "NREM三期（深睡）"
+ },
+ "ap-psychology.u1.t1-5.rem-sleep": {
+  "term": "REM sleep",
+  "zh": "快速眼动睡眠"
+ },
+ "ap-psychology.u1.t1-5.rem-rebound": {
+  "term": "REM rebound",
+  "zh": "REM反弹"
+ },
+ "ap-psychology.u1.t1-5.activation-synthesis-dreams": {
+  "term": "Activation-synthesis (dreams)",
+  "zh": "激活-整合理论（梦）"
+ },
+ "ap-psychology.u1.t1-5.consolidation-theory-dreams": {
+  "term": "Consolidation theory (dreams)",
+  "zh": "记忆巩固理论（梦）"
+ },
+ "ap-psychology.u1.t1-5.restoration-of-resources": {
+  "term": "Restoration of resources",
+  "zh": "资源恢复理论（睡眠）"
+ },
+ "ap-psychology.u1.t1-5.insomnia": {
+  "term": "Insomnia",
+  "zh": "失眠"
+ },
+ "ap-psychology.u1.t1-5.narcolepsy": {
+  "term": "Narcolepsy",
+  "zh": "发作性睡病（嗜睡症）"
+ },
+ "ap-psychology.u1.t1-5.rem-sleep-behavior-disorder": {
+  "term": "REM sleep behavior disorder",
+  "zh": "快速眼动睡眠行为障碍"
+ },
+ "ap-psychology.u1.t1-5.sleep-apnea": {
+  "term": "Sleep apnea",
+  "zh": "睡眠呼吸暂停"
+ },
+ "ap-psychology.u1.t1-5.somnambulism": {
+  "term": "Somnambulism",
+  "zh": "梦游"
+ },
+ "ap-psychology.u1.t1-6.sensation": {
+  "term": "Sensation",
+  "zh": "感觉"
+ },
+ "ap-psychology.u1.t1-6.transduction": {
+  "term": "Transduction",
+  "zh": "换能"
+ },
+ "ap-psychology.u1.t1-6.absolute-threshold": {
+  "term": "Absolute threshold",
+  "zh": "绝对阈限"
+ },
+ "ap-psychology.u1.t1-6.just-noticeable-difference": {
+  "term": "Just-noticeable difference",
+  "zh": "最小可觉差（JND）"
+ },
+ "ap-psychology.u1.t1-6.sensory-adaptation": {
+  "term": "Sensory adaptation",
+  "zh": "感官适应"
+ },
+ "ap-psychology.u1.t1-6.weber-s-law": {
+  "term": "Weber’s law",
+  "zh": "韦伯定律"
+ },
+ "ap-psychology.u1.t1-6.sensory-interaction": {
+  "term": "Sensory interaction",
+  "zh": "感官互动"
+ },
+ "ap-psychology.u1.t1-6.synesthesia": {
+  "term": "Synesthesia",
+  "zh": "联觉"
+ },
+ "ap-psychology.u1.t1-6.retina": {
+  "term": "Retina",
+  "zh": "视网膜"
+ },
+ "ap-psychology.u1.t1-6.blind-spot": {
+  "term": "Blind spot",
+  "zh": "盲点"
+ },
+ "ap-psychology.u1.t1-6.visual-nerve": {
+  "term": "Visual nerve",
+  "zh": "视神经"
+ },
+ "ap-psychology.u1.t1-6.lens": {
+  "term": "Lens",
+  "zh": "晶状体"
+ },
+ "ap-psychology.u1.t1-6.accommodation": {
+  "term": "Accommodation",
+  "zh": "晶状体调节"
+ },
+ "ap-psychology.u1.t1-6.nearsightedness": {
+  "term": "Nearsightedness",
+  "zh": "近视"
+ },
+ "ap-psychology.u1.t1-6.farsightedness": {
+  "term": "Farsightedness",
+  "zh": "远视"
+ },
+ "ap-psychology.u1.t1-6.photoreceptors": {
+  "term": "Photoreceptors",
+  "zh": "感光细胞"
+ },
+ "ap-psychology.u1.t1-6.rods": {
+  "term": "Rods",
+  "zh": "视杆细胞"
+ },
+ "ap-psychology.u1.t1-6.cones-blue-green-red": {
+  "term": "Cones (blue, green, red)",
+  "zh": "视锥细胞"
+ },
+ "ap-psychology.u1.t1-6.trichromatic-theory": {
+  "term": "Trichromatic theory",
+  "zh": "三原色理论"
+ },
+ "ap-psychology.u1.t1-6.opponent-process-theory": {
+  "term": "Opponent-process theory",
+  "zh": "对立过程理论"
+ },
+ "ap-psychology.u1.t1-6.afterimages": {
+  "term": "Afterimages",
+  "zh": "后像"
+ },
+ "ap-psychology.u1.t1-6.ganglion-cells": {
+  "term": "Ganglion cells",
+  "zh": "神经节细胞"
+ },
+ "ap-psychology.u1.t1-6.dichromatism": {
+  "term": "Dichromatism",
+  "zh": "双色盲（红绿色盲）"
+ },
+ "ap-psychology.u1.t1-6.monochromatism": {
+  "term": "Monochromatism",
+  "zh": "全色盲"
+ },
+ "ap-psychology.u1.t1-6.prosopagnosia": {
+  "term": "Prosopagnosia",
+  "zh": "面容失认症（脸盲）"
+ },
+ "ap-psychology.u1.t1-6.blindsight": {
+  "term": "Blindsight",
+  "zh": "盲视"
+ },
+ "ap-psychology.u1.t1-6.wavelength": {
+  "term": "Wavelength",
+  "zh": "波长"
+ },
+ "ap-psychology.u1.t1-6.pitch": {
+  "term": "Pitch",
+  "zh": "音高"
+ },
+ "ap-psychology.u1.t1-6.amplitude": {
+  "term": "Amplitude",
+  "zh": "振幅"
+ },
+ "ap-psychology.u1.t1-6.loudness": {
+  "term": "Loudness",
+  "zh": "响度"
+ },
+ "ap-psychology.u1.t1-6.pitch-perception": {
+  "term": "Pitch perception",
+  "zh": "音高知觉"
+ },
+ "ap-psychology.u1.t1-6.place-theory": {
+  "term": "Place theory",
+  "zh": "位置理论"
+ },
+ "ap-psychology.u1.t1-6.volley-theory": {
+  "term": "Volley theory",
+  "zh": "齐射理论"
+ },
+ "ap-psychology.u1.t1-6.frequency-theory": {
+  "term": "Frequency theory",
+  "zh": "频率理论"
+ },
+ "ap-psychology.u1.t1-6.sound-localization": {
+  "term": "Sound localization",
+  "zh": "声音定位"
+ },
+ "ap-psychology.u1.t1-6.conduction-deafness": {
+  "term": "Conduction deafness",
+  "zh": "传导性耳聋"
+ },
+ "ap-psychology.u1.t1-6.sensorineural-deafness": {
+  "term": "Sensorineural deafness",
+  "zh": "神经性耳聋"
+ },
+ "ap-psychology.u1.t1-6.olfactory-system": {
+  "term": "Olfactory system",
+  "zh": "嗅觉系统"
+ },
+ "ap-psychology.u1.t1-6.thalamus": {
+  "term": "Thalamus",
+  "zh": "丘脑"
+ },
+ "ap-psychology.u1.t1-6.pheromones": {
+  "term": "Pheromones",
+  "zh": "信息素"
+ },
+ "ap-psychology.u1.t1-6.gustation": {
+  "term": "Gustation",
+  "zh": "味觉"
+ },
+ "ap-psychology.u1.t1-6.sweet-sour-salty-bitter-umami-oleogustus": {
+  "term": "Sweet, sour, salty, bitter, umami, oleogustus",
+  "zh": "六种基本味觉"
+ },
+ "ap-psychology.u1.t1-6.taste-receptors": {
+  "term": "Taste receptors",
+  "zh": "味蕾"
+ },
+ "ap-psychology.u1.t1-6.supertasters": {
+  "term": "Supertasters",
+  "zh": "超级品尝者"
+ },
+ "ap-psychology.u1.t1-6.medium-tasters": {
+  "term": "Medium tasters",
+  "zh": "中等品尝者"
+ },
+ "ap-psychology.u1.t1-6.nontasters": {
+  "term": "Nontasters",
+  "zh": "味盲者"
+ },
+ "ap-psychology.u1.t1-6.warm-cold-receptors": {
+  "term": "Warm/cold receptors",
+  "zh": "温冷感受器"
+ },
+ "ap-psychology.u1.t1-6.gate-control-theory": {
+  "term": "Gate control theory",
+  "zh": "门控理论"
+ },
+ "ap-psychology.u1.t1-6.phantom-limb": {
+  "term": "Phantom limb",
+  "zh": "幻肢"
+ },
+ "ap-psychology.u1.t1-6.vestibular-sense": {
+  "term": "Vestibular sense",
+  "zh": "前庭觉"
+ },
+ "ap-psychology.u1.t1-6.semicircular-canals": {
+  "term": "Semicircular canals",
+  "zh": "半规管"
+ },
+ "ap-psychology.u1.t1-6.kinesthesis": {
+  "term": "Kinesthesis",
+  "zh": "动觉"
+ },
+ "ap-psychology.u2.t2-1.bottom-up-processing": {
+  "term": "Bottom-up processing",
+  "zh": "自下而上加工"
+ },
+ "ap-psychology.u2.t2-1.top-down-processing": {
+  "term": "Top-down processing",
+  "zh": "自上而下加工"
+ },
+ "ap-psychology.u2.t2-1.schema": {
+  "term": "Schema",
+  "zh": "图式"
+ },
+ "ap-psychology.u2.t2-1.perceptual-set": {
+  "term": "Perceptual set",
+  "zh": "知觉定势（笔记叫思维定势）"
+ },
+ "ap-psychology.u2.t2-1.gestalt-psychology": {
+  "term": "Gestalt psychology",
+  "zh": "格式塔心理学"
+ },
+ "ap-psychology.u2.t2-1.closure": {
+  "term": "Closure",
+  "zh": "闭合律"
+ },
+ "ap-psychology.u2.t2-1.figure-and-ground": {
+  "term": "Figure and ground",
+  "zh": "图形与背景"
+ },
+ "ap-psychology.u2.t2-1.proximity": {
+  "term": "Proximity",
+  "zh": "接近律"
+ },
+ "ap-psychology.u2.t2-1.similarity": {
+  "term": "Similarity",
+  "zh": "相似性"
+ },
+ "ap-psychology.u2.t2-1.attention": {
+  "term": "Attention",
+  "zh": "注意"
+ },
+ "ap-psychology.u2.t2-1.selective-attention": {
+  "term": "Selective attention",
+  "zh": "选择性注意"
+ },
+ "ap-psychology.u2.t2-1.cocktail-party-effect": {
+  "term": "Cocktail party effect",
+  "zh": "鸡尾酒会效应"
+ },
+ "ap-psychology.u2.t2-1.inattentional-blindness": {
+  "term": "Inattentional blindness",
+  "zh": "非注意盲视"
+ },
+ "ap-psychology.u2.t2-1.change-blindness": {
+  "term": "Change blindness",
+  "zh": "变化盲视"
+ },
+ "ap-psychology.u2.t2-1.binocular-depth-cues": {
+  "term": "Binocular depth cues",
+  "zh": "双眼深度线索"
+ },
+ "ap-psychology.u2.t2-1.retinal-disparity": {
+  "term": "Retinal disparity",
+  "zh": "视网膜差异"
+ },
+ "ap-psychology.u2.t2-1.convergence": {
+  "term": "Convergence",
+  "zh": "辐合"
+ },
+ "ap-psychology.u2.t2-1.monocular-depth-cues": {
+  "term": "Monocular depth cues",
+  "zh": "单眼深度线索"
+ },
+ "ap-psychology.u2.t2-1.relative-clarity": {
+  "term": "Relative clarity",
+  "zh": "相对清晰度"
+ },
+ "ap-psychology.u2.t2-1.relative-size": {
+  "term": "Relative size",
+  "zh": "相对大小"
+ },
+ "ap-psychology.u2.t2-1.texture-gradient": {
+  "term": "Texture gradient",
+  "zh": "纹理梯度"
+ },
+ "ap-psychology.u2.t2-1.linear-perspective": {
+  "term": "Linear perspective",
+  "zh": "线性透视"
+ },
+ "ap-psychology.u2.t2-1.interposition": {
+  "term": "Interposition",
+  "zh": "遮挡"
+ },
+ "ap-psychology.u2.t2-1.apparent-movement": {
+  "term": "Apparent movement",
+  "zh": "似动"
+ },
+ "ap-psychology.u2.t2-2.prototypes": {
+  "term": "Prototypes",
+  "zh": "原型"
+ },
+ "ap-psychology.u2.t2-2.assimilation": {
+  "term": "Assimilation",
+  "zh": "同化"
+ },
+ "ap-psychology.u2.t2-2.accommodation": {
+  "term": "Accommodation",
+  "zh": "顺应"
+ },
+ "ap-psychology.u2.t2-2.algorithms": {
+  "term": "Algorithms",
+  "zh": "算法"
+ },
+ "ap-psychology.u2.t2-2.heuristics": {
+  "term": "Heuristics",
+  "zh": "启发法"
+ },
+ "ap-psychology.u2.t2-2.representativeness-heuristic": {
+  "term": "Representativeness heuristic",
+  "zh": "代表性启发法"
+ },
+ "ap-psychology.u2.t2-2.availability-heuristic": {
+  "term": "Availability heuristic",
+  "zh": "可得性启发法"
+ },
+ "ap-psychology.u2.t2-2.mental-set": {
+  "term": "Mental set",
+  "zh": "思维定势"
+ },
+ "ap-psychology.u2.t2-2.priming": {
+  "term": "Priming",
+  "zh": "启动效应"
+ },
+ "ap-psychology.u2.t2-2.framing": {
+  "term": "Framing",
+  "zh": "框架效应"
+ },
+ "ap-psychology.u2.t2-2.gambler-s-fallacy": {
+  "term": "Gambler’s fallacy",
+  "zh": "赌徒谬误"
+ },
+ "ap-psychology.u2.t2-2.sunk-cost-fallacy": {
+  "term": "Sunk-cost fallacy",
+  "zh": "沉没成本谬误"
+ },
+ "ap-psychology.u2.t2-2.executive-functions": {
+  "term": "Executive functions",
+  "zh": "执行功能"
+ },
+ "ap-psychology.u2.t2-2.creativity": {
+  "term": "Creativity",
+  "zh": "创造力"
+ },
+ "ap-psychology.u2.t2-2.divergent-thinking": {
+  "term": "Divergent thinking",
+  "zh": "发散思维"
+ },
+ "ap-psychology.u2.t2-2.convergent-thinking": {
+  "term": "Convergent thinking",
+  "zh": "聚合思维"
+ },
+ "ap-psychology.u2.t2-2.functional-fixedness": {
+  "term": "Functional fixedness",
+  "zh": "功能固着"
+ },
+ "ap-psychology.u2.t2-3.explicit-memory": {
+  "term": "Explicit memory",
+  "zh": "外显记忆（陈述性）"
+ },
+ "ap-psychology.u2.t2-3.episodic-memory": {
+  "term": "Episodic memory",
+  "zh": "情景记忆"
+ },
+ "ap-psychology.u2.t2-3.semantic-memory": {
+  "term": "Semantic memory",
+  "zh": "语义记忆"
+ },
+ "ap-psychology.u2.t2-3.implicit-memory": {
+  "term": "Implicit memory",
+  "zh": "内隐记忆"
+ },
+ "ap-psychology.u2.t2-3.procedural-memory": {
+  "term": "Procedural memory",
+  "zh": "程序性记忆"
+ },
+ "ap-psychology.u2.t2-3.prospective-memory": {
+  "term": "Prospective memory",
+  "zh": "前瞻记忆"
+ },
+ "ap-psychology.u2.t2-3.long-term-potentiation": {
+  "term": "Long-term potentiation",
+  "zh": "长时程增强效应（LTP）"
+ },
+ "ap-psychology.u2.t2-3.working-memory-model": {
+  "term": "Working memory model",
+  "zh": "工作记忆模型"
+ },
+ "ap-psychology.u2.t2-3.primary-memory-system": {
+  "term": "Primary memory system",
+  "zh": "初级记忆系统"
+ },
+ "ap-psychology.u2.t2-3.central-executive": {
+  "term": "Central executive",
+  "zh": "中央执行系统"
+ },
+ "ap-psychology.u2.t2-3.phonological-loop": {
+  "term": "Phonological loop",
+  "zh": "语音回路"
+ },
+ "ap-psychology.u2.t2-3.visuospatial-sketchpad": {
+  "term": "Visuospatial sketchpad",
+  "zh": "视觉空间画板"
+ },
+ "ap-psychology.u2.t2-3.long-term-memory": {
+  "term": "Long-term memory",
+  "zh": "长期记忆"
+ },
+ "ap-psychology.u2.t2-3.multi-store-model": {
+  "term": "Multi-store model",
+  "zh": "三阶记忆模型"
+ },
+ "ap-psychology.u2.t2-3.sensory-memory": {
+  "term": "Sensory memory",
+  "zh": "感觉记忆"
+ },
+ "ap-psychology.u2.t2-3.iconic-memory": {
+  "term": "Iconic memory",
+  "zh": "图像记忆"
+ },
+ "ap-psychology.u2.t2-3.echoic-memory": {
+  "term": "Echoic memory",
+  "zh": "声像记忆"
+ },
+ "ap-psychology.u2.t2-3.automatic-processing": {
+  "term": "Automatic processing",
+  "zh": "自动加工"
+ },
+ "ap-psychology.u2.t2-3.effortful-processing": {
+  "term": "Effortful processing",
+  "zh": "刻意加工"
+ },
+ "ap-psychology.u2.t2-3.storage": {
+  "term": "Storage",
+  "zh": "储存"
+ },
+ "ap-psychology.u2.t2-3.levels-of-processing-model": {
+  "term": "Levels of processing model",
+  "zh": "加工水平模型"
+ },
+ "ap-psychology.u2.t2-3.shallow-encoding": {
+  "term": "Shallow encoding",
+  "zh": "浅层编码"
+ },
+ "ap-psychology.u2.t2-3.deep-encoding": {
+  "term": "Deep encoding",
+  "zh": "深层编码"
+ },
+ "ap-psychology.u2.t2-3.structural-phonemic-semantic": {
+  "term": "Structural, phonemic, semantic",
+  "zh": "结构/语音/语义加工"
+ },
+ "ap-psychology.u2.t2-4.encoding": {
+  "term": "Encoding",
+  "zh": "编码"
+ },
+ "ap-psychology.u2.t2-4.mnemonic-devices": {
+  "term": "Mnemonic devices",
+  "zh": "助记方法"
+ },
+ "ap-psychology.u2.t2-4.method-of-loci": {
+  "term": "Method of loci",
+  "zh": "位置记忆法（记忆宫殿）"
+ },
+ "ap-psychology.u2.t2-4.chunking": {
+  "term": "Chunking",
+  "zh": "组块法"
+ },
+ "ap-psychology.u2.t2-4.categories-as-they-pertain-to-grouping": {
+  "term": "Categories (as they pertain to grouping)",
+  "zh": "类别分组"
+ },
+ "ap-psychology.u2.t2-4.hierarchies-as-they-pertain-to-grouping": {
+  "term": "Hierarchies (as they pertain to grouping)",
+  "zh": "层级组织"
+ },
+ "ap-psychology.u2.t2-4.spacing-effect": {
+  "term": "Spacing effect",
+  "zh": "间隔效应"
+ },
+ "ap-psychology.u2.t2-4.memory-consolidation": {
+  "term": "Memory consolidation",
+  "zh": "记忆巩固"
+ },
+ "ap-psychology.u2.t2-4.massed-practice": {
+  "term": "Massed practice",
+  "zh": "集中学习"
+ },
+ "ap-psychology.u2.t2-4.distributed-practice": {
+  "term": "Distributed practice",
+  "zh": "分散学习"
+ },
+ "ap-psychology.u2.t2-4.serial-position-effect": {
+  "term": "Serial position effect",
+  "zh": "系列位置效应"
+ },
+ "ap-psychology.u2.t2-4.primacy-effect": {
+  "term": "Primacy effect",
+  "zh": "首因效应"
+ },
+ "ap-psychology.u2.t2-4.recency-effect": {
+  "term": "Recency effect",
+  "zh": "近因效应"
+ },
+ "ap-psychology.u2.t2-5.sensory-memory": {
+  "term": "Sensory memory",
+  "zh": "感觉记忆"
+ },
+ "ap-psychology.u2.t2-5.short-term-memory": {
+  "term": "Short-term memory",
+  "zh": "短期记忆"
+ },
+ "ap-psychology.u2.t2-5.working-memory": {
+  "term": "Working memory",
+  "zh": "工作记忆"
+ },
+ "ap-psychology.u2.t2-5.long-term-memory": {
+  "term": "Long-term memory",
+  "zh": "长期记忆"
+ },
+ "ap-psychology.u2.t2-5.maintenance-rehearsal": {
+  "term": "Maintenance rehearsal",
+  "zh": "维持复述"
+ },
+ "ap-psychology.u2.t2-5.elaborative-rehearsal": {
+  "term": "Elaborative rehearsal",
+  "zh": "拓展复述（精细复述）"
+ },
+ "ap-psychology.u2.t2-5.memory-retention": {
+  "term": "Memory retention",
+  "zh": "记忆保持"
+ },
+ "ap-psychology.u2.t2-5.retrograde-amnesia": {
+  "term": "Retrograde amnesia",
+  "zh": "逆行性遗忘"
+ },
+ "ap-psychology.u2.t2-5.autobiographical-memory": {
+  "term": "Autobiographical memory",
+  "zh": "自传记忆"
+ },
+ "ap-psychology.u2.t2-5.anterograde-amnesia": {
+  "term": "Anterograde amnesia",
+  "zh": "顺行性遗忘"
+ },
+ "ap-psychology.u2.t2-5.alzheimer-s-disease": {
+  "term": "Alzheimer’s disease",
+  "zh": "阿尔茨海默病"
+ },
+ "ap-psychology.u2.t2-5.infantile-amnesia": {
+  "term": "Infantile amnesia",
+  "zh": "婴儿期遗忘"
+ },
+ "ap-psychology.u2.t2-6.retrieval": {
+  "term": "Retrieval",
+  "zh": "提取"
+ },
+ "ap-psychology.u2.t2-6.recall": {
+  "term": "Recall",
+  "zh": "回忆"
+ },
+ "ap-psychology.u2.t2-6.recognition": {
+  "term": "Recognition",
+  "zh": "再认"
+ },
+ "ap-psychology.u2.t2-6.retrieval-cues": {
+  "term": "Retrieval cues",
+  "zh": "提取线索"
+ },
+ "ap-psychology.u2.t2-6.context-dependent-memory": {
+  "term": "Context-dependent memory",
+  "zh": "情境依赖记忆"
+ },
+ "ap-psychology.u2.t2-6.mood-congruent-memory": {
+  "term": "Mood-congruent memory",
+  "zh": "心境一致性记忆"
+ },
+ "ap-psychology.u2.t2-6.state-dependent-memory": {
+  "term": "State-dependent memory",
+  "zh": "状态依赖记忆"
+ },
+ "ap-psychology.u2.t2-6.testing-effect": {
+  "term": "Testing effect",
+  "zh": "测试效应"
+ },
+ "ap-psychology.u2.t2-6.metacognition": {
+  "term": "Metacognition",
+  "zh": "元认知"
+ },
+ "ap-psychology.u2.t2-7.forgetting-curve": {
+  "term": "Forgetting curve",
+  "zh": "遗忘曲线"
+ },
+ "ap-psychology.u2.t2-7.encoding-failure": {
+  "term": "Encoding failure",
+  "zh": "编码失败"
+ },
+ "ap-psychology.u2.t2-7.proactive-interference": {
+  "term": "Proactive interference",
+  "zh": "前摄干扰"
+ },
+ "ap-psychology.u2.t2-7.retroactive-interference": {
+  "term": "Retroactive interference",
+  "zh": "后摄干扰"
+ },
+ "ap-psychology.u2.t2-7.tip-of-the-tongue-phenomenon": {
+  "term": "Tip-of-the-tongue phenomenon",
+  "zh": "舌尖现象"
+ },
+ "ap-psychology.u2.t2-7.repression-psychodynamic": {
+  "term": "Repression (psychodynamic)",
+  "zh": "压抑"
+ },
+ "ap-psychology.u2.t2-7.misinformation-effect": {
+  "term": "Misinformation effect",
+  "zh": "错误信息效应"
+ },
+ "ap-psychology.u2.t2-7.source-amnesia": {
+  "term": "Source amnesia",
+  "zh": "来源性遗忘"
+ },
+ "ap-psychology.u2.t2-7.constructive-memory": {
+  "term": "Constructive memory",
+  "zh": "建构性记忆"
+ },
+ "ap-psychology.u2.t2-7.imagination-inflation": {
+  "term": "Imagination inflation",
+  "zh": "想象膨胀"
+ },
+ "ap-psychology.u2.t2-8.intelligence": {
+  "term": "Intelligence",
+  "zh": "智力"
+ },
+ "ap-psychology.u2.t2-8.g-general-intelligence": {
+  "term": "g (general intelligence)",
+  "zh": "一般智力（g因素）"
+ },
+ "ap-psychology.u2.t2-8.intelligence-quotient-iq": {
+  "term": "Intelligence quotient (IQ)",
+  "zh": "智商"
+ },
+ "ap-psychology.u2.t2-8.mental-age": {
+  "term": "Mental age",
+  "zh": "心理年龄"
+ },
+ "ap-psychology.u2.t2-8.chronological-age": {
+  "term": "Chronological age",
+  "zh": "生理年龄"
+ },
+ "ap-psychology.u2.t2-8.standardization": {
+  "term": "Standardization",
+  "zh": "标准化"
+ },
+ "ap-psychology.u2.t2-8.validity": {
+  "term": "Validity",
+  "zh": "效度"
+ },
+ "ap-psychology.u2.t2-8.construct-validity": {
+  "term": "Construct validity",
+  "zh": "建构效度"
+ },
+ "ap-psychology.u2.t2-8.predictive-validity": {
+  "term": "Predictive validity",
+  "zh": "预测效度"
+ },
+ "ap-psychology.u2.t2-8.reliability": {
+  "term": "Reliability",
+  "zh": "信度"
+ },
+ "ap-psychology.u2.t2-8.test-retest-reliability": {
+  "term": "Test-retest reliability",
+  "zh": "重测信度"
+ },
+ "ap-psychology.u2.t2-8.split-half-reliability": {
+  "term": "Split-half reliability",
+  "zh": "分半信度"
+ },
+ "ap-psychology.u2.t2-8.stereotype-threat": {
+  "term": "Stereotype threat",
+  "zh": "刻板印象威胁"
+ },
+ "ap-psychology.u2.t2-8.stereotype-lift": {
+  "term": "Stereotype lift",
+  "zh": "刻板印象提升"
+ },
+ "ap-psychology.u2.t2-8.flynn-effect": {
+  "term": "Flynn Effect",
+  "zh": "弗林效应"
+ },
+ "ap-psychology.u2.t2-8.achievement-tests": {
+  "term": "Achievement tests",
+  "zh": "成就测试"
+ },
+ "ap-psychology.u2.t2-8.aptitude-tests": {
+  "term": "Aptitude tests",
+  "zh": "能力倾向测试"
+ },
+ "ap-psychology.u2.t2-8.fixed-mindset": {
+  "term": "Fixed mindset",
+  "zh": "固定型思维"
+ },
+ "ap-psychology.u2.t2-8.growth-mindset": {
+  "term": "Growth mindset",
+  "zh": "成长型思维"
+ },
+ "ap-psychology.u3.t3-1.chronological-development": {
+  "term": "Chronological development",
+  "zh": "时序发展"
+ },
+ "ap-psychology.u3.t3-1.continuous-development": {
+  "term": "Continuous development",
+  "zh": "连续发展"
+ },
+ "ap-psychology.u3.t3-1.discontinuous-development": {
+  "term": "Discontinuous development",
+  "zh": "阶段发展（不连续）"
+ },
+ "ap-psychology.u3.t3-1.lifespan-development": {
+  "term": "Lifespan development",
+  "zh": "毕生发展"
+ },
+ "ap-psychology.u3.t3-1.stability-and-change": {
+  "term": "Stability and change",
+  "zh": "稳定与变化"
+ },
+ "ap-psychology.u3.t3-1.nature-and-nurture": {
+  "term": "Nature and nurture",
+  "zh": "先天与后天"
+ },
+ "ap-psychology.u3.t3-2.teratogens": {
+  "term": "Teratogens",
+  "zh": "致畸物"
+ },
+ "ap-psychology.u3.t3-2.fine-motor-coordination": {
+  "term": "Fine motor coordination",
+  "zh": "精细动作协调"
+ },
+ "ap-psychology.u3.t3-2.gross-motor-coordination": {
+  "term": "Gross motor coordination",
+  "zh": "粗大动作协调"
+ },
+ "ap-psychology.u3.t3-2.maturation": {
+  "term": "Maturation",
+  "zh": "成熟"
+ },
+ "ap-psychology.u3.t3-2.reflexes": {
+  "term": "Reflexes",
+  "zh": "反射"
+ },
+ "ap-psychology.u3.t3-2.rooting-reflex": {
+  "term": "Rooting reflex",
+  "zh": "觅食反射"
+ },
+ "ap-psychology.u3.t3-2.visual-cliff": {
+  "term": "Visual cliff",
+  "zh": "视觉悬崖"
+ },
+ "ap-psychology.u3.t3-2.critical-periods": {
+  "term": "Critical periods",
+  "zh": "关键期"
+ },
+ "ap-psychology.u3.t3-2.sensitive-periods": {
+  "term": "Sensitive periods",
+  "zh": "敏感期"
+ },
+ "ap-psychology.u3.t3-2.imprinting": {
+  "term": "Imprinting",
+  "zh": "印刻"
+ },
+ "ap-psychology.u3.t3-2.growth-spurt": {
+  "term": "Growth spurt",
+  "zh": "生长突增"
+ },
+ "ap-psychology.u3.t3-2.puberty": {
+  "term": "Puberty",
+  "zh": "青春期"
+ },
+ "ap-psychology.u3.t3-2.primary-sex-characteristics": {
+  "term": "Primary sex characteristics",
+  "zh": "第一性征"
+ },
+ "ap-psychology.u3.t3-2.secondary-sex-characteristics": {
+  "term": "Secondary sex characteristics",
+  "zh": "第二性征"
+ },
+ "ap-psychology.u3.t3-2.menarche": {
+  "term": "Menarche",
+  "zh": "初潮"
+ },
+ "ap-psychology.u3.t3-2.spermarche": {
+  "term": "Spermarche",
+  "zh": "初次遗精"
+ },
+ "ap-psychology.u3.t3-2.menopause": {
+  "term": "Menopause",
+  "zh": "更年期（绝经）"
+ },
+ "ap-psychology.u3.t3-4.schemas": {
+  "term": "Schemas",
+  "zh": "图式"
+ },
+ "ap-psychology.u3.t3-4.assimilation": {
+  "term": "Assimilation",
+  "zh": "同化"
+ },
+ "ap-psychology.u3.t3-4.accommodation": {
+  "term": "Accommodation",
+  "zh": "顺应"
+ },
+ "ap-psychology.u3.t3-4.sensorimotor-stage": {
+  "term": "Sensorimotor stage",
+  "zh": "感知运动阶段"
+ },
+ "ap-psychology.u3.t3-4.preoperational-stage": {
+  "term": "Preoperational stage",
+  "zh": "前运算阶段"
+ },
+ "ap-psychology.u3.t3-4.concrete-operational-stage": {
+  "term": "Concrete operational stage",
+  "zh": "具体运算阶段"
+ },
+ "ap-psychology.u3.t3-4.formal-operational-stage": {
+  "term": "Formal operational stage",
+  "zh": "形式运算阶段"
+ },
+ "ap-psychology.u3.t3-4.object-permanence": {
+  "term": "Object permanence",
+  "zh": "客体永久性"
+ },
+ "ap-psychology.u3.t3-4.mental-symbols": {
+  "term": "Mental symbols",
+  "zh": "心理符号"
+ },
+ "ap-psychology.u3.t3-4.pretend-play": {
+  "term": "Pretend play",
+  "zh": "假装游戏"
+ },
+ "ap-psychology.u3.t3-4.conservation": {
+  "term": "Conservation",
+  "zh": "守恒"
+ },
+ "ap-psychology.u3.t3-4.reversibility": {
+  "term": "Reversibility",
+  "zh": "可逆性"
+ },
+ "ap-psychology.u3.t3-4.animism": {
+  "term": "Animism",
+  "zh": "泛灵论"
+ },
+ "ap-psychology.u3.t3-4.egocentrism": {
+  "term": "Egocentrism",
+  "zh": "自我中心主义"
+ },
+ "ap-psychology.u3.t3-4.theory-of-mind": {
+  "term": "Theory of mind",
+  "zh": "心理理论"
+ },
+ "ap-psychology.u3.t3-4.systematic-thinking": {
+  "term": "Systematic thinking",
+  "zh": "系统性思维"
+ },
+ "ap-psychology.u3.t3-4.abstract-thinking": {
+  "term": "Abstract thinking",
+  "zh": "抽象思维"
+ },
+ "ap-psychology.u3.t3-4.hypothetical-thinking": {
+  "term": "Hypothetical thinking",
+  "zh": "假设性思维"
+ },
+ "ap-psychology.u3.t3-4.scaffolding-as-it-pertains-to-vygotsky": {
+  "term": "Scaffolding (as it pertains to Vygotsky)",
+  "zh": "脚手架"
+ },
+ "ap-psychology.u3.t3-4.zone-of-proximal-development": {
+  "term": "Zone of proximal development",
+  "zh": "最近发展区（ZPD）"
+ },
+ "ap-psychology.u3.t3-4.crystallized-intelligence": {
+  "term": "Crystallized intelligence",
+  "zh": "晶体智力"
+ },
+ "ap-psychology.u3.t3-4.fluid-intelligence": {
+  "term": "Fluid intelligence",
+  "zh": "流体智力"
+ },
+ "ap-psychology.u3.t3-4.dementia": {
+  "term": "Dementia",
+  "zh": "失智症"
+ },
+ "ap-psychology.u3.t3-5.phonemes": {
+  "term": "Phonemes",
+  "zh": "音位"
+ },
+ "ap-psychology.u3.t3-5.morphemes": {
+  "term": "Morphemes",
+  "zh": "语素"
+ },
+ "ap-psychology.u3.t3-5.semantics": {
+  "term": "Semantics",
+  "zh": "语义"
+ },
+ "ap-psychology.u3.t3-5.grammar": {
+  "term": "Grammar",
+  "zh": "语法"
+ },
+ "ap-psychology.u3.t3-5.syntax": {
+  "term": "Syntax",
+  "zh": "句法"
+ },
+ "ap-psychology.u3.t3-5.cooing": {
+  "term": "Cooing",
+  "zh": "咕咕声期"
+ },
+ "ap-psychology.u3.t3-5.babbling": {
+  "term": "Babbling",
+  "zh": "牙牙学语期"
+ },
+ "ap-psychology.u3.t3-5.one-word-stage": {
+  "term": "One-word stage",
+  "zh": "单词句阶段"
+ },
+ "ap-psychology.u3.t3-5.telegraphic-speech": {
+  "term": "Telegraphic speech",
+  "zh": "电报式语言"
+ },
+ "ap-psychology.u3.t3-5.overgeneralization-of-language-rules": {
+  "term": "Overgeneralization of language rules",
+  "zh": "语言规则过度泛化"
+ },
+ "ap-psychology.u3.t3-6.ecological-systems-theory": {
+  "term": "Ecological systems theory",
+  "zh": "生态系统理论"
+ },
+ "ap-psychology.u3.t3-6.microsystem": {
+  "term": "Microsystem",
+  "zh": "微观系统"
+ },
+ "ap-psychology.u3.t3-6.mesosystem": {
+  "term": "Mesosystem",
+  "zh": "中间系统"
+ },
+ "ap-psychology.u3.t3-6.exosystem": {
+  "term": "Exosystem",
+  "zh": "外层系统"
+ },
+ "ap-psychology.u3.t3-6.macrosystem": {
+  "term": "Macrosystem",
+  "zh": "宏观系统"
+ },
+ "ap-psychology.u3.t3-6.chronosystem": {
+  "term": "Chronosystem",
+  "zh": "时间系统"
+ },
+ "ap-psychology.u3.t3-6.authoritarian-parenting": {
+  "term": "Authoritarian parenting",
+  "zh": "专制型教养"
+ },
+ "ap-psychology.u3.t3-6.authoritative-parenting": {
+  "term": "Authoritative parenting",
+  "zh": "权威型教养"
+ },
+ "ap-psychology.u3.t3-6.permissive-parenting": {
+  "term": "Permissive parenting",
+  "zh": "放纵型教养"
+ },
+ "ap-psychology.u3.t3-6.attachment-styles": {
+  "term": "Attachment styles",
+  "zh": "依恋类型"
+ },
+ "ap-psychology.u3.t3-6.secure-attachment": {
+  "term": "Secure attachment",
+  "zh": "安全依恋"
+ },
+ "ap-psychology.u3.t3-6.insecure-attachment": {
+  "term": "Insecure attachment",
+  "zh": "不安全依恋"
+ },
+ "ap-psychology.u3.t3-6.avoidant-attachment": {
+  "term": "Avoidant attachment",
+  "zh": "回避型依恋"
+ },
+ "ap-psychology.u3.t3-6.anxious-attachment": {
+  "term": "Anxious attachment",
+  "zh": "焦虑型依恋（矛盾型）"
+ },
+ "ap-psychology.u3.t3-6.disorganized-attachment": {
+  "term": "Disorganized attachment",
+  "zh": "紊乱型依恋"
+ },
+ "ap-psychology.u3.t3-6.separation-anxiety": {
+  "term": "Separation anxiety",
+  "zh": "分离焦虑"
+ },
+ "ap-psychology.u3.t3-6.temperament": {
+  "term": "Temperament",
+  "zh": "气质"
+ },
+ "ap-psychology.u3.t3-6.parallel-play": {
+  "term": "Parallel play",
+  "zh": "平行游戏"
+ },
+ "ap-psychology.u3.t3-6.imaginary-audience": {
+  "term": "Imaginary audience",
+  "zh": "假想观众"
+ },
+ "ap-psychology.u3.t3-6.personal-fable": {
+  "term": "Personal fable",
+  "zh": "个人神话"
+ },
+ "ap-psychology.u3.t3-6.social-clock": {
+  "term": "Social clock",
+  "zh": "社会时钟"
+ },
+ "ap-psychology.u3.t3-6.emerging-adulthood": {
+  "term": "Emerging adulthood",
+  "zh": "成年初显期"
+ },
+ "ap-psychology.u3.t3-6.stage-theory-of-psychosocial-development-erikson": {
+  "term": "Stage theory of psychosocial development (Erikson)",
+  "zh": "心理社会发展阶段理论"
+ },
+ "ap-psychology.u3.t3-6.trust-and-mistrust": {
+  "term": "Trust and mistrust",
+  "zh": "信任对不信任"
+ },
+ "ap-psychology.u3.t3-6.autonomy-and-shame-and-doubt": {
+  "term": "Autonomy and shame and doubt",
+  "zh": "自主对羞怯怀疑"
+ },
+ "ap-psychology.u3.t3-6.initiative-and-guilt": {
+  "term": "Initiative and guilt",
+  "zh": "主动对内疚"
+ },
+ "ap-psychology.u3.t3-6.industry-and-inferiority": {
+  "term": "Industry and inferiority",
+  "zh": "勤奋对自卑"
+ },
+ "ap-psychology.u3.t3-6.identity-and-role-confusion": {
+  "term": "Identity and role confusion",
+  "zh": "同一性对角色混乱"
+ },
+ "ap-psychology.u3.t3-6.intimacy-and-isolation": {
+  "term": "Intimacy and isolation",
+  "zh": "亲密对孤独"
+ },
+ "ap-psychology.u3.t3-6.generativity-and-stagnation": {
+  "term": "Generativity and stagnation",
+  "zh": "繁衍对停滞"
+ },
+ "ap-psychology.u3.t3-6.integrity-and-despair": {
+  "term": "Integrity and despair",
+  "zh": "自我整合对绝望"
+ },
+ "ap-psychology.u3.t3-6.adverse-childhood-experiences-aces": {
+  "term": "Adverse childhood experiences (ACEs)",
+  "zh": "童年逆境经历"
+ },
+ "ap-psychology.u3.t3-6.achievement-adolescent-identity-development": {
+  "term": "Achievement (adolescent identity development)",
+  "zh": "同一性获得"
+ },
+ "ap-psychology.u3.t3-6.diffusion-adolescent-identity-development": {
+  "term": "Diffusion (adolescent identity development)",
+  "zh": "同一性扩散"
+ },
+ "ap-psychology.u3.t3-6.foreclosure-adolescent-identity-development": {
+  "term": "Foreclosure (adolescent identity development)",
+  "zh": "同一性早闭"
+ },
+ "ap-psychology.u3.t3-6.moratorium-adolescent-identity-development": {
+  "term": "Moratorium (adolescent identity development)",
+  "zh": "同一性延缓"
+ },
+ "ap-psychology.u3.t3-6.racial-ethnic-identity": {
+  "term": "Racial/ethnic identity",
+  "zh": "种族/民族认同"
+ },
+ "ap-psychology.u3.t3-6.sexual-orientation": {
+  "term": "Sexual orientation",
+  "zh": "性取向"
+ },
+ "ap-psychology.u3.t3-6.religious-identity": {
+  "term": "Religious identity",
+  "zh": "宗教认同"
+ },
+ "ap-psychology.u3.t3-6.occupational-identity": {
+  "term": "Occupational identity",
+  "zh": "职业认同"
+ },
+ "ap-psychology.u3.t3-6.familial-identity": {
+  "term": "Familial identity",
+  "zh": "家庭认同"
+ },
+ "ap-psychology.u3.t3-6.possible-selves": {
+  "term": "Possible selves",
+  "zh": "可能自我"
+ },
+ "ap-psychology.u3.t3-7.behavioral-perspective": {
+  "term": "Behavioral perspective",
+  "zh": "行为主义视角"
+ },
+ "ap-psychology.u3.t3-7.classical-conditioning": {
+  "term": "Classical conditioning",
+  "zh": "经典条件反射"
+ },
+ "ap-psychology.u3.t3-7.association": {
+  "term": "Association",
+  "zh": "联结"
+ },
+ "ap-psychology.u3.t3-7.acquisition": {
+  "term": "Acquisition",
+  "zh": "习得"
+ },
+ "ap-psychology.u3.t3-7.associative-learning": {
+  "term": "Associative learning",
+  "zh": "联想学习"
+ },
+ "ap-psychology.u3.t3-7.unconditioned-stimulus": {
+  "term": "Unconditioned stimulus",
+  "zh": "无条件刺激（US）"
+ },
+ "ap-psychology.u3.t3-7.unconditioned-response": {
+  "term": "Unconditioned response",
+  "zh": "无条件反应（UR）"
+ },
+ "ap-psychology.u3.t3-7.conditioned-stimulus": {
+  "term": "Conditioned stimulus",
+  "zh": "条件刺激（CS）"
+ },
+ "ap-psychology.u3.t3-7.conditioned-response": {
+  "term": "Conditioned response",
+  "zh": "条件反应（CR）"
+ },
+ "ap-psychology.u3.t3-7.extinction": {
+  "term": "Extinction",
+  "zh": "消退"
+ },
+ "ap-psychology.u3.t3-7.spontaneous-recovery": {
+  "term": "Spontaneous recovery",
+  "zh": "自然恢复"
+ },
+ "ap-psychology.u3.t3-7.stimulus-discrimination": {
+  "term": "Stimulus discrimination",
+  "zh": "刺激辨别"
+ },
+ "ap-psychology.u3.t3-7.stimulus-generalization": {
+  "term": "Stimulus generalization",
+  "zh": "刺激泛化"
+ },
+ "ap-psychology.u3.t3-7.higher-order-conditioning": {
+  "term": "Higher-order conditioning",
+  "zh": "高级条件作用"
+ },
+ "ap-psychology.u3.t3-7.counterconditioning": {
+  "term": "Counterconditioning",
+  "zh": "反条件作用"
+ },
+ "ap-psychology.u3.t3-7.taste-aversion": {
+  "term": "Taste aversion",
+  "zh": "味觉厌恶"
+ },
+ "ap-psychology.u3.t3-7.one-trial-conditioning": {
+  "term": "One-trial conditioning",
+  "zh": "一次性条件反射"
+ },
+ "ap-psychology.u3.t3-7.one-trial-learning": {
+  "term": "One-trial learning",
+  "zh": "一次性学习"
+ },
+ "ap-psychology.u3.t3-7.biological-preparedness": {
+  "term": "Biological preparedness",
+  "zh": "生物预备性"
+ },
+ "ap-psychology.u3.t3-7.habituation": {
+  "term": "Habituation",
+  "zh": "习惯化"
+ },
+ "ap-psychology.u3.t3-8.operant-conditioning": {
+  "term": "Operant conditioning",
+  "zh": "操作性条件反射"
+ },
+ "ap-psychology.u3.t3-8.reinforcement": {
+  "term": "Reinforcement",
+  "zh": "强化"
+ },
+ "ap-psychology.u3.t3-8.punishment": {
+  "term": "Punishment",
+  "zh": "惩罚"
+ },
+ "ap-psychology.u3.t3-8.law-of-effect": {
+  "term": "Law of Effect",
+  "zh": "效果律"
+ },
+ "ap-psychology.u3.t3-8.superstitious-behavior": {
+  "term": "Superstitious behavior",
+  "zh": "迷信行为"
+ },
+ "ap-psychology.u3.t3-8.learned-helplessness": {
+  "term": "Learned helplessness",
+  "zh": "习得性无助"
+ },
+ "ap-psychology.u3.t3-8.positive-reinforcement": {
+  "term": "Positive reinforcement",
+  "zh": "正强化"
+ },
+ "ap-psychology.u3.t3-8.primary-reinforcers": {
+  "term": "Primary reinforcers",
+  "zh": "一级强化物"
+ },
+ "ap-psychology.u3.t3-8.secondary-reinforcer": {
+  "term": "Secondary reinforcer",
+  "zh": "二级强化物"
+ },
+ "ap-psychology.u3.t3-8.reinforcement-discrimination": {
+  "term": "Reinforcement discrimination",
+  "zh": "强化辨别"
+ },
+ "ap-psychology.u3.t3-8.reinforcement-generalization": {
+  "term": "Reinforcement generalization",
+  "zh": "强化泛化"
+ },
+ "ap-psychology.u3.t3-8.shaping": {
+  "term": "Shaping",
+  "zh": "行为塑造"
+ },
+ "ap-psychology.u3.t3-8.instinctive-drift": {
+  "term": "Instinctive drift",
+  "zh": "本能漂移"
+ },
+ "ap-psychology.u3.t3-8.negative-reinforcement": {
+  "term": "Negative reinforcement",
+  "zh": "负强化"
+ },
+ "ap-psychology.u3.t3-8.reinforcement-schedules": {
+  "term": "Reinforcement schedules",
+  "zh": "强化程式"
+ },
+ "ap-psychology.u3.t3-8.continuous-reinforcement": {
+  "term": "Continuous reinforcement",
+  "zh": "连续强化"
+ },
+ "ap-psychology.u3.t3-8.partial-reinforcement": {
+  "term": "Partial reinforcement",
+  "zh": "部分强化"
+ },
+ "ap-psychology.u3.t3-8.fixed-interval": {
+  "term": "Fixed interval",
+  "zh": "固定间隔"
+ },
+ "ap-psychology.u3.t3-8.variable-interval": {
+  "term": "Variable interval",
+  "zh": "可变间隔"
+ },
+ "ap-psychology.u3.t3-8.fixed-ratio": {
+  "term": "Fixed ratio",
+  "zh": "固定比率"
+ },
+ "ap-psychology.u3.t3-8.variable-ratio": {
+  "term": "Variable ratio",
+  "zh": "可变比率"
+ },
+ "ap-psychology.u3.t3-8.scalloped-graph": {
+  "term": "Scalloped graph",
+  "zh": "扇贝形曲线"
+ },
+ "ap-psychology.u3.t3-9.social-learning-theory": {
+  "term": "Social learning theory",
+  "zh": "社会学习理论"
+ },
+ "ap-psychology.u3.t3-9.vicarious-conditioning": {
+  "term": "Vicarious conditioning",
+  "zh": "替代性条件反射"
+ },
+ "ap-psychology.u3.t3-9.modeling": {
+  "term": "Modeling",
+  "zh": "榜样示范（模仿）"
+ },
+ "ap-psychology.u3.t3-9.insight-learning": {
+  "term": "Insight learning",
+  "zh": "顿悟学习"
+ },
+ "ap-psychology.u3.t3-9.latent-learning": {
+  "term": "Latent learning",
+  "zh": "潜在学习"
+ },
+ "ap-psychology.u3.t3-9.cognitive-maps": {
+  "term": "Cognitive maps",
+  "zh": "认知地图"
+ },
+ "ap-psychology.u4.t4-1.attributions": {
+  "term": "Attributions",
+  "zh": "归因"
+ },
+ "ap-psychology.u4.t4-1.dispositional-attributions": {
+  "term": "Dispositional attributions",
+  "zh": "性格归因（内部归因）"
+ },
+ "ap-psychology.u4.t4-1.situational-attributions": {
+  "term": "Situational attributions",
+  "zh": "情境归因（外部归因）"
+ },
+ "ap-psychology.u4.t4-1.explanatory-style": {
+  "term": "Explanatory style",
+  "zh": "解释风格"
+ },
+ "ap-psychology.u4.t4-1.optimistic-explanatory-style": {
+  "term": "Optimistic explanatory style",
+  "zh": "乐观解释风格"
+ },
+ "ap-psychology.u4.t4-1.pessimistic-explanatory-style": {
+  "term": "Pessimistic explanatory style",
+  "zh": "悲观解释风格"
+ },
+ "ap-psychology.u4.t4-1.actor-observer-bias": {
+  "term": "Actor/observer bias",
+  "zh": "行动者-观察者偏差（双标）"
+ },
+ "ap-psychology.u4.t4-1.fundamental-attribution-error": {
+  "term": "Fundamental attribution error",
+  "zh": "基本归因错误（FAE）"
+ },
+ "ap-psychology.u4.t4-1.self-serving-bias": {
+  "term": "Self-serving bias",
+  "zh": "自利偏见"
+ },
+ "ap-psychology.u4.t4-1.internal-locus-of-control": {
+  "term": "Internal locus of control",
+  "zh": "内控点"
+ },
+ "ap-psychology.u4.t4-1.external-locus-of-control": {
+  "term": "External locus of control",
+  "zh": "外控点"
+ },
+ "ap-psychology.u4.t4-1.mere-exposure-effect": {
+  "term": "Mere exposure effect",
+  "zh": "多看你一眼效应（曝光效应）"
+ },
+ "ap-psychology.u4.t4-1.self-fulfilling-prophecy": {
+  "term": "Self-fulfilling prophecy",
+  "zh": "自证预言"
+ },
+ "ap-psychology.u4.t4-1.social-comparison": {
+  "term": "Social comparison",
+  "zh": "社会比较"
+ },
+ "ap-psychology.u4.t4-1.upward-social-comparison": {
+  "term": "Upward social comparison",
+  "zh": "向上比较"
+ },
+ "ap-psychology.u4.t4-1.downward-social-comparison": {
+  "term": "Downward social comparison",
+  "zh": "向下比较"
+ },
+ "ap-psychology.u4.t4-1.relative-deprivation": {
+  "term": "Relative deprivation",
+  "zh": "相对剥夺感"
+ },
+ "ap-psychology.u4.t4-2.stereotype": {
+  "term": "Stereotype",
+  "zh": "刻板印象"
+ },
+ "ap-psychology.u4.t4-2.prejudice": {
+  "term": "Prejudice",
+  "zh": "偏见"
+ },
+ "ap-psychology.u4.t4-2.discrimination": {
+  "term": "Discrimination",
+  "zh": "歧视"
+ },
+ "ap-psychology.u4.t4-2.implicit-attitudes": {
+  "term": "Implicit attitudes",
+  "zh": "内隐态度"
+ },
+ "ap-psychology.u4.t4-2.ethnocentrism": {
+  "term": "Ethnocentrism",
+  "zh": "民族优越感"
+ },
+ "ap-psychology.u4.t4-2.just-world-phenomenon": {
+  "term": "Just-world phenomenon",
+  "zh": "公正世界现象（善有善报）"
+ },
+ "ap-psychology.u4.t4-2.out-group-homogeneity-bias": {
+  "term": "Out-group homogeneity bias",
+  "zh": "外群体同质性偏差（外国人效应）"
+ },
+ "ap-psychology.u4.t4-2.in-group-bias": {
+  "term": "In-group bias",
+  "zh": "内群体偏见"
+ },
+ "ap-psychology.u4.t4-2.belief-perseverance": {
+  "term": "Belief perseverance",
+  "zh": "信念固执"
+ },
+ "ap-psychology.u4.t4-2.confirmation-bias": {
+  "term": "Confirmation bias",
+  "zh": "证实性偏见（确认偏差）"
+ },
+ "ap-psychology.u4.t4-2.cognitive-dissonance": {
+  "term": "Cognitive dissonance",
+  "zh": "认知失调"
+ },
+ "ap-psychology.u4.t4-2.cognitive-load": {
+  "term": "Cognitive load",
+  "zh": "认知负荷"
+ },
+ "ap-psychology.u4.t4-3.social-norms": {
+  "term": "Social norms",
+  "zh": "社会规范"
+ },
+ "ap-psychology.u4.t4-3.social-influence-theory": {
+  "term": "Social influence theory",
+  "zh": "社会影响理论"
+ },
+ "ap-psychology.u4.t4-3.normative-social-influence": {
+  "term": "Normative social influence",
+  "zh": "规范性社会影响"
+ },
+ "ap-psychology.u4.t4-3.informational-social-influence": {
+  "term": "Informational social influence",
+  "zh": "信息性社会影响"
+ },
+ "ap-psychology.u4.t4-3.persuasion": {
+  "term": "Persuasion",
+  "zh": "说服"
+ },
+ "ap-psychology.u4.t4-3.elaboration-likelihood-model": {
+  "term": "Elaboration likelihood model",
+  "zh": "精细加工可能性模型"
+ },
+ "ap-psychology.u4.t4-3.central-route": {
+  "term": "Central route",
+  "zh": "中心路径"
+ },
+ "ap-psychology.u4.t4-3.peripheral-route": {
+  "term": "Peripheral route",
+  "zh": "外周路径"
+ },
+ "ap-psychology.u4.t4-3.halo-effect": {
+  "term": "Halo effect",
+  "zh": "光环效应"
+ },
+ "ap-psychology.u4.t4-3.foot-in-the-door-technique": {
+  "term": "Foot-in-the-door technique",
+  "zh": "登门槛效应"
+ },
+ "ap-psychology.u4.t4-3.door-in-the-face-technique": {
+  "term": "Door-in-the-face technique",
+  "zh": "留面子效应"
+ },
+ "ap-psychology.u4.t4-3.conformity": {
+  "term": "Conformity",
+  "zh": "从众"
+ },
+ "ap-psychology.u4.t4-3.obedience": {
+  "term": "Obedience",
+  "zh": "服从"
+ },
+ "ap-psychology.u4.t4-3.individualism": {
+  "term": "Individualism",
+  "zh": "个人主义"
+ },
+ "ap-psychology.u4.t4-3.collectivism": {
+  "term": "Collectivism",
+  "zh": "集体主义"
+ },
+ "ap-psychology.u4.t4-3.multiculturalism": {
+  "term": "Multiculturalism",
+  "zh": "多元文化主义"
+ },
+ "ap-psychology.u4.t4-3.group-polarization": {
+  "term": "Group polarization",
+  "zh": "群体极化"
+ },
+ "ap-psychology.u4.t4-3.groupthink": {
+  "term": "Groupthink",
+  "zh": "群体思维"
+ },
+ "ap-psychology.u4.t4-3.diffusion-of-responsibility": {
+  "term": "Diffusion of responsibility",
+  "zh": "责任分散"
+ },
+ "ap-psychology.u4.t4-3.social-loafing": {
+  "term": "Social loafing",
+  "zh": "社会懈怠"
+ },
+ "ap-psychology.u4.t4-3.deindividuation": {
+  "term": "Deindividuation",
+  "zh": "去个性化"
+ },
+ "ap-psychology.u4.t4-3.social-facilitation": {
+  "term": "Social facilitation",
+  "zh": "社会助长"
+ },
+ "ap-psychology.u4.t4-3.false-consensus-effect": {
+  "term": "False consensus effect",
+  "zh": "虚假共识效应"
+ },
+ "ap-psychology.u4.t4-3.superordinate-goals": {
+  "term": "Superordinate goals",
+  "zh": "超级目标"
+ },
+ "ap-psychology.u4.t4-3.social-traps": {
+  "term": "Social traps",
+  "zh": "社会陷阱"
+ },
+ "ap-psychology.u4.t4-3.industrial-organizational-i-o-psychologists": {
+  "term": "Industrial-organizational (I/O) psychologists",
+  "zh": "工业-组织心理学家"
+ },
+ "ap-psychology.u4.t4-3.burnout": {
+  "term": "Burnout",
+  "zh": "职业倦怠"
+ },
+ "ap-psychology.u4.t4-3.altruism": {
+  "term": "Altruism",
+  "zh": "利他主义"
+ },
+ "ap-psychology.u4.t4-3.prosocial-behavior": {
+  "term": "Prosocial behavior",
+  "zh": "亲社会行为"
+ },
+ "ap-psychology.u4.t4-3.social-debt": {
+  "term": "Social debt",
+  "zh": "社会亏欠（人情）"
+ },
+ "ap-psychology.u4.t4-3.social-reciprocity-norm": {
+  "term": "Social reciprocity norm",
+  "zh": "互惠规范"
+ },
+ "ap-psychology.u4.t4-3.social-responsibility-norm": {
+  "term": "Social responsibility norm",
+  "zh": "社会责任规范"
+ },
+ "ap-psychology.u4.t4-3.bystander-effect": {
+  "term": "Bystander effect",
+  "zh": "旁观者效应"
+ },
+ "ap-psychology.u4.t4-3.situational-variables": {
+  "term": "Situational variables",
+  "zh": "情境变量"
+ },
+ "ap-psychology.u4.t4-3.attentional-variables": {
+  "term": "Attentional variables",
+  "zh": "注意变量"
+ },
+ "ap-psychology.u4.t4-4.psychodynamic-theory": {
+  "term": "Psychodynamic theory",
+  "zh": "心理动力学理论"
+ },
+ "ap-psychology.u4.t4-4.unconscious-processes": {
+  "term": "Unconscious processes",
+  "zh": "无意识过程"
+ },
+ "ap-psychology.u4.t4-4.ego-defense-mechanisms": {
+  "term": "Ego defense mechanisms",
+  "zh": "自我防御机制"
+ },
+ "ap-psychology.u4.t4-4.denial": {
+  "term": "Denial",
+  "zh": "否认"
+ },
+ "ap-psychology.u4.t4-4.displacement": {
+  "term": "Displacement",
+  "zh": "转移"
+ },
+ "ap-psychology.u4.t4-4.projection": {
+  "term": "Projection",
+  "zh": "投射"
+ },
+ "ap-psychology.u4.t4-4.rationalization": {
+  "term": "Rationalization",
+  "zh": "合理化"
+ },
+ "ap-psychology.u4.t4-4.reaction-formation": {
+  "term": "Reaction formation",
+  "zh": "反向形成"
+ },
+ "ap-psychology.u4.t4-4.regression": {
+  "term": "Regression",
+  "zh": "退行"
+ },
+ "ap-psychology.u4.t4-4.repression": {
+  "term": "Repression",
+  "zh": "压抑"
+ },
+ "ap-psychology.u4.t4-4.sublimation": {
+  "term": "Sublimation",
+  "zh": "升华"
+ },
+ "ap-psychology.u4.t4-4.projective-tests": {
+  "term": "Projective tests",
+  "zh": "投射测验"
+ },
+ "ap-psychology.u4.t4-4.preconscious-mind": {
+  "term": "Preconscious mind",
+  "zh": "前意识"
+ },
+ "ap-psychology.u4.t4-4.unconscious-mind": {
+  "term": "Unconscious mind",
+  "zh": "潜意识"
+ },
+ "ap-psychology.u4.t4-4.humanistic-psychology": {
+  "term": "Humanistic psychology",
+  "zh": "人本主义心理学"
+ },
+ "ap-psychology.u4.t4-4.unconditional-regard": {
+  "term": "Unconditional regard",
+  "zh": "无条件积极关注"
+ },
+ "ap-psychology.u4.t4-4.self-actualizing-tendency": {
+  "term": "Self-actualizing tendency",
+  "zh": "自我实现倾向"
+ },
+ "ap-psychology.u4.t4-5.social-cognitive-theory": {
+  "term": "Social-cognitive theory",
+  "zh": "社会认知理论"
+ },
+ "ap-psychology.u4.t4-5.reciprocal-determinism": {
+  "term": "Reciprocal determinism",
+  "zh": "互惠决定论"
+ },
+ "ap-psychology.u4.t4-5.self-concept": {
+  "term": "Self-concept",
+  "zh": "自我概念"
+ },
+ "ap-psychology.u4.t4-5.self-efficacy": {
+  "term": "Self-efficacy",
+  "zh": "自我效能感"
+ },
+ "ap-psychology.u4.t4-5.self-esteem": {
+  "term": "Self-esteem",
+  "zh": "自尊"
+ },
+ "ap-psychology.u4.t4-5.trait-theories": {
+  "term": "Trait theories",
+  "zh": "特质理论"
+ },
+ "ap-psychology.u4.t4-5.big-five-theory": {
+  "term": "Big Five theory",
+  "zh": "大五人格（OCEAN）"
+ },
+ "ap-psychology.u4.t4-5.agreeableness": {
+  "term": "Agreeableness",
+  "zh": "宜人性"
+ },
+ "ap-psychology.u4.t4-5.extraversion": {
+  "term": "Extraversion",
+  "zh": "外向性"
+ },
+ "ap-psychology.u4.t4-5.conscientiousness": {
+  "term": "Conscientiousness",
+  "zh": "尽责性"
+ },
+ "ap-psychology.u4.t4-5.openness-to-experience": {
+  "term": "Openness to experience",
+  "zh": "经验开放性"
+ },
+ "ap-psychology.u4.t4-5.emotional-stability": {
+  "term": "Emotional Stability",
+  "zh": "情绪稳定性（神经质反向）"
+ },
+ "ap-psychology.u4.t4-5.personality-inventories": {
+  "term": "Personality inventories",
+  "zh": "人格量表"
+ },
+ "ap-psychology.u4.t4-5.factor-analysis": {
+  "term": "Factor analysis",
+  "zh": "因素分析"
+ },
+ "ap-psychology.u4.t4-6.drive-reduction-theory": {
+  "term": "Drive-reduction theory",
+  "zh": "驱力降低理论"
+ },
+ "ap-psychology.u4.t4-6.homeostasis": {
+  "term": "Homeostasis",
+  "zh": "稳态"
+ },
+ "ap-psychology.u4.t4-6.arousal-theory": {
+  "term": "Arousal theory",
+  "zh": "唤醒理论"
+ },
+ "ap-psychology.u4.t4-6.optimal-level-of-arousal": {
+  "term": "Optimal level of arousal",
+  "zh": "最佳唤醒水平"
+ },
+ "ap-psychology.u4.t4-6.yerkes-dodson-law": {
+  "term": "Yerkes-Dodson Law",
+  "zh": "耶克斯-多德森定律"
+ },
+ "ap-psychology.u4.t4-6.self-determination-theory": {
+  "term": "Self-determination theory",
+  "zh": "自我决定理论"
+ },
+ "ap-psychology.u4.t4-6.intrinsic-motivation": {
+  "term": "Intrinsic motivation",
+  "zh": "内在动机"
+ },
+ "ap-psychology.u4.t4-6.extrinsic-motivation": {
+  "term": "Extrinsic motivation",
+  "zh": "外在动机"
+ },
+ "ap-psychology.u4.t4-6.incentive-theory": {
+  "term": "Incentive theory",
+  "zh": "诱因理论"
+ },
+ "ap-psychology.u4.t4-6.instincts": {
+  "term": "Instincts",
+  "zh": "本能"
+ },
+ "ap-psychology.u4.t4-6.lewin-s-motivational-conflicts-theory": {
+  "term": "Lewin’s motivational conflicts theory",
+  "zh": "勒温动机冲突理论"
+ },
+ "ap-psychology.u4.t4-6.approach-approach-conflicts": {
+  "term": "Approach-approach conflicts",
+  "zh": "双趋冲突"
+ },
+ "ap-psychology.u4.t4-6.approach-avoidance-conflicts": {
+  "term": "Approach-avoidance conflicts",
+  "zh": "趋避冲突"
+ },
+ "ap-psychology.u4.t4-6.avoidance-avoidance-conflicts": {
+  "term": "Avoidance-avoidance conflicts",
+  "zh": "双避冲突"
+ },
+ "ap-psychology.u4.t4-6.sensation-seeking-theory": {
+  "term": "Sensation-seeking theory",
+  "zh": "寻求刺激理论"
+ },
+ "ap-psychology.u4.t4-6.thrill-seeking": {
+  "term": "Thrill seeking",
+  "zh": "惊险寻求"
+ },
+ "ap-psychology.u4.t4-6.adventure-seeking": {
+  "term": "Adventure seeking",
+  "zh": "冒险寻求"
+ },
+ "ap-psychology.u4.t4-6.disinhibition": {
+  "term": "Disinhibition",
+  "zh": "去抑制"
+ },
+ "ap-psychology.u4.t4-6.boredom-susceptibility": {
+  "term": "Boredom susceptibility",
+  "zh": "无聊易感性"
+ },
+ "ap-psychology.u4.t4-6.hunger": {
+  "term": "Hunger",
+  "zh": "饥饿"
+ },
+ "ap-psychology.u4.t4-6.satiety": {
+  "term": "Satiety",
+  "zh": "饱腹感"
+ },
+ "ap-psychology.u4.t4-7.affect": {
+  "term": "Affect",
+  "zh": "情感"
+ },
+ "ap-psychology.u4.t4-7.physiological-experiences": {
+  "term": "Physiological experiences",
+  "zh": "生理体验"
+ },
+ "ap-psychology.u4.t4-7.cognitive-experiences": {
+  "term": "Cognitive experiences",
+  "zh": "认知体验"
+ },
+ "ap-psychology.u4.t4-7.cognitive-label": {
+  "term": "Cognitive label",
+  "zh": "认知标签"
+ },
+ "ap-psychology.u4.t4-7.facial-feedback-hypothesis": {
+  "term": "Facial-feedback hypothesis",
+  "zh": "面部反馈假设"
+ },
+ "ap-psychology.u4.t4-7.broaden-and-build-theory-of-emotion": {
+  "term": "Broaden-and-build theory of emotion",
+  "zh": "情绪拓展-建构理论"
+ },
+ "ap-psychology.u4.t4-7.cognitive-appraisal": {
+  "term": "Cognitive appraisal",
+  "zh": "认知评价"
+ },
+ "ap-psychology.u4.t4-7.display-rules": {
+  "term": "Display rules",
+  "zh": "情绪表达规则"
+ },
+ "ap-psychology.u4.t4-7.emotional-elicitors": {
+  "term": "Emotional elicitors",
+  "zh": "情绪诱因"
+ },
+ "ap-psychology.u5.t5-1.health-psychology": {
+  "term": "Health psychology",
+  "zh": "健康心理学"
+ },
+ "ap-psychology.u5.t5-1.stress": {
+  "term": "Stress",
+  "zh": "应激（压力）"
+ },
+ "ap-psychology.u5.t5-1.hypertension": {
+  "term": "Hypertension",
+  "zh": "高血压"
+ },
+ "ap-psychology.u5.t5-1.immune-suppression": {
+  "term": "Immune suppression",
+  "zh": "免疫抑制"
+ },
+ "ap-psychology.u5.t5-1.stressors": {
+  "term": "Stressors",
+  "zh": "压力源"
+ },
+ "ap-psychology.u5.t5-1.eustress-motivating": {
+  "term": "Eustress (motivating)",
+  "zh": "良性压力"
+ },
+ "ap-psychology.u5.t5-1.distress-debilitating": {
+  "term": "Distress (debilitating)",
+  "zh": "恶性压力"
+ },
+ "ap-psychology.u5.t5-1.adverse-childhood-experiences-aces": {
+  "term": "Adverse childhood experiences (ACEs)",
+  "zh": "童年逆境经历"
+ },
+ "ap-psychology.u5.t5-1.general-adaptation-syndrome-gas": {
+  "term": "General adaptation syndrome (GAS)",
+  "zh": "一般适应综合征"
+ },
+ "ap-psychology.u5.t5-1.alarm-reaction-phase": {
+  "term": "Alarm reaction phase",
+  "zh": "警觉期"
+ },
+ "ap-psychology.u5.t5-1.resistance-phase": {
+  "term": "Resistance phase",
+  "zh": "抵抗期"
+ },
+ "ap-psychology.u5.t5-1.flight-flight-freeze-response": {
+  "term": "Flight-flight-freeze response",
+  "zh": "战逃僵反应"
+ },
+ "ap-psychology.u5.t5-1.exhaustion-phase": {
+  "term": "Exhaustion phase",
+  "zh": "衰竭期"
+ },
+ "ap-psychology.u5.t5-1.tend-and-befriend-theory": {
+  "term": "Tend-and-befriend theory",
+  "zh": "照顾与结盟理论"
+ },
+ "ap-psychology.u5.t5-1.problem-focused-coping": {
+  "term": "Problem-focused coping",
+  "zh": "问题中心应对"
+ },
+ "ap-psychology.u5.t5-1.emotion-focused-coping": {
+  "term": "Emotion-focused coping",
+  "zh": "情绪中心应对"
+ },
+ "ap-psychology.u5.t5-2.positive-psychology": {
+  "term": "Positive psychology",
+  "zh": "积极心理学"
+ },
+ "ap-psychology.u5.t5-2.well-being": {
+  "term": "Well-being",
+  "zh": "幸福感"
+ },
+ "ap-psychology.u5.t5-2.resilience": {
+  "term": "Resilience",
+  "zh": "心理韧性（复原力）"
+ },
+ "ap-psychology.u5.t5-2.positive-emotions": {
+  "term": "Positive emotions",
+  "zh": "积极情绪"
+ },
+ "ap-psychology.u5.t5-2.gratitude": {
+  "term": "Gratitude",
+  "zh": "感恩"
+ },
+ "ap-psychology.u5.t5-2.positive-subjective-experiences": {
+  "term": "Positive subjective experiences",
+  "zh": "积极主观体验"
+ },
+ "ap-psychology.u5.t5-2.subjective-well-being": {
+  "term": "Subjective well-being",
+  "zh": "主观幸福感"
+ },
+ "ap-psychology.u5.t5-2.signature-strengths": {
+  "term": "Signature strengths",
+  "zh": "个人优势（标志性优势）"
+ },
+ "ap-psychology.u5.t5-2.virtues": {
+  "term": "Virtues",
+  "zh": "六大美德"
+ },
+ "ap-psychology.u5.t5-2.positive-objective-experiences": {
+  "term": "Positive objective experiences",
+  "zh": "积极客观体验"
+ },
+ "ap-psychology.u5.t5-2.happiness": {
+  "term": "Happiness",
+  "zh": "幸福"
+ },
+ "ap-psychology.u5.t5-2.categories-of-virtues-wisdom-courage-humanity-justice-temperance-transcendence": {
+  "term": "Categories of virtues (wisdom, courage, humanity, justice, temperance, transcendence)",
+  "zh": "六大美德类别"
+ },
+ "ap-psychology.u5.t5-2.posttraumatic-growth": {
+  "term": "Posttraumatic growth",
+  "zh": "创伤后成长"
+ },
+ "ap-psychology.u5.t5-3.dysfunction": {
+  "term": "Dysfunction",
+  "zh": "功能失调（4D之一）"
+ },
+ "ap-psychology.u5.t5-3.distress": {
+  "term": "Distress",
+  "zh": "痛苦（4D之一）"
+ },
+ "ap-psychology.u5.t5-3.deviation-from-the-social-norm": {
+  "term": "Deviation from the social norm",
+  "zh": "偏离社会规范（越轨）"
+ },
+ "ap-psychology.u5.t5-3.cultural-societal-norms": {
+  "term": "Cultural/societal norms",
+  "zh": "文化/社会规范"
+ },
+ "ap-psychology.u5.t5-3.stigma": {
+  "term": "Stigma",
+  "zh": "污名化"
+ },
+ "ap-psychology.u5.t5-3.racism": {
+  "term": "Racism",
+  "zh": "种族主义"
+ },
+ "ap-psychology.u5.t5-3.sexism": {
+  "term": "Sexism",
+  "zh": "性别主义"
+ },
+ "ap-psychology.u5.t5-3.ageism": {
+  "term": "Ageism",
+  "zh": "年龄主义"
+ },
+ "ap-psychology.u5.t5-3.discrimination": {
+  "term": "Discrimination",
+  "zh": "歧视"
+ },
+ "ap-psychology.u5.t5-3.diagnostic-and-statistical-manual-of-mental-disorders-dsm": {
+  "term": "Diagnostic and Statistical Manual of Mental Disorders (DSM)",
+  "zh": "精神障碍诊断与统计手册"
+ },
+ "ap-psychology.u5.t5-3.international-classification-of-mental-disorders-icd": {
+  "term": "International Classification of Mental Disorders (ICD)",
+  "zh": "国际疾病分类（ICD）"
+ },
+ "ap-psychology.u5.t5-3.eclectic-approach": {
+  "term": "Eclectic approach",
+  "zh": "折中主义方法"
+ },
+ "ap-psychology.u5.t5-3.behavioral-perspective": {
+  "term": "Behavioral perspective",
+  "zh": "行为主义视角（异常）"
+ },
+ "ap-psychology.u5.t5-3.maladaptive-learned-associations": {
+  "term": "Maladaptive learned associations",
+  "zh": "适应不良的习得联结"
+ },
+ "ap-psychology.u5.t5-3.humanistic-perspective": {
+  "term": "Humanistic perspective",
+  "zh": "人本主义视角（异常）"
+ },
+ "ap-psychology.u5.t5-3.cognitive-perspective": {
+  "term": "Cognitive perspective",
+  "zh": "认知视角（异常）"
+ },
+ "ap-psychology.u5.t5-3.psychodynamic-perspective": {
+  "term": "Psychodynamic perspective",
+  "zh": "心理动力学视角（异常）"
+ },
+ "ap-psychology.u5.t5-3.evolutionary-perspective": {
+  "term": "Evolutionary perspective",
+  "zh": "进化论视角（异常）"
+ },
+ "ap-psychology.u5.t5-3.sociocultural-perspective": {
+  "term": "Sociocultural perspective",
+  "zh": "社会文化视角"
+ },
+ "ap-psychology.u5.t5-3.biological-perspective": {
+  "term": "Biological perspective",
+  "zh": "生物视角（异常）"
+ },
+ "ap-psychology.u5.t5-3.biopsychosocial-model": {
+  "term": "Biopsychosocial model",
+  "zh": "生物-心理-社会模型"
+ },
+ "ap-psychology.u5.t5-3.diathesis-stress-model": {
+  "term": "Diathesis-stress model",
+  "zh": "素质-压力模型"
+ },
+ "ap-psychology.u5.t5-4.neurodevelopmental-disorders": {
+  "term": "Neurodevelopmental disorders",
+  "zh": "神经发育障碍"
+ },
+ "ap-psychology.u5.t5-4.attention-deficit-hyperactivity-disorder-adhd": {
+  "term": "Attention-deficit / hyperactivity disorder (ADHD)",
+  "zh": "注意缺陷/多动障碍"
+ },
+ "ap-psychology.u5.t5-4.autism-spectrum-disorder-asd": {
+  "term": "Autism Spectrum Disorder (ASD)",
+  "zh": "自闭症谱系障碍"
+ },
+ "ap-psychology.u5.t5-4.schizophrenic-spectrum-disorders": {
+  "term": "Schizophrenic Spectrum Disorders",
+  "zh": "精神分裂症谱系障碍"
+ },
+ "ap-psychology.u5.t5-4.delusions": {
+  "term": "Delusions",
+  "zh": "妄想"
+ },
+ "ap-psychology.u5.t5-4.hallucinations": {
+  "term": "Hallucinations",
+  "zh": "幻觉"
+ },
+ "ap-psychology.u5.t5-4.disorganized-thinking": {
+  "term": "Disorganized thinking",
+  "zh": "思维紊乱"
+ },
+ "ap-psychology.u5.t5-4.disorganized-speech": {
+  "term": "Disorganized speech",
+  "zh": "言语紊乱"
+ },
+ "ap-psychology.u5.t5-4.disorganized-motor-behavior": {
+  "term": "Disorganized motor behavior",
+  "zh": "行为紊乱（运动）"
+ },
+ "ap-psychology.u5.t5-4.negative-symptoms": {
+  "term": "Negative symptoms",
+  "zh": "阴性症状"
+ },
+ "ap-psychology.u5.t5-4.positive-symptoms": {
+  "term": "Positive symptoms",
+  "zh": "阳性症状"
+ },
+ "ap-psychology.u5.t5-4.delusions-of-persecution": {
+  "term": "Delusions of persecution",
+  "zh": "被害妄想"
+ },
+ "ap-psychology.u5.t5-4.delusions-of-grandeur": {
+  "term": "Delusions of grandeur",
+  "zh": "夸大妄想"
+ },
+ "ap-psychology.u5.t5-4.word-salad": {
+  "term": "Word salad",
+  "zh": "词语沙拉"
+ },
+ "ap-psychology.u5.t5-4.catatonia": {
+  "term": "Catatonia",
+  "zh": "紧张症"
+ },
+ "ap-psychology.u5.t5-4.flat-affect": {
+  "term": "Flat affect",
+  "zh": "情感平淡"
+ },
+ "ap-psychology.u5.t5-4.catatonic-stupor": {
+  "term": "Catatonic stupor",
+  "zh": "紧张性木僵"
+ },
+ "ap-psychology.u5.t5-4.dopamine-hypothesis": {
+  "term": "Dopamine hypothesis",
+  "zh": "多巴胺假说"
+ },
+ "ap-psychology.u5.t5-4.depressive-disorders": {
+  "term": "Depressive disorders",
+  "zh": "抑郁障碍"
+ },
+ "ap-psychology.u5.t5-4.major-depressive-disorder": {
+  "term": "Major Depressive Disorder",
+  "zh": "重度抑郁障碍（单相）"
+ },
+ "ap-psychology.u5.t5-4.persistent-depressive-disorder": {
+  "term": "Persistent Depressive Disorder",
+  "zh": "持续性抑郁障碍"
+ },
+ "ap-psychology.u5.t5-4.bipolar-disorders": {
+  "term": "Bipolar disorders",
+  "zh": "双相障碍"
+ },
+ "ap-psychology.u5.t5-4.cycling": {
+  "term": "Cycling",
+  "zh": "循环发作"
+ },
+ "ap-psychology.u5.t5-4.mania": {
+  "term": "Mania",
+  "zh": "躁狂发作"
+ },
+ "ap-psychology.u5.t5-4.depression": {
+  "term": "Depression",
+  "zh": "抑郁发作"
+ },
+ "ap-psychology.u5.t5-4.bipolar-i-disorder": {
+  "term": "Bipolar I Disorder",
+  "zh": "双相I型障碍"
+ },
+ "ap-psychology.u5.t5-4.bipolar-ii-disorder": {
+  "term": "Bipolar II Disorder",
+  "zh": "双相II型障碍"
+ },
+ "ap-psychology.u5.t5-4.anxiety-disorders": {
+  "term": "Anxiety disorders",
+  "zh": "焦虑障碍"
+ },
+ "ap-psychology.u5.t5-4.specific-phobia": {
+  "term": "Specific phobia",
+  "zh": "特定恐惧症"
+ },
+ "ap-psychology.u5.t5-4.acrophobia": {
+  "term": "Acrophobia",
+  "zh": "恐高症"
+ },
+ "ap-psychology.u5.t5-4.arachnophobia": {
+  "term": "Arachnophobia",
+  "zh": "恐蛛症"
+ },
+ "ap-psychology.u5.t5-4.agoraphobia": {
+  "term": "Agoraphobia",
+  "zh": "广场恐惧症"
+ },
+ "ap-psychology.u5.t5-4.panic-disorder": {
+  "term": "Panic disorder",
+  "zh": "惊恐障碍"
+ },
+ "ap-psychology.u5.t5-4.panic-attack": {
+  "term": "Panic attack",
+  "zh": "惊恐发作"
+ },
+ "ap-psychology.u5.t5-4.ataque-de-nervios": {
+  "term": "Ataque de nervios",
+  "zh": "神经发作（文化综合征）"
+ },
+ "ap-psychology.u5.t5-4.social-anxiety-disorder": {
+  "term": "Social anxiety disorder",
+  "zh": "社交焦虑障碍"
+ },
+ "ap-psychology.u5.t5-4.taijin-kyofusho": {
+  "term": "Taijin kyofusho",
+  "zh": "对人恐惧症"
+ },
+ "ap-psychology.u5.t5-4.generalized-anxiety-disorder-gad": {
+  "term": "Generalized anxiety disorder (GAD)",
+  "zh": "广泛性焦虑障碍"
+ },
+ "ap-psychology.u5.t5-4.obsessive-compulsive-and-related-disorders": {
+  "term": "Obsessive-compulsive and related disorders",
+  "zh": "强迫及相关障碍"
+ },
+ "ap-psychology.u5.t5-4.obsessions": {
+  "term": "Obsessions",
+  "zh": "强迫观念"
+ },
+ "ap-psychology.u5.t5-4.compulsions": {
+  "term": "Compulsions",
+  "zh": "强迫行为"
+ },
+ "ap-psychology.u5.t5-4.obsessive-compulsive-disorder": {
+  "term": "Obsessive-compulsive disorder",
+  "zh": "强迫症（OCD）"
+ },
+ "ap-psychology.u5.t5-4.hoarding-disorder": {
+  "term": "Hoarding disorder",
+  "zh": "囤积障碍"
+ },
+ "ap-psychology.u5.t5-4.dissociative-disorders": {
+  "term": "Dissociative disorders",
+  "zh": "分离性障碍"
+ },
+ "ap-psychology.u5.t5-4.dissociation": {
+  "term": "Dissociation",
+  "zh": "解离"
+ },
+ "ap-psychology.u5.t5-4.dissociative-amnesia": {
+  "term": "Dissociative amnesia",
+  "zh": "分离性遗忘"
+ },
+ "ap-psychology.u5.t5-4.dissociative-identity-disorder": {
+  "term": "Dissociative identity disorder",
+  "zh": "分离性身份障碍（DID）"
+ },
+ "ap-psychology.u5.t5-4.trauma-and-stressor-related-disorders": {
+  "term": "Trauma and stressor-related disorders",
+  "zh": "创伤及应激相关障碍"
+ },
+ "ap-psychology.u5.t5-4.hypervigilance": {
+  "term": "Hypervigilance",
+  "zh": "过度警觉"
+ },
+ "ap-psychology.u5.t5-4.flashbacks": {
+  "term": "Flashbacks",
+  "zh": "闪回"
+ },
+ "ap-psychology.u5.t5-4.insomnia": {
+  "term": "Insomnia",
+  "zh": "失眠（创伤相关）"
+ },
+ "ap-psychology.u5.t5-4.emotional-detachment": {
+  "term": "Emotional detachment",
+  "zh": "情感疏离"
+ },
+ "ap-psychology.u5.t5-4.hostility": {
+  "term": "Hostility",
+  "zh": "敌意"
+ },
+ "ap-psychology.u5.t5-4.posttraumatic-stress-disorder": {
+  "term": "Posttraumatic stress disorder",
+  "zh": "创伤后应激障碍（PTSD）"
+ },
+ "ap-psychology.u5.t5-4.feeding-and-eating-disorders": {
+  "term": "Feeding and eating disorders",
+  "zh": "喂养及进食障碍"
+ },
+ "ap-psychology.u5.t5-4.anorexia-nervosa": {
+  "term": "Anorexia nervosa",
+  "zh": "神经性厌食症"
+ },
+ "ap-psychology.u5.t5-4.bulimia-nervosa": {
+  "term": "Bulimia nervosa",
+  "zh": "神经性贪食症"
+ },
+ "ap-psychology.u5.t5-4.personality-disorders": {
+  "term": "Personality disorders",
+  "zh": "人格障碍"
+ },
+ "ap-psychology.u5.t5-4.cluster-a-odd-or-eccentric-cluster": {
+  "term": "Cluster A (odd or eccentric cluster)",
+  "zh": "A组人格障碍（怪异 Weird）"
+ },
+ "ap-psychology.u5.t5-4.paranoid-personality-disorder": {
+  "term": "Paranoid personality disorder",
+  "zh": "偏执型人格障碍"
+ },
+ "ap-psychology.u5.t5-4.schizoid-personality-disorder": {
+  "term": "Schizoid personality disorder",
+  "zh": "分裂样人格障碍"
+ },
+ "ap-psychology.u5.t5-4.schizotypal-personality-disorder": {
+  "term": "Schizotypal personality disorder",
+  "zh": "分裂型人格障碍"
+ },
+ "ap-psychology.u5.t5-4.cluster-b-dramatic-emotional-or-erratic-cluster": {
+  "term": "Cluster B (dramatic, emotional, or erratic cluster)",
+  "zh": "B组人格障碍（狂野 Wild）"
+ },
+ "ap-psychology.u5.t5-4.antisocial-personality-disorder": {
+  "term": "Antisocial personality disorder",
+  "zh": "反社会型人格障碍"
+ },
+ "ap-psychology.u5.t5-4.histrionic-personality-disorder": {
+  "term": "Histrionic personality disorder",
+  "zh": "表演型人格障碍"
+ },
+ "ap-psychology.u5.t5-4.narcissistic-personality-disorder": {
+  "term": "Narcissistic personality disorder",
+  "zh": "自恋型人格障碍"
+ },
+ "ap-psychology.u5.t5-4.borderline-personality-disorder": {
+  "term": "Borderline personality disorder",
+  "zh": "边缘型人格障碍"
+ },
+ "ap-psychology.u5.t5-4.cluster-c-anxious-or-fearful-cluster": {
+  "term": "Cluster C (anxious or fearful cluster)",
+  "zh": "C组人格障碍（担忧 Worried）"
+ },
+ "ap-psychology.u5.t5-4.avoidant-personality-disorder": {
+  "term": "Avoidant personality disorder",
+  "zh": "回避型人格障碍"
+ },
+ "ap-psychology.u5.t5-4.dependent-personality-disorder": {
+  "term": "Dependent personality disorder",
+  "zh": "依赖型人格障碍"
+ },
+ "ap-psychology.u5.t5-4.obsessive-compulsive-personality-disorder": {
+  "term": "Obsessive-compulsive personality disorder",
+  "zh": "强迫型人格障碍（≠OCD）"
+ },
+ "ap-psychology.u5.t5-5.evidence-based-interventions": {
+  "term": "Evidence-based interventions",
+  "zh": "循证干预"
+ },
+ "ap-psychology.u5.t5-5.cultural-humility": {
+  "term": "Cultural humility",
+  "zh": "文化谦逊"
+ },
+ "ap-psychology.u5.t5-5.therapeutic-alliance": {
+  "term": "Therapeutic alliance",
+  "zh": "治疗联盟"
+ },
+ "ap-psychology.u5.t5-5.psychotropic-medication": {
+  "term": "Psychotropic medication",
+  "zh": "精神类药物"
+ },
+ "ap-psychology.u5.t5-5.nonmaleficence": {
+  "term": "Nonmaleficence",
+  "zh": "无害原则"
+ },
+ "ap-psychology.u5.t5-5.fidelity": {
+  "term": "Fidelity",
+  "zh": "忠诚原则"
+ },
+ "ap-psychology.u5.t5-5.integrity": {
+  "term": "Integrity",
+  "zh": "诚信原则"
+ },
+ "ap-psychology.u5.t5-5.respect-for-people-s-rights-and-dignity": {
+  "term": "Respect for people’s rights and dignity",
+  "zh": "尊重权利与尊严"
+ },
+ "ap-psychology.u5.t5-5.psychodynamic-therapies": {
+  "term": "Psychodynamic therapies",
+  "zh": "心理动力学疗法"
+ },
+ "ap-psychology.u5.t5-5.free-association": {
+  "term": "Free association",
+  "zh": "自由联想"
+ },
+ "ap-psychology.u5.t5-5.dream-interpretation": {
+  "term": "Dream interpretation",
+  "zh": "梦的解析"
+ },
+ "ap-psychology.u5.t5-5.cognitive-therapies": {
+  "term": "Cognitive therapies",
+  "zh": "认知疗法"
+ },
+ "ap-psychology.u5.t5-5.cognitive-restructuring": {
+  "term": "Cognitive restructuring",
+  "zh": "认知重构"
+ },
+ "ap-psychology.u5.t5-5.fear-hierarchies": {
+  "term": "Fear hierarchies",
+  "zh": "恐惧等级"
+ },
+ "ap-psychology.u5.t5-5.combating-maladaptive-thinking": {
+  "term": "Combating maladaptive thinking",
+  "zh": "对抗适应不良思维"
+ },
+ "ap-psychology.u5.t5-5.cognitive-triad": {
+  "term": "Cognitive triad",
+  "zh": "认知三角"
+ },
+ "ap-psychology.u5.t5-5.applied-behavior-analysis": {
+  "term": "Applied behavior analysis",
+  "zh": "应用行为分析"
+ },
+ "ap-psychology.u5.t5-5.exposure-therapies": {
+  "term": "Exposure therapies",
+  "zh": "暴露疗法"
+ },
+ "ap-psychology.u5.t5-5.systematic-desensitization": {
+  "term": "Systematic desensitization",
+  "zh": "系统脱敏"
+ },
+ "ap-psychology.u5.t5-5.aversion-therapies": {
+  "term": "Aversion therapies",
+  "zh": "厌恶疗法"
+ },
+ "ap-psychology.u5.t5-5.token-economies": {
+  "term": "Token economies",
+  "zh": "代币经济"
+ },
+ "ap-psychology.u5.t5-5.biofeedback": {
+  "term": "Biofeedback",
+  "zh": "生物反馈"
+ },
+ "ap-psychology.u5.t5-5.cognitive-behavioral-therapies": {
+  "term": "Cognitive-behavioral therapies",
+  "zh": "认知行为疗法（CBT）"
+ },
+ "ap-psychology.u5.t5-5.dialectical-behavior-therapy": {
+  "term": "Dialectical behavior therapy",
+  "zh": "辩证行为疗法（DBT）"
+ },
+ "ap-psychology.u5.t5-5.rational-emotive-behavior-therapy-rebt": {
+  "term": "Rational emotive behavior therapy (REBT)",
+  "zh": "理性情绪行为疗法（REBT）"
+ },
+ "ap-psychology.u5.t5-5.person-centered-therapy": {
+  "term": "Person-centered therapy",
+  "zh": "来访者中心疗法"
+ },
+ "ap-psychology.u5.t5-5.unconditional-positive-regard": {
+  "term": "Unconditional positive regard",
+  "zh": "无条件积极关注"
+ },
+ "ap-psychology.u5.t5-5.active-listening": {
+  "term": "Active listening",
+  "zh": "积极倾听"
+ },
+ "ap-psychology.u5.t5-5.group-therapy": {
+  "term": "Group therapy",
+  "zh": "团体治疗"
+ },
+ "ap-psychology.u5.t5-5.hypnosis": {
+  "term": "Hypnosis",
+  "zh": "催眠"
+ },
+ "ap-psychology.u5.t5-5.psychoactive-medication": {
+  "term": "Psychoactive medication",
+  "zh": "精神活性药物（治疗用）"
+ },
+ "ap-psychology.u5.t5-5.antidepressants": {
+  "term": "Antidepressants",
+  "zh": "抗抑郁药"
+ },
+ "ap-psychology.u5.t5-5.antianxiety-drugs": {
+  "term": "Antianxiety drugs",
+  "zh": "抗焦虑药"
+ },
+ "ap-psychology.u5.t5-5.lithium": {
+  "term": "Lithium",
+  "zh": "锂盐"
+ },
+ "ap-psychology.u5.t5-5.antipsychotic-medications": {
+  "term": "Antipsychotic medications",
+  "zh": "抗精神病药"
+ },
+ "ap-psychology.u5.t5-5.tardive-dyskinesia": {
+  "term": "Tardive dyskinesia",
+  "zh": "迟发性运动障碍"
+ },
+ "ap-psychology.u5.t5-5.psychosurgery": {
+  "term": "Psychosurgery",
+  "zh": "精神外科"
+ },
+ "ap-psychology.u5.t5-5.lesioning": {
+  "term": "Lesioning",
+  "zh": "损毁术"
+ },
+ "ap-psychology.u5.t5-5.tms-transcranial-magnetic-stimulation": {
+  "term": "TMS (transcranial magnetic stimulation)",
+  "zh": "经颅磁刺激（TMS）"
+ },
+ "ap-psychology.u5.t5-5.electroconvulsive-therapy": {
+  "term": "Electroconvulsive therapy",
+  "zh": "电休克疗法（ECT）"
+ },
+ "ap-psychology.u5.t5-5.lobotomy": {
+  "term": "Lobotomy",
+  "zh": "前脑叶切断术"
+ }
+}

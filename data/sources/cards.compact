@@ -1,0 +1,4070 @@
+# Term cards rewritten from the Irene-refined 合订本 + Leo's OPML.
+# Field policy: def = one sentence (zh name prefix first, then en) · ex = expanded example
+# · pit = only real confusions · note = cross-links/exam tips. Blank is fine.
+# Importer: EnrichFromCards (authoritative — overwrites any earlier source).
+
+# Term cards rewritten from the Irene-refined 合订本 + Leo's OPML.
+# Field policy: def = one sentence (zh first, en second) · ex = expanded example
+# · pit = only real confusions · note = cross-links/exam tips. Blank is fine.
+# Importer: EnrichFromCards (authoritative — overwrites any earlier source).
+
+@@ ap-psychology.u2.t2-1.bottom-up-processing
+def: 自下而上加工。从原始的感觉细节出发、一步步向上搭出知觉，不依赖任何已有知识。
+def: Processing that builds up from raw sensory data to perception, with no prior knowledge involved.
+ex: 老外第一次看汉字，只能一笔一画地拆解——因为他没有任何已有知识可以依赖。
+note: BU = **B**uild **U**p from the details；和 Top-down 对着记。
+
+@@ ap-psychology.u2.t2-1.top-down-processing
+def: 自上而下加工。用已有的知识、预期和背景来解释感觉信息——日常生活中更常用的方式。
+def: Using prior knowledge, expectations, and context to interpret sensory information.
+ex: 研表究明：汉字的序顺并不定一影阅响读！——读到这句你根本没发现字是乱的，大脑自动用已有知识补全了。
+note: TD = **T**hink **D**own from the big picture；更高效，所以日常用得更多。
+
+@@ ap-psychology.u2.t2-1.schema
+def: 图式。组织知识的心理框架，告诉我们「应该预期什么」。
+def: A mental framework that organizes knowledge and guides expectations about the world.
+ex: 你对餐厅的 schema：进门、点餐、吃饭、买单——去任何一家餐厅都会这样预期，不用重新学。
+note: Concept 回答 *What is it?*，Schema 回答 *What should I expect?*——别混。Piaget 的同化/顺应（Unit 3.4）就是在改 schema。
+
+@@ ap-psychology.u2.t2-1.perceptual-set
+def: 知觉定势。基于经验、情境、文化、情绪和动机，以某种固定方式去知觉事物的心理倾向——「先入为主」。
+def: A mental predisposition to perceive things in a certain way, influenced by experience, context, culture, emotions, and motivation.
+ex: 刚看完恐怖片走在黑路上，树影都觉得像鬼——你看到的是你**预期**看到的。
+pit: 知觉定势本身**没有好坏之分**；真正坏事的是 Mental set 思维定势（2.2，固守旧方法）。俩容易混，考试注意。
+
+@@ ap-psychology.u2.t2-1.gestalt-psychology
+def: 格式塔心理学。强调「整体大于部分之和」的心理学派：大脑天生会把零散信息组织成有意义的整体。
+def: A school of psychology emphasizing that the whole is greater than the sum of its parts.
+ex: 我们看到的从来不是一堆孤立的点和线，而是一个完整的图形。
+note: 考点集中在组织原则：figure-ground + 分组原则（相似、接近、闭合）。
+
+@@ ap-psychology.u2.t2-1.closure
+def: 闭合律。大脑自动「脑补」图形缺失的部分，把它看成一个完整的整体。
+def: The tendency to mentally fill in gaps in incomplete figures to perceive them as complete.
+ex: 一个缺了一小块的圆，你依然会把它看成圆。
+
+@@ ap-psychology.u2.t2-1.figure-and-ground
+def: 图形与背景。大脑自动把视觉输入分离成主体（figure）和背景（ground）的组织方式。
+def: The brain automatically separates visual input into a main object (figure) and its background (ground).
+ex: 经典的花瓶与人脸图：你要么看到花瓶，要么看到两张对视的脸——可以切换，但不能同时看到。
+note: 不只视觉：提琴曲里旋律是 figure，伴奏是 ground。
+
+@@ ap-psychology.u2.t2-1.proximity
+def: 接近律。空间上靠得近的物体，容易被知觉为同一组。
+def: Objects close together in space tend to be perceived as belonging to the same group.
+ex: 三个点靠在一起、另外三个点靠在一起，你会自动把它们看成两组。
+
+@@ ap-psychology.u2.t2-1.similarity
+def: 相似性。外观相似（颜色、形状、大小）的物体，容易被知觉为同一组。
+def: Objects that look alike tend to be grouped together.
+ex: 红点和蓝点交替排成一排，你会按颜色分成两组，而不是按列看。
+
+@@ ap-psychology.u2.t2-1.attention
+def: 注意。把意识集中在特定刺激上、同时过滤掉其他刺激的过程。
+def: The process of focusing conscious awareness on a particular stimulus while filtering out others.
+ex: 专心听老师讲课时，窗外的鸟叫声好像根本「不存在」。
+
+@@ ap-psychology.u2.t2-1.selective-attention
+def: 选择性注意。注意像过滤器：集中于一个刺激，忽略其他所有刺激。
+def: Focusing on one specific stimulus while ignoring others — attention acts as a filter.
+ex: 嘈杂的自习室里专心做题，周围的聊天声完全没进脑子。
+
+@@ ap-psychology.u2.t2-1.cocktail-party-effect
+def: 鸡尾酒会效应。没在主动听的背景信息里，个人相关的刺激（比如你的名字）仍然会被立刻捕捉到的现象。
+def: The ability to detect personally relevant information even when not actively attending to it.
+ex: 嘈杂的派对上你没在听别人聊天，但远处有人叫你名字，注意力马上被吸走。
+note: 说明选择性注意**没有完全屏蔽**信息，而是在后台默默监控。
+
+@@ ap-psychology.u2.t2-1.inattentional-blindness
+def: 非注意盲视。注意高度集中在某件事上时，对视野里非常显眼的刺激「视而不见」。
+def: Failing to notice a fully visible but unexpected stimulus when attention is focused elsewhere.
+ex: 经典大猩猩实验：专注数传球次数，一只大猩猩走过画面都没看到。🦍
+
+@@ ap-psychology.u2.t2-1.change-blindness
+def: 变化盲视。场景在短暂干扰期间发生了明显变化，却没被察觉。
+def: Failing to detect obvious changes in a scene when the change occurs during a brief disruption.
+ex: 问路实验：你正在给人指路，中途对方被换成另一个人，你竟然没发现。
+
+@@ ap-psychology.u2.t2-1.binocular-depth-cues
+def: 双眼深度线索。需要两只眼睛协同工作才能获得的深度（远近）信息，主要用来判断近距离。
+def: Depth cues that require both eyes working together, mainly for judging nearby distances.
+note: 就两个：Retinal disparity（视网膜差异）+ Convergence（辐合）。
+
+@@ ap-psychology.u2.t2-1.retinal-disparity
+def: 视网膜差异。左右眼成像的微小差异——物体越近，差异越大。
+def: The slight difference between the images on the two retinas; greater disparity = closer object.
+ex: 分别闭上一只眼看手指：位置不一样；手指越靠近脸，差异越明显。
+
+@@ ap-psychology.u2.t2-1.convergence
+def: 辐合。看近处物体时双眼向内转（斗鸡眼）；眼部肌肉越紧张，说明物体越近。
+def: The inward turning of the eyes when viewing a nearby object; more muscle tension = closer.
+ex: 把手指慢慢贴近鼻尖，感受眼睛在「对眼」——大脑靠这份肌肉紧张度判断距离。
+
+@@ ap-psychology.u2.t2-1.monocular-depth-cues
+def: 单眼深度线索。单只眼睛就能利用的深度线索——所以看照片、画画这种 2D 平面也能判断远近。
+def: Depth cues available to each eye alone, useful for perceiving distance in 2D images.
+note: 五个要会认：线性透视、遮挡、相对大小、相对清晰度、纹理梯度。
+
+@@ ap-psychology.u2.t2-1.relative-clarity
+def: 相对清晰度。看起来清晰的近，雾蒙蒙的远（空气里的尘埃和水汽会「糊化」远物）。
+def: Clearer objects appear closer; hazier objects appear farther away.
+ex: 近处的树根根分明，远处的山雾蒙蒙一片。
+
+@@ ap-psychology.u2.t2-1.relative-size
+def: 相对大小。两个物体实际大小相同时，在视野里看起来更小的那个更远。
+def: If two objects are assumed to be the same actual size, the smaller image appears farther away.
+ex: 两辆一样的车，看起来小的那辆离你更远。
+
+@@ ap-psychology.u2.t2-1.texture-gradient
+def: 纹理梯度。近处的纹理清晰粗大，远处的纹理变得密集模糊。
+def: Nearby surfaces show detailed, coarse texture; distant surfaces appear dense and smooth.
+ex: 脚下的草地根根分明，远处的草地糊成一片绿。
+
+@@ ap-psychology.u2.t2-1.linear-perspective
+def: 线性透视。平行线在远处看起来会汇聚于一点；汇聚得越厉害，感觉越远。
+def: Parallel lines appear to converge in the distance; more convergence = farther away.
+ex: 铁轨在远方汇成一个点。
+
+@@ ap-psychology.u2.t2-1.interposition
+def: 遮挡。一个物体挡住另一个物体时，被挡住的那个被知觉为更远。
+def: When one object overlaps another, the blocked object is perceived as farther away.
+ex: 一栋楼挡住了另一栋楼——被挡的那栋看起来更远。
+
+@@ ap-psychology.u2.t2-1.apparent-movement
+def: 似动。一系列静止图像快速连续呈现时，产生的「在动」的知觉。
+def: The perception of movement from a rapid series of still images.
+ex: 电影和动画的基本原理——本质都是静止画片。
+note: 相关概念 Phi phenomenon（相邻灯光依次闪→觉得光点在移动，Windows 加载转圈），不考。
+
+@@ ap-psychology.science-practices.set-a.independent-variables
+def: 自变量。研究者操纵的、用来产生效果的变量。
+def: The factor manipulated by the researcher to determine its effect.
+ex: 研究咖啡因对记忆的影响，咖啡因摄入量就是自变量。
+pit: 别和 DV 搞混——IV 是你**操纵**的，DV 是你**测量**的。
+
+@@ ap-psychology.science-practices.set-a.confounding-variables
+def: 混淆变量。除了自变量之外、可能意外影响结果的额外变量。
+def: Factors other than the independent variable that might produce an effect.
+ex: 参与者的睡眠质量可能干扰对咖啡因效果的判断——管住其他变量！
+note: 冰淇淋销量和溺水一起涨？真凶是**温度**这个第三变量。
+
+@@ ap-psychology.science-practices.set-a.dependent-variables
+def: 因变量。被测量的结果变量，随自变量的操纵而变化。
+def: The outcome factor that is measured; it may change in response to manipulations.
+ex: 同一个研究里，记忆力测试的分数就是因变量。
+
+@@ ap-psychology.science-practices.set-a.random-assignment
+def: 随机分配。把被试靠运气分进实验组或对照组。
+def: Assigning participants to experimental and control groups by chance.
+ex: 抽签决定谁喝真咖啡、谁喝无咖啡因饮料。
+pit: 随机**分配** ≠ 随机**抽样**：assignment 是分组（进实验），sampling 是从总体里选人。判断是不是 experiment 的 key point 就是看有没有 random assignment。
+
+@@ ap-psychology.science-practices.set-a.hypothesis
+def: 假设。具体的、可测试的预测，还没被验证。
+def: A testable prediction, often implied by a theory.
+ex: 假设：摄入咖啡因的学生在记忆测试中表现更好。
+
+@@ ap-psychology.science-practices.set-a.generalizability
+def: 可推广性。研究结果能推广到更大人群的程度。
+def: The extent to which research findings can be applied to the broader population.
+ex: 结果能不能从这10名学生推及全校学生？
+
+@@ ap-psychology.science-practices.set-a.quantitative-data
+def: 定量数据。能用数字记录和测量的数据。
+def: Information that can be measured and written down with numbers.
+ex: 记录测试得到的具体分数。
+
+@@ ap-psychology.science-practices.set-a.qualitative-data
+def: 定性数据。描述性的、用于理解概念和体验的数据。
+def: Descriptive data used to understand concepts, thoughts, or experiences.
+ex: 记录参与者对测试过程的主观感受描述。
+
+@@ ap-psychology.science-practices.set-b.institutional-review
+def: 机构伦理审查（IRB）。审核研究是否符合伦理的委员会。
+def: A committee that reviews research proposals for ethical compliance.
+ex: 实验开始前必须提交 IRB 审核——没有 IRB，实验不能开始。
+
+@@ ap-psychology.science-practices.set-b.informed-consent
+def: 知情同意。向成年人充分说明研究后，签字自愿参加。
+def: Giving potential participants enough information to choose whether to participate.
+ex: 实验前让学生了解流程并签署同意书。
+
+@@ ap-psychology.science-practices.set-b.informed-assent
+def: 知情赞同。未成年人/无完全决策能力者本人的参与同意。
+def: Agreement to participate from a minor or someone unable to give legal consent.
+ex: 针对未成年人：除了家长 consent，还需要孩子本人用他能理解的方式表达意愿。
+
+@@ ap-psychology.science-practices.set-b.protection-from-harm
+def: 免受伤害原则。不让被试承受不必要的身心伤害。
+def: Ensuring participants do not endure unnecessary physical or psychological distress.
+ex: 确保实验不会对学生造成持久的心理压力；即使研究很重要也不行。
+
+@@ ap-psychology.science-practices.set-b.confidentiality
+def: 保密性。数据不泄露、身份受保护。
+def: Keeping all information about participants private and anonymous.
+ex: 发布数据时隐去姓名、只用编号。
+pit: 保密 ≠ 匿名：confidentiality 是「研究者知道是谁但不公开」，anonymity 是连研究者都不知道。
+
+@@ ap-psychology.science-practices.set-b.deception
+def: 欺骗。对研究真实目的或流程的故意误导。
+def: Intentionally misleading participants about the true nature of the experiment.
+ex: 告诉学生在测视力，实际在测从众。有意义的 deception 可以，但必须事后 debrief、IRB 同意、不造成长期伤害。
+
+@@ ap-psychology.science-practices.set-b.debriefing
+def: 事后解说。实验结束后解释真实目的、方法和原因。
+def: The post-experimental explanation of a study, including its purpose and any deceptions.
+ex: 实验结束，老师真相大白。用了 deception 必须解释；没用也照样要有这个环节。
+
+@@ ap-psychology.science-practices.set-c.central-tendency
+def: 集中趋势。用一个数代表一整组分数。
+def: A single score that represents a whole set of scores.
+ex: 用一个数值概括全班的整体表现。
+note: 其实就是 3M：Mean、Median、Mode。
+
+@@ ap-psychology.science-practices.set-c.mean
+def: 平均数。全部加起来除以个数。
+def: The arithmetic average of a distribution.
+ex: 把全班分数加起来除以总人数。
+note: 容易被 outlier 拉偏——有极端值时用 median 更稳。
+
+@@ ap-psychology.science-practices.set-c.median
+def: 中位数。排序后正中间的那个数。
+def: The middle score in a distribution.
+ex: 全班分数从低到高排，找最中间那个。
+note: 对极端值不敏感：分布 skewed 或有 outlier 时，median 更能代表 typical。
+
+@@ ap-psychology.science-practices.set-c.mode
+def: 众数。出现次数最多的分数。
+def: The most frequently occurring score(s) in a distribution.
+ex: 班里有10个人都考了85分——85 就是 mode。
+note: 可能没有（各只出现一次），也可能有好几个；适合类别数据（最常见血型）。
+
+@@ ap-psychology.science-practices.set-c.variation
+def: 变异性。分数之间相似还是分散的程度。
+def: How similar or diverse the scores are.
+ex: 观察班级内学生分数的差异程度。
+
+@@ ap-psychology.science-practices.set-c.percentile-rank
+def: 百分位等级。你的分数压过了百分之多少的人。
+def: The percentage of scores that are lower than or equal to a specific score.
+ex: 90th percentile = 打败了90%的人，位于 top 10%。
+pit: 百分位 ≠ 百分制分数：90th percentile 不是考了90分。
+
+@@ ap-psychology.science-practices.set-c.range
+def: 全距。最高分减最低分。
+def: The difference between the highest and lowest scores.
+ex: 最高98减最低40，range 是58。粗略估计，会被 outlier 影响。
+
+@@ ap-psychology.science-practices.set-d.normal-curve
+def: 正态曲线。对称的钟形分布。
+def: A symmetrical, bell-shaped curve describing the distribution of many types of data.
+ex: 大多数人的身高集中在平均值附近。
+note: 对称 → Mean=Median=Mode；68-95-99.7 规则：±1SD=68%，±2SD=95%，±3SD=99.7%。
+
+@@ ap-psychology.science-practices.set-d.bimodal-distribution
+def: 双峰分布。有两个明显峰的分布。
+def: A distribution with two clear peaks.
+ex: 一天车流量的早高峰和晚高峰——双峰一般意味着两个不同群体。
+
+@@ ap-psychology.science-practices.set-d.standard-deviation
+def: 标准差。分数围绕平均数分散程度的度量。
+def: A computed measure of how much scores vary around the mean.
+ex: SD 大数据更分散，SD 小数据更集中。
+
+@@ ap-psychology.science-practices.set-d.regression-toward-the-mean
+def: 向均数回归。极端值下一次会落回平均的趋势。
+def: The tendency for extreme scores to fall back toward their average.
+ex: 第一次考了破纪录高分的球星，下次表现往往回归平庸。
+
+@@ ap-psychology.science-practices.set-d.positive-skew
+def: 正偏态（右偏）。尾巴拖向高数值方向。
+def: A distribution where the tail points toward the higher values (right).
+ex: 题目太难，大部分人不及格，只有极少数高分。
+pit: 偏态看**尾巴**方向：尾巴在右=positive（右偏），此时 Mean > Median > Mode（income 就是这样，穷苦的大多数😭）。
+
+@@ ap-psychology.science-practices.set-d.negative-skew
+def: 负偏态（左偏）。尾巴拖向低数值方向。
+def: A distribution where the tail points toward the lower values (left).
+ex: 题目太简单，大部分人都高分，只有极少数不及格。Mean < Median < Mode。
+
+@@ ap-psychology.science-practices.set-d.scatterplot
+def: 散点图。用点阵呈现两个变量关系的图。
+def: A graphed cluster of dots representing the values of two variables.
+ex: 在图上画出身高与鞋码的对应数据点——correlational study 画 data 的方式。
+note: 看方向（正/负）和强度（聚拢/散开）；outliers 会夸大相关。
+
+@@ ap-psychology.science-practices.set-d.correlation
+def: 相关。两个变量共同变化的程度——只描述，不操纵。
+def: A measure of the extent to which two factors vary together.
+ex: 研究观看暴力电视与攻击性行为之间的联系。
+pit: 就算 r=0.9 也**不是**因果！Correlation does NOT prove causation。另外相关里不分 IV/DV。
+
+@@ ap-psychology.science-practices.set-d.positive-correlation
+def: 正相关。两个变量同加同减。
+def: Both variables increase or decrease together.
+ex: 复习时间越多，考试成绩越高。
+
+@@ ap-psychology.science-practices.set-d.negative-correlation
+def: 负相关。一个加，另一个减。
+def: As one variable increases, the other decreases.
+ex: 缺勤次数越多，考试成绩越低。
+note: 正负≠好坏，只是方向。
+
+@@ ap-psychology.science-practices.set-d.correlation-coefficient
+def: 相关系数（r值）。量化关系方向和强度的指数，范围 -1 到 +1。
+def: A statistical index of the relationship between two things (from -1.00 to +1.00).
+ex: r = +0.85，很强的正相关。
+note: AAQ 分析 r 时要说明 **direction + strength** 两个维度；强度看绝对值，方向看正负号。
+
+@@ ap-psychology.science-practices.set-e.population
+def: 总体。可能被研究的全部人。
+def: All those in a group being studied, from which samples may be drawn.
+ex: 研究对象是全中国所有的高中生——所有的 potential samples。
+
+@@ ap-psychology.science-practices.set-e.sample
+def: 样本。实际参与研究的总体子集。
+def: A subset of the population used for the actual study.
+ex: 实际参与实验的500名学生。
+
+@@ ap-psychology.science-practices.set-e.representative-sample
+def: 代表性样本。准确反映总体特征的样本。
+def: A sample that accurately reflects the characteristics of the population.
+ex: 样本里男女比例、地区分布要与全国情况一致——demographic factors 要多样。
+
+@@ ap-psychology.science-practices.set-e.random-sampling
+def: 随机抽样。人人机会均等地被抽中。
+def: A sample that fairly represents a population because each member has an equal chance of inclusion.
+ex: 电脑随机生成名单抽取受试者（SRS）。
+note: 更可能得到 representative sample；大样本 → 代表性更强。
+
+@@ ap-psychology.science-practices.set-e.convenience-sampling
+def: 便利抽样。图省事，捡身边的人用。
+def: Choosing individuals who are easiest to reach.
+ex: 只调查 psych 班里的学生；去食堂门口调研「是否喜欢食堂的饭」——讨厌食堂的人根本不来吃！
+
+@@ ap-psychology.science-practices.set-e.representation-of-participants
+def: 被试代表性。样本和总体匹配的程度。
+def: The degree to which the sample matches the population.
+ex: 这500名受试者能不能代表全体高中生？判断的是 degree of generalizability。
+
+@@ ap-psychology.science-practices.set-e.experimental-group
+def: 实验组。接受处理（IV）的那组。
+def: The group exposed to the treatment (independent variable).
+ex: 实验中服用新开发药物的那组人。
+
+@@ ap-psychology.science-practices.set-e.control-group
+def: 对照组。不接受处理、用来对比的那组。
+def: The group not exposed to the treatment, serving as a comparison.
+ex: 吃 placebo 的那组人。
+
+@@ ap-psychology.science-practices.set-e.single-blind-study
+def: 单盲实验。被试不知道自己在哪组。
+def: Participants do not know whether they are in the experimental or control group.
+ex: 病人不知道自己吃的是真药还是小糖片。防 participant bias。
+
+@@ ap-psychology.science-practices.set-e.double-blind-study
+def: 双盲实验。被试和实验者都不知道分组。
+def: Neither the participants nor the researchers know who is in which group.
+ex: 学生和代课老师都不知道哪组是实验组。防 experimenter bias——被试：？你有**什么**感觉吗~
+
+@@ ap-psychology.science-practices.set-f.operational-definition
+def: 操作性定义。精确写出变量如何被测量或操纵。
+def: A carefully worded statement of the exact procedures used in a research study.
+ex: 将「学习压力」定义为唾液中 cortisol 的含量。
+note: AAQ Question B 是让你**找文章中的 OD**，不是自己编；记得找 questionnaire 或任何 quantifiable measurement。它也是 replication 的前提。
+
+@@ ap-psychology.science-practices.set-f.case-study
+def: 个案研究。对一个或少数个体做深度研究。
+def: A descriptive technique in which one individual or group is studied in depth.
+ex: H.M. 的 anterograde amnesia、Broca/Wernicke 失语症、Phineas Gage。
+note: 罕见、不道德复制的情形适用；但无法推广。
+
+@@ ap-psychology.science-practices.set-f.meta-analysis
+def: 元分析。整合多项研究结果做总体结论的统计程序。
+def: A statistical procedure for combining and analyzing data from many different studies.
+ex: 综合过去20年所有睡眠与记忆的研究得出结论。
+note: 是**分析**不是 experiment；靠 effect size 提高可靠性。
+
+@@ ap-psychology.science-practices.set-f.naturalistic-observation
+def: 自然观察法。在自然情境中观察记录，不操纵任何变量。
+def: Observing and recording behavior in naturally occurring situations without manipulation.
+ex: 在操场上偷偷观察并记录小朋友的社交互动。
+
+@@ ap-psychology.science-practices.set-f.structured-interviews
+def: 结构化访谈。所有被试回答同一套固定问题。
+def: A research procedure in which all participants are asked the same set of questions.
+ex: 对所有应聘者统一询问三个固定问题——别自由发挥，不让 confounding variables 影响结果。
+
+@@ ap-psychology.science-practices.set-f.likert-scale
+def: 李克特量表。用等级（如1-5）测量态度的量表。
+def: A survey scale used to measure attitudes or opinions (e.g., 1-5 scale).
+ex: 对满意度的1-5打分：1=非常不满，5=非常满意。
+
+@@ ap-psychology.science-practices.set-f.effect-size
+def: 效应量。变量间关系的实际强度。
+def: The strength of the relationship between two variables.
+ex: 结果显著，但药对减肥的实际效果只有0.5斤。
+note: 不受样本量影响（不像 p-value）；Pearson's r 就是一种 effect size。
+
+@@ ap-psychology.science-practices.set-f.statistical-significance
+def: 统计显著性。结果由偶然造成的可能性很低。
+def: A statistical statement of how likely it is that an obtained result occurred by chance.
+ex: p<.05：不是乱撞上的，是真实的情况。
+
+@@ ap-psychology.science-practices.set-f.replication
+def: 重复实验。换不同被试重做同一研究。
+def: Repeating the essence of a research study with different participants.
+ex: 在中国做完，去美国用同样步骤再做一次。前提是有非常清楚的 OD。
+
+@@ ap-psychology.science-practices.set-f.peer-review
+def: 同行评审。同领域专家在发表前审查挑错。
+def: Evaluation of scientific work by others working in the same field.
+ex: 论文发表前由其他心理学专家盲审。
+
+@@ ap-psychology.science-practices.set-g.falsifiability-pertaining-to-hypotheses
+def: 可证伪性。假设必须有可能被证明是错的。
+def: The possibility that a hypothesis can be proven false.
+ex: 「我们坚信小栗小蛋糕是最可爱的，这导致你考5分」——没法证伪，所以不是科学。
+note: Psychoanalysis 的许多理论就因为缺乏 falsifiability 被批评。
+
+@@ ap-psychology.science-practices.set-g.placebo
+def: 安慰剂。给对照组的无效制剂，外观和真药一样。
+def: An inert substance or condition given to the control group.
+ex: 给 control group 吃外表一模一样的淀粉片——分离「药效」和「期待」。
+
+@@ ap-psychology.science-practices.set-g.placebo-effect
+def: 安慰剂效应。仅仅因为期待就产生的改善。
+def: Experimental results caused by expectations alone.
+ex: 病人以为吃了药，心理作用让病情真的好转了。
+note: Single blind 就能避免这个，能做到 double blind 更好。
+
+@@ ap-psychology.science-practices.set-g.overconfidence
+def: 过度自信。比实际正确程度更自信的倾向。
+def: The tendency to be more confident than correct.
+ex: 觉得自己复习得很好能考5分，结果只考了3分。
+
+@@ ap-psychology.science-practices.set-g.directionality-problem-in-correlation
+def: 方向性问题。只知道相关，分不清谁导致谁。
+def: When a correlation exists, it is unclear which variable caused the change in the other.
+ex: 是焦虑导致了失眠，还是失眠导致了焦虑？
+
+@@ ap-psychology.science-practices.set-g.third-variable-problem-in-correlation
+def: 第三变量问题。看不见的第三个变量造成虚假相关。
+def: An external variable that leads to a mistaken correlation between two factors.
+ex: 冰淇淋销量和溺水人数正相关——其实是气温升高在作怪。
+
+@@ ap-psychology.science-practices.set-g.experimenter-bias
+def: 实验者偏差。研究者的期望影响了结果。
+def: When a researcher's expectations influence the results.
+ex: 老师潜意识希望实验成功，不自觉地鼓励了实验组。
+
+@@ ap-psychology.science-practices.set-g.social-desirability-bias
+def: 社会赞许性偏差。为了形象给出好看但虚假的回答。
+def: Giving answers that make one look good in the eyes of others.
+ex: 在问卷里谎称自己从不撒谎。
+
+@@ ap-psychology.science-practices.set-g.cultural-norms
+def: 文化规范。一个社会的规则和期待。
+def: The rules and expectations of a society.
+ex: 中国人过年给红包是一种 norm。
+note: Display rules（4.7）就是 cultural norms 在情绪表达上的体现。
+
+@@ ap-psychology.science-practices.set-g.confirmation-bias
+def: 证实性偏见。只找支持自己已有信念的证据。
+def: A tendency to search for information that supports our preconceptions.
+ex: 只关注「玩游戏有害」的新闻，无视证明有益的研究。
+
+@@ ap-psychology.science-practices.set-g.hindsight-bias
+def: 后见之明（马后炮）。事后觉得「我早就知道」。
+def: The tendency to believe, after learning an outcome, that one would have foreseen it.
+ex: 答案公布是C，你拍大腿：我当时就说选C吧 :)
+
+@@ ap-psychology.u1.t1-1.heredity
+def: 遗传。特征从父母传给孩子的过程。
+def: The genetic transfer of characteristics from parents to offspring.
+ex: 孩子继承了父母的高个子基因。
+
+@@ ap-psychology.u1.t1-1.nature
+def: 先天。基因遗传对我们人格和身体的影响。
+def: The influence of our inherited characteristics on personality and physical growth.
+ex: 一个人天生就比较内向。
+note: 看到就该定位为 bio/nature 的词：temperament、diathesis、mature……
+
+@@ ap-psychology.u1.t1-1.nurture
+def: 后天。环境因素对人的影响。
+def: The influence of environmental factors on a person.
+ex: 后天培养和家庭环境影响了孩子的成就：parenting、education、culture、experiences。
+
+@@ ap-psychology.u1.t1-1.genetic-predisposition
+def: 遗传易感性。基于基因构成更容易出现某倾向的可能性。
+def: An increased likelihood of developing a condition based on one's genetic makeup.
+ex: 家族有抑郁症史，个体更可能表现出抑郁倾向。
+note: 不是基因决定命运——后天环境仍然可以改变。
+
+@@ ap-psychology.u1.t1-1.evolutionary-perspective
+def: 进化论视角。用自然选择解释行为和心理的取向。
+def: Study of the evolution of behavior and the mind, using principles of natural selection.
+ex: 从进化角度解释为什么人类普遍怕蛇和蜘蛛。核心是 survival & reproduction。
+
+@@ ap-psychology.u1.t1-1.natural-selection
+def: 自然选择。利于生存繁殖的特质被传给后代。
+def: Traits leading to increased reproduction and survival will be passed on to succeeding generations.
+ex: 跑得快的远古人类更有可能生存并传下基因。
+
+@@ ap-psychology.u1.t1-1.eugenics
+def: 优生学。以「改良人口质量」为名的错误且歧视性主张。
+def: The study of agency under social control that may improve or impair the racial qualities of future generations.
+ex: 历史上筛选所谓优良基因的极端主张。Social Darwinism 是**不对的**。
+note: Eu- = good（还记得 eustress 吗？）。
+
+@@ ap-psychology.u1.t1-1.twin-studies
+def: 双生子研究。比较同卵/异卵双胞胎拆分遗传与环境。
+def: Research comparing identical and fraternal twins to determine the relative importance of heredity and environment.
+ex: 观察分开抚养的双胞胎在智力上的相似性。
+note: 本质是 longitudinal/correlation/case study——因为 ethics 没法做真正的 experiment。
+
+@@ ap-psychology.u1.t1-1.family-studies
+def: 家族研究。考察特质在家族中聚集的倾向。
+def: Research examining the tendency of traits to run in families.
+ex: 研究近亲之间患某种精神疾病的概率。
+
+@@ ap-psychology.u1.t1-1.adoption-studies
+def: 领养研究。比较被领养孩子与亲生/养父母。
+def: Research comparing adopted children to their biological and adoptive parents.
+ex: 发现孩子的性格更像亲生父母而非养父母——基因的力量。
+
+@@ ap-psychology.u1.t1-2.central-nervous-system-brain-and-spinal-cord
+def: 中枢神经系统（CNS）。大脑+脊髓，身体的指挥中心。
+def: Composed of the brain and spinal cord.
+ex: 作为指挥中心处理所有信息。不会还有人记不住 nervous system 的分类吧！
+
+@@ ap-psychology.u1.t1-2.peripheral-nervous-system
+def: 周围神经系统（PNS）。连接 CNS 与全身的神经。
+def: The sensory and motor neurons that connect the CNS to the rest of the body.
+ex: 把手指碰火苗的感觉传回神经中枢——sensory 进、motor 出两条路。
+
+@@ ap-psychology.u1.t1-2.autonomic-nervous-system
+def: 自主神经系统（ANS）。自动控制腺体和内脏的 PNS 分支。
+def: Part of the PNS that controls the glands and muscles of internal organs.
+ex: 自动调节心跳和消化，不需要大脑刻意去想。
+note: 「自主」= 站在神经系统视角不需要意识参与；下分 sympathetic / parasympathetic。
+
+@@ ap-psychology.u1.t1-2.sympathetic-nervous-system
+def: 交感神经系统。应激时唤醒身体、动员能量。
+def: Arouses the body, mobilizing its energy in stressful situations.
+ex: 遇到老虎：瞳孔放大、心跳加快、胃部停工——战逃僵。
+pit: 交感= arousal（战逃僵），副交感= calm & digest，别记反。
+
+@@ ap-psychology.u1.t1-2.parasympathetic-nervous-system
+def: 副交感神经系统。危机过后让身体平静节能。
+def: Calms the body, conserving its energy.
+ex: 考完 SAT 才感觉有点饿了——Rest & Digest。
+
+@@ ap-psychology.u1.t1-2.somatic-nervous-system
+def: 躯体神经系统。控制骨骼肌的随意运动。
+def: Controls the body's skeletal muscles.
+ex: 你想挥手打招呼，它控制手臂肌肉动起来——voluntary movement。
+note: soma- = 身体：somatosensory cortex、soma of neuron 都是这个词根。
+
+@@ ap-psychology.u1.t1-3.neurons
+def: 神经元。神经系统的基本结构和功能单位。
+def: Basic building blocks of the nervous system.
+ex: 用电化学信号传消息的神经细胞。结构记：dendrite 收 → soma 整合 → axon 传 → terminal 放。
+
+@@ ap-psychology.u1.t1-3.glial-cells
+def: 胶质细胞。支撑、营养和保护神经元的后勤细胞。
+def: Cells in the nervous system that support, nourish, and protect neurons.
+ex: 提供营养和绝缘（髓鞘），但 do NOT transmit impulses。
+
+@@ ap-psychology.u1.t1-3.reflex-arc
+def: 反射弧。不经大脑、在脊髓完成的反射回路。
+def: A neural pathway that controls a reflex.
+ex: 手碰热锅立刻缩回——Receptor → Sensory → Interneuron（脊髓）→ Motor，大脑事后才知道。
+pit: 别和 developmental 的 rooting reflex 混：rooting 只有婴儿有，reflex arc 任何时候都在。
+
+@@ ap-psychology.u1.t1-3.sensory-neurons
+def: 感觉神经元（传入神经元）。从感受器向 CNS 传信息。
+def: Carry incoming information from the sensory receptors to the CNS.
+ex: 把眼睛看到的光信号传给大脑——负责「感受」。
+
+@@ ap-psychology.u1.t1-3.motor-neurons
+def: 运动神经元（传出神经元）。从 CNS 向肌肉腺体发指令。
+def: Carry outgoing information from the CNS to muscles and glands.
+ex: 大脑发令让腿部肌肉跑步——负责「行动」。
+
+@@ ap-psychology.u1.t1-3.interneurons
+def: 中间神经元。CNS 内部连接感觉与运动的桥梁。
+def: Neurons within the CNS that communicate internally and intervene between sensory and motor outputs.
+ex: 脊髓里连接感觉神经元和运动神经元的中间人。
+
+@@ ap-psychology.u1.t1-3.neural-transmission
+def: 神经传导。电+化学的混合信号传递。
+def: The process by which signaling molecules are released by a neuron and activate the receptors of another neuron.
+ex: 电信号在神经元**内部**跑，化学递质在神经元**之间**跳——electrochemically。
+
+@@ ap-psychology.u1.t1-3.action-potential
+def: 动作电位。沿轴突传导的短暂电冲动。
+def: A brief electrical charge that travels down an axon.
+ex: 神经冲动像闪电一样沿轴突传导。
+
+@@ ap-psychology.u1.t1-3.all-or-nothing-principle
+def: 全有或全无法则。神经元要么放电要么不放，没有半发。
+def: A neuron's reaction of either firing or not firing.
+ex: 像扣扳机：要么发射要么不发射。
+note: 所以信号的**强度**不体现在动作电位大小上，而体现在放电**频率**上。
+
+@@ ap-psychology.u1.t1-3.depolarization
+def: 去极化。钠离子内流、膜内由负变正的阶段。
+def: The process during the action potential when sodium is rushing into the cell.
+ex: 电压从 -55mV 冲到 +40mV——开火！
+note: 题干看到 depolarization 基本等于在说 action potential / neural impulse。
+
+@@ ap-psychology.u1.t1-3.refractory-period
+def: 不应期。放电后的短暂冷却，无法再发射。
+def: A period of inactivity after a neuron has fired.
+ex: 神经元发射后的冷却期。分 absolute（绝不放）/ relative（要更强刺激才放）——没见过考这么细。
+
+@@ ap-psychology.u1.t1-3.resting-potential
+def: 静息电位。未放电时的极化待命状态（-70mV）。
+def: The positive-outside/negative-inside state of a neuron's membrane.
+ex: 像拉开的弓，但没发射——ready but not firing。
+
+@@ ap-psychology.u1.t1-3.reuptake
+def: 再摄取。递质被发送端神经元回收再利用。
+def: A neurotransmitter's reabsorption by the sending neuron.
+ex: SSRI = 阻断血清素再摄取 → 更多 serotonin 继续传信息 → 治抑郁。
+
+@@ ap-psychology.u1.t1-3.threshold
+def: 阈值。触发神经冲动所需的最小刺激强度（-55mV）。
+def: The level of stimulation required to trigger a neural impulse.
+ex: 达到就 fire，达不到就不 fire——没有「差一点也放」。
+
+@@ ap-psychology.u1.t1-3.multiple-sclerosis
+def: 多发性硬化症（MS）。免疫系统攻击髓鞘。
+def: A disease in which the immune system eats away at the protective covering of nerves.
+ex: 髓鞘受损 → 消息乱跑到别的神经元 → 硬化斑块、瘫痪、震颤。
+note: MS（myelin sheath）→ MS（multiple sclerosis），配对记。
+
+@@ ap-psychology.u1.t1-3.myasthenia-gravis
+def: 重症肌无力。神经肌肉接头处的自身免疫病。
+def: A chronic autoimmune disease affecting the neuromuscular junction, producing weakness of voluntary muscles.
+ex: 眼睑下垂、严重肌肉无力——ACh 出问题。MG = 肌无力！
+
+@@ ap-psychology.u1.t1-3.dopamine
+def: 多巴胺。奖赏、动机、运动、学习相关递质。
+def: Neurotransmitter associated with movement, learning, attention, and emotion.
+ex: 中彩票的愉悦感；上瘾玩游戏也是它的奖励机制。
+note: 过多 → schizophrenia 症状（只是相关），不足 → Parkinson's 运动困难。
+
+@@ ap-psychology.u1.t1-3.excitatory-neurotransmitters
+def: 兴奋性神经递质。让神经元更容易放电。
+def: Increase the likelihood that the neuron will fire an action potential.
+ex: 给神经递质发出的加油指令：速速传递消息！
+
+@@ ap-psychology.u1.t1-3.inhibitory-neurotransmitters
+def: 抑制性神经递质。让神经元更不容易放电。
+def: Decrease the likelihood that the neuron will fire an action potential.
+ex: 给神经递质发出的刹车指令。
+
+@@ ap-psychology.u1.t1-3.serotonin
+def: 血清素（5-HT）。管情绪、睡眠、食欲。
+def: Affects mood, hunger, sleep, and arousal.
+ex: 血清素不足 → 抑郁情绪。SSRI 的本质就是抑制它的 reuptake。
+
+@@ ap-psychology.u1.t1-3.norepinephrine
+def: 去甲肾上腺素。管警觉和唤醒。
+def: Helps control alertness and arousal.
+ex: 在压力下保持警觉和兴奋。
+
+@@ ap-psychology.u1.t1-3.glutamate
+def: 谷氨酸。主要兴奋性递质，参与学习记忆。
+def: A major excitatory neurotransmitter involved in memory.
+ex: 帮你更好地记住单词。
+
+@@ ap-psychology.u1.t1-3.gaba
+def: GABA（γ-氨基丁酸）。主要抑制性递质。
+def: A major inhibitory neurotransmitter.
+ex: 帮大脑冷静下来、减少焦虑。
+note: Alcohol 是 GABA agonist → calm down → impulse control↓ → 放松/嗜睡/反应变慢（作用地点：前额叶+小脑）。
+
+@@ ap-psychology.u1.t1-3.endorphins
+def: 内啡肽。天然的类阿片物质，镇痛+快感。
+def: Natural, opiate-like neurotransmitters linked to pain control and pleasure.
+ex: 长跑后的快感（runner's high），减轻身体疼痛。
+note: Heroin 就是在模拟它；止痛 → 也可以说是一种 negative reinforcement。
+
+@@ ap-psychology.u1.t1-3.substance-p
+def: P物质。参与痛觉传递的递质。
+def: A neurotransmitter involved in pain perception.
+ex: 手指扎破时，它向大脑发送疼痛信号。
+
+@@ ap-psychology.u1.t1-3.acetylcholine
+def: 乙酰胆碱（ACh）。管肌肉收缩、学习、记忆。
+def: Enables muscle action, learning, and memory.
+ex: 控制肌肉收缩；缺失与阿尔茨海默症有关。MG 肌无力也和它相关！
+
+@@ ap-psychology.u1.t1-3.hormones
+def: 激素。内分泌腺分泌、经血液运输的化学信使。
+def: Chemical messengers that are manufactured by the endocrine glands.
+ex: 通过血液运输的长效化学信息。
+pit: 本质和 neurotransmitter 一样，只是**作用地点**不同——血液全身慢而久 vs 突触间隙快而短。
+
+@@ ap-psychology.u1.t1-3.adrenaline
+def: 肾上腺素。应激时分泌，拉高心率呼吸。
+def: Hormone secreted in response to stress, increasing rates of blood circulation and breathing.
+ex: 被 Irene 提问的时候你心跳狂飙。
+
+@@ ap-psychology.u1.t1-3.leptin
+def: 瘦素。脂肪细胞分泌的「吃饱了」信号。
+def: Hormone that helps regulate energy balance by inhibiting hunger.
+ex: 告诉大脑你吃饱了——full signal。和 satiety 相关的激素在 Unit 4 Motivation~
+
+@@ ap-psychology.u1.t1-3.ghrelin
+def: 饥饿素。空胃分泌的「我饿了」信号。
+def: Hormone secreted by an empty stomach that sends "I'm hungry" signals to the brain.
+ex: 肚子饿得咕咕叫——「咕」relin。
+
+@@ ap-psychology.u1.t1-3.melatonin
+def: 褪黑素。调节睡眠觉醒周期的激素。
+def: Hormone that helps regulate sleep-wake cycles.
+ex: 天黑分泌增多让你犯困；睡前刷手机蓝光太多，大脑就不分泌它了。
+
+@@ ap-psychology.u1.t1-3.oxytocin
+def: 催产素。与社会联结和信任相关的激素。
+def: Hormone associated with social bonding and trust.
+ex: 拥抱时分泌的爱与信任荷尔蒙（Love hormone）。
+
+@@ ap-psychology.u1.t1-3.psychoactive-drugs
+def: 精神活性药物。改变中枢神经活动、影响情绪认知的化学物质。
+def: Chemicals that affect the central nervous system and alter activity in the brain.
+ex: 从咖啡到酒精都属于这类。
+
+@@ ap-psychology.u1.t1-3.agonists
+def: 激动剂。模拟或增强递质效果的药物。
+def: Drugs that increase the action of a neurotransmitter.
+ex: 直接激动剂=模拟（heroin 模拟 endorphins）；间接激动剂=增强（cocaine 抑制多巴胺再摄取）。
+pit: 只看「效果增强」——别管原来的刺激是积极还是消极，增加递质作用就是 agonist。
+
+@@ ap-psychology.u1.t1-3.antagonists
+def: 拮抗剂。阻断递质效果的药物。
+def: Drugs that block the function of a neurotransmitter.
+ex: 阻挡接收端让递质无法工作——只有这一种方式。
+note: 多巴胺拮抗剂是抗精神病药：压掉过活跃的多巴胺。
+
+@@ ap-psychology.u1.t1-3.reuptake-inhibitors
+def: 再摄取抑制剂。阻止递质回收、延长作用时间。
+def: Drugs that prevent the reabsorption of neurotransmitters.
+ex: 让递质在突触间隙停留更久——SSRI，again！
+
+@@ ap-psychology.u1.t1-3.stimulants
+def: 兴奋剂。加速神经活动的药物。
+def: Drugs that excite neural activity and speed up body functions.
+ex: 让你精神百倍的物质——咖啡！考试前也喝一杯？想起 state-dependent memory（Unit 2）了吗。
+
+@@ ap-psychology.u1.t1-3.caffeine
+def: 咖啡因。温和的兴奋剂。
+def: A mild stimulant found in coffee and tea.
+ex: 早起一杯咖啡提神。
+
+@@ ap-psychology.u1.t1-3.cocaine
+def: 可卡因。强成瘾性的兴奋剂。
+def: A powerful and addictive stimulant.
+ex: 间接激动剂——抑制 dopamine 的 reuptake，让刺激停留更久。
+
+@@ ap-psychology.u1.t1-3.depressants
+def: 镇静剂。减慢神经活动的药物。
+def: Drugs that reduce neural activity and slow body functions.
+ex: 让神经系统变迟钝——酒精是最常见的一种。
+
+@@ ap-psychology.u1.t1-3.alcohol
+def: 酒精。最常见的镇静剂。
+def: The most common depressant.
+ex: 喝醉后反应迟钝、走路不稳——GABA agonist，作用于前额叶+小脑。
+
+@@ ap-psychology.u1.t1-3.hallucinogens
+def: 致幻剂。扭曲知觉、引发无中生有感官体验的药物。
+def: Psychedelic drugs that distort perceptions and evoke sensory images without sensory input.
+ex: 看到并不存在的幻象。halluci- = distorted perception。
+
+@@ ap-psychology.u1.t1-3.marijuana
+def: 大麻。轻度致幻+放松的药物。
+def: A drug that causes mild hallucinations and relaxation.
+ex: 吸食后感到放松且感知改变。
+
+@@ ap-psychology.u1.t1-3.opioids
+def: 阿片类药物。强效止痛、高成瘾性。
+def: Drugs used to treat pain but are highly addictive.
+ex: 吗啡一类的强效止痛药。
+
+@@ ap-psychology.u1.t1-3.heroin
+def: 海洛因。模拟内啡肽的极高成瘾性阿片。
+def: An extremely addictive opioid drug.
+ex: 直接激动剂——模拟 endorphins。
+
+@@ ap-psychology.u1.t1-3.tolerance
+def: 耐受。同样剂量效果越来越弱。
+def: Diminishing effect with regular use of the same dose of a drug.
+ex: 以前一杯瑞幸就清醒，现在要三杯。
+
+@@ ap-psychology.u1.t1-3.addiction
+def: 成瘾。明知有害仍无法停止的强迫性渴求。
+def: Compulsive drug craving and use, despite adverse consequences.
+ex: 无法停止吸烟，即便知道伤害身体。本质是 loss of impulse control——前额叶受损，无法说「不」。
+
+@@ ap-psychology.u1.t1-3.withdrawal
+def: 戒断反应。停药后的不适和痛苦。
+def: Discomfort and distress that follow discontinuing an addictive drug.
+ex: 戒烟后的焦虑和渴望感——生理+心理两层。
+
+@@ ap-psychology.u1.t1-4.brain-stem
+def: 脑干。最古老的脑结构，管自动生存功能。
+def: The oldest part and central core of the brain, responsible for automatic survival functions.
+ex: 呼吸、心跳、血压、觉醒——维持生命的底线。
+
+@@ ap-psychology.u1.t1-4.medulla
+def: 延髓。脑干底部，管呼吸心跳血压。
+def: Base of the brainstem; controls heartbeat and breathing.
+ex: 这里受损，人就无法呼吸或心跳——致命。
+note: 对侧控制的神经纤维交叉也发生在这里（不是胼胝体！）。
+
+@@ ap-psychology.u1.t1-4.reticular-activating-system-ras
+def: 网状激活系统（网状结构）。脑干里管觉醒和注意的网络。
+def: Nerve network in the brainstem that plays an important role in controlling arousal.
+ex: 负责你的觉醒和清醒状态，过滤无关刺激保持专注。
+
+@@ ap-psychology.u1.t1-4.reward-center
+def: 奖赏中心。产生愉悦感的脑区（多巴胺通路）。
+def: Region of the brain that produces feelings of pleasure.
+ex: 大脑中的 dopamine 通路，让人想重复愉悦行为——上瘾的生物学基础（Unit 4 饥饿动机也会用到）。
+
+@@ ap-psychology.u1.t1-4.cerebellum
+def: 小脑。协调随意运动、平衡和姿势。
+def: The "little brain" at the rear of the brainstem; coordinates voluntary movement and balance.
+ex: 让你能平稳走平衡木。Balance & coordination & posture——协调，但是不思考。
+
+@@ ap-psychology.u1.t1-4.cerebral-cortex
+def: 大脑皮层。覆盖半球表面的褶皱结构，管高级认知。
+def: The intricate fabric of interconnected neural cells covering the cerebral hemispheres.
+ex: 负责思考、推理、语言、想象——Gray matter 处理信息，White matter 传输信息。
+
+@@ ap-psychology.u1.t1-4.limbic-system
+def: 边缘系统。情绪和驱力相关的神经 系统。
+def: Neural system associated with emotions and drives.
+ex: 大脑的情感中心——4F：Feeding, Fighting, Fleeing, Fornicating。
+
+@@ ap-psychology.u1.t1-4.thalamus
+def: 丘脑。大脑的感觉中继站。
+def: The brain's sensory control center.
+ex: 除了 olfaction（嗅觉！），所有感觉信息都要经过这个 relay station 再到皮层。「看起来就有感觉，对吧」
+
+@@ ap-psychology.u1.t1-4.hypothalamus
+def: 下丘脑。管吃、喝、体温和内分泌的总开关。
+def: Directs eating, drinking, body temperature; helps govern the endocrine system.
+ex: 维持身体的内环境稳态（homeostasis）；控制脑垂体。
+note: 记法：比丘脑多一个 Hypo，它管激素。
+
+@@ ap-psychology.u1.t1-4.pituitary-gland
+def: 脑垂体。内分泌系统的总司令（主腺体）。
+def: The endocrine system's most influential gland.
+ex: 受下丘脑控制，再指挥其他腺体——master gland。分泌生长激素、催产素。
+
+@@ ap-psychology.u1.t1-4.hippocampus
+def: 海马体。处理外显记忆入库的边缘系统结构。
+def: A neural center in the limbic system that helps process explicit memories for storage.
+ex: 如果这里坏了，你就记不住 psych 的知识点辣！H.M. 切除后 anterograde amnesia（但 implicit memory 还在）。河马校园~
+
+@@ ap-psychology.u1.t1-4.amygdala
+def: 杏仁核。情绪（尤其恐惧和攻击）的关键核团。
+def: Two lima-bean-sized neural clusters in the limbic system; linked to emotion, especially fear and aggression.
+ex: 看到蛇时的恐惧反应——"fear center"。爱吗伊戈达拉~
+note: Amygdala hijack 杏仁核劫持：它接管大脑做出不理智行为。低路情绪反应也走它（4.7）。
+
+@@ ap-psychology.u1.t1-4.corpus-callosum
+def: 胼胝体。连接左右半球的大神经纤维束。
+def: The large band of neural fibers connecting the two brain hemispheres.
+ex: 左右脑沟通的桥梁。切了它就是 split brain。
+pit: 它管「交换信息」，**不是**对侧控制——对侧控制的交叉在延髓。
+
+@@ ap-psychology.u1.t1-4.occipital-lobes
+def: 枕叶。后脑勺的视觉处理区。
+def: Portion of the cerebral cortex at the back of the head; receives information from the visual fields.
+ex: 后脑勺挨一记闷棍会眼冒金星。(O.O) 像不像你的眼睛——O lobe → vision。
+
+@@ ap-psychology.u1.t1-4.temporal-lobes
+def: 颞叶。耳朵上方的听觉处理区。
+def: Portion of the cerebral cortex roughly above the ears; includes the auditory areas.
+ex: 负责处理听到的声音。位置记法：颞叶在「下」，离耳朵近。
+
+@@ ap-psychology.u1.t1-4.parietal-lobes
+def: 顶叶。头顶的躯体感觉区。
+def: Portion of the cerebral cortex at the top of the head; receives sensory input for touch and body position.
+ex: 感知冷热和触碰——somatosensory cortex 就在这里。居高临下俯视全身。
+
+@@ ap-psychology.u1.t1-4.association-areas
+def: 联合区。不直接管感官/运动、负责深度加工的皮层区。
+def: Areas of the cerebral cortex involved in higher mental functions such as learning, remembering, thinking, and speaking.
+ex: 大脑分为 sensory、motor 和 association——最后这个是人类比动物聪明的地方。
+
+@@ ap-psychology.u1.t1-4.somatosensory-cortex
+def: 体感皮层。顶叶前的身体感觉地图。
+def: Area at the front of the parietal lobes that registers and processes body touch and movement sensations.
+ex: Leo 脚趾被 Jason 踩了，这个区域产生痛觉——身体各部位在这里有对应的地图。
+
+@@ ap-psychology.u1.t1-4.frontal-lobes
+def: 额叶。说话、运动、计划、判断——理智中心。
+def: Involved in speaking and muscle movements and in making plans and judgments.
+ex: 大脑的理智中心；Phineas Gage 被铁棍穿刺后性格大变就是伤到了它。领头的位置管人格。
+
+@@ ap-psychology.u1.t1-4.linguistic-processing
+def: 语言加工。理解和运用语言的过程。
+def: The process of understanding and using language.
+ex: 大脑对文字和语音的解析——左脑！
+
+@@ ap-psychology.u1.t1-4.higher-order-thinking
+def: 高阶思维。复杂认知过程的总称。
+def: Complex cognitive processes including problem solving and decision making.
+ex: 思考量子力学等抽象问题。
+
+@@ ap-psychology.u1.t1-4.executive-functioning
+def: 执行功能。管理目标和控制行为的高层认知。
+def: High-level cognitive processes that help individuals manage goals and control behaviors.
+ex: 在诱惑面前控制住自己不去玩手机。
+
+@@ ap-psychology.u1.t1-4.prefrontal-cortex
+def: 前额叶皮质。决策、冲动控制、道德判断。
+def: Responsible for thinking, planning, and language.
+ex: 前额叶受损 → 性格大变、冲动易怒；25岁才完全成熟——青春期的冲动有解了。成瘾也和这里有关。
+
+@@ ap-psychology.u1.t1-4.motor-cortex
+def: 运动皮层。额叶后部，发起随意运动。
+def: An area at the rear of the frontal lobes that controls voluntary movements.
+ex: 大脑发令让手指打字写 FRQ 的源头。左脑控制右手。
+
+@@ ap-psychology.u1.t1-4.split-brain-research
+def: 裂脑研究。切断胼胝体后对左右脑分工的研究。
+def: Studies on people whose corpus callosum has been severed.
+ex: 治疗严重癫痫时切 CC，发现两个半球无法共享信息——左脑管语言，图像出现在左视野时病人「说」不出来但能用左手指。
+
+@@ ap-psychology.u1.t1-4.hemispheric-specialization
+def: 功能偏侧化。某些功能定位于一侧半球。
+def: The idea that certain cognitive functions are localized in one hemisphere or the other.
+ex: 左脑偏分析（语言、逻辑、计算），右脑偏整体（空间、面孔、音乐）。
+pit: ❌ 不存在「左脑人/右脑人」——复杂行为两个半球都参与。
+
+@@ ap-psychology.u1.t1-4.broca-s-area
+def: 布洛卡区。额叶的语言**产出**区。
+def: Controls language expression; directs the muscle movements involved in speech.
+ex: 受损后你能**听懂**话，但说不出来、发言很慢——哑巴吃黄连。
+
+@@ ap-psychology.u1.t1-4.wernicke-s-area
+def: 韦尼克区。颞叶的语言**理解**区。
+def: Controls language reception; involved in language comprehension.
+ex: 受损后你说话很流利但满嘴胡言，且听不懂别人的话。
+
+@@ ap-psychology.u1.t1-4.aphasia-broca-s-and-wernicke-s
+def: 失语症。左脑语言区损伤导致的言语障碍。
+def: Impairment of language, usually caused by left hemisphere damage to Broca's or Wernicke's area.
+ex: 脑卒中后的言语障碍——「听得懂说不出」是 Broca，「流利但无意义+听不懂」是 Wernicke。
+
+@@ ap-psychology.u1.t1-4.contralateral-hemispheric-organization
+def: 对侧控制。左脑管右身、右脑管左身。
+def: The left hemisphere controls the right side of the body, and vice versa.
+ex: 右手被扎，左脑 process 疼的信号。
+pit: 交叉发生在**延髓**；裂脑人还能用左手指物，正因为延髓没被切——别把对侧控制算到胼胝体头上。
+
+@@ ap-psychology.u1.t1-4.plasticity
+def: 神经可塑性。大脑重组和重塑自身的能力。
+def: The brain's ability to change by reorganizing after damage or building new pathways based on experience.
+ex: 盲人的听觉区域可能接管部分视觉功能。越年轻越强（成年人也有）。功能转移+结构改变两种。
+
+@@ ap-psychology.u1.t1-4.eeg
+def: 脑电图（EEG）。头皮电极记录脑电波。
+def: An amplified recording of the waves of electrical activity sweeping across the brain's surface.
+ex: 医生在头上贴电极观察脑电波——检测睡眠周期和癫痫。考试会给缩写，不用记全名。
+
+@@ ap-psychology.u1.t1-4.fmri
+def: 功能性核磁共振成像。靠血氧变化看脑活动。
+def: A technique for revealing blood flow and brain activity by comparing successive MRI scans.
+ex: 通过「哪里在耗氧」判断你在想什么。
+note: 和 EEG 都是测 brain activity——一个看 brainwave（快），一个看血氧（定位准）。题干匹配「lights up / increased blood flow」。
+
+@@ ap-psychology.u1.t1-4.lesioning
+def: 损毁法。故意损毁特定脑区观察功能丧失。
+def: Tissue destruction.
+ex: 通过损毁特定大脑区域来观察其功能的丧失——早期研究大脑的主要手段（个案研究）。
+
+@@ ap-psychology.u1.t1-5.consciousness
+def: 意识。对我们自身和环境的觉知。
+def: Our awareness of ourselves and our environment.
+ex: 你现在能意识到你在看这段文字（希望你 Psych 5 分~）。
+
+@@ ap-psychology.u1.t1-5.circadian-rhythm-sleep-wake-cycle
+def: 昼夜节律。24小时的生物钟。
+def: The biological clock; regular bodily rhythms on a 24-hour cycle.
+ex: 体温和睡眠呈24小时规律波动——调节 sleep、cortisol、melatonin。
+note: 会被 jet lag 和 shift work 打乱。
+
+@@ ap-psychology.u1.t1-5.jet-lag
+def: 时差反应。跨时区打乱昼夜节律。
+def: Fatigue and sleep disturbance from disruption of the circadian rhythm.
+ex: 从北京飞往纽约后黑白颠倒。
+
+@@ ap-psychology.u1.t1-5.shift-work
+def: 轮班工作。非常规时段工作打乱节律。
+def: Work scheduled outside of standard daytime hours.
+ex: 熬夜复习 AP 导致睡眠规律被打乱（虽然这个应该叫 shift study?）。
+
+@@ ap-psychology.u1.t1-5.nrem-stage-1
+def: NREM一期（浅睡）。清醒到睡眠的过渡。
+def: The transition from wakefulness to sleep.
+ex: 刚入睡半梦半醒，容易出现 hypnic jerks（突然抖一下）——「我没睡！」
+
+@@ ap-psychology.u1.t1-5.hypnagogic-sensations
+def: 入睡前幻觉。入睡前出现的怪异体验。
+def: Bizarre experiences, such as jerking or a feeling of falling, while transitioning to sleep.
+ex: 感觉身体踩空蹬了一下，或听到不存在的声音、看到闪光。
+
+@@ ap-psychology.u1.t1-5.nrem-stage-2
+def: NREM二期。出现睡眠纺锤波的浅深睡眠。
+def: Deeper sleep characterized by sleep spindles.
+ex: 睡眠中占比最大的阶段（≈45%）——体温心率下降、纺锤波、说梦话。
+
+@@ ap-psychology.u1.t1-5.nrem-stage-3
+def: NREM三期（深睡）。delta 波慢波睡眠。
+def: Deepest stage of sleep (delta waves).
+ex: 最难叫醒、醒来会迷糊；生长激素分泌、身体修复最重要的阶段。梦游发生在这里。
+
+@@ ap-psychology.u1.t1-5.rem-sleep
+def: 快速眼动睡眠。大脑活跃但身体瘫痪的做梦期。
+def: Rapid eye movement sleep; a recurring sleep stage during which vivid dreams commonly occur.
+ex: 矛盾的睡眠（Paradoxical）：脑波像清醒、心跳呼吸加快，但肌肉麻痹——防止梦里的动作带进现实。
+
+@@ ap-psychology.u1.t1-5.rem-rebound
+def: REM反弹。缺 REM 后补觉时 REM 增多。
+def: The tendency for REM sleep to increase following REM sleep deprivation.
+ex: 熬夜后补觉，梦会变得特别多、特别 vivid。
+
+@@ ap-psychology.u1.t1-5.activation-synthesis-dreams
+def: 激活-整合理论。梦是大脑给随机神经活动编的故事。
+def: The theory that dreams are the brain's attempt to synthesize random neural activity.
+ex: 梦来自 pons 的随机激活，大脑皮层负责「编故事」合理化。
+pit: 这个理论说梦**没有意义**（random by-product）；psychodynamics 才认为梦是潜意识的体现、超有意义。
+
+@@ ap-psychology.u1.t1-5.consolidation-theory-dreams
+def: 记忆巩固理论。梦帮我们把白天的记忆存入长期记忆。
+def: Dreams help us sort out the day's events and consolidate our memories.
+ex: 做梦是在帮我们把记忆存进 LTM——和海马体联动。
+
+@@ ap-psychology.u1.t1-5.restoration-of-resources
+def: 资源恢复理论。睡眠修复身体和免疫系统。
+def: Sleep helps restore our bodies and immune systems.
+ex: 睡觉是为了恢复体力——特别是 NREM 阶段。
+
+@@ ap-psychology.u1.t1-5.insomnia
+def: 失眠。反复的入睡或维持睡眠困难。
+def: Recurring problems in falling or staying asleep.
+ex: 躺在床上翻来覆去睡不着（超过20-30分钟才算）。
+
+@@ ap-psychology.u1.t1-5.narcolepsy
+def: 发作性睡病。白天不可抗拒的睡眠发作。
+def: A sleep disorder characterized by uncontrollable sleep attacks.
+ex: 说着说着话突然秒睡——可能由强烈情绪触发，直接进入 REM。
+
+@@ ap-psychology.u1.t1-5.rem-sleep-behavior-disorder
+def: 快速眼动睡眠行为障碍。REM 期把梦演出来。
+def: A sleep disorder in which you physically act out vivid, often unpleasant dreams.
+ex: 在梦里打架，现实中也挥舞拳头踢人——正常 REM 该有的肌肉麻痹消失了。50岁以上中老年男性多见。
+
+@@ ap-psychology.u1.t1-5.sleep-apnea
+def: 睡眠呼吸暂停。睡觉中反复呼吸停止。
+def: A sleep disorder characterized by temporary cessations of breathing during sleep.
+ex: 打呼噜时突然呼吸停了几秒——白天疲劳，和肥胖有关（减肥有效）。
+
+@@ ap-psychology.u1.t1-5.somnambulism
+def: 梦游。深睡期下床活动。
+def: Sleepwalking.
+ex: 青少年儿童多见；双眼睁着但眼神空洞，场景简单重复（起床、穿衣、去厨房找吃的）。可能根本没做梦。
+
+@@ ap-psychology.u1.t1-6.sensation
+def: 感觉。感受器把物理刺激转换成神经信号的过程。
+def: The process by which our sensory receptors and nervous system receive and represent stimulus energies.
+ex: 鼻子闻到了花香——physical process，没有理解，就是感受。
+
+@@ ap-psychology.u1.t1-6.transduction
+def: 换能。物理/化学能量→神经电信号。
+def: Conversion of one form of energy into another.
+ex: 耳朵把声波转化成神经电脉冲——从物理信号到生理信号。
+
+@@ ap-psychology.u1.t1-6.absolute-threshold
+def: 绝对阈限。50%次数能察觉到的最小刺激。
+def: The minimum stimulation needed to detect a particular stimulus 50% of the time.
+ex: 黑夜中能看到的最微弱一丝光——「能不能感觉到」的界限。
+
+@@ ap-psychology.u1.t1-6.just-noticeable-difference
+def: 最小可觉差（JND）。50%次数能分辨的最小差异。
+def: The minimum difference between two stimuli required for detection 50% of the time.
+ex: 两袋糖要差多少克，你才觉得一袋比另一袋重——「能不能感觉到**变化**」。
+pit: 绝对阈限管「有没有」，JND 管「变没变」——两个 threshold 别混。
+
+@@ ap-psychology.u1.t1-6.sensory-adaptation
+def: 感官适应。对恒定刺激敏感度下降。
+def: Diminished sensitivity as a consequence of constant stimulation.
+ex: 刚进游泳池觉得冷，过一会儿就适应了；香水闻久了没味。
+pit: 感官适应是**生理层面**；Habituation（3.7）是 CNS 层面的「学会忽略」——不是一个东西！
+
+@@ ap-psychology.u1.t1-6.weber-s-law
+def: 韦伯定律。刺激越大，需要察觉的变化也越大。
+def: To be perceived as different, two stimuli must differ by a constant minimum percentage.
+ex: 100克巧克力加2克能察觉，1000克哑铃要加20克才行——在乎的是百分比。
+
+@@ ap-psychology.u1.t1-6.sensory-interaction
+def: 感官互动。一种感觉影响另一种感觉。
+def: The principle that one sense may influence another.
+ex: 感冒鼻塞时，吃东西觉得没味道——味觉+嗅觉联动。
+
+@@ ap-psychology.u1.t1-6.synesthesia
+def: 联觉。一种刺激引发多种感觉。
+def: Describing one kind of sensation in terms of another.
+ex: 听到某种音乐时会看到特定的颜色。非常 rare 的 condition，不是错觉也不是想象。
+
+@@ ap-psychology.u1.t1-6.retina
+def: 视网膜。眼球内壁的感光层。
+def: The light-sensitive inner surface of the eye.
+ex: 眼睛里的底片，负责捕捉影像——transduction 发生的地方，图像是倒立的。
+
+@@ ap-psychology.u1.t1-6.blind-spot
+def: 盲点。视神经离开眼球、没有感光细胞的点。
+def: The point at which the optic nerve leaves the eye, creating a "blind" spot.
+ex: 光线射到视神经出口处我们看不见——但大脑用 top-down processing 自动补全了。
+
+@@ ap-psychology.u1.t1-6.visual-nerve
+def: 视神经。把视觉信号送进大脑的电缆。
+def: The nerve that carries neural impulses from the eye to the brain.
+ex: 视觉信号的高速公路。
+
+@@ ap-psychology.u1.t1-6.lens
+def: 晶状体。改变形状聚焦成像的透明结构。
+def: The transparent structure behind the pupil that changes shape to focus images on the retina.
+ex: 眼睛里的变焦镜头。
+
+@@ ap-psychology.u1.t1-6.accommodation
+def: 晶状体调节。晶状体变形对焦远近物体。
+def: The process by which the eye's lens changes shape to focus near or far objects on the retina.
+ex: 看远处的山再看手中的书，晶状体在自动对焦。
+pit: ⚠ 这个词在 AP Psych 有**两个含义**——Piaget 的「顺应」（改 schema）别忘了，语境判断。
+
+@@ ap-psychology.u1.t1-6.nearsightedness
+def: 近视。成像落在视网膜**前**。
+def: Condition where far objects are blurry.
+ex: 不戴眼镜看不清黑板。
+
+@@ ap-psychology.u1.t1-6.farsightedness
+def: 远视。成像落在视网膜**后**。
+def: Condition where near objects are blurry.
+ex: 老人家看报纸要拿得很远。
+
+@@ ap-psychology.u1.t1-6.photoreceptors
+def: 感光细胞。视网膜上响应光的细胞。
+def: Cells in the retina that respond to light.
+ex: 分为 rods（视杆）和 cones（视锥）。
+
+@@ ap-psychology.u1.t1-6.rods
+def: 视杆细胞。黑白、周边、暗光的感受器。
+def: Retinal receptors that detect black, white, and gray; necessary for peripheral and twilight vision.
+ex: 昏暗环境下帮你走路不撞墙——数量多，fovea 里**没有**。
+pit: Rods=黑白周边暗光，Cones=颜色细节强光——按维度对齐记，别串。
+
+@@ ap-psychology.u1.t1-6.cones-blue-green-red
+def: 视锥细胞。颜色、细节、强光的感受器。
+def: Retinal receptors concentrated near the center of the retina; function in daylight or well-lit conditions.
+ex: 帮你分辨 CB 不同 subject 的颜色。Cones → Colors，集中在 fovea。
+
+@@ ap-psychology.u1.t1-6.trichromatic-theory
+def: 三原色理论。三种视锥（红绿蓝）解释颜色视觉。
+def: The theory that the retina contains three different color receptors — most sensitive to red, green, and blue.
+ex: 我们只有 RGB 三种「像素点」。
+
+@@ ap-psychology.u1.t1-6.opponent-process-theory
+def: 对立过程理论。颜色以对立组合加工。
+def: The theory that opposing retinal processes (red-green, yellow-blue, white-black) enable color vision.
+ex: 三组补色系统：红绿、黄蓝、黑白——解释了 afterimage。
+pit: 两理论**都对**，作用在不同层级：三原色在视锥，对立过程在后续加工。颜色组合会考！
+
+@@ ap-psychology.u1.t1-6.afterimages
+def: 后像。刺激撤除后残留的视觉影像。
+def: Images that occur when a visual sensation persists briefly after the stimulus is removed.
+ex: 盯着红色看久了，看白墙会出现绿色影子——opponent-process 的体现。
+
+@@ ap-psychology.u1.t1-6.ganglion-cells
+def: 神经节细胞。轴突汇成视神经的细胞。
+def: The specialized cells which lie behind the bipolar cells whose axons form the optic nerve.
+ex: 把初步处理后的视觉信号汇总传往大脑。
+
+@@ ap-psychology.u1.t1-6.dichromatism
+def: 双色盲。只有两种视锥（红绿色盲）。
+def: A condition in which a person has only two types of cone cells.
+ex: 缺一种 cone——红绿色盲。
+
+@@ ap-psychology.u1.t1-6.monochromatism
+def: 全色盲。只有一种视锥或只剩视杆。
+def: A condition in which a person can only see in shades of gray.
+ex: 世界只有黑白灰。普通人是 tri，缺一种是 di，mono 就是全色盲。
+
+@@ ap-psychology.u1.t1-6.prosopagnosia
+def: 面容失认症（脸盲）。认不出人脸。
+def: Face blindness.
+ex: 能看清五官但认不出这人是谁——top-down processing 出了问题。与 fusiform gyrus 有关。
+
+@@ ap-psychology.u1.t1-6.blindsight
+def: 盲视。无意识视觉下的反应能力。
+def: A condition in which a person can respond to a visual stimulus without consciously experiencing it.
+ex: 失明者能避开地上的障碍物——occipital cortex 受损但没有意识视觉。neuroplasticity 的例子。
+
+@@ ap-psychology.u1.t1-6.wavelength
+def: 波长。决定色调（光）和音高（声）。
+def: The distance from the peak of one light or sound wave to the peak of the next.
+ex: 决定光的 hue 或声音的 pitch——在这个词里找到 color 了吗。
+
+@@ ap-psychology.u1.t1-6.pitch
+def: 音高。声音的高低体验，由频率决定。
+def: A tone's experienced highness or lowness; depends on frequency.
+ex: 女高音的高音。
+
+@@ ap-psychology.u1.t1-6.amplitude
+def: 振幅。波的height，决定亮度和响度。
+def: The height of a wave.
+ex: 决定光的 brightness 或声音的 loudness。
+
+@@ ap-psychology.u1.t1-6.loudness
+def: 响度。由振幅决定的声音强度。
+def: A sensory characteristic of sound produced by the amplitude of the sound wave.
+ex: Justin 上课时候的超大音量。≥120dB 听力损伤，150dB 鼓膜破裂。
+
+@@ ap-psychology.u1.t1-6.pitch-perception
+def: 音高知觉。大脑分辨高低音的机制。
+def: How we hear the frequency of sound waves.
+ex: 三个理论分工：高频 place、低频 frequency、中频 volley。
+
+@@ ap-psychology.u1.t1-6.place-theory
+def: 位置理论。按耳蜗被刺激位置判断音高。
+def: The theory that links the pitch we hear with the place where the cochlea's membrane is stimulated.
+ex: 高音刺激耳蜗**外面**（底部），低音在里面——看哪里被刺激就知道音高。
+pit: 频段分工别记乱：高频=place，低频=frequency，中频=volley。
+
+@@ ap-psychology.u1.t1-6.volley-theory
+def: 齐射理论。神经元轮流放电跟上高频。
+def: Groups of neurons fire in rapid succession to achieve higher combined frequencies.
+ex: >1000Hz 的声音单个神经元跟不上——一组神经元轮班 firing。
+
+@@ ap-psychology.u1.t1-6.frequency-theory
+def: 频率理论。神经放电频率匹配音高频率。
+def: The rate of nerve impulses traveling up the auditory nerve matches the frequency of a tone.
+ex: 低频音让神经纤维以同样频率震动——频率越高放电越快。
+
+@@ ap-psychology.u1.t1-6.sound-localization
+def: 声音定位。判断声源方位。
+def: Determining the location of a sound source.
+ex: 根据声音到达左右耳的微小时间差和强度差判断声源。
+
+@@ ap-psychology.u1.t1-6.conduction-deafness
+def: 传导性耳聋。声音传不到耳蜗的机械损伤。
+def: Hearing loss caused by damage to the mechanical system that conducts sound waves to the cochlea.
+ex: 鼓膜破裂导致听力下降——神经还好着，助听器可以补偿。
+
+@@ ap-psychology.u1.t1-6.sensorineural-deafness
+def: 神经性耳聋。毛细胞或听神经损伤。
+def: Hearing loss caused by damage to the cochlea's receptor cells or to the auditory nerves.
+ex: 长期听重金属摇滚导致毛细胞受损——需要人工耳蜗（cochlea 不用记，记住是「和神经相关」）。
+pit: 传导性=机械结构坏（可助听），神经性=毛细胞/神经坏（人工耳蜗）。
+
+@@ ap-psychology.u1.t1-6.olfactory-system
+def: 嗅觉系统。唯一不经过丘脑的感觉。
+def: The sensory system used for smelling.
+ex: 气味信号直接到 cortex、amygdala、hippocampus——所以气味=记忆触发器（80%的味觉来自嗅觉）。
+pit: 全身感觉里只有嗅觉**不走 thalamus**——高频考点。
+
+@@ ap-psychology.u1.t1-6.thalamus
+def: 丘脑。感觉中继站（1.6视角）。
+def: The brain's sensory control center.
+ex: 除嗅觉外的所有感觉都要经过这里再送皮层。
+
+@@ ap-psychology.u1.t1-6.pheromones
+def: 信息素。同种个体间传信的化学信号。
+def: Chemical signals released by an animal that communicate information and affect the behavior of others of the same species.
+ex: 蚂蚁留下的气味路径——动物有，人类的证据存疑。
+
+@@ ap-psychology.u1.t1-6.gustation
+def: 味觉。舌头的化学感觉。
+def: The sense of taste.
+ex: 甜酸咸苦鲜+腻（oleogustus）。
+pit: 辣**不是**味觉，是痛觉！
+
+@@ ap-psychology.u1.t1-6.sweet-sour-salty-bitter-umami-oleogustus
+def: 六种基本味觉。甜酸咸苦鲜腻。
+def: The six basic tastes: sugar, acid, salt, bitter, savory, and fat.
+ex: oleogustus 是「腻/脂肪味」——第六味。
+
+@@ ap-psychology.u1.t1-6.taste-receptors
+def: 味蕾。舌头上响应味觉的细胞。
+def: Cells on the tongue that respond to the basic tastes.
+ex: 分布在舌面的味觉感受器。
+
+@@ ap-psychology.u1.t1-6.supertasters
+def: 超级品尝者。味蕾特别多的人。
+def: People who have more taste buds than the average person.
+ex: 对味道极度敏感，通常讨厌苦味食物。
+
+@@ ap-psychology.u1.t1-6.medium-tasters
+def: 中等品尝者。味蕾数量中等。
+def: People with an average number of taste buds.
+ex: 大多数人在这一档——和超级品尝者、味盲者构成连续谱。
+
+@@ ap-psychology.u1.t1-6.nontasters
+def: 味盲者。味蕾少、味觉钝。
+def: People with a low sensitivity to taste.
+ex: 口味重，觉得大部分菜都没味道。
+
+@@ ap-psychology.u1.t1-6.warm-cold-receptors
+def: 温冷感受器。皮肤上的温度感受器。
+def: Receptors in the skin that detect warmth and cold.
+ex: 触觉系统的一部分：pressure / pain / cold / warmth。
+
+@@ ap-psychology.u1.t1-6.gate-control-theory
+def: 门控理论。脊髓的「门」控制痛觉通过。
+def: The theory that the spinal cord contains a neurological "gate" that blocks pain signals or allows them to pass.
+ex: 撞到腿下意识揉一揉能减轻痛感——皮肤刺激把门关上；endorphins、转移注意力也行。
+
+@@ ap-psychology.u1.t1-6.phantom-limb
+def: 幻肢。截肢后仍感觉肢体存在。
+def: Sensation that an amputated or missing limb is still attached.
+ex: 失去手臂的人感觉断肢处在发痒——somatosensory cortex 仍保留着 mapping。是实在的神经现象，不是幻觉。
+
+@@ ap-psychology.u1.t1-6.vestibular-sense
+def: 前庭觉。头部位置和平衡感。
+def: The sense of body movement and position, including the sense of balance.
+ex: 让你闭着眼也能感受到自己在旋转；知道头和身体的相对位置。
+
+@@ ap-psychology.u1.t1-6.semicircular-canals
+def: 半规管。内耳里管平衡的三根管子。
+def: Three canals within the inner ear containing receptor cells that generate nerve impulses with body movement.
+ex: 像水平仪一样维持平衡，里面的液体流动触发毛细胞。
+
+@@ ap-psychology.u1.t1-6.kinesthesis
+def: 动觉。感知身体各部分位置和运动。
+def: The system for sensing the position and movement of individual body parts.
+ex: 让你闭着眼也能准确摸到自己的鼻子——靠肌肉和关节的反馈。
+
+@@ ap-psychology.u2.t2-2.prototypes
+def: 原型。一个概念里最典型、最具代表性的例子。
+def: The most typical example of a concept, used as a mental reference for categorization.
+ex: 提到鸟🐦，你脑中浮现的是麻雀而不是企鹅——因为麻雀更符合「小巧、会飞、有羽毛」。鲸鱼是哺乳动物🐳。
+
+@@ ap-psychology.u2.t2-2.assimilation
+def: 同化。把新例子直接套进已有 schema。
+def: Fitting new information into an existing schema without changing the schema.
+ex: 小孩知道「狗=四条腿会叫」，看到新品种的狗也直接归为狗——大脑的舒适区。
+
+@@ ap-psychology.u2.t2-2.accommodation
+def: 顺应。修改 schema 去容纳新信息。
+def: Modifying an existing schema to incorporate new information that doesn't fit.
+ex: 小孩把猫也叫狗，后来发现「猫会喵喵叫」，于是调整 schema 区分猫和狗——学习的镇痛区。
+
+@@ ap-psychology.u2.t2-2.algorithms
+def: 算法。按部就班、保证正确但可能很慢。
+def: A step-by-step procedure that guarantees a correct solution, but may be slow.
+ex: 超市找薯片，一排排货架挨个找——肯定能找到但很慢。
+
+@@ ap-psychology.u2.t2-2.heuristics
+def: 启发法。经验法则，快但不保证对。
+def: Mental shortcuts that allow quick judgments; efficient but not guaranteed to be correct.
+ex: 直接去零食区找——快，但可能走错区域。Top-down processing 的体现。
+
+@@ ap-psychology.u2.t2-2.representativeness-heuristic
+def: 代表性启发法。按「像不像原型」判断概率。
+def: Judging likelihood by how well something matches a prototype, often ignoring base rates.
+ex: 一个安静爱读书的 Steve，你觉得他是图书管理员而不是农民——但农民人数远多于图书管理员（忽略了基础比率）。
+
+@@ ap-psychology.u2.t2-2.availability-heuristic
+def: 可得性启发法。按「容易想起来」判断频率。
+def: Judging frequency or probability based on how easily examples come to mind.
+ex: 新闻总报飞机失事，你觉得坐飞机比坐车危险——其实车祸死亡率高得多。
+
+@@ ap-psychology.u2.t2-2.mental-set
+def: 思维定势。固守过去成功的方法解决新问题。
+def: The tendency to use previously successful strategies even when they are no longer effective.
+ex: 一直用某个数学公式解题，遇到新题型还下意识套用——结果错了。
+pit: 思维定势是**不好的**（僵化）；知觉定势（2.1）本身无好坏——名字像，评价相反。
+
+@@ ap-psychology.u2.t2-2.priming
+def: 启动效应。先前刺激无意识影响后续反应。
+def: Exposure to a prior stimulus unconsciously influences the response to a subsequent stimulus.
+ex: 先看到「香蕉」，再填 Y_L___——你大概率写出 YELLOW。
+
+@@ ap-psychology.u2.t2-2.framing
+def: 框架效应。同一件事的不同说法改变决策。
+def: The way information is presented significantly influences decisions and judgments.
+ex: 「手术存活率90%」听起来很安全，「死亡率10%」听起来很危险——同一件事。
+
+@@ ap-psychology.u2.t2-2.gambler-s-fallacy
+def: 赌徒谬误。以为独立事件会「轮到」某结果。
+def: The false belief that past random events affect future probabilities of independent events.
+ex: 连续9次正面，你觉得下一次一定是反面——每次都是独立的50%。
+
+@@ ap-psychology.u2.t2-2.sunk-cost-fallacy
+def: 沉没成本谬误。因为已投入而不肯止损。
+def: Continuing an endeavor because of previously invested resources, even when it's no longer rational.
+ex: 电影很难看，但票钱已经花了，就强迫自己看完——「来都来了」。
+
+@@ ap-psychology.u2.t2-2.executive-functions
+def: 执行功能。额叶管理注意、计划、自控的高阶过程。
+def: Higher-order cognitive processes (in the frontal lobes) that manage attention, planning, decision-making, and self-regulation.
+ex: 写作业时控制自己不去刷手机——执行功能在工作。
+
+@@ ap-psychology.u2.t2-2.creativity
+def: 创造力。产出既新颖又有价值的想法。
+def: The ability to produce ideas that are both novel and valuable.
+ex: 用一块砖头想出几十种用途：盖房子、当哑铃、当画板……
+
+@@ ap-psychology.u2.t2-2.divergent-thinking
+def: 发散思维。探索多种可能、天马行空。
+def: Thinking that explores multiple possible solutions — open-ended and creative.
+ex: 头脑风暴「砖头有多少用途」——发散思维是创造力的核心。
+
+@@ ap-psychology.u2.t2-2.convergent-thinking
+def: 聚合思维。收窄到唯一正确答案。
+def: Thinking that narrows down to one correct answer — logical and focused.
+ex: AP 选择题四选一，排除错误选项找出唯一答案。
+
+@@ ap-psychology.u2.t2-2.functional-fixedness
+def: 功能固着。只看到物体的常规用途。
+def: The inability to see an object as having a function beyond its typical use — a type of mental set.
+ex: 蜡烛问题：想不到把图钉盒倒空当烛台——被「装图钉」这个功能固着了。
+
+@@ ap-psychology.u2.t2-3.explicit-memory
+def: 外显记忆。能有意识回忆、能用语言说出的记忆。
+def: Memories that can be consciously recalled and verbally declared; also called declarative memory.
+ex: 你能清楚说出昨天晚餐吃了什么、中国的首都是北京。
+
+@@ ap-psychology.u2.t2-3.episodic-memory
+def: 情景记忆。亲身经历的具体事件。
+def: A type of explicit memory for personal experiences tied to specific times and places.
+ex: 你记得去年生日派对的场景、声音和感受——人生「剧集」，回忆时再次经历。
+
+@@ ap-psychology.u2.t2-3.semantic-memory
+def: 语义记忆。事实和一般知识。
+def: A type of explicit memory for general facts and knowledge, independent of personal experience.
+ex: 地球是圆的、1+1=2——不依赖你的个人经历。
+
+@@ ap-psychology.u2.t2-3.implicit-memory
+def: 内隐记忆。无意识影响行为的记忆。
+def: Memories that influence behavior without conscious awareness.
+ex: 骑自行车时不需要有意识地想每一步怎么做。
+
+@@ ap-psychology.u2.t2-3.procedural-memory
+def: 程序性记忆。怎么做某事的技能记忆。
+def: A type of implicit memory for motor skills and habits — "how-to" knowledge.
+ex: 骑车、打字、弹钢琴——「我就是会骑，没法表述怎么骑的」。
+
+@@ ap-psychology.u2.t2-3.prospective-memory
+def: 前瞻记忆。记得将来要做某事。
+def: Remembering to perform a planned action in the future — "remembering to remember."
+ex: 记住下午三点要去取快递——意图+未来时间点结合。
+
+@@ ap-psychology.u2.t2-3.long-term-potentiation
+def: 长时程增强效应（LTP）。重复刺激让突触连接更强。
+def: The strengthening of synaptic connections through repeated stimulation — the biological basis of learning and memory.
+ex: 这世上本没有路，走的人多了也便成了路——每次有效复习都在强化神经通路。
+
+@@ ap-psychology.u2.t2-3.working-memory-model
+def: 工作记忆模型。STM 的主动加工升级版。
+def: An updated model of STM emphasizing active processing: central executive, phonological loop, visuospatial sketchpad.
+ex: 不只被动存放信息，而是主动加工——三个组件各司其职。
+
+@@ ap-psychology.u2.t2-3.primary-memory-system
+def: 初级记忆系统。短期/工作记忆的早期术语。
+def: An early term for short-term/working memory — the system that actively holds information currently in use.
+ex: 你正在使用的临时工作台：心算时暂时记住中间结果。
+
+@@ ap-psychology.u2.t2-3.central-executive
+def: 中央执行系统。工作记忆的老板，分配注意。
+def: The component of working memory that directs attention and coordinates the subsystems.
+ex: 老板角色——分配注意力，协调语音回路和视觉空间画板，并从 LTM 提取信息。
+
+@@ ap-psychology.u2.t2-3.phonological-loop
+def: 语音回路。工作记忆里处理声音和语言的「内部耳朵和嘴巴」。
+def: The component of working memory that processes auditory and verbal information.
+ex: 在脑海里默念一个电话号码来记住它。
+
+@@ ap-psychology.u2.t2-3.visuospatial-sketchpad
+def: 视觉空间画板。工作记忆里的「内部眼睛」。
+def: The component of working memory that processes visual and spatial information.
+ex: 在脑中想象一张地图，或旋转一个三维物体。
+
+@@ ap-psychology.u2.t2-3.long-term-memory
+def: 长期记忆。容量近乎无限的永久储存库。
+def: The relatively permanent and unlimited storage system for knowledge, skills, and experiences.
+ex: 母语、骑车技能、童年回忆都在这里。储存位置：hippocampus（explicit）、cerebellum（implicit）、amygdala（情绪）。
+
+@@ ap-psychology.u2.t2-3.multi-store-model
+def: 三阶记忆模型。感觉→短期→长期的串行仓库。
+def: Atkinson-Shiffrin model: sensory memory → short-term memory → long-term memory.
+ex: 信息先到感觉记忆，被注意后进入 STM，复述后存入 LTM——三个仓库依次通过。
+
+@@ ap-psychology.u2.t2-3.sensory-memory
+def: 感觉记忆。极短暂保存原始感觉信息的接待大厅。
+def: A brief storage that holds large amounts of raw sensory input before it fades or is attended to.
+ex: 容量大但衰减极快（视觉<1秒，听觉3-4秒）——绝大多数信息到这就消失了。
+
+@@ ap-psychology.u2.t2-3.iconic-memory
+def: 图像记忆。视觉感觉记忆。
+def: Visual sensory memory, lasting less than a second.
+ex: 快速晃动烟花棒看到完整光轨——视觉印象在视网膜上停留不到一秒。
+
+@@ ap-psychology.u2.t2-3.echoic-memory
+def: 声像记忆。听觉感觉记忆。
+def: Auditory sensory memory, lasting about 3-4 seconds.
+ex: 老师说了一句话你没听清，但几秒内可以在脑中「回放」——所以别人问「刚才说什么了」你有时答得出来。
+
+@@ ap-psychology.u2.t2-3.automatic-processing
+def: 自动加工。不费力的无意识编码。
+def: Encoding of information without conscious effort — such as space, time, and frequency.
+ex: 你不用刻意记，就知道今天在路上碰到好几次同一个朋友——空间、时间、频率自动入账。
+
+@@ ap-psychology.u2.t2-3.effortful-processing
+def: 刻意加工。需要注意和努力的编码。
+def: Encoding that requires conscious attention and deliberate effort.
+ex: 背单词、复习公式——需要集中注意力反复练习。
+
+@@ ap-psychology.u2.t2-3.storage
+def: 储存。把编码后的信息保持在记忆系统里。
+def: The process of maintaining encoded information in memory over time.
+ex: 就像把文件保存到硬盘上。
+
+@@ ap-psychology.u2.t2-3.levels-of-processing-model
+def: 加工水平模型。加工越深记得越牢。
+def: Craik & Lockhart's theory that memory depends on the depth of processing — deeper processing leads to better memory.
+ex: 理解意义比死记字形效果好得多。
+
+@@ ap-psychology.u2.t2-3.shallow-encoding
+def: 浅层编码。只关注表面特征。
+def: Processing information at a surface level (appearance or sound), producing weak memory.
+ex: 只注意到 Peter Parker 是大写的、有几个字母。
+
+@@ ap-psychology.u2.t2-3.deep-encoding
+def: 深层编码。关注意义并连接已有知识。
+def: Processing information at a meaningful level (semantics), producing strong and lasting memory.
+ex: 看到 Peter Parker 想到「他是蜘蛛侠！」——和已有知识网络连接。
+
+@@ ap-psychology.u2.t2-3.structural-phonemic-semantic
+def: 结构/语音/语义加工。由浅到深三层。
+def: Three levels: structural (physical features, shallowest), phonemic (sound), semantic (meaning, deepest).
+ex: Peter Parker：结构层看字母形状，语音层注意到两个 P 押头韵，语义层想到蜘蛛侠。
+
+@@ ap-psychology.u2.t2-4.encoding
+def: 编码。把外界信息转成可储存的形式。
+def: The process of converting sensory information into a form that can be stored in memory.
+ex: 用键盘打字，把外界信息变成电子信号存进电脑。
+
+@@ ap-psychology.u2.t2-4.mnemonic-devices
+def: 助记方法。帮助编码和提取的记忆策略。
+def: Memory aids that use strategies (imagery, organization, acronyms) to enhance encoding and recall.
+ex: My Very Educated Mother Just Served Us Noodles——记太阳系行星顺序。
+
+@@ ap-psychology.u2.t2-4.method-of-loci
+def: 位置记忆法（记忆宫殿）。把项目和熟悉位置绑定。
+def: A mnemonic technique that links items to specific locations in a familiar physical space.
+ex: 把要记的东西放在晚自习教室的不同位置——想象一个巨大的香蕉上写着同学的身份证号，回忆时在脑中走一遍就都能「看到」。
+
+@@ ap-psychology.u2.t2-4.chunking
+def: 组块法。把零散信息打包成大单元。
+def: Grouping individual pieces of information into larger, meaningful units to overcome STM capacity limits (7±2).
+ex: 手机号 13812345678 分成 138-1234-5678 三组——理论上能记住两串手机号啦。
+
+@@ ap-psychology.u2.t2-4.categories-as-they-pertain-to-grouping
+def: 类别分组。按共同特征归类帮助编码。
+def: Organizing information into meaningful groups based on shared characteristics to aid encoding.
+ex: 购物清单分成乳制品、蔬菜、零食来记。
+
+@@ ap-psychology.u2.t2-4.hierarchies-as-they-pertain-to-grouping
+def: 层级组织。从宽到窄分层组织。
+def: Organizing information in a structured, ranked order from broad to specific.
+ex: 生物分类：动物→哺乳动物→犬科→狗——层层细分更好记。
+
+@@ ap-psychology.u2.t2-4.spacing-effect
+def: 间隔效应。分散学习远好于集中学习。
+def: Distributed practice over time produces better long-term retention than massed practice.
+ex: 每天复习30分钟连续一周，好过考前通宵——不要临时抱佛脚（心理学教我学习）！
+
+@@ ap-psychology.u2.t2-4.memory-consolidation
+def: 记忆巩固。脆弱的短期记忆转成稳定长期记忆。
+def: The process of converting fragile short-term memories into stable long-term memories, involving the hippocampus.
+ex: 电脑把 RAM 的临时数据写入硬盘永久保存——睡眠对巩固很重要（河马校园 Hippocampus 主导）。
+
+@@ ap-psychology.u2.t2-4.massed-practice
+def: 集中学习。一次学一大坨（临时抱佛脚）。
+def: Cramming — studying intensively in one concentrated session; poor for long-term retention.
+ex: 考试前一晚通宵复习——短期可能有用，没巩固就忘得飞快。
+
+@@ ap-psychology.u2.t2-4.distributed-practice
+def: 分散学习。把学习摊开到多个时段。
+def: Spreading study sessions over time; leads to stronger and more durable memory.
+ex: 每天学一点，连续一周——记忆效果远好于临时抱佛脚。
+
+@@ ap-psychology.u2.t2-4.serial-position-effect
+def: 系列位置效应。开头结尾好记，中间易忘。
+def: The tendency to best recall items at the beginning and end of a list.
+ex: 背一长串单词，最容易记住开头和结尾——由首因+近因两个效应组成。
+
+@@ ap-psychology.u2.t2-4.primacy-effect
+def: 首因效应。列表开头记得更好。
+def: Better recall for items at the beginning of a list — due to more rehearsal, transferring them to LTM.
+ex: 开头的词你有更多时间反复默念——已经转进长期记忆。
+
+@@ ap-psychology.u2.t2-4.recency-effect
+def: 近因效应。列表结尾记得更好。
+def: Better recall for items at the end of a list — because they are still in working memory.
+ex: 最后几个词刚刚才听到，还留在短期记忆里。
+
+@@ ap-psychology.u2.t2-5.sensory-memory
+def: 感觉记忆。所有感官信息的第一站（存储视角）。
+def: The initial, brief storage of sensory information; large capacity but very short duration.
+ex: 记忆的接待大厅——所有感官信息先到这里，绝大部分迅速消失。
+
+@@ ap-psychology.u2.t2-5.short-term-memory
+def: 短期记忆。容量7±2、时长约30秒的临时工作台。
+def: Temporary storage with limited capacity (7±2 items) and duration (~20-30 seconds) without rehearsal.
+ex: 临时记一个验证码，不复述的话30秒内就忘了。
+
+@@ ap-psychology.u2.t2-5.working-memory
+def: 工作记忆。会主动加工的 STM 升级版。
+def: The active processing system (upgraded STM) that manipulates and processes information, not just holds it.
+ex: 心算时一边记住中间结果一边计算下一步——「短时记忆」这个词太被动，体现不了主动加工。
+
+@@ ap-psychology.u2.t2-5.long-term-memory
+def: 长期记忆。近乎无限容量的永久库（存储视角）。
+def: The relatively permanent storage with virtually unlimited capacity and duration.
+ex: 你的知识、技能和所有经历的永久储存库。
+
+@@ ap-psychology.u2.t2-5.maintenance-rehearsal
+def: 维持复述。机械重复维持短期记忆。
+def: Simple repetition to keep information in STM; does not effectively transfer to LTM.
+ex: 不停念叨验证码 583926——挂了电话马上就忘，没有真正「保存」。
+
+@@ ap-psychology.u2.t2-5.elaborative-rehearsal
+def: 拓展复述。语义连接把信息送入长期记忆。
+def: Connecting new information to existing knowledge through meaningful, deep processing — effective for LTM transfer.
+ex: 把购物清单按乳制品、清洁用品分类来记——和已有知识深度连接（OPML 原文叫「拓展复述」）。
+
+@@ ap-psychology.u2.t2-5.memory-retention
+def: 记忆保持。储存的信息随时间保留的程度。
+def: The ability to maintain stored information over time.
+ex: 学过的知识过了一个月还能记得多少。
+
+@@ ap-psychology.u2.t2-5.retrograde-amnesia
+def: 逆行性遗忘。想不起创伤**之前**的事。
+def: Inability to recall memories from before a traumatic event. Retro = backward.
+ex: 车祸后醒来不记得自己是谁、不认识家人——丢失的是**过去**。Scott Bolzan 忘了过去46年。
+
+@@ ap-psychology.u2.t2-5.autobiographical-memory
+def: 自传记忆。关于自己人生的故事。
+def: Personal memory about one's own life, combining episodic and semantic memories.
+ex: Key words: **Better Memory about yourself**, not others——关于「我」的经历和事实。
+
+@@ ap-psychology.u2.t2-5.anterograde-amnesia
+def: 顺行性遗忘。无法形成**新的**长期记忆。
+def: Inability to form new long-term memories after a traumatic event. Antero = forward.
+ex: H.M.（Henry Molaison）切除海马体后：旧记忆都在，但你离开房间再回来他就不记得见过你——每天都是「现在」。但程序性记忆还能学。
+pit: retro=忘过去，antero=存不了新——一对反义前缀，别配反。
+
+@@ ap-psychology.u2.t2-5.alzheimer-s-disease
+def: 阿尔茨海默病。进行性神经退行性记忆破坏。
+def: A progressive neurodegenerative disease characterized by memory loss, cognitive decline, and behavioral changes.
+ex: 从忘记最近的事开始，逐渐不认识家人、忘记个人信息、丧失自理能力——β淀粉样蛋白斑块+Tau缠结+ACh缺失。
+
+@@ ap-psychology.u2.t2-5.infantile-amnesia
+def: 婴儿期遗忘。想不起3-4岁前的经历。
+def: The inability to recall personal experiences from before age 3-4.
+ex: 海马体不成熟、语言发展不完全、自我意识未形成——三个原因，不是小时候没记忆。
+
+@@ ap-psychology.u2.t2-6.retrieval
+def: 提取。从记忆库调出已存信息。
+def: The process of accessing and bringing stored information back into conscious awareness.
+ex: 就像打开一个文件，读取里面的内容。
+
+@@ ap-psychology.u2.t2-6.recall
+def: 回忆。没有提示自己提取（更难）。
+def: Retrieving information without external cues — more difficult.
+ex: 填空题和简答题——「写单词」式背法。
+
+@@ ap-psychology.u2.t2-6.recognition
+def: 再认。信息重现时认出它（更容易）。
+def: Identifying previously learned information when it is presented again — easier than recall.
+ex: 选择题——正确答案就在眼前，「扇贝单词」式认出它。
+
+@@ ap-psychology.u2.t2-6.retrieval-cues
+def: 提取线索。帮你「钓」出记忆的刺激。
+def: Stimuli that help trigger the recall of stored memories.
+ex: 闻到某种香水的味道突然想起老朋友——线索可外部（场景、气味）可内部（情绪、想法）。
+
+@@ ap-psychology.u2.t2-6.context-dependent-memory
+def: 情境依赖记忆。编码提取环境一致记得更好。
+def: Memory retrieval is better when the physical environment at encoding and retrieval match.
+ex: 在同一间 AP 教室学习和考试，灯光桌椅都成了提取线索。
+
+@@ ap-psychology.u2.t2-6.mood-congruent-memory
+def: 心境一致性记忆。情绪当线索，回忆同情绪的事。
+def: Current mood influences which memories are recalled — we recall memories consistent with our present mood.
+ex: 开心时容易想起开心的事；悲伤的时候「我怎么这么难啊」——情绪本身成了 cue。
+
+@@ ap-psychology.u2.t2-6.state-dependent-memory
+def: 状态依赖记忆。生理/心理状态一致记得更好。
+def: Memory retrieval is better when the physiological/psychological state at encoding and retrieval match.
+ex: 学习时喝了咖啡（咖啡因兴奋状态），考试前也喝一杯——可能帮你更好地回忆。
+
+@@ ap-psychology.u2.t2-6.testing-effect
+def: 测试效应。自我测试比重读更能巩固记忆。
+def: Self-testing (retrieval practice) strengthens long-term memory more effectively than re-reading.
+ex: 做练习题、考自己、向别人解释概念——每次成功提取都在加固 LTP。还不快去做 CB~
+
+@@ ap-psychology.u2.t2-6.metacognition
+def: 元认知。对思维的思维。
+def: Thinking about your own thinking — monitoring and reflecting on your cognitive processes.
+ex: 你意识到自己没听懂老师讲的内容，决定换一种方式学习——Thinking you're thinking。
+
+@@ ap-psychology.u2.t2-7.forgetting-curve
+def: 遗忘曲线。遗忘先快后慢的指数衰减。
+def: Ebbinghaus's finding that forgetting occurs rapidly after learning (~70% within 24 hours) and then levels off.
+ex: 新知识24小时内忘掉大部分，不复习就「考完还给老师」——用分散学习对抗它。
+
+@@ ap-psychology.u2.t2-7.encoding-failure
+def: 编码失败。根本没存进去，不是忘了。
+def: Information was never properly encoded into LTM in the first place.
+ex: 硬币上的林肯头像朝哪边？——从来没认真编码过，不是忘记。
+
+@@ ap-psychology.u2.t2-7.proactive-interference
+def: 前摄干扰。旧记忆干扰新记忆。
+def: Old memories interfere with the retrieval of new information. Pro = forward (old → new).
+ex: 搬家后填表还是下意识写旧地址——G11了还总写自己是G10的呜呜呜。
+
+@@ ap-psychology.u2.t2-7.retroactive-interference
+def: 后摄干扰。新记忆干扰旧记忆。
+def: New memories interfere with the retrieval of old information. Retro = backward (new → old).
+ex: 学了新曲子后，想不起以前那首旧曲子的旋律。
+pit: pro=旧扰新（向前），retro=新扰旧（向后）——和逆行/顺行遗忘一样用前缀判断，别混。
+
+@@ ap-psychology.u2.t2-7.tip-of-the-tongue-phenomenon
+def: 舌尖现象。知道但一时说不出来。
+def: The feeling of knowing information but being temporarily unable to retrieve it — available but not retrievable.
+ex: 「那个人叫什么来着……就在嘴边！」——过一会儿突然想起来了。
+
+@@ ap-psychology.u2.t2-7.repression-psychodynamic
+def: 压抑。无意识把创伤记忆推出意识（防御机制）。
+def: The unconscious pushing of painful memories out of awareness as a defense mechanism.
+ex: 完全想不起小时候被伤害的经历——不是故意忘，是真的记不起来。
+note: 有争议：Loftus 等认为「被压抑的记忆」可能是被植入的虚假记忆。
+
+@@ ap-psychology.u2.t2-7.misinformation-effect
+def: 错误信息效应。事后误导信息扭曲原记忆。
+def: Exposure to misleading post-event information distorts the original memory.
+ex: Loftus 车祸实验：用 smashed 代替 hit 提问，参与者估计车速更高，还声称看到了不存在的碎玻璃——一个词就能改写记忆。
+
+@@ ap-psychology.u2.t2-7.source-amnesia
+def: 来源性遗忘。记得内容忘了来源。
+def: Remembering information but forgetting where, when, or how it was learned.
+ex: 你记得一个冷知识，但想不起从哪知道的——既视感（déjà vu 逮虾户）就是把记忆来源错归到「真实经历」。
+
+@@ ap-psychology.u2.t2-7.constructive-memory
+def: 建构性记忆。回忆是一次重新建构。
+def: Memory is not simply retrieved but actively reconstructed, filling gaps with existing knowledge and expectations.
+ex: 每次回忆都在用已有经验填补空白——骗兄弟可以，别把自己也骗了。
+
+@@ ap-psychology.u2.t2-7.imagination-inflation
+def: 想象膨胀。想象多了就信以为真。
+def: Imagining a fictitious event increases confidence that it actually happened.
+ex: 反复想象小时候在商场走丢——即使从未发生，你也开始觉得这事真有过。
+
+@@ ap-psychology.u2.t2-8.intelligence
+def: 智力。学习、解决问题、适应新环境的能力。
+def: The ability to learn from experience, solve problems, and adapt to new situations.
+ex: 没有统一定义，但共识是：adaptive、涉及学习、多心智过程、culture specific。
+
+@@ ap-psychology.u2.t2-8.g-general-intelligence
+def: 一般智力（g因素）。跨任务通用的底层能力。
+def: Spearman's concept of a single underlying general intelligence factor influencing all cognitive tasks.
+ex: 「好学生啥都好」——一项认知测试强的人，其他方面往往也不错。
+
+@@ ap-psychology.u2.t2-8.intelligence-quotient-iq
+def: 智商。以100为均值的标准化分数。
+def: A standardized score representing intellectual ability, with 100 as the average.
+ex: 现代算法：和**同龄组**比出来的标准分。老公式 IQ =（心理年龄/生理年龄）×100。
+note: 分布是正态曲线—— psych 一门课串起来了吧。
+
+@@ ap-psychology.u2.t2-8.mental-age
+def: 心理年龄。测试表现对应的年龄水平。
+def: The age level of intellectual performance a person demonstrates on a test.
+ex: 8岁孩子（生理8岁）表现和平均10岁一样好——心理年龄10岁。
+
+@@ ap-psychology.u2.t2-8.chronological-age
+def: 生理年龄。从出生算起的实际年龄。
+def: A person's actual age in years from birth.
+ex: 用来和心理年龄对比计算 IQ 的分母。
+
+@@ ap-psychology.u2.t2-8.standardization
+def: 标准化。统一施测和评分程序。
+def: Establishing uniform procedures for administering and scoring a test, with norms from a representative sample.
+ex: 所有考生相同条件考试、统一 Rubric 改卷——分数才有可比性。
+
+@@ ap-psychology.u2.t2-8.validity
+def: 效度。测没测到想测的东西。
+def: The extent to which a test measures what it claims to measure.
+ex: 不能站在体重秤上测身高——体重秤测身高就是无效的。
+pit: 信度=一致性，效度=准确性——可靠≠有效（体重秤很稳定但测不了身高）。
+
+@@ ap-psychology.u2.t2-8.construct-validity
+def: 建构效度。是否测到了背后的心理学概念。
+def: Whether a test accurately measures the theoretical concept it intends to measure.
+ex: 一个「智力测试」是否真的在测智力这个概念。
+
+@@ ap-psychology.u2.t2-8.predictive-validity
+def: 预测效度。分数能否预测未来表现。
+def: Whether test scores can effectively predict future behavior or performance.
+ex: SAT 分数能否预测大学 GPA。
+
+@@ ap-psychology.u2.t2-8.reliability
+def: 信度。重复测量结果的一致性。
+def: The extent to which a test yields consistent, reproducible results.
+ex: 能力没变化，测两次应该得到相近的分数。
+
+@@ ap-psychology.u2.t2-8.test-retest-reliability
+def: 重测信度。隔时间两次结果一致。
+def: Consistency of scores when the same test is given twice to the same group at different times.
+ex: 同一组人隔一个月测两次，看同一个人的分数是否接近。
+
+@@ ap-psychology.u2.t2-8.split-half-reliability
+def: 分半信度。同一份卷子两半一致。
+def: Consistency between two halves of a single test (odd vs. even items).
+ex: 把试卷奇数题和偶数题的分数做相关——高相关说明两半在测同样的东西。
+
+@@ ap-psychology.u2.t2-8.stereotype-threat
+def: 刻板印象威胁。担心坐实负面刻板印象而表现变差。
+def: Anxiety that one's performance will confirm a negative stereotype about their group, impairing performance.
+ex: 「女生数学不好」的刻板印象让女生考试更紧张——反而考得更差。
+
+@@ ap-psychology.u2.t2-8.stereotype-lift
+def: 刻板印象提升。正面刻板印象带来 boost。
+def: Improved performance from awareness of a positive stereotype about one's group.
+ex: 「亚洲人数学好」让亚洲学生考数学更自信。
+
+@@ ap-psychology.u2.t2-8.flynn-effect
+def: 弗林效应。全球 IQ 均分逐代上升。
+def: The observed trend that average IQ scores have been rising across generations worldwide.
+ex: 营养、医疗、教育、科技进步——所以 IQ 测试要定期 renorm，保证均值还是100。
+
+@@ ap-psychology.u2.t2-8.achievement-tests
+def: 成就测试。测已经学会了什么。
+def: Tests that measure what a person has already learned.
+ex: 单元测、期末考试、AP 考试。
+
+@@ ap-psychology.u2.t2-8.aptitude-tests
+def: 能力倾向测试。预测未来学习潜力。
+def: Tests designed to predict future learning ability or potential, not current knowledge.
+ex: SAT——预测你未来在大学的表现，不是考你现在会什么。
+
+@@ ap-psychology.u2.t2-8.fixed-mindset
+def: 固定型思维。认为智力天生固定。
+def: The belief that intelligence is innate and unchangeable; failure = lack of ability.
+ex: 害怕挑战，因为失败意味着「我不聪明」。
+
+@@ ap-psychology.u2.t2-8.growth-mindset
+def: 成长型思维。认为能力可以靠努力提升。
+def: The belief that intelligence can be developed through effort and learning; failure = opportunity to grow.
+ex: 失败是学习和成长的机会——更有韧性。
+
+@@ ap-psychology.u3.t3-1.chronological-development
+def: 时序发展。按年龄顺序研究变化。
+def: Studying development by following age-related changes over time.
+ex: 从婴儿到老年，跟着年龄看变化。
+
+@@ ap-psychology.u3.t3-1.continuous-development
+def: 连续发展。平缓渐进、没有阶段跳跃。
+def: Development is a gradual, smooth process without distinct stages.
+ex: 像一个斜坡——能力慢慢增长，没有突然的跳跃。
+
+@@ ap-psychology.u3.t3-1.discontinuous-development
+def: 阶段发展（不连续）。一级一级质变。
+def: Development occurs in distinct stages, each qualitatively different from the last.
+ex: 像爬楼梯——每上一层就有质的变化（Piaget 就是这种）。
+
+@@ ap-psychology.u3.t3-1.lifespan-development
+def: 毕生发展。发展持续一生。
+def: Development continues from conception to death, not just childhood.
+ex: 人一辈子都在发展，不只是小时候。
+
+@@ ap-psychology.u3.t3-1.stability-and-change
+def: 稳定与变化。特质终生稳定还是会变。
+def: The debate over whether traits remain consistent or change across the lifespan.
+ex: 小时候内向的人，长大了还会内向吗？
+
+@@ ap-psychology.u3.t3-1.nature-and-nurture
+def: 先天与后天。遗传与环境之争。
+def: The debate over the relative contributions of genetics vs. environment to development.
+ex: 智商是天生的还是后天培养的？——两者都有影响。
+
+@@ ap-psychology.u3.t3-2.teratogens
+def: 致畸物。损害胎儿发展的有害因子。
+def: Harmful agents (drugs, alcohol, viruses) that can cause birth defects during prenatal development.
+ex: 孕妇喝酒可能导致胎儿酒精综合征——产前环境也很重要。
+
+@@ ap-psychology.u3.t3-2.fine-motor-coordination
+def: 精细动作协调。小肌肉的控制。
+def: Control of small muscles, especially in the hands and fingers.
+ex: 用筷子、写字、系鞋带。
+
+@@ ap-psychology.u3.t3-2.gross-motor-coordination
+def: 粗大动作协调。大肌肉的控制。
+def: Control of large muscles used for walking, running, and jumping.
+ex: 走路、跑步、跳跃——发展顺序：先粗大后精细。
+
+@@ ap-psychology.u3.t3-2.maturation
+def: 成熟。生物程序驱动的自然发育。
+def: The biologically driven sequence of growth that is relatively unaffected by experience.
+ex: 所有婴儿都是先会坐再会走——这个顺序不需要教。
+
+@@ ap-psychology.u3.t3-2.reflexes
+def: 反射。与生俱来的自动反应。
+def: Involuntary, automatic responses to stimuli that are present at birth.
+ex: 新生儿天生就有的自动反应，比如抓握反射。
+
+@@ ap-psychology.u3.t3-2.rooting-reflex
+def: 觅食反射。碰脸颊就转头找奶。
+def: When a newborn's cheek is touched, it turns toward the stimulus and opens its mouth to feed.
+ex: 碰婴儿脸颊，他自动把头转过来找奶吃。
+
+@@ ap-psychology.u3.t3-2.visual-cliff
+def: 视觉悬崖。测婴儿深度知觉的实验装置。
+def: A laboratory device used to test depth perception in infants; most avoid the "deep" side by 6-14 months.
+ex: 玻璃桌下看起来是悬崖——6-14个月的婴儿不敢爬过去，说明已有深度知觉。
+
+@@ ap-psychology.u3.t3-2.critical-periods
+def: 关键期。错过就不可逆的时间窗。
+def: A strict time window during which certain experiences must occur; missing it causes irreversible effects.
+ex: 7岁前没接触语言，语言能力可能**永久**受损。
+
+@@ ap-psychology.u3.t3-2.sensitive-periods
+def: 敏感期。最佳但非绝对的时间窗。
+def: An optimal but not absolute time window when the organism is especially responsive to certain experiences.
+ex: 幼儿期学语言最容易，但成年后也不是完全学不会。
+pit: critical=错过不可逆，sensitive=最佳但还有机会——程度不同。
+
+@@ ap-psychology.u3.t3-2.imprinting
+def: 印刻。关键期内对第一移动物体的依恋。
+def: A rapid form of attachment in certain animals during a critical period, to the first moving object they see.
+ex: 小鹅出生后把第一个看到的移动物体当妈。
+pit: 印刻是**动物特有**——人类有 attachment 但没有 imprinting，考试常挖这个坑。
+
+@@ ap-psychology.u3.t3-2.growth-spurt
+def: 生长突增。快速的身高增长期。
+def: A period of rapid physical growth, especially during puberty.
+ex: 青春期突然长高了很多。
+
+@@ ap-psychology.u3.t3-2.puberty
+def: 青春期。性成熟的生理发育期。
+def: The period of physical maturation involving hormonal surges and sexual maturity.
+ex: 荷尔蒙激增、生长突增、性征发育。大脑里边缘系统和杏仁核先发育、前额叶25岁才成熟——所以青少年冲动。
+
+@@ ap-psychology.u3.t3-2.primary-sex-characteristics
+def: 第一性征。直接参与生殖的身体结构。
+def: Body structures directly involved in reproduction (ovaries, testes, uterus).
+ex: 卵巢、子宫、睾丸。
+
+@@ ap-psychology.u3.t3-2.secondary-sex-characteristics
+def: 第二性征。不直接参与生殖的青春期特征。
+def: Physical features not directly involved in reproduction that appear at puberty.
+ex: 男生长喉结和胡须，女生乳房发育。
+
+@@ ap-psychology.u3.t3-2.menarche
+def: 初潮。女生第一次月经。
+def: A female's first menstrual period, signaling reproductive maturity.
+ex: 青春期的里程碑之一。
+
+@@ ap-psychology.u3.t3-2.spermarche
+def: 初次遗精。男生第一次遗精。
+def: A male's first ejaculation, signaling reproductive maturity.
+ex: 和初潮对应。
+
+@@ ap-psychology.u3.t3-2.menopause
+def: 更年期（绝经）。月经永久停止。
+def: The cessation of menstruation, typically around age 50.
+ex: 约50岁，伴随荷尔蒙变化和身心不适；男性也有类似过程但更平缓。
+
+@@ ap-psychology.u3.t3-4.schemas
+def: 图式。组织经验的心理框架（Piaget视角）。
+def: Mental frameworks or concepts that help us organize and interpret information.
+ex: 小孩脑中的「狗」框架：四条腿、毛茸茸、会叫。
+
+@@ ap-psychology.u3.t3-4.assimilation
+def: 同化。新经历套进已有图式。
+def: Interpreting new experiences in terms of existing schemas.
+ex: 小孩第一次看到猫，叫它「狗狗」——也是四条腿毛茸茸嘛。
+
+@@ ap-psychology.u3.t3-4.accommodation
+def: 顺应。修改图式容纳新信息。
+def: Modifying existing schemas or creating new ones to incorporate new information.
+ex: 发现猫会喵喵叫和狗不一样——建立新的「猫」概念。
+
+@@ ap-psychology.u3.t3-4.sensorimotor-stage
+def: 感知运动阶段。0-2岁，用感官动作认识世界。
+def: Piaget's Stage 1 (birth to ~2 years): learning through senses and motor actions; developing object permanence.
+ex: 婴儿通过抓、咬、看来认识世界——活在当下。
+
+@@ ap-psychology.u3.t3-4.preoperational-stage
+def: 前运算阶段。2-7岁，有符号思维但缺守恒。
+def: Piaget's Stage 2 (~2-7 years): symbolic thinking develops but children lack conservation and are egocentric.
+ex: 会用语言和假装游戏，但认为把水倒进高杯子水就「变多了」。
+
+@@ ap-psychology.u3.t3-4.concrete-operational-stage
+def: 具体运算阶段。7-11岁，具体逻辑。
+def: Piaget's Stage 3 (~7-11 years): logical thinking about concrete events; mastering conservation and reversibility.
+ex: 知道 8+4=12 所以 12-4=8——但还不能思考抽象假设。
+
+@@ ap-psychology.u3.t3-4.formal-operational-stage
+def: 形式运算阶段。12岁起，抽象假设思维。
+def: Piaget's Stage 4 (~12+): capacity for abstract, hypothetical, and systematic thinking.
+ex: 能理解正义、自由这些抽象概念，能设计科学实验——y=ax+b 里的 x 代表什么。
+
+@@ ap-psychology.u3.t3-4.object-permanence
+def: 客体永久性。看不见的东西仍然存在。
+def: The understanding that objects continue to exist even when not seen; develops around 8-10 months.
+ex: 把玩具藏在毯子下面，婴儿知道去掀开毯子找。
+
+@@ ap-psychology.u3.t3-4.mental-symbols
+def: 心理符号。脑中表征不在眼前的事物。
+def: Internal representations of objects or events that allow thinking without direct sensory experience.
+ex: 婴儿可以在脑中「想到」一个不在眼前的东西。
+
+@@ ap-psychology.u3.t3-4.pretend-play
+def: 假装游戏。用一物象征另一物。
+def: Using objects or actions to represent other objects or actions symbolically.
+ex: 小孩拿香蕉当电话打、过家家——符号思维的体现。
+
+@@ ap-psychology.u3.t3-4.conservation
+def: 守恒。形状变了量不变。
+def: The understanding that quantity remains the same despite changes in shape or appearance.
+ex: 同样多的水倒进高瘦杯和矮胖杯——水量不变（前运算阶段的孩子会觉得高杯多）。
+
+@@ ap-psychology.u3.t3-4.reversibility
+def: 可逆性。心理上能撤销操作。
+def: The ability to mentally reverse an action or operation.
+ex: 知道 8+4=12，也就知道 12-4=8。
+
+@@ ap-psychology.u3.t3-4.animism
+def: 泛灵论。认为万物有灵。
+def: The belief that inanimate objects are alive and have feelings; common in the preoperational stage.
+ex: 小孩说「太阳公公在对我笑」，觉得玩具熊会疼。
+
+@@ ap-psychology.u3.t3-4.egocentrism
+def: 自我中心主义。无法采择他人视角。
+def: The inability to take another person's perspective; characteristic of the preoperational stage.
+ex: 三山实验：小孩觉得别人看到的山和自己看到的一样。注意和「自私」无关。
+
+@@ ap-psychology.u3.t3-4.theory-of-mind
+def: 心理理论。知道别人有不同的想法。
+def: The ability to understand that others have different thoughts, beliefs, and perspectives than one's own.
+ex: 知道别人可能不知道你知道的事——大约4-5岁发展出来。
+
+@@ ap-psychology.u3.t3-4.systematic-thinking
+def: 系统性思维。有条理地解决问题。
+def: The ability to approach problems in an organized, logical manner.
+ex: 能有条理地一步步解决，而不是乱猜——具体运算阶段出现。
+
+@@ ap-psychology.u3.t3-4.abstract-thinking
+def: 抽象思维。思考不在眼前、不具体的概念。
+def: The ability to think about concepts that are not physically present.
+ex: 「正义是什么」——形式运算阶段的标志。
+
+@@ ap-psychology.u3.t3-4.hypothetical-thinking
+def: 假设性思维。考虑「如果……会怎样」。
+def: The ability to consider "what if" scenarios.
+ex: 如果地球没有引力会怎样？——假设命题思考。
+
+@@ ap-psychology.u3.t3-4.scaffolding-as-it-pertains-to-vygotsky
+def: 脚手架。帮学习者够到 ZPD 的临时支持。
+def: Temporary support provided by a more knowledgeable person to help a learner accomplish a task within their ZPD.
+ex: 老师先给提示和框架，等你学会了就慢慢撤掉帮助——就是那个「帮助」。
+
+@@ ap-psychology.u3.t3-4.zone-of-proximal-development
+def: 最近发展区（ZPD）。独立与辅助之间的区间。
+def: The gap between what a learner can do independently and what they can do with guidance.
+ex: 你自己解不出这道数学题，但老师提示一下你就会了——这个区间就是 ZPD（Vygotsky）。
+
+@@ ap-psychology.u3.t3-4.crystallized-intelligence
+def: 晶体智力。积累的知识技能，随龄增长。
+def: Accumulated knowledge and verbal skills that tend to increase with age.
+ex: 爷爷比你强👴👍——词汇量、常识、经验越来越丰富。
+
+@@ ap-psychology.u3.t3-4.fluid-intelligence
+def: 流体智力。灵活推理能力，随龄下降。
+def: The ability to think quickly, abstractly, and solve novel problems; tends to decline with age.
+ex: 你比爷爷强🧒👍——反应快、学新东西快。
+
+@@ ap-psychology.u3.t3-4.dementia
+def: 失智症。认知功能严重退化。
+def: A progressive decline in cognitive function severe enough to interfere with daily life.
+ex: 老人记忆力严重衰退、忘记家人名字、无法独立生活。
+
+@@ ap-psychology.u3.t3-5.phonemes
+def: 音位。最小的语音单位。
+def: The smallest units of sound that distinguish meaning in a language.
+ex: /b/ 和 /p/ 是不同音位——bat 和 pat 意思不同。
+
+@@ ap-psychology.u3.t3-5.morphemes
+def: 语素。最小的意义单位。
+def: The smallest units of meaning in a language.
+ex: un-believe-able 三个语素：un=不，believe=相信，able=能够。
+
+@@ ap-psychology.u3.t3-5.semantics
+def: 语义。句子背后的意思。
+def: The study of meaning in language — what words and sentences actually convey.
+ex: 「他很冷」可能是温度低，也可能是人冷漠——理解的是意思，不只是声音。
+
+@@ ap-psychology.u3.t3-5.grammar
+def: 语法。语言的结构规则系统。
+def: The system of rules governing the structure and use of a language.
+ex: 英语的主语+谓语+宾语规则。
+
+@@ ap-psychology.u3.t3-5.syntax
+def: 句法。词语组成句子的顺序规则。
+def: Rules for combining words into grammatically correct sentences.
+ex: The dog bit the man ≠ The man bit the dog——语序一换意思全变。
+
+@@ ap-psychology.u3.t3-5.cooing
+def: 咕咕声期。2个月起练习发声。
+def: Vowel-like sounds produced by infants beginning around 2 months.
+ex: 婴儿「噢噢啊啊」——在练习发声器官，语言的萌芽。
+
+@@ ap-psychology.u3.t3-5.babbling
+def: 牙牙学语期。4个月起练辅音元音。
+def: Repetitive consonant-vowel combinations beginning around 4 months.
+ex: ba-ba-ba、ma-ma-ma——10个月左右开始专精母语的音位。
+
+@@ ap-psychology.u3.t3-5.one-word-stage
+def: 单词句阶段。1岁起一个词表达整句。
+def: Around 12 months, children use single words to express whole ideas (holophrases).
+ex: 指着门说「出！」——意思是我想出去玩。
+
+@@ ap-psychology.u3.t3-5.telegraphic-speech
+def: 电报式语言。2岁起的两词关键句。
+def: Two-word sentences containing mostly nouns and verbs, like a telegram.
+ex: 「妈妈走」「要球球」——只有关键词，没有语法词。
+
+@@ ap-psychology.u3.t3-5.overgeneralization-of-language-rules
+def: 语言规则过度泛化。规则用到例外上。
+def: Applying grammatical rules too broadly, including to exceptions.
+ex: 孩子说 goed 而不是 went、mouses 而不是 mice——恰恰说明他在**应用规则**。
+
+@@ ap-psychology.u3.t3-6.ecological-systems-theory
+def: 生态系统理论。多层环境嵌套影响发展。
+def: Bronfenbrenner's theory that development is influenced by multiple nested environmental systems.
+ex: 一个孩子的发展受家庭、学校、社区、文化层层影响——从微观到宏观五层。
+
+@@ ap-psychology.u3.t3-6.microsystem
+def: 微观系统。直接互动的最近环境。
+def: The immediate environments a person directly interacts with.
+ex: 家庭、学校、同伴、老师——天天接触的圈层。
+
+@@ ap-psychology.u3.t3-6.mesosystem
+def: 中间系统。微系统之间的联系。
+def: The interactions between microsystems.
+ex: 家长和老师沟通孩子的表现——家庭和学校之间的连接。
+
+@@ ap-psychology.u3.t3-6.exosystem
+def: 外层系统。间接影响的外部环境。
+def: External environments that indirectly affect the individual.
+ex: 爸爸公司裁员导致家庭经济紧张——孩子没直接参与，却被影响。
+
+@@ ap-psychology.u3.t3-6.macrosystem
+def: 宏观系统。文化价值观和习俗。
+def: The broader cultural values, laws, and customs that shape all other systems.
+ex: 中国文化重视教育——影响了家庭对孩子学习的要求。
+
+@@ ap-psychology.u3.t3-6.chronosystem
+def: 时间系统。历史事件和人生转折的时间维度。
+def: The dimension of time — historical events and life transitions that influence development.
+ex: 经历过新冠疫情的这代孩子，成长与之前不同。
+
+@@ ap-psychology.u3.t3-6.authoritarian-parenting
+def: 专制型教养。高要求、低回应。
+def: High demands, low responsiveness; strict rules with little warmth.
+ex: 「我说什么你就做什么，不许反驳」——也不关心你的感受。压迫剥削。
+
+@@ ap-psychology.u3.t3-6.authoritative-parenting
+def: 权威型教养。高要求、高回应（最好）。
+def: High demands, high responsiveness; firm but warm and communicative. Best outcomes.
+ex: 有要求有规矩，但也倾听你、支持你、讲道理。
+
+@@ ap-psychology.u3.t3-6.permissive-parenting
+def: 放纵型教养。低要求、高回应。
+def: Low demands, high responsiveness; warm but few rules or structure.
+ex: 宠溺孩子，什么都答应，不设规矩。（还有第四种 Neglectful：哪凉快哪儿待着去。）
+
+@@ ap-psychology.u3.t3-6.attachment-styles
+def: 依恋类型。婴儿与照顾者的联结模式。
+def: Patterns of bonding between infant and caregiver, shaped by caregiver responsiveness.
+ex: 陌生情景实验测出四种：安全、回避、焦虑、紊乱——影响一生的人际关系。
+
+@@ ap-psychology.u3.t3-6.secure-attachment
+def: 安全依恋。最健康的依恋。
+def: Child uses caregiver as a safe base; distressed when they leave, happy when they return.
+ex: 妈妈在就安心探索，走了会哭，回来很开心——照顾者对孩子的需求**持续敏感回应**。
+
+@@ ap-psychology.u3.t3-6.insecure-attachment
+def: 不安全依恋。非安全的依恋总类。
+def: A general category for attachment patterns that are not secure.
+ex: 包含回避型、焦虑型、紊乱型三种表现形式。
+
+@@ ap-psychology.u3.t3-6.avoidant-attachment
+def: 回避型依恋。不安全-回避。
+def: Child shows little distress when caregiver leaves and avoids them upon return; suppresses emotional needs.
+ex: 妈妈走了无所谓，回来了也无所谓——「无所谓啦」，其实压抑了情感需求。照顾者长期忽视/拒绝。
+
+@@ ap-psychology.u3.t3-6.anxious-attachment
+def: 焦虑型依恋（矛盾型）。不安全-焦虑。
+def: Child is clingy when caregiver is present, extremely distressed when they leave, and ambivalent upon return.
+ex: 在的时候黏人，走了崩溃大哭，回来了又推开她又要抱——好神经（照顾者时回时不回）。
+
+@@ ap-psychology.u3.t3-6.disorganized-attachment
+def: 紊乱型依恋。最不健康、无规律。
+def: Child shows no consistent pattern; often linked to abuse or trauma. Most unhealthy.
+ex: 行为混乱没规律，一会儿靠近一会儿远离——通常和虐待或创伤有关。
+
+@@ ap-psychology.u3.t3-6.separation-anxiety
+def: 分离焦虑。照顾者离开时的哭闹。
+def: Distress displayed by infants when separated from their primary caregiver, typically around 8 months.
+ex: 妈妈一离开视线，婴儿就哭闹不安。
+
+@@ ap-psychology.u3.t3-6.temperament
+def: 气质。天生的行为风格。
+def: An infant's inborn disposition — easy, difficult, or slow to warm up.
+ex: 有的宝宝天生好带、有的难带、有的慢热——离开宝宝阶段就不叫气质了。
+
+@@ ap-psychology.u3.t3-6.parallel-play
+def: 平行游戏。一起玩但各玩各的。
+def: Children play side by side but do not interact with each other.
+ex: 两个小孩坐在一起各玩各的积木，互不干涉。
+
+@@ ap-psychology.u3.t3-6.imaginary-audience
+def: 假想观众。觉得全世界都在看我。
+def: Adolescents' belief that everyone is watching and judging them.
+ex: 长了个痘觉得全世界都在看——我站在舞台中央。
+
+@@ ap-psychology.u3.t3-6.personal-fable
+def: 个人神话。觉得我独一无二刀枪不入。
+def: Adolescents' belief that they are unique and invulnerable.
+ex: 「不好的事不会发生在我身上」——青少年的冒险心理。
+
+@@ ap-psychology.u3.t3-6.social-clock
+def: 社会时钟。社会规定的人生大事时间表。
+def: The culturally preferred timing for major life events like marriage, career, and retirement.
+ex: 社会觉得你该什么年龄结婚、生子、退休——无形的压力。
+
+@@ ap-psychology.u3.t3-6.emerging-adulthood
+def: 成年初显期。18-25岁的探索期。
+def: The transitional period from late teens to mid-20s, characterized by identity exploration and instability.
+ex: 不完全是青少年也不完全是成年人，还在探索。
+
+@@ ap-psychology.u3.t3-6.stage-theory-of-psychosocial-development-erikson
+def: 心理社会发展阶段理论。八阶段人生危机。
+def: Erikson's 8-stage theory: personality develops through a series of crises across the lifespan.
+ex: 每个人生阶段都有一个核心心理冲突要解决——从婴儿期到老年期。
+
+@@ ap-psychology.u3.t3-6.trust-and-mistrust
+def: 信任对不信任。婴儿期（0-1岁）。
+def: Stage 1 (infancy): consistent caregiving leads to trust.
+ex: 照顾者靠谱 → 信任世界；不靠谱 → 不信任。
+
+@@ ap-psychology.u3.t3-6.autonomy-and-shame-and-doubt
+def: 自主对羞怯怀疑。幼儿期（1-3岁）。
+def: Stage 2 (toddlerhood): encouragement leads to autonomy.
+ex: 让孩子自己做事 → 自主感；总批评 → 自我怀疑。
+
+@@ ap-psychology.u3.t3-6.initiative-and-guilt
+def: 主动对内疚。学前期（3-6岁）。
+def: Stage 3 (preschool): support for exploration leads to initiative.
+ex: 让孩子主动探索 → 主动性；总阻止 → 内疚。
+
+@@ ap-psychology.u3.t3-6.industry-and-inferiority
+def: 勤奋对自卑。学龄期（6-12岁）。
+def: Stage 4 (school age): mastery leads to competence.
+ex: 在学校获得成就感 → 勤奋；总是失败 → 自卑。
+
+@@ ap-psychology.u3.t3-6.identity-and-role-confusion
+def: 同一性对角色混乱。青春期（12-18岁）。
+def: Stage 5 (adolescence): successful exploration leads to a strong identity.
+ex: 我是谁？我要成为什么样的人？——青春期的核心任务。
+
+@@ ap-psychology.u3.t3-6.intimacy-and-isolation
+def: 亲密对孤独。青年期（18-40岁）。
+def: Stage 6 (young adulthood): forming close relationships vs. feeling alone.
+ex: 能不能建立亲密关系，还是孤独一人。
+
+@@ ap-psychology.u3.t3-6.generativity-and-stagnation
+def: 繁衍对停滞。中年期（40-65岁）。
+def: Stage 7 (middle adulthood): contributing to the next generation vs. stagnation.
+ex: 为下一代和社会做贡献，还是觉得人生没意义、停滞不前。
+
+@@ ap-psychology.u3.t3-6.integrity-and-despair
+def: 自我整合对绝望。老年期（65岁+）。
+def: Stage 8 (late adulthood): looking back with satisfaction vs. regret.
+ex: 回顾一生觉得满足，还是充满遗憾和绝望。
+
+@@ ap-psychology.u3.t3-6.adverse-childhood-experiences-aces
+def: 童年逆境经历。18岁前的创伤事件。
+def: Traumatic events in childhood (abuse, neglect, household dysfunction) with lasting negative effects.
+ex: 家暴、父母酗酒、被忽视——对身心健康产生长期负面影响。
+
+@@ ap-psychology.u3.t3-6.achievement-adolescent-identity-development
+def: 同一性获得。探索过且已承诺（Marcia）。
+def: Marcia's status: the individual has explored and committed to an identity.
+ex: 想清楚了要学什么专业，做出了明确选择。
+
+@@ ap-psychology.u3.t3-6.diffusion-adolescent-identity-development
+def: 同一性扩散。不探索也不承诺。
+def: Marcia's status: no exploration, no commitment.
+ex: 没想过也不在乎自己是谁——随波逐流。
+
+@@ ap-psychology.u3.t3-6.foreclosure-adolescent-identity-development
+def: 同一性早闭。没探索就接受了别人安排。
+def: Marcia's status: commitment without exploration; identity adopted from others.
+ex: 「爸妈说当医生就当医生吧」——自己从没想过别的可能。
+
+@@ ap-psychology.u3.t3-6.moratorium-adolescent-identity-development
+def: 同一性延缓。正在探索、尚未承诺。
+def: Marcia's status: actively exploring but no commitment yet.
+ex: 正在尝试各种可能性，还没做最终决定——换专业的大学时光。
+
+@@ ap-psychology.u3.t3-6.racial-ethnic-identity
+def: 种族/民族认同。对族群归属的认同。
+def: One's sense of belonging to a racial or ethnic group and how it shapes self-concept.
+ex: 作为华裔对自己民族文化身份的认同。
+
+@@ ap-psychology.u3.t3-6.sexual-orientation
+def: 性取向。持久的吸引倾向。
+def: An enduring pattern of emotional, romantic, and/or sexual attraction to others.
+ex: 对同性、异性或两性的持久吸引力倾向。
+
+@@ ap-psychology.u3.t3-6.religious-identity
+def: 宗教认同。信仰塑造的自我。
+def: One's sense of self as shaped by religious beliefs and practices.
+ex: 信仰对自我认同的影响。
+
+@@ ap-psychology.u3.t3-6.occupational-identity
+def: 职业认同。职业角色成为自我的一部分。
+def: One's sense of self related to career choices and professional roles.
+ex: 「我想成为交易员」——这是自我身份的一部分。
+
+@@ ap-psychology.u3.t3-6.familial-identity
+def: 家庭认同。家庭角色塑造的自我。
+def: One's sense of self shaped by family roles and relationships.
+ex: 作为家里的长子，对角色和责任的认知。
+
+@@ ap-psychology.u3.t3-6.possible-selves
+def: 可能自我。希望成为和害怕成为的自己。
+def: Mental representations of what one hopes to become, expects to become, or fears becoming.
+ex: 「我希望成为的自己」和「我害怕变成的自己」——两种想象都是动力。
+
+@@ ap-psychology.u3.t3-7.behavioral-perspective
+def: 行为主义视角。只研究可观察的行为。
+def: The psychological approach that focuses on observable behavior and how it is learned from the environment.
+ex: 不深究内心想法——学习就是和环境交互而被强化的行为改变。
+
+@@ ap-psychology.u3.t3-7.classical-conditioning
+def: 经典条件反射。中性刺激与无条件刺激配对产生联结。
+def: A type of learning where a neutral stimulus becomes associated with an unconditioned stimulus to produce a conditioned response.
+ex: 巴甫洛夫的狗：铃声反复和食物配对后，听到铃声就流口水。
+
+@@ ap-psychology.u3.t3-7.association
+def: 联结。两个刺激之间形成的心理联系。
+def: The mental link formed between two stimuli or between a stimulus and a response.
+ex: 把铃声和食物联系在一起——学习的最基本单位。
+
+@@ ap-psychology.u3.t3-7.acquisition
+def: 习得。联结初步建立并增强的阶段。
+def: The initial stage of learning, when a response is first established and gradually strengthened.
+ex: 小猫逐渐学会听到罐头声就跑去厨房。
+
+@@ ap-psychology.u3.t3-7.associative-learning
+def: 联想学习。学会「事件一起出现」。
+def: Learning that certain events occur together; includes both classical and operant conditioning.
+ex: 通过一个刺激预测另一个刺激的出现。
+
+@@ ap-psychology.u3.t3-7.unconditioned-stimulus
+def: 无条件刺激（US）。天生就能引发反应的刺激。
+def: A stimulus that naturally and automatically triggers a response without prior learning.
+ex: 食物自动引发流口水、打针的疼痛自动引发哭泣。「小时候穿白大褂的医生给我打针（疼）」——疼就是 US。
+
+@@ ap-psychology.u3.t3-7.unconditioned-response
+def: 无条件反应（UR）。天生的自动反应。
+def: The natural, unlearned reaction to the unconditioned stimulus.
+ex: 吃到食物自然流口水、被打针自然会哭。
+
+@@ ap-psychology.u3.t3-7.conditioned-stimulus
+def: 条件刺激（CS）。配对后获得信号意义的中性刺激。
+def: A previously neutral stimulus that, after association with the US, triggers a learned response.
+ex: 铃声本来不会让狗流口水，但和食物配对多次后就可以了——白大褂（后来的）。
+
+@@ ap-psychology.u3.t3-7.conditioned-response
+def: 条件反应（CR）。学来的反应。
+def: The learned response to the conditioned stimulus; typically similar to the UR.
+ex: 听到铃声就流口水、看到白大褂就害怕——习得的反应。
+
+@@ ap-psychology.u3.t3-7.extinction
+def: 消退。CS 反复单独出现，反应减弱。
+def: The diminishing of a conditioned response when the CS is repeatedly presented without the US.
+ex: 罐头声响了但一直不给食物——小猫慢慢不再跑了。
+
+@@ ap-psychology.u3.t3-7.spontaneous-recovery
+def: 自然恢复。消退后反应突然回归。
+def: The reappearance of an extinguished conditioned response after a rest period.
+ex: 消退一段时间后，铃声再响，狗又流口水了。
+
+@@ ap-psychology.u3.t3-7.stimulus-discrimination
+def: 刺激辨别。只对特定 CS 反应。
+def: The ability to distinguish between the CS and other similar stimuli.
+ex: 小猫只对主人**特定**罐头的声音有反应，其他类似声音不反应。
+
+@@ ap-psychology.u3.t3-7.stimulus-generalization
+def: 刺激泛化。对相似刺激也反应。
+def: The tendency to respond to stimuli that are similar to the CS.
+ex: 小猫听到任何类似罐头的声音都跑去厨房；被狗咬过之后怕所有的狗。
+pit: discrimination=挑着反应（分得清），generalization=一视同仁（分不清）——一对反义词。
+
+@@ ap-psychology.u3.t3-7.higher-order-conditioning
+def: 高级条件作用。用 CS 当 US 再建新联结。
+def: A procedure where a CS is used as a US to condition a new neutral stimulus.
+ex: 白大褂让你害怕，而白大褂总伴着邪恶 BGM——后来听到 BGM 也怕了。僵尸病毒同化这一块。
+
+@@ ap-psychology.u3.t3-7.counterconditioning
+def: 反条件作用。用新反应替换旧反应。
+def: Replacing an unwanted CR with a new, incompatible response to the same CS.
+ex: 怕狗的人在狗旁边吃最喜欢的零食——慢慢把恐惧替换成愉悦。
+
+@@ ap-psychology.u3.t3-7.taste-aversion
+def: 味觉厌恶。吃过的东西配恶心就再也不吃。
+def: A learned avoidance of a specific food after it was followed by illness; often requires only one trial.
+ex: 生病时吃了豆花，从此再也不想吃豆花了——经典的一次性学习。
+
+@@ ap-psychology.u3.t3-7.one-trial-conditioning
+def: 一次性条件反射。一次配对即成立。
+def: Classical conditioning that occurs after a single pairing of the CS and US.
+ex: 只被狗咬了一次就从此怕狗。
+
+@@ ap-psychology.u3.t3-7.one-trial-learning
+def: 一次性学习。一次经历即学会。
+def: Learning that occurs from a single experience, often involving strong emotional or biological significance.
+ex: 摸了一次火炉被烫到，再也不敢摸了。
+
+@@ ap-psychology.u3.t3-7.biological-preparedness
+def: 生物预备性。天生更容易学某些联结。
+def: An evolutionary predisposition to more easily learn associations that are survival-relevant.
+ex: 人天生更容易怕蛇和蜘蛛，而不是怕花朵——前者对生存有威胁。
+
+@@ ap-psychology.u3.t3-7.habituation
+def: 习惯化。对重复无害刺激反应下降（CNS层面）。
+def: Decreased responsiveness to a repeated, insignificant stimulus; a CNS-level learned process.
+ex: 住在铁路旁边的人慢慢不再注意火车声。
+pit: 习惯化≠感官适应！SA 是**生理层面**（感受器），HB 是 **CNS 层面**「学会忽略」——高频坑。
+
+@@ ap-psychology.u3.t3-8.operant-conditioning
+def: 操作性条件反射。后果塑造行为频率。
+def: A type of learning where behavior is strengthened or weakened by its consequences.
+ex: 行为的后果决定这个行为以后会不会再做——Skinner 和他的箱子。
+
+@@ ap-psychology.u3.t3-8.reinforcement
+def: 强化。增加行为概率的后果。
+def: Any consequence that increases the likelihood of a behavior being repeated.
+ex: 任何让你更想重复某个行为的后果。
+
+@@ ap-psychology.u3.t3-8.punishment
+def: 惩罚。减少行为概率的后果。
+def: Any consequence that decreases the likelihood of a behavior being repeated.
+ex: 任何让你不想再做某个行为的后果。
+
+@@ ap-psychology.u3.t3-8.law-of-effect
+def: 效果律。好结果的行为会重复。
+def: Thorndike's principle: behaviors followed by satisfying consequences are more likely to recur.
+ex: 效果为王——结果好就重复，结果差就减少。
+
+@@ ap-psychology.u3.t3-8.superstitious-behavior
+def: 迷信行为。巧合强化出的行为。
+def: A behavior repeated because a reinforcer coincidentally followed it, with no causal relationship.
+ex: 考试穿了某件衣服考得好——以后每次考试都穿它。
+
+@@ ap-psychology.u3.t3-8.learned-helplessness
+def: 习得性无助。怎么都没用，摆烂了。
+def: Repeated exposure to unavoidable negative events leads to passivity and giving up.
+ex: 「反正怎么努力都没用，干脆摆烂」——以后遇到挑战直接放弃。
+
+@@ ap-psychology.u3.t3-8.positive-reinforcement
+def: 正强化。加好，增加行为。
+def: Adding a pleasant stimulus after a behavior to increase that behavior. 加好。
+ex: 考试考好了给奖金、工作出色发奖金。
+
+@@ ap-psychology.u3.t3-8.primary-reinforcers
+def: 一级强化物。天生就有强化力。
+def: Stimuli that are innately reinforcing, satisfying biological needs.
+ex: 食物、水、睡眠——不需要学习就知道它们好。
+
+@@ ap-psychology.u3.t3-8.secondary-reinforcer
+def: 二级强化物。学来的强化力。
+def: Stimuli that become reinforcing through learned association with primary reinforcers.
+ex: 钱、分数、小红花——本身没意义，但可以换成食物或认可（Token Economy 的基础）。
+
+@@ ap-psychology.u3.t3-8.reinforcement-discrimination
+def: 强化辨别。只在有信号时反应。
+def: Responding differently to stimuli that signal whether reinforcement is available.
+ex: 只在老板在的时候认真工作——知道老板在才可能被表扬。
+
+@@ ap-psychology.u3.t3-8.reinforcement-generalization
+def: 强化泛化。相似情境也反应。
+def: Responding similarly to stimuli similar to those previously associated with reinforcement.
+ex: 在一个老师那里认真学习得到表扬，在其他老师那里也认真。
+
+@@ ap-psychology.u3.t3-8.shaping
+def: 行为塑造。逐步强化接近目标的行为。
+def: Reinforcing successive approximations toward a desired behavior, step by step.
+ex: 教狗翻滚：先奖励躺下，再奖励侧翻，最后奖励完整翻滚——一步一步 closer and closer。
+
+@@ ap-psychology.u3.t3-8.instinctive-drift
+def: 本能漂移。本能行为挤掉习得行为。
+def: The tendency for an animal to revert to innate behaviors that interfere with conditioned behavior.
+ex: 训练猪把硬币放进存钱罐，猪总忍不住用鼻子拱——「狗改不了吃屎」这一块。
+
+@@ ap-psychology.u3.t3-8.negative-reinforcement
+def: 负强化。减坏，增加行为。
+def: Removing an unpleasant stimulus after a behavior to increase that behavior. 减坏。
+ex: 系好安全带，烦人的警报声停了——以后上车就系安全带。
+pit: 负强化**不是惩罚**！它和正强化目的一样（增加行为），只是手段不同：一个加好、一个减坏。
+
+@@ ap-psychology.u3.t3-8.reinforcement-schedules
+def: 强化程式。什么时候给强化的规则。
+def: Rules that determine when and how often a behavior is reinforced.
+ex: 连续 vs 部分；部分又分固定/可变 × 间隔/比率四种。
+
+@@ ap-psychology.u3.t3-8.continuous-reinforcement
+def: 连续强化。每次都强化。
+def: Reinforcing the behavior every time it occurs. Fastest learning, fastest extinction.
+ex: 每次按按钮都出饮料——一次不出就不按了。「做得真好，每次奖励一颗小星星」。
+
+@@ ap-psychology.u3.t3-8.partial-reinforcement
+def: 部分强化。只偶尔强化。
+def: Reinforcing behavior only some of the time. Slower learning, but much more resistant to extinction.
+ex: 老虎机不是每次都中奖，但人们停不下来——抗消退之王。
+
+@@ ap-psychology.u3.t3-8.fixed-interval
+def: 固定间隔。固定时间后强化。
+def: Reinforcement after a fixed time period; response rate increases as the time approaches.
+ex: 按月发工资——月底前才努力干活；每周测验——考前突击。
+
+@@ ap-psychology.u3.t3-8.variable-interval
+def: 可变间隔。不定期强化。
+def: Reinforcement after unpredictable time periods; produces steady, consistent responding.
+ex: 随堂测验（Pop Quiz）不知道什么时候考所以每天准备；刷社交媒体等点赞；等快递电话。
+
+@@ ap-psychology.u3.t3-8.fixed-ratio
+def: 固定比率。固定次数后强化。
+def: Reinforcement after a fixed number of responses; high rate with brief pauses after reinforcement.
+ex: 计件工资——每做50个产品得20块；买十杯咖啡送一杯。
+
+@@ ap-psychology.u3.t3-8.variable-ratio
+def: 可变比率。不定次数强化，最能维持行为。
+def: Reinforcement after an unpredictable number of responses; produces the highest and most consistent response rate.
+ex: 老虎机、抽卡游戏、钓鱼——不知道什么时候中，但就是停不下来。
+
+@@ ap-psychology.u3.t3-8.scalloped-graph
+def: 扇贝形曲线。固定间隔的反应模式。
+def: The response pattern seen in fixed interval schedules — low responding after reinforcement, then a sharp increase as the next reinforcement approaches.
+ex: 刚拿完工资就摸鱼，快发工资了才猛干活——曲线像扇贝壳。
+
+@@ ap-psychology.u3.t3-9.social-learning-theory
+def: 社会学习理论。观察和模仿他人学习。
+def: Bandura's theory that we learn by observing and imitating others, not just through direct experience.
+ex: 小孩看到大人打充气娃娃，自己也跟着打——Bobo doll 实验。
+
+@@ ap-psychology.u3.t3-9.vicarious-conditioning
+def: 替代性条件反射。看别人的后果来学习。
+def: Learning by observing the consequences of others' behavior.
+ex: 看到同学上课说话被罚站——自己就不敢说话了。
+
+@@ ap-psychology.u3.t3-9.modeling
+def: 榜样示范（模仿）。照着具体行为做。
+def: The process of observing and imitating a specific behavior.
+ex: 小孩模仿爸爸刮胡子的动作。
+
+@@ ap-psychology.u3.t3-9.insight-learning
+def: 顿悟学习。突然的「啊哈」。
+def: A sudden realization of a problem's solution without trial and error.
+ex: 想了很久的数学题突然灵光一闪就会了。
+
+@@ ap-psychology.u3.t3-9.latent-learning
+def: 潜在学习。学了但没表现，需要时才显现。
+def: Learning that occurs without reinforcement and is not demonstrated until there is a reason to do so.
+ex: 每天坐车经过同一条路没刻意记——某天要自己走，发现其实认识路。
+
+@@ ap-psychology.u3.t3-9.cognitive-maps
+def: 认知地图。脑中的环境布局表征。
+def: Mental representations of the layout of an environment.
+ex: 你脑中有一张学校的地图——知道哪里是食堂哪里是教室（Tolman 的老鼠也是这样）。
+
+@@ ap-psychology.u4.t4-1.attributions
+def: 归因。我们怎么解释行为的原因。
+def: How we explain the causes of events or behaviors — either internal or external.
+ex: 他为什么迟到？——归因就是给行为找解释。
+
+@@ ap-psychology.u4.t4-1.dispositional-attributions
+def: 性格归因（内部归因）。归结为人本身。
+def: Explaining behavior as caused by internal factors like personality, ability, or effort.
+ex: 「他考试考得好，是因为他聪明」。
+
+@@ ap-psychology.u4.t4-1.situational-attributions
+def: 情境归因（外部归因）。归结为环境。
+def: Explaining behavior as caused by external factors like luck, context, or difficulty.
+ex: 「他考试考得好，是因为这次题目简单」。
+
+@@ ap-psychology.u4.t4-1.explanatory-style
+def: 解释风格。习惯性解释坏事的方式。
+def: A person's habitual way of explaining events, either optimistically or pessimistically.
+ex: 一个人习惯怎么解释发生在自己身上的事。
+
+@@ ap-psychology.u4.t4-1.optimistic-explanatory-style
+def: 乐观解释风格。坏事=暂时、外部、特定。
+def: Bad events are seen as temporary, external, and specific.
+ex: 考砸了：「这次题太偏了，下次不会这样」。
+
+@@ ap-psychology.u4.t4-1.pessimistic-explanatory-style
+def: 悲观解释风格。坏事=永久、内部、普遍。
+def: Bad events are seen as permanent, internal, and global.
+ex: 考砸了：「我就是笨，什么都学不好」。
+
+@@ ap-psychology.u4.t4-1.actor-observer-bias
+def: 行动者-观察者偏差。看自己看别人的双标。
+def: When we are the actor we blame the situation; when we are the observer we blame the person's character.
+ex: 自己迟到=堵车，别人迟到=没有时间观念。
+pit: FAE 讲「怎么看别人」，AOB 讲「看自己和看别人的**双标**」——考点在区别。
+
+@@ ap-psychology.u4.t4-1.fundamental-attribution-error
+def: 基本归因错误（FAE）。高估性格、低估情境。
+def: The tendency to overestimate dispositional factors and underestimate situational factors when judging others.
+ex: 看到别人考试挂了觉得「他就是不努力」——不考虑他可能生病了。
+
+@@ ap-psychology.u4.t4-1.self-serving-bias
+def: 自利偏见。成功归自己，失败归外界。
+def: Attributing success to internal factors and failure to external factors to protect self-esteem.
+ex: AP考了5分：「我是天才」；考了2分：「题出得太偏了，那天空调还太冷」。
+
+@@ ap-psychology.u4.t4-1.internal-locus-of-control
+def: 内控点。我命由我不由天。
+def: Belief that you control your own outcomes through effort and decisions.
+ex: 考前认真刷题——相信努力能改变结果。
+
+@@ ap-psychology.u4.t4-1.external-locus-of-control
+def: 外控点。听天由命。
+def: Belief that outcomes are determined by luck, fate, or others.
+ex: 考前转发锦鲤、摆烂——可能导致习得性无助。
+
+@@ ap-psychology.u4.t4-1.mere-exposure-effect
+def: 多看你一眼效应（曝光效应）。见得多了就顺眼了。
+def: Simply being exposed to something repeatedly increases our liking for it.
+ex: 一首新歌听十遍后觉得真上头；广告狂轰滥炸就是这个原理。
+
+@@ ap-psychology.u4.t4-1.self-fulfilling-prophecy
+def: 自证预言。信念改变行为，行为实现信念。
+def: A belief leads to behavior that makes the belief come true: belief → behavior → outcome.
+ex: 老师觉得 Leo 是好学生（信念）→ 给他更多关注 → Leo 更努力 → 真成了好学生（结果成真）。
+
+@@ ap-psychology.u4.t4-1.social-comparison
+def: 社会比较。通过和他人比来评价自己。
+def: Evaluating ourselves by comparing with others.
+ex: 看看身边同学考了多少分，判断自己考得好不好。
+
+@@ ap-psychology.u4.t4-1.upward-social-comparison
+def: 向上比较。和比自己强的人比。
+def: Comparing with someone better — can motivate or cause feelings of inadequacy.
+ex: 和年级第一比——要么更努力，要么自卑。
+
+@@ ap-psychology.u4.t4-1.downward-social-comparison
+def: 向下比较。和比自己差的人比。
+def: Comparing with someone worse — boosts self-esteem but may reduce motivation.
+ex: 和倒数第一比：「我还挺不错的嘛」。
+
+@@ ap-psychology.u4.t4-1.relative-deprivation
+def: 相对剥夺感。一比就不开心了。
+def: Feeling deprived or dissatisfied after comparing with others who have more.
+ex: 本来对工资很满意，知道同事多两千后就不开心了——人比人气死人。
+
+@@ ap-psychology.u4.t4-2.stereotype
+def: 刻板印象。对一群人的过度概括信念（认知层）。
+def: An overgeneralized belief about a group of people; a cognitive shortcut (heuristic).
+ex: 「亚洲人都擅长数学」「法国人都很浪漫」——不一定是坏的，但忽视个体差异。
+
+@@ ap-psychology.u4.t4-2.prejudice
+def: 偏见。对群体不公正的负面态度（情感层）。
+def: An unjustified negative attitude toward a group — the emotional level.
+ex: 「我就是不喜欢吃榴莲的人」。
+
+@@ ap-psychology.u4.t4-2.discrimination
+def: 歧视。对群体不公正的行为（行为层）。
+def: Unjust behavior toward a group — the action level, often caused by prejudice.
+ex: 「我欺负吃榴莲的人」——不让吃榴莲的人加入小组。
+pit: 刻板印象（想法）→ 偏见（感觉）→ 歧视（行为）——三层递进，考试按层次考。
+
+@@ ap-psychology.u4.t4-2.implicit-attitudes
+def: 内隐态度。自己都没察觉的态度。
+def: Attitudes that are unconscious and automatically activated; people may not be aware they hold them.
+ex: 嘴上说不歧视，但 IAT 内隐联想测试测出偏见。
+
+@@ ap-psychology.u4.t4-2.ethnocentrism
+def: 民族优越感。用自己的文化标准评判别人。
+def: Believing your own culture is superior and judging other cultures by your own standards.
+ex: 看到别人用手吃饭就觉得「真脏真落后」——而不是理解这是不同习俗。
+
+@@ ap-psychology.u4.t4-2.just-world-phenomenon
+def: 公正世界现象（善有善报）。相信受害者活该。
+def: The belief that people get what they deserve, often leading to blaming the victim.
+ex: 看到路边的乞丐就想「他肯定年轻时不上进」——受害者有罪论。
+
+@@ ap-psychology.u4.t4-2.out-group-homogeneity-bias
+def: 外群体同质性偏差（外国人效应）。他们都一样。
+def: Perceiving members of an out-group as all alike, while seeing your own group as diverse.
+ex: 你能分清重金属、朋克、独立摇滚，但觉得 K-pop 听起来全是一个调子。
+
+@@ ap-psychology.u4.t4-2.in-group-bias
+def: 内群体偏见。我们最棒了。
+def: Favoring members of your own group over out-group members.
+ex: 平时吐槽自己学校，但跟外校比赛时「我校最棒」——只有我们才能骂母校。
+
+@@ ap-psychology.u4.t4-2.belief-perseverance
+def: 信念固执。被打脸仍坚持。
+def: Clinging to initial beliefs even after they have been discredited by evidence.
+ex: 阴谋论者：「科学证据都是伪造的，地球就是平的！」
+
+@@ ap-psychology.u4.t4-2.confirmation-bias
+def: 证实性偏见（确认偏差）。只找对自己有利的证据。
+def: Seeking information that supports existing beliefs and ignoring contradictory evidence.
+ex: 觉得「每次洗车后都下雨」——因为只记住了洗车后下雨的次数。
+pit: 信念固执=被打脸还不改（对**已有证据**），证实偏见=主动**找新证据**支持自己——时序不同。
+
+@@ ap-psychology.u4.t4-2.cognitive-dissonance
+def: 认知失调。态度和行为不一致的紧张感。
+def: The psychological discomfort when attitudes and behaviors are inconsistent; we change either one to reduce it.
+ex: 知道抽烟有害还继续抽，于是说服自己「抽烟能减压嘛」——吃不到葡萄说葡萄酸。
+
+@@ ap-psychology.u4.t4-2.cognitive-load
+def: 认知负荷。工作记忆正在用的心理资源量。
+def: The amount of mental effort being used in working memory; high load makes critical thinking harder.
+ex: 一边开车一边打电话——大脑超负荷，容易出错，更容易依赖启发法。
+
+@@ ap-psychology.u4.t4-3.social-norms
+def: 社会规范。群体里不成文的行为规则。
+def: Unwritten rules about how to behave in a group or society.
+ex: 在图书馆要安静；电梯里面朝门站。
+
+@@ ap-psychology.u4.t4-3.social-influence-theory
+def: 社会影响理论。他人通过两条路径影响我们。
+def: The theory that our behavior is influenced by others through normative or informational pathways.
+ex: 不管是为了合群（normative）还是为了获取信息（informational），我们都在被身边人影响。
+
+@@ ap-psychology.u4.t4-3.normative-social-influence
+def: 规范性社会影响。为了合群而从众。
+def: Conforming to be accepted by the group, even if you know they're wrong.
+ex: 一群朋友都抽烟，你明知不好但为了合群也跟着抽。
+pit: normative=想被喜欢（明知错也跟），informational=以为别人对（找正确信息）——动机不同。
+
+@@ ap-psychology.u4.t4-3.informational-social-influence
+def: 信息性社会影响。因为别人信息更准而从众。
+def: Conforming because you believe others have better information than you.
+ex: 第一次吃西餐不知道怎么用刀叉——偷看隔壁桌怎么做。
+
+@@ ap-psychology.u4.t4-3.persuasion
+def: 说服。通过沟通改变他人态度。
+def: The process of changing someone's attitudes or behaviors through communication.
+ex: 广告、演讲、谈判——都在试图改变你的想法。
+
+@@ ap-psychology.u4.t4-3.elaboration-likelihood-model
+def: 精细加工可能性模型。说服的两条路径。
+def: A model explaining two routes of persuasion: central (logic) and peripheral (surface cues).
+ex: 我们被说服有两条路：走脑子 or 走感觉。
+
+@@ ap-psychology.u4.t4-3.central-route
+def: 中心路径。用事实逻辑说服（走脑子）。
+def: Persuasion through logic, evidence, and careful thinking. Leads to lasting attitude change.
+ex: 买电脑时仔细对比 CPU、内存和价格——态度改变更持久。
+
+@@ ap-psychology.u4.t4-3.peripheral-route
+def: 外周路径。靠表面线索说服（走肾）。
+def: Persuasion through surface cues like attractiveness or celebrity endorsement. Effect is temporary.
+ex: 「我家哥哥代言联想电脑，买！」——效果短暂。
+
+@@ ap-psychology.u4.t4-3.halo-effect
+def: 光环效应。一好百好。
+def: The tendency to let one positive trait (often attractiveness) influence overall judgment.
+ex: 长得好看的人，别人会觉得他性格也好、能力也强。
+
+@@ ap-psychology.u4.t4-3.foot-in-the-door-technique
+def: 登门槛效应。先小后大。
+def: Getting someone to agree to a small request first, then following with a larger one.
+ex: 先请你签名支持环保——然后问能不能捐100块。
+
+@@ ap-psychology.u4.t4-3.door-in-the-face-technique
+def: 留面子效应。先大后小。
+def: Starting with a large request that will be refused, then following with a smaller one.
+ex: 「借我5000买iPad？」被拒——「那借100吃个饭总行吧，谢谢！」
+
+@@ ap-psychology.u4.t4-3.conformity
+def: 从众。向群体标准靠拢（跟平辈）。
+def: Adjusting behavior or thinking to match group standards.
+ex: 电梯里所有人都面朝后站——你不自觉也转过身去。
+pit: 从众=跟**平辈**学，服从=听**权威**的话——对象不同。
+
+@@ ap-psychology.u4.t4-3.obedience
+def: 服从。听从权威的直接命令。
+def: Complying with direct commands from an authority figure.
+ex: 警察说「不许动」，你就不动了——Milgram 实验。
+
+@@ ap-psychology.u4.t4-3.individualism
+def: 个人主义。强调个人目标与独立。
+def: Cultural emphasis on personal goals, independence, and self-expression.
+ex: 美国文化强调个人自由和独立思考。
+
+@@ ap-psychology.u4.t4-3.collectivism
+def: 集体主义。强调群体和谐与相互依存。
+def: Cultural emphasis on group harmony, duty, and interdependence.
+ex: 东亚文化强调家庭和集体利益。
+
+@@ ap-psychology.u4.t4-3.multiculturalism
+def: 多元文化主义。尊重并融合多样文化。
+def: Valuing and integrating diverse cultural perspectives within a society.
+ex: 一个社区里不同文化背景的人互相尊重、和平共处。
+
+@@ ap-psychology.u4.t4-3.group-polarization
+def: 群体极化。讨论后观点更极端。
+def: Group discussion makes members' views become more extreme than their initial positions.
+ex: 一群观点相似的人越聊越激动地蛐蛐某个人。
+
+@@ ap-psychology.u4.t4-3.groupthink
+def: 群体思维。为和谐压制异议。
+def: Desire for group harmony suppresses dissenting opinions, leading to poor decisions.
+ex: 开会时大家都觉得方案有问题，但没人敢说——项目失败了。
+
+@@ ap-psychology.u4.t4-3.diffusion-of-responsibility
+def: 责任分散。人越多责任越薄。
+def: The more people present, the less personal responsibility each person feels to act.
+ex: 有人倒在路上——围观的人越多，每个人越觉得「别人会去帮」。
+
+@@ ap-psychology.u4.t4-3.social-loafing
+def: 社会懈怠。贡献没法量化就偷懒。
+def: Individuals exert less effort in a group because their contribution can't be individually measured.
+ex: 三个和尚没水吃——小组作业总有人摸鱼。
+
+@@ ap-psychology.u4.t4-3.deindividuation
+def: 去个性化。人群中失去自我约束。
+def: Loss of self-awareness and self-restraint in group situations due to anonymity and arousal.
+ex: 演唱会上疯狂尖叫跟唱；键盘侠在网上骂人——匿名+高唤醒。
+
+@@ ap-psychology.u4.t4-3.social-facilitation
+def: 社会助长。观众在场，熟练任务更好。
+def: Presence of others improves performance on simple/well-practiced tasks but impairs complex/new tasks.
+ex: 台球高手有人看打得更准；第一次演讲有人看反而忘词（后者叫社会抑制 social inhibition）。
+
+@@ ap-psychology.u4.t4-3.false-consensus-effect
+def: 虚假共识效应。高估别人同意我们的程度。
+def: Overestimating how much others agree with our own beliefs or behaviors.
+ex: 你觉得香菜奶茶超好喝，买了一堆请全班——结果没人喝。
+
+@@ ap-psychology.u4.t4-3.superordinate-goals
+def: 超级目标。必须合作才能达成的共同目标。
+def: A shared goal requiring cooperation between conflicting groups, reducing hostility.
+ex: 互相仇视的两个小队必须一起推陷进泥里的卡车——推完关系就好了。
+
+@@ ap-psychology.u4.t4-3.social-traps
+def: 社会陷阱。个人短期利益 → 集体长期受害。
+def: Individuals pursuing short-term self-interest leads to long-term collective harm.
+ex: 大家都开私家车图方便——结果全城拥堵雾霾。
+
+@@ ap-psychology.u4.t4-3.industrial-organizational-i-o-psychologists
+def: 工业-组织心理学家。把心理学用在职场。
+def: Psychologists who apply psychological principles to the workplace to improve productivity and well-being.
+ex: 公司请心理学家设计面试题、优化办公室布局——关键词：Workplace、Productivity、HR。
+
+@@ ap-psychology.u4.t4-3.burnout
+def: 职业倦怠。长期工作压力的身心耗竭。
+def: Physical and emotional exhaustion caused by prolonged work-related stress.
+ex: 连续加班几个月——身心俱疲，对工作完全失去热情。
+
+@@ ap-psychology.u4.t4-3.altruism
+def: 利他主义。不求回报的无私助人。
+def: Selfless concern for the well-being of others, with no expectation of reward.
+ex: 匿名捐款给灾区——不求任何回报。
+
+@@ ap-psychology.u4.t4-3.prosocial-behavior
+def: 亲社会行为。任何助人行为。
+def: Any action intended to help others, which may or may not be selfless.
+ex: 帮老奶奶过马路——不管动机是否无私。
+
+@@ ap-psychology.u4.t4-3.social-debt
+def: 社会亏欠（人情）。受了帮助觉得欠人情。
+def: The feeling of owing someone after they have helped you.
+ex: 朋友帮你搬家后，你觉得欠了个人情。
+
+@@ ap-psychology.u4.t4-3.social-reciprocity-norm
+def: 互惠规范。帮过我的我也要帮。
+def: The expectation that people will return favors — help those who have helped you.
+ex: 别人帮了我，我以后也要帮他。
+
+@@ ap-psychology.u4.t4-3.social-responsibility-norm
+def: 社会责任规范。帮助无法回报的人。
+def: The expectation that people should help those in need, even if they can't repay.
+ex: 帮助弱势群体——即使他们无法回报。
+
+@@ ap-psychology.u4.t4-3.bystander-effect
+def: 旁观者效应。人越多越没人帮。
+def: The more people present at an emergency, the less likely any individual is to help.
+ex: 大街上有人晕倒——围观的人很多，但没人打120（责任分散的后果）。
+
+@@ ap-psychology.u4.t4-3.situational-variables
+def: 情境变量。环境影响助人的可能性。
+def: External factors in the environment that influence whether someone will help.
+ex: 天黑、偏僻的地方——人们更不愿意伸出援手。
+
+@@ ap-psychology.u4.t4-3.attentional-variables
+def: 注意变量。注意到事件才会帮。
+def: Whether a person notices the event and recognizes it as an emergency.
+ex: 戴着耳机走路——根本没注意到有人摔倒了。
+
+@@ ap-psychology.u4.t4-4.psychodynamic-theory
+def: 心理动力学理论。潜意识、童年、冲突驱动人格。
+def: Freud's approach emphasizing unconscious processes, childhood experiences, and internal conflicts as drivers of personality.
+ex: 弗洛伊德认为行为受潜意识驱动——童年经历影响一生。
+
+@@ ap-psychology.u4.t4-4.unconscious-processes
+def: 无意识过程。意识之外仍影响行为。
+def: Thoughts, desires, and memories outside conscious awareness that still influence behavior.
+ex: 被压抑的童年创伤记忆——自己想不起来，却影响着现在的行为。冰山最深层。
+
+@@ ap-psychology.u4.t4-4.ego-defense-mechanisms
+def: 自我防御机制。自我缓解焦虑的无意识策略。
+def: Unconscious strategies the ego uses to reduce anxiety from conflicts between the id, superego, and reality.
+ex: 大脑自动启动的心理保护机制——本我、超我、现实打架时和稀泥。
+
+@@ ap-psychology.u4.t4-4.denial
+def: 否认。拒绝接受痛苦现实。
+def: Refusing to accept a painful reality.
+ex: 亲人去世后说「这不可能，一定是搞错了！」
+
+@@ ap-psychology.u4.t4-4.displacement
+def: 转移。情绪撒向更安全的对象。
+def: Redirecting emotions toward a safer or weaker target.
+ex: 被老板骂了不敢还嘴——回家对家人撒气。
+
+@@ ap-psychology.u4.t4-4.projection
+def: 投射。把自己的想法安到别人头上。
+def: Attributing your own unacceptable thoughts or feelings to someone else.
+ex: 以小人之心度君子之腹——自己自私却觉得「他这么做肯定是为了自己」。
+
+@@ ap-psychology.u4.t4-4.rationalization
+def: 合理化。编造说得通的理由。
+def: Creating logical-sounding excuses to justify unacceptable behavior or feelings.
+ex: 考砸了说「不是没努力，是考试太难了」。
+
+@@ ap-psychology.u4.t4-4.reaction-formation
+def: 反向形成。表现和真实感受相反。
+def: Behaving in a way opposite to one's true feelings.
+ex: 喜欢一个人却故意对他冷淡甚至刻薄。
+
+@@ ap-psychology.u4.t4-4.regression
+def: 退行。压力下变回幼稚行为。
+def: Reverting to childlike behaviors when stressed.
+ex: 成年人遇到压力大哭大闹要找妈妈。
+
+@@ ap-psychology.u4.t4-4.repression
+def: 压抑。无意识阻断痛苦记忆。
+def: Unconsciously blocking disturbing thoughts or memories from awareness — the most basic defense mechanism.
+ex: 完全想不起小时候被伤害的经历——不是故意忘，是真的记不起来。
+
+@@ ap-psychology.u4.t4-4.sublimation
+def: 升华。负面冲动转化为积极活动。
+def: Channeling unacceptable impulses into socially acceptable or productive activities.
+ex: 化悲愤为力量——失恋后疯狂健身。
+
+@@ ap-psychology.u4.t4-4.projective-tests
+def: 投射测验。用模糊刺激探测潜意识。
+def: Personality assessments using ambiguous stimuli (e.g., inkblots) to reveal unconscious thoughts.
+ex: 罗夏墨迹测验：看一团墨迹说看到了什么——以此推断潜意识。信度和效度较差。
+
+@@ ap-psychology.u4.t4-4.preconscious-mind
+def: 前意识。随时可提取的未意识内容。
+def: Information not currently in awareness but easily retrievable.
+ex: 你现在没在想早餐吃了什么——但一问你马上就能想起来。冰山的水面附近。
+
+@@ ap-psychology.u4.t4-4.unconscious-mind
+def: 潜意识。不可直接进入的深层心理。
+def: The deepest level: repressed thoughts, desires, and memories not accessible to conscious awareness.
+ex: 被压抑的痛苦记忆和不可接受的欲望——自己根本意识不到。冰山水下主体。
+
+@@ ap-psychology.u4.t4-4.humanistic-psychology
+def: 人本主义心理学。自由意志与自我实现。
+def: An approach emphasizing free will, self-actualization, and inherent goodness. Key figure: Carl Rogers.
+ex: 每个人都有积极向上的潜能——强调人的整体性和选择。
+
+@@ ap-psychology.u4.t4-4.unconditional-regard
+def: 无条件积极关注。不附带条件地接纳。
+def: Accepting and loving someone without judgment or conditions.
+ex: 无论孩子做了什么，父母都表达接纳和爱——不附带「考得好才爱你」。
+
+@@ ap-psychology.u4.t4-4.self-actualizing-tendency
+def: 自我实现倾向。天生想成为更好的自己。
+def: The innate drive to grow, develop, and fulfill one's potential.
+ex: 人天生就有不断追求成为更好自己的内在驱动力。
+
+@@ ap-psychology.u4.t4-5.social-cognitive-theory
+def: 社会认知理论。认知×行为×环境。
+def: Personality is shaped by the interaction of personal cognitive factors, behavior, and environment.
+ex: 人的性格是三者相互影响的结果——Bandura。
+
+@@ ap-psychology.u4.t4-5.reciprocal-determinism
+def: 互惠决定论。三者相互影响成循环。
+def: Bandura's concept that personal factors, behavior, and environment all mutually influence each other.
+ex: 被贴上坏学生标签（环境）→ 自我认知变差（认知）→ 不想学（行为）→ 成绩更差（环境强化）→ 恶性循环。
+
+@@ ap-psychology.u4.t4-5.self-concept
+def: 自我概念。对「我是谁」的全部认知。
+def: A person's overall perception and belief about who they are. Answers "Who am I?"
+ex: 「我是一个内向的、喜欢画画的高中生」——如果与现实不符会产生焦虑。
+
+@@ ap-psychology.u4.t4-5.self-efficacy
+def: 自我效能感。对具体任务的信心。
+def: Belief in one's ability to succeed at a specific task.
+ex: 「我相信我能通过明天的 AP 考试」——任务层面的信心。
+pit: 自我效能=对**任务**的信心，自尊=对**整体价值**的评价——scope 不同，考试爱考。
+
+@@ ap-psychology.u4.t4-5.self-esteem
+def: 自尊。对自我价值的整体评价。
+def: One's overall sense of self-worth — general value, not task-specific.
+ex: 「无论考好考差，我都是有价值的人」。
+
+@@ ap-psychology.u4.t4-5.trait-theories
+def: 特质理论。用稳定特质描述人格。
+def: Theories that describe personality as a set of stable, measurable characteristics.
+ex: 用一组稳定的特质来描述人格——外向、尽责。
+
+@@ ap-psychology.u4.t4-5.big-five-theory
+def: 大五人格（OCEAN）。五维度人格模型。
+def: The most widely accepted trait model: Openness, Conscientiousness, Extraversion, Agreeableness, Neuroticism.
+ex: OCEAN 五个维度——目前最被接受的人格模型。
+
+@@ ap-psychology.u4.t4-5.agreeableness
+def: 宜人性。信任、友善、合作。
+def: Tendency toward trust, altruism, kindness, and cooperation.
+ex: 高分：主动帮助同事；低分：为达目的不择手段。
+
+@@ ap-psychology.u4.t4-5.extraversion
+def: 外向性。社交、健谈、正情绪。
+def: Tendency toward sociability, talkativeness, and positive emotions.
+ex: 高分：参加派对很兴奋；低分（内向）：独处才能充电。
+
+@@ ap-psychology.u4.t4-5.conscientiousness
+def: 尽责性。有条理、可靠、自律。
+def: Tendency toward being organized, dependable, and self-disciplined.
+ex: 高分：每天列待办清单；低分：经常忘记截止日期。
+
+@@ ap-psychology.u4.t4-5.openness-to-experience
+def: 经验开放性。好奇、创造力、新想法。
+def: Tendency toward curiosity, creativity, and appreciation of new ideas.
+ex: 高分：喜欢探索艺术和哲学；低分：喜欢按部就班。
+
+@@ ap-psychology.u4.t4-5.emotional-stability
+def: 情绪稳定性（神经质的反向）。
+def: The opposite end of Neuroticism. High = calm, resilient; low = anxious, moody.
+ex: 高分：泰山崩于前而色不变；低分（高神经质）：遇到小事就焦虑。
+
+@@ ap-psychology.u4.t4-5.personality-inventories
+def: 人格量表。自陈式人格问卷。
+def: Standardized self-report questionnaires designed to assess personality traits.
+ex: MMPI、大五问卷——通过一系列问题评估人格（MBTI 也算但学术界不太认）。
+
+@@ ap-psychology.u4.t4-5.factor-analysis
+def: 因素分析。从大量数据提炼核心特质。
+def: A statistical method identifying clusters of correlated traits — how the Big Five was developed.
+ex: 把海量人格数据归纳成几个核心因素——大五就是这么来的。
+
+@@ ap-psychology.u4.t4-6.drive-reduction-theory
+def: 驱力降低理论。生理需要→驱力→行动→恢复平衡。
+def: Physiological needs create tension (drive) that motivates behavior to restore homeostasis.
+ex: 口渴（需要）→ 想喝水（驱力）→ 喝水（行为）→ 不渴了（平衡恢复）。
+
+@@ ap-psychology.u4.t4-6.homeostasis
+def: 稳态。身体自动维持内部平衡。
+def: The body's tendency to maintain a stable internal state (temperature, blood sugar).
+ex: 身体自动维持体温在37度左右。
+
+@@ ap-psychology.u4.t4-6.arousal-theory
+def: 唤醒理论。维持最佳唤醒水平。
+def: We are motivated to maintain an optimal level of arousal — not too high, not too low.
+ex: 无聊时想找点刺激，太紧张时想放松。
+
+@@ ap-psychology.u4.t4-6.optimal-level-of-arousal
+def: 最佳唤醒水平。表现最好时的唤醒度。
+def: The ideal amount of physiological activation for best performance, varying by person and task.
+ex: 考试时适度紧张发挥最好——太放松或太焦虑都不行。
+
+@@ ap-psychology.u4.t4-6.yerkes-dodson-law
+def: 耶克斯-多德森定律。任务难度决定最佳唤醒。
+def: Performance increases with arousal up to a point; easy tasks benefit from higher arousal, difficult tasks from lower.
+ex: 简单任务来点压力更好；困难任务太紧张反而失常。
+
+@@ ap-psychology.u4.t4-6.self-determination-theory
+def: 自我决定理论。自主、胜任、归属三需要。
+def: Motivation is driven by three innate needs: autonomy, competence, and relatedness.
+ex: 人需要自主感、胜任感和归属感才能保持内在动力。
+
+@@ ap-psychology.u4.t4-6.intrinsic-motivation
+def: 内在动机。因为本身有趣而做。
+def: Doing something because it is inherently interesting or enjoyable.
+ex: 因为喜欢画画而画画——不是为了获奖。
+
+@@ ap-psychology.u4.t4-6.extrinsic-motivation
+def: 外在动机。为了外部奖励而做。
+def: Doing something for external rewards (money, grades, praise).
+ex: 为了奖金完成销售目标——金钱、名声、成绩、赞扬。
+
+@@ ap-psychology.u4.t4-6.incentive-theory
+def: 诱因理论。外部刺激「拉」我们行动。
+def: Behavior is motivated by external stimuli (incentives) that pull us toward them.
+ex: 看到美食图片就产生食欲、闻到咖啡香就想喝——被吸引，不是被推。
+
+@@ ap-psychology.u4.t4-6.instincts
+def: 本能。天生的固定行为模式。
+def: Innate, fixed patterns of behavior that are biologically driven.
+ex: 婴儿天生会吮吸；母亲保护孩子的本能——进化视角。
+
+@@ ap-psychology.u4.t4-6.lewin-s-motivational-conflicts-theory
+def: 勒温动机冲突理论。三种内心纠结。
+def: Kurt Lewin's framework describing three types of conflicts when choosing between goals.
+ex: 做选择时的纠结分三种：双趋、趋避、双避。
+
+@@ ap-psychology.u4.t4-6.approach-approach-conflicts
+def: 双趋冲突。两个都想要。
+def: Choosing between two equally attractive options.
+ex: 清华还是北大——两个都想去。
+
+@@ ap-psychology.u4.t4-6.approach-avoidance-conflicts
+def: 趋避冲突。一个目标既有好又有坏。
+def: A single goal has both attractive and unattractive aspects.
+ex: 想吃甜食但又怕胖。
+
+@@ ap-psychology.u4.t4-6.avoidance-avoidance-conflicts
+def: 双避冲突。两个都不想要。
+def: Choosing between two equally undesirable options.
+ex: 补作业还是请家长——两个都不想。
+
+@@ ap-psychology.u4.t4-6.sensation-seeking-theory
+def: 寻求刺激理论。每人需要的刺激量不同。
+def: People differ in their need for novel, complex, and intense stimulation.
+ex: 有些人天生就爱冒险、追求刺激——四个成分：经验寻求、惊险冒险、去抑制、无聊易感。
+
+@@ ap-psychology.u4.t4-6.thrill-seeking
+def: 惊险寻求。追求危险刺激。
+def: Seeking exciting experiences that often involve physical risk.
+ex: 跳伞、蹦极、极限运动。
+
+@@ ap-psychology.u4.t4-6.adventure-seeking
+def: 冒险寻求。追求新奇户外体验。
+def: Desire for novel physical activities and exploration.
+ex: 喜欢旅行探险、尝试新的户外运动。
+
+@@ ap-psychology.u4.t4-6.disinhibition
+def: 去抑制。挣脱社会规范的社交刺激。
+def: Seeking social stimulation through behaviors normally restrained by social norms.
+ex: 在派对上放飞自我——做平时不敢做的事。
+
+@@ ap-psychology.u4.t4-6.boredom-susceptibility
+def: 无聊易感性。受不了单调重复。
+def: Intolerance of repetitive, monotonous, or predictable situations.
+ex: 稳定但无聊的工作干不下去——非要换个刺激的。
+
+@@ ap-psychology.u4.t4-6.hunger
+def: 饥饿。生理+心理共同驱动的进食动机。
+def: A motivational state driven by physiological signals (ghrelin, hypothalamus) and psychological cues.
+ex: 胃分泌饥饿素催你吃饭；到了饭点条件反射地饿——下丘脑统筹。
+
+@@ ap-psychology.u4.t4-6.satiety
+def: 饱腹感。吃饱了的信号。
+def: The feeling of fullness that signals the body to stop eating, regulated by leptin.
+ex: 吃饱了，脂肪细胞分泌瘦素告诉大脑「别吃了」。
+
+@@ ap-psychology.u4.t4-7.affect
+def: 情感。情绪体验的泛称。
+def: A broad term for the experience of feeling or emotion.
+ex: 泛指所有的情绪情感体验。
+
+@@ ap-psychology.u4.t4-7.physiological-experiences
+def: 生理体验。情绪的身体反应。
+def: The bodily responses associated with emotion — increased heart rate, sweating, muscle tension.
+ex: 紧张时心跳加速、手心出汗——身体的自动反应。
+
+@@ ap-psychology.u4.t4-7.cognitive-experiences
+def: 认知体验。伴随情绪的想法。
+def: The thoughts and interpretations that accompany an emotional state.
+ex: 看到蛇时脑子里闪过「我在危险中」。
+
+@@ ap-psychology.u4.t4-7.cognitive-label
+def: 认知标签。给生理唤醒贴的情绪名字。
+def: The interpretation we assign to physiological arousal, which determines the emotion — key to Schachter-Singer.
+ex: 同样是心跳加速——考场上解读为焦虑，过山车上解读为兴奋（两因素理论）。
+
+@@ ap-psychology.u4.t4-7.facial-feedback-hypothesis
+def: 面部反馈假说。表情反过来影响情绪。
+def: Facial muscle movements can trigger or intensify the corresponding emotion.
+ex: 即使心情一般，强迫自己微笑也会让你感觉好一点。
+
+@@ ap-psychology.u4.t4-7.broaden-and-build-theory-of-emotion
+def: 情绪拓展-建构理论。积极情绪拓宽认知建资源。
+def: Positive emotions broaden our awareness and encourage building new skills, resources, and connections.
+ex: 快乐时更愿意探索新事物、交新朋友——积累更多心理资源。
+
+@@ ap-psychology.u4.t4-7.cognitive-appraisal
+def: 认知评价。先评估事件再产生情绪。
+def: The process of evaluating an event's significance to determine the emotional response — Lazarus.
+ex: 你把考试定义为「威胁」还是「挑战」——决定了后续是焦虑还是兴奋。
+
+@@ ap-psychology.u4.t4-7.display-rules
+def: 情绪表达规则。文化规定怎么表露情绪。
+def: Cultural norms dictating when, where, and how emotions should be expressed.
+ex: 有些文化提倡喜形于色，有些觉得公开哭泣不成熟——cultural norms 的体现。
+
+@@ ap-psychology.u4.t4-7.emotional-elicitors
+def: 情绪诱因。触发情绪的刺激或事件。
+def: Stimuli or events that trigger emotional responses, influenced by gender, age, and culture.
+ex: 蛇是恐惧的诱因；收到礼物是快乐的诱因。
+
+@@ ap-psychology.u5.t5-1.health-psychology
+def: 健康心理学。研究心理如何影响健康与疾病。
+def: A subfield focused on promoting health and preventing/treating illness, including psychological responses to being sick.
+ex: 关心身体的同时，还研究人生病时的心理反应、应对方式、怎么改善医疗系统。
+
+@@ ap-psychology.u5.t5-1.stress
+def: 应激（压力）。压力源引发的身心紧张状态。
+def: A state of physiological and psychological tension caused by stressors; chronic stress weakens the immune system.
+ex: 期末考试周身心俱疲、睡不好觉。
+
+@@ ap-psychology.u5.t5-1.stressors
+def: 压力源。引发应激的事件或条件。
+def: Events or conditions in the environment that trigger the stress response.
+ex: 考试、失恋、经济困难、噪音。
+
+@@ ap-psychology.u5.t5-1.hypertension
+def: 高血压。长期压力的身体后果。
+def: High blood pressure, a common physical consequence of chronic stress.
+ex: 长期高压工作导致血压升高。
+
+@@ ap-psychology.u5.t5-1.immune-suppression
+def: 免疫抑制。慢性压力压垮免疫系统。
+def: Chronic stress weakens the immune system, making the body more vulnerable to illness.
+ex: 考试周压力太大反而感冒了。
+
+@@ ap-psychology.u5.t5-1.eustress-motivating
+def: 良性压力。推动你发挥的好压力。
+def: Positive stress from beneficial events that provides motivation and enhances performance.
+ex: 比赛前的兴奋紧张感——让你发挥更好。Eu- = good（优生学那个词根）。
+
+@@ ap-psychology.u5.t5-1.distress-debilitating
+def: 恶性压力。拖垮你的坏压力。
+def: Negative stress that impairs motivation and performance, causing emotional and physical harm.
+ex: 亲人去世、失业带来的持续痛苦。
+
+@@ ap-psychology.u5.t5-1.adverse-childhood-experiences-aces
+def: 童年逆境经历。18岁前的潜在创伤事件。
+def: Potentially traumatic events occurring before age 18 with lasting negative effects.
+ex: 家暴、父母酗酒、被忽视——对成年后的身心健康都有长期影响。
+
+@@ ap-psychology.u5.t5-1.general-adaptation-syndrome-gas
+def: 一般适应综合征（GAS）。三阶段压力反应。
+def: Hans Selye's three-stage stress response: alarm → resistance → exhaustion.
+ex: 描述身体在持续压力下如何逐步耗竭——⭐重点模型。
+
+@@ ap-psychology.u5.t5-1.alarm-reaction-phase
+def: 警觉期。压力初袭，战逃激活。
+def: The initial reaction to a stressor; the body activates the fight-or-flight response.
+ex: 突然被老师点名——心跳猛地加速、手心出汗。
+
+@@ ap-psychology.u5.t5-1.resistance-phase
+def: 抵抗期。表面适应，储备在耗。
+def: The body attempts to adapt and cope; appears to be managing but resources are being consumed.
+ex: 连续加班几周，表面上还撑得住——但身体在悄悄消耗储备。
+
+@@ ap-psychology.u5.t5-1.flight-flight-freeze-response
+def: 战逃僵反应。交感神经激活的应急反应。
+def: Activation of the sympathetic nervous system: heart rate up, adrenaline surges — fight, flee, or freeze.
+ex: 走夜路遇到可疑的人——心跳加速、腿发软跑不动（freeze）。对应交感神经系统（1.2）。
+
+@@ ap-psychology.u5.t5-1.exhaustion-phase
+def: 衰竭期。资源耗尽，免疫崩溃。
+def: Body's resources are depleted after prolonged stress — weakened immunity, burnout, illness.
+ex: 长期高压后免疫力崩溃——反复生病、极度疲劳。
+
+@@ ap-psychology.u5.t5-1.tend-and-befriend-theory
+def: 照顾与结盟理论。压力下的照料和求援。
+def: A stress response (especially in women): nurturing others (tend) and seeking social support (befriend).
+ex: 地震后母亲先安抚孩子（tend），再联系亲友互相支持（befriend）——不是只有战逃。
+
+@@ ap-psychology.u5.t5-1.problem-focused-coping
+def: 问题中心应对。直接解决问题。
+def: Coping by directly addressing the stressor — changing the situation.
+ex: 考试压力大 → 制定详细的复习计划——改变压力源本身。
+
+@@ ap-psychology.u5.t5-1.emotion-focused-coping
+def: 情绪中心应对。管理情绪反应。
+def: Coping by managing emotional reactions when the stressor cannot be changed.
+ex: 亲人去世无法改变 → 冥想、深呼吸、找朋友倾诉——让自己好受些。
+pit: 能改的用问题中心，改不了的用情绪中心——不是谁更高级，看情境。
+
+@@ ap-psychology.u5.t5-2.positive-psychology
+def: 积极心理学。研究什么让人活得好。
+def: The scientific study of optimal human functioning, advocated by Martin Seligman.
+ex: 不只研究心理疾病——研究优势、美德、什么帮助人茁壮成长。
+
+@@ ap-psychology.u5.t5-2.well-being
+def: 幸福感。身心社会健康的综合状态。
+def: A broad concept encompassing physical, emotional, and social health — an overall sense of flourishing.
+ex: 身体健康、情绪稳定、人际关系良好的综合状态。
+
+@@ ap-psychology.u5.t5-2.resilience
+def: 心理韧性（复原力）。逆境中反弹。
+def: The ability to recover and bounce back from adversity, trauma, or stress.
+ex: 创业失败后重新振作，从头再来。
+
+@@ ap-psychology.u5.t5-2.positive-emotions
+def: 积极情绪。拓展思维的正面感受。
+def: Emotions such as joy, gratitude, and hope that broaden thinking and build psychological resources.
+ex: 帮助别人后感到的满足和快乐。
+
+@@ ap-psychology.u5.t5-2.gratitude
+def: 感恩。被证实的幸福提升器。
+def: A positive emotion; regularly expressing gratitude significantly improves long-term well-being.
+ex: 每天写三件感恩的事——长期坚持幸福感明显提升。
+
+@@ ap-psychology.u5.t5-2.positive-subjective-experiences
+def: 积极主观体验。内心的幸福感。
+def: Internal, self-reported experiences of happiness, satisfaction, and fulfillment.
+ex: 回忆一次旅行时内心涌起的幸福感。
+
+@@ ap-psychology.u5.t5-2.subjective-well-being
+def: 主观幸福感。自己评价的满意度。
+def: A person's self-evaluation of their life satisfaction and happiness.
+ex: 收入不高但觉得自己生活很幸福——主观幸福感就高。
+
+@@ ap-psychology.u5.t5-2.signature-strengths
+def: 个人优势。你性格中最核心的长处。
+def: The core character strengths most central to a person's identity; using them boosts well-being.
+ex: 一个人最突出的可能是好奇心和创造力——了解并运用它们是提升幸福的途径。
+
+@@ ap-psychology.u5.t5-2.virtues
+def: 六大美德。优势的六大类别。
+def: Six broad categories under which signature strengths are organized.
+ex: 智慧（好奇心）、勇气（毅力）、人道（善良）、正义（公平）、节制（自控）、超越（感恩希望）。
+
+@@ ap-psychology.u5.t5-2.positive-objective-experiences
+def: 积极客观体验。可测量的幸福指标。
+def: External, measurable indicators of well-being — income, education, health status.
+ex: 稳定的收入、良好的健康指标、受教育程度。
+
+@@ ap-psychology.u5.t5-2.happiness
+def: 幸福。积极情绪+生活满意。
+def: A state of well-being characterized by positive emotions and life satisfaction; influenced by genetics and circumstances.
+ex: 做自己喜欢的事时感到的愉悦和满足。
+
+@@ ap-psychology.u5.t5-2.categories-of-virtues-wisdom-courage-humanity-justice-temperance-transcendence
+def: 六大美德类别。智慧勇气人道正义节制超越。
+def: The six categories: Wisdom, Courage, Humanity, Justice, Temperance, Transcendence.
+ex: 同 Virtues——每类下面挂着具体的性格优势。
+
+@@ ap-psychology.u5.t5-2.posttraumatic-growth
+def: 创伤后成长。逆境后的积极蜕变。
+def: Positive psychological change after struggling with a major crisis — deeper understanding, stronger relationships.
+ex: 经历重病后更珍惜生活，人际关系更深刻，内心更强大——逆境成为成长的催化剂。
+
+@@ ap-psychology.u5.t5-3.dysfunction
+def: 功能失调（4D之一）。日常功能受损。
+def: One of the Four Ds: inability to maintain daily functioning — self-care, social, or work.
+ex: 抑郁到无法起床上学、无法维持基本社交。
+
+@@ ap-psychology.u5.t5-3.distress
+def: 痛苦（4D之一）。当事人的主观痛苦。
+def: One of the Four Ds: subjective suffering from one's own thoughts, emotions, or behaviors.
+ex: 强迫症患者因反复洗手感到极度痛苦。
+
+@@ ap-psychology.u5.t5-3.deviation-from-the-social-norm
+def: 偏离社会规范（4D之越轨）。
+def: One of the Four Ds (Deviance): behavior significantly departing from cultural norms.
+ex: 在公共场合对着空气大声说话。
+pit: 罕见≠障碍——天才也统计罕见。判断异常不能只看偏离规范。
+
+@@ ap-psychology.u5.t5-3.cultural-societal-norms
+def: 文化/社会规范。「正常」的文化标准。
+def: Standards of acceptable behavior that vary across cultures and time.
+ex: 同性恋曾被 DSM 列为障碍，1980年移除——诊断标准随社会价值观变化。
+
+@@ ap-psychology.u5.t5-3.stigma
+def: 污名化。对心理疾病的负面社会态度。
+def: Negative social attitudes toward mental illness, leading to stereotypes, prejudice, and discrimination.
+ex: 别人知道你看心理医生后对你另眼相看、疏远你——每年5月心理健康意识月对抗的就是它。
+
+@@ ap-psychology.u5.t5-3.racism
+def: 种族主义。基于种族的偏见与歧视。
+def: Prejudice and discrimination based on race/ethnicity.
+ex: 因种族背景在求职中被歧视。
+
+@@ ap-psychology.u5.t5-3.sexism
+def: 性别主义。基于性别的偏见与歧视。
+def: Prejudice and discrimination based on sex/gender.
+ex: 女性在职场中因性别被低估能力。
+
+@@ ap-psychology.u5.t5-3.ageism
+def: 年龄主义。基于年龄的偏见与歧视。
+def: Prejudice and discrimination based on age.
+ex: 认为老年人学不会新技术。
+
+@@ ap-psychology.u5.t5-3.discrimination
+def: 歧视。偏见的行为层（异常语境）。
+def: Behavioral component of prejudice — unfair treatment based on group membership.
+ex: 因心理疾病诊断标签被拒绝录用。
+
+@@ ap-psychology.u5.t5-3.diagnostic-and-statistical-manual-of-mental-disorders-dsm
+def: 精神障碍诊断与统计手册（DSM）。
+def: Published by the American Psychiatric Association; the standard US classification system and insurance basis.
+ex: DSM-5（2013）收录541种诊断——1952年首版只有128种。
+
+@@ ap-psychology.u5.t5-3.international-classification-of-mental-disorders-icd
+def: 国际疾病分类（ICD）。WHO 全球标准。
+def: Published by the WHO; a globally used classification system for clinical descriptions and diagnostic codes.
+ex: 全球通用的疾病分类标准——不限于心理障碍。
+
+@@ ap-psychology.u5.t5-3.eclectic-approach
+def: 折中主义方法。整合多视角。
+def: Rejecting single-factor explanations; integrating multiple perspectives to understand and treat disorders.
+ex: 治疗抑郁症时同时考虑药物、认知疗法和社会支持——不站单一门派。
+
+@@ ap-psychology.u5.t5-3.behavioral-perspective
+def: 行为主义视角（异常）。习得的不良联结。
+def: Psychological disorders result from maladaptive learned associations through conditioning.
+ex: 被狗咬过后对所有狗产生恐惧——经典条件反射结下的梁子。
+
+@@ ap-psychology.u5.t5-3.maladaptive-learned-associations
+def: 适应不良的习得联结。学出来的坏联结。
+def: Unhealthy stimulus-response connections formed through learning that maintain problematic behavior.
+ex: 每次焦虑就喝酒缓解——形成了不健康的应对联结。
+
+@@ ap-psychology.u5.t5-3.humanistic-perspective
+def: 人本主义视角（异常）。成长受阻。
+def: Disorders arise when self-actualization is blocked or the growth environment is deficient.
+ex: 长期被否定无法发挥潜能——需要无条件的接纳和支持。
+
+@@ ap-psychology.u5.t5-3.cognitive-perspective
+def: 认知视角（异常）。扭曲的思维模式。
+def: Disorders stem from maladaptive thinking patterns and cognitive distortions.
+ex: 一次考试没考好就认为「我什么都做不好」——以偏概全的认知扭曲。
+
+@@ ap-psychology.u5.t5-3.psychodynamic-perspective
+def: 心理动力学视角（异常）。潜意识冲突。
+def: Disorders originate from unconscious conflicts and childhood experiences.
+ex: 童年被忽视的经历——导致成年后的信任问题。
+
+@@ ap-psychology.u5.t5-3.evolutionary-perspective
+def: 进化论视角（异常）。曾是适应性的特质。
+def: Certain psychological traits or disorders may have been adaptive in ancestral environments.
+ex: 焦虑反应帮远古人类警觉危险、存活下来——今天成了负担。
+
+@@ ap-psychology.u5.t5-3.sociocultural-perspective
+def: 社会文化视角。个体与社会规范的冲突。
+def: Disorders arise from conflicts between the individual and social/cultural environments.
+ex: 移民因文化冲突产生适应障碍。
+
+@@ ap-psychology.u5.t5-3.biological-perspective
+def: 生物视角（异常）。神经化学、基因、脑结构。
+def: Disorders result from neurochemical imbalances, genetic factors, or brain abnormalities.
+ex: 抑郁症与血清素水平低有关——用药物调节神经递质。
+
+@@ ap-psychology.u5.t5-3.biopsychosocial-model
+def: 生物-心理-社会模型。三因素交互。
+def: An integrative model: disorders result from the interaction of biological × psychological × social factors.
+ex: 抑郁症 = 基因易感性（bio）+ 消极思维模式（psych）+ 社会孤立（social）——当代主流。
+
+@@ ap-psychology.u5.t5-3.diathesis-stress-model
+def: 素质-压力模型。遗传易感+压力触发。
+def: Disorders are triggered when genetic vulnerability (diathesis) interacts with environmental stressors.
+ex: 有精神分裂症家族史（素质），但只有经历重大压力才发病（触发）——有家族史≠必然发病。
+
+@@ ap-psychology.u5.t5-4.neurodevelopmental-disorders
+def: 神经发育障碍。出生/幼儿期出现的脑功能障碍。
+def: A group of brain dysfunctions present at birth or early childhood, affecting behavior, memory, attention, and/or learning.
+ex: ADHD 和 ASD 都属于这一类——成因含遗传、生理、环境因素。
+
+@@ ap-psychology.u5.t5-4.attention-deficit-hyperactivity-disorder-adhd
+def: 注意缺陷/多动障碍（ADHD）。持续的不注意或多动冲动。
+def: Persistent patterns of inattention and/or hyperactivity-impulsivity that interfere with functioning.
+ex: 上课无法集中注意力、坐不住、经常打断别人说话——≥6症状持续≥6个月、12岁前起病、多场景。
+
+@@ ap-psychology.u5.t5-4.autism-spectrum-disorder-asd
+def: 自闭症谱系障碍（ASD）。社交沟通+刻板行为。
+def: Deficits in social-emotional reciprocity, nonverbal communication, and relationships, plus restricted/repetitive behaviors.
+ex: 不理解社交暗示、对特定话题有极度强烈的兴趣、重复同样动作——「来自星星的孩子」。
+
+@@ ap-psychology.u5.t5-4.schizophrenic-spectrum-disorders
+def: 精神分裂症谱系障碍。异常感知+怪异思维的 psychotic 障碍。
+def: A psychotic disorder involving deterioration in functioning due to abnormal perceptions, bizarre thinking, emotional dysregulation, and motor abnormalities.
+ex: 出现幻觉、妄想，无法正常工作和社交。
+pit: 不是人格分裂！"Split Mind" 指的是**心智**与现实的分裂，不是分裂成多个人格（那是 DID）。
+
+@@ ap-psychology.u5.t5-4.positive-symptoms
+def: 阳性症状。比别人「多」出来的。
+def: Symptoms that represent an excess or addition to normal functioning.
+ex: 妄想、幻觉、言语紊乱、紧张症——阳性=多了不该有的。
+pit: 阳性=多（加东西），阴性=少（缺东西）——按「多/少」记，和「好坏」无关。
+
+@@ ap-psychology.u5.t5-4.negative-symptoms
+def: 阴性症状。比别人「少」掉的。
+def: Symptoms that represent a reduction or absence of normal functioning.
+ex: 情感平淡、缺乏动力、社交退缩——可能被误认为抑郁或懒惰。
+
+@@ ap-psychology.u5.t5-4.delusions
+def: 妄想。证据摆在眼前也不改的假信念。
+def: False beliefs maintained despite contradictory evidence.
+ex: 坚信自己被监视——即使没有任何证据。
+
+@@ ap-psychology.u5.t5-4.delusions-of-persecution
+def: 被害妄想。觉得有人害我（最常见）。
+def: Belief that one is being persecuted, watched, or conspired against.
+ex: 坚信有人在食物里下毒——最常见的妄想类型。
+
+@@ ap-psychology.u5.t5-4.delusions-of-grandeur
+def: 夸大妄想。觉得自己是大人物。
+def: Belief that one is an extraordinarily powerful or important person.
+ex: 相信自己是某个王室继承人——「父母只是在考验我」。
+
+@@ ap-psychology.u5.t5-4.hallucinations
+def: 幻觉。生动真实的虚假感知。
+def: False sensory perceptions that feel vivid and real; usually negative in content.
+ex: 听到有声音命令自己做事，但周围没有人——**听觉**幻觉最常见（大脑真的在产生声音信号）。
+
+@@ ap-psychology.u5.t5-4.disorganized-thinking
+def: 思维紊乱。逻辑组织崩坏。
+def: Disrupted thought processes reflected in incoherent or illogical reasoning.
+ex: 无法按逻辑组织想法——思维跳跃混乱。
+
+@@ ap-psychology.u5.t5-4.disorganized-speech
+def: 言语紊乱。说出来的话没法懂。
+def: Incoherent or meaningless speech — jumping between unrelated topics, inappropriate word use.
+ex: 说话完全没有逻辑，听的人无法理解。
+
+@@ ap-psychology.u5.t5-4.word-salad
+def: 词语沙拉。言语紊乱的极端形态。
+def: Completely scrambled, incoherent speech — an extreme form of disorganized speech.
+ex: 「苹果飞机紫色跳舞……」——完全无法理解的词语堆砌。
+
+@@ ap-psychology.u5.t5-4.disorganized-motor-behavior
+def: 行为紊乱（运动）。无目的的多动或怪姿势。
+def: Excessive, purposeless motor activity — agitation, bizarre postures, pacing, repetitive movements.
+ex: 反复踱步、模仿别人的动作、摆出怪异姿势。
+
+@@ ap-psychology.u5.t5-4.catatonia
+def: 紧张症。运动极端异常（过多或过少）。
+def: As a positive symptom: excessive purposeless movement; as a negative symptom: lack of movement (catatonic stupor).
+ex: 阳性表现：不停踱步、重复动作；阴性表现：保持诡异姿势一动不动。
+
+@@ ap-psychology.u5.t5-4.flat-affect
+def: 情感平淡。情绪表达严重减少。
+def: Severely diminished emotional expression: unchanging face, poor eye contact, monotone voice.
+ex: 听到好消息或坏消息，表情完全没有变化、语调平平——「面瘫」。
+
+@@ ap-psychology.u5.t5-4.catatonic-stupor
+def: 紧张性木僵。像雕塑一样不动。
+def: A negative symptom: lack of movement or responsiveness; may hold unusual postures and resist being moved.
+ex: 像雕塑一样保持一个姿势几个小时——不回应任何人。
+
+@@ ap-psychology.u5.t5-4.dopamine-hypothesis
+def: 多巴胺假说。多巴胺波动致精神分裂症状。
+def: The theory that highly fluctuating dopamine levels contribute to schizophrenia symptoms.
+ex: 多巴胺水平异常波动→幻觉和妄想——抗精神病药就是多巴胺拮抗剂。
+
+@@ ap-psychology.u5.t5-4.depressive-disorders
+def: 抑郁障碍。持续低落、动力缺失。
+def: A category of mood disorders characterized by persistent low mood and loss of motivation.
+ex: 持续的悲伤、对事物失去兴趣。
+
+@@ ap-psychology.u5.t5-4.major-depressive-disorder
+def: 重度抑郁障碍（单相）。≥2周的深度抑郁。
+def: Unipolar depression: intense depressive mood, loss of interest, energy loss for at least 2 weeks.
+ex: 连续两周以上每天极度悲伤、无法上学上班、反复想到死亡。
+
+@@ ap-psychology.u5.t5-4.persistent-depressive-disorder
+def: 持续性抑郁障碍。≥2年的慢性低烈度抑郁。
+def: A chronic form of depression lasting at least 2 years — less severe but persistent.
+ex: 两年多来大部分时间情绪低落——没重度那么猛，但一直好不了。
+
+@@ ap-psychology.u5.t5-4.bipolar-disorders
+def: 双相障碍。躁狂与抑郁交替。
+def: Mood disorders involving alternating episodes between depression and mania.
+ex: 情绪在极度亢奋和极度低落之间来回波动。
+
+@@ ap-psychology.u5.t5-4.cycling
+def: 循环发作。两极之间的切换。
+def: The switching between manic and depressive states; duration and intensity vary.
+ex: 这个月躁狂、下个月抑郁——反复循环。
+
+@@ ap-psychology.u5.t5-4.mania
+def: 躁狂发作。亢奋、冲动、自我膨胀。
+def: Elevated mood, increased energy, decreased need for sleep, racing thoughts, impulsive behavior.
+ex: 连续几天不睡觉但精力充沛、疯狂消费、觉得自己无所不能。
+
+@@ ap-psychology.u5.t5-4.depression
+def: 抑郁发作。低落、疲惫、自我封闭。
+def: Persistent sadness, fatigue, feelings of worthlessness, withdrawal, suicidal thoughts.
+ex: 躁狂期过后陷入极度疲惫和绝望——不想见任何人。
+
+@@ ap-psychology.u5.t5-4.bipolar-i-disorder
+def: 双相I型。有完整躁狂发作（更严重）。
+def: At least one full manic episode; may have hypomanic or major depressive episodes.
+ex: 经历过完整的躁狂发作——可能住院治疗。
+
+@@ ap-psychology.u5.t5-4.bipolar-ii-disorder
+def: 双相II型。轻躁狂+重度抑郁（较轻）。
+def: At least one hypomanic episode and one major depressive episode; never a full manic episode.
+ex: 轻躁狂=情绪高涨但没严重到影响功能——比 I 型轻。
+pit: I 型有**完整躁狂**，II 型只有**轻躁狂**——数字越大越轻，别记反。
+
+@@ ap-psychology.u5.t5-4.anxiety-disorders
+def: 焦虑障碍。过度、非理性、不可控的焦虑。
+def: The most common psychological disorders in the US; pathological anxiety is disruptive, irrational, and uncontrollable.
+ex: 焦虑本身正常——病理性焦虑是过度的、停不下来的。
+
+@@ ap-psychology.u5.t5-4.specific-phobia
+def: 特定恐惧症。对特定刺激的强烈非理性恐惧。
+def: An intense, irrational fear of a specific stimulus, lasting ≥6 months, with avoidance.
+ex: 看到蜘蛛就尖叫逃跑——明知过度但无法控制。
+
+@@ ap-psychology.u5.t5-4.acrophobia
+def: 恐高症。
+def: Fear of heights.
+ex: 站在高楼阳台上双腿发软、头晕。
+
+@@ ap-psychology.u5.t5-4.arachnophobia
+def: 恐蛛症。
+def: Fear of spiders.
+ex: 看到蜘蛛就极度恐慌。
+
+@@ ap-psychology.u5.t5-4.agoraphobia
+def: 广场恐惧症。怕难以逃离的公共场所。
+def: Fear of open or public spaces where escape might be difficult.
+ex: 害怕去商场、广场等开阔公共场所。
+
+@@ ap-psychology.u5.t5-4.panic-disorder
+def: 惊恐障碍。反复不可预测的惊恐发作。
+def: Characterized by recurrent, unpredictable panic attacks with severe physical symptoms.
+ex: 突然心跳加速、胸痛、感觉快要窒息——以为自己心脏病发作（+对复发的持续担忧≥1个月）。
+
+@@ ap-psychology.u5.t5-4.panic-attack
+def: 惊恐发作。急性 intense 焦虑的巅峰。
+def: An episode of intense, acute anxiety with severe physical symptoms — chest pain, sweating, choking.
+ex: 突然极度恐惧、全身发抖、呼吸困难——持续几分钟。
+
+@@ ap-psychology.u5.t5-4.ataque-de-nervios
+def: 神经发作（拉丁文化综合征）。
+def: A culture-bound syndrome in Latin American cultures: screaming, crying, trembling, or fainting after intense events.
+ex: 拉丁文化中亲人去世后出现尖叫、哭泣、颤抖甚至昏厥的情绪爆发——文化束缚综合征考点。
+
+@@ ap-psychology.u5.t5-4.social-anxiety-disorder
+def: 社交焦虑障碍。怕被审视和负面评价。
+def: Intense fear and anxiety in social situations where one might be scrutinized.
+ex: 被叫起来回答问题时极度恐惧——害怕被同学笑话，≥6个月。
+
+@@ ap-psychology.u5.t5-4.taijin-kyofusho
+def: 对人恐惧症（日本文化综合征）。
+def: A culture-bound syndrome from Japan: intense fear of offending others with one's appearance or behavior.
+ex: 极度害怕「自己的存在让别人不舒服」——西方社交焦虑怕被评价，东方怕冒犯别人，对比着记。
+
+@@ ap-psychology.u5.t5-4.generalized-anxiety-disorder-gad
+def: 广泛性焦虑障碍（GAD）。什么都担心、停不下来。
+def: Excessive anxiety about almost everything for ≥6 months — free-floating anxiety with no specific trigger.
+ex: 工作、健康、家人什么都担心——但说不清楚到底在怕什么（自由浮动焦虑）。
+note: 诊断要 ≥6 个月 + 至少三种症状：紧张、疲劳、注意力差、易怒、肌肉紧张、睡眠问题。
+
+@@ ap-psychology.u5.t5-4.obsessive-compulsive-and-related-disorders
+def: 强迫及相关障碍。强迫观念/行为的障碍类。
+def: A category involving obsessions, compulsions, or related repetitive behaviors that create distress and impairment.
+ex: 包括强迫症（OCD）和囤积障碍。
+
+@@ ap-psychology.u5.t5-4.obsessions
+def: 强迫观念。停不下来的侵入想法。
+def: Persistent, intrusive, unwanted thoughts the individual cannot get rid of.
+ex: 脑海里不停出现自己会伤害家人的画面——越想停越停不下来。
+
+@@ ap-psychology.u5.t5-4.compulsions
+def: 强迫行为。为缓解焦虑的仪式动作。
+def: Repetitive ritualistic behaviors performed to reduce the anxiety caused by obsessions.
+ex: 每天洗手几十次直到手都裂了——「观念」是想法，「行为」是动作，配套出现。
+
+@@ ap-psychology.u5.t5-4.obsessive-compulsive-disorder
+def: 强迫症（OCD）。观念+行为的复合障碍。
+def: A disorder involving both obsessions and compulsions; time-consuming and significantly distressful.
+ex: 反复想到门没锁好（观念）→ 回去检查五六次（行为）。
+
+@@ ap-psychology.u5.t5-4.hoarding-disorder
+def: 囤积障碍。无法丢弃物品。
+def: Persistent difficulty discarding possessions, causing severe clutter and distress.
+ex: 家里堆满旧报纸和塑料袋——完全无法丢弃，连走路的空间都没有。囤囤鼠~
+
+@@ ap-psychology.u5.t5-4.dissociative-disorders
+def: 分离性障碍。意识/记忆/身份的中断。
+def: Disruptions in consciousness, memory, identity, or perception causing significant impairment.
+ex: 意识、记忆、身份、感知断片——「分离」本身可以正常（开车自动驾驶状态）。
+
+@@ ap-psychology.u5.t5-4.dissociation
+def: 解离。与自身思想感受的断开感。
+def: A disconnection from one's thoughts, feelings, surroundings, or identity; from normal to pathological.
+ex: 压力极大时感觉灵魂出窍——像在看别人的生活；轻度版本=做白日梦。
+
+@@ ap-psychology.u5.t5-4.dissociative-amnesia
+def: 分离性遗忘。想不起创伤性自传信息。
+def: Inability to recall important autobiographical information, usually traumatic — beyond ordinary forgetting.
+ex: 经历车祸后完全记不起事故发生的过程。
+
+@@ ap-psychology.u5.t5-4.dissociative-identity-disorder
+def: 分离性身份障碍（DID）。多个独立人格。
+def: Presence of ≥2 distinct personality states with memory gaps; often associated with severe childhood abuse.
+ex: 一个人有多个人格，彼此可能互不知道对方存在——常与童年虐待相关。
+note: 「人格分裂」说的其实是它；精神分裂症是 psychotic，不是多个人格。
+
+@@ ap-psychology.u5.t5-4.trauma-and-stressor-related-disorders
+def: 创伤及应激相关障碍。创伤后的心理困扰。
+def: Disorders involving psychological distress after exposure to traumatic/stressful events.
+ex: 过度警觉、严重焦虑、闪回、失眠、情感疏离、敌意。
+
+@@ ap-psychology.u5.t5-4.hypervigilance
+def: 过度警觉。时刻扫描威胁。
+def: A state of heightened alertness and scanning for threats.
+ex: 退伍军人听到巨响就立刻趴下寻找掩护。
+
+@@ ap-psychology.u5.t5-4.flashbacks
+def: 闪回。创伤现场的重现。
+def: Intrusive, vivid re-experiencing of traumatic events as if they are happening again.
+ex: 突然感觉自己又回到了事故现场——画面和声音栩栩如生。
+
+@@ ap-psychology.u5.t5-4.insomnia
+def: 失眠（创伤相关）。创伤后难以入睡。
+def: Difficulty falling or staying asleep, commonly associated with trauma-related disorders.
+ex: 经历创伤后每晚都难以入睡、反复惊醒。
+
+@@ ap-psychology.u5.t5-4.emotional-detachment
+def: 情感疏离。情绪麻木断连。
+def: A state of emotional numbness or disconnection from one's feelings and from others.
+ex: 经历创伤后对任何事都感觉麻木——感受不到快乐或悲伤。
+
+@@ ap-psychology.u5.t5-4.hostility
+def: 敌意。创伤后的易怒攻击。
+def: Increased irritability and aggression as a symptom of trauma-related disorders.
+ex: 创伤后变得暴躁易怒——经常对家人发脾气。
+
+@@ ap-psychology.u5.t5-4.posttraumatic-stress-disorder
+def: 创伤后应激障碍（PTSD）。创伤后持续>1个月的应激反应。
+def: Persistent distress after trauma: intrusive memories/flashbacks, avoidance, negative changes, heightened reactivity — >1 month.
+ex: 士兵从战场回来反复做噩梦、回避一切战争相关的事物、听到烟花声就恐慌——可能延迟数月才发作。
+
+@@ ap-psychology.u5.t5-4.feeding-and-eating-disorders
+def: 喂养及进食障碍。摄入异常损害身心。
+def: Disorders defined by altered food consumption impairing health and psychological functioning.
+ex: 吃得太少或太多——身体健康和心理功能都受影响。
+
+@@ ap-psychology.u5.t5-4.anorexia-nervosa
+def: 神经性厌食症。节食+扭曲身体意象。
+def: Restricted food intake, intense fear of gaining weight, and distorted body image, leading to significant weight loss.
+ex: 已经很瘦了，照镜子还觉得自己胖——极度节食。
+
+@@ ap-psychology.u5.t5-4.bulimia-nervosa
+def: 神经性贪食症。暴食+补偿行为。
+def: Recurrent binge eating followed by inappropriate compensatory behaviors (vomiting, fasting, excessive exercise).
+ex: 一次性吃掉大量食物——然后跑到厕所催吐。
+
+@@ ap-psychology.u5.t5-4.personality-disorders
+def: 人格障碍。僵化失调的长期行为模式。
+def: Long-standing, rigid, maladaptive patterns of thinking and behavior impairing social functioning; not diagnosed before 18.
+ex: 长期极端且僵化的行为模式，影响人际关系——自己意识不到问题（缺乏自知力）。
+
+@@ ap-psychology.u5.t5-4.cluster-a-odd-or-eccentric-cluster
+def: A组人格障碍（怪异 Weird）。
+def: Cluster A: odd or eccentric — paranoid, schizoid, schizotypal.
+ex: 关键词：**Weird**——偏执、分裂样、分裂型。
+
+@@ ap-psychology.u5.t5-4.paranoid-personality-disorder
+def: 偏执型人格障碍。多疑不安。
+def: Pattern of distrust and suspicion of others' motives; accusatory; misreads intentions.
+ex: 总觉得朋友在背后说自己坏话——从不向任何人吐露心事。
+
+@@ ap-psychology.u5.t5-4.schizoid-personality-disorder
+def: 分裂样人格障碍。孤僻冷漠。
+def: Persistent avoidance of social relationships and little emotional expression; genuinely prefers being alone.
+ex: 真心喜欢独处——对交朋友和谈恋爱毫无兴趣（男性更多见）。
+
+@@ ap-psychology.u5.t5-4.schizotypal-personality-disorder
+def: 分裂型人格障碍。怪异思维和行为。
+def: Bizarre thinking, perceptions, and eccentric behavior; distorted thinking; avoids close relationships.
+ex: 相信自己有心灵感应能力，穿着打扮非常怪异——让人感觉很尴尬。
+
+@@ ap-psychology.u5.t5-4.cluster-b-dramatic-emotional-or-erratic-cluster
+def: B组人格障碍（狂野 Wild）。
+def: Cluster B: dramatic, emotional, or erratic — antisocial, borderline, histrionic, narcissistic.
+ex: 关键词：**Wild**——反社会、边缘、表演、自恋。
+
+@@ ap-psychology.u5.t5-4.antisocial-personality-disorder
+def: 反社会型人格障碍。无愧疚地侵犯他人。
+def: Pattern of disregarding and violating others' rights; manipulative, exploitative; no guilt.
+ex: 反复欺骗和利用他人，完全没有愧疚感——和犯罪行为密切相关（男性更多见）。
+
+@@ ap-psychology.u5.t5-4.histrionic-personality-disorder
+def: 表演型人格障碍。戏剧化博关注。
+def: Excessive emotionality and attention-seeking; self-centered; exaggerates.
+ex: 说话夸张戏剧化，总要成为全场焦点——稍微被忽视就受不了（女性更多见）。
+
+@@ ap-psychology.u5.t5-4.narcissistic-personality-disorder
+def: 自恋型人格障碍。自负+缺共情。
+def: Grandiosity, need for admiration, and lack of empathy; cannot accept criticism; expects special treatment.
+ex: 觉得自己比所有人都优秀，要求特殊待遇——完全不在乎别人的感受（男性更多见）。
+
+@@ ap-psychology.u5.t5-4.borderline-personality-disorder
+def: 边缘型人格障碍。关系和情绪极不稳定。
+def: Instability in relationships, self-image, and emotions, plus impulsivity; suicidal threats common.
+ex: 对朋友一天之内从极度依赖变成极度厌恶——经常用自伤威胁别人（女性更多见）。
+
+@@ ap-psychology.u5.t5-4.cluster-c-anxious-or-fearful-cluster
+def: C组人格障碍（担忧 Worried）。
+def: Cluster C: anxious or fearful — avoidant, dependent, obsessive-compulsive.
+ex: 关键词：**Worried**——回避、依赖、强迫型。三组记：Weird / Wild / Worried。
+
+@@ ap-psychology.u5.t5-4.avoidant-personality-disorder
+def: 回避型人格障碍。怕被拒而回避社交。
+def: Persistent social discomfort, overwhelming inadequacy, extreme sensitivity to rejection.
+ex: 很想交朋友但极度害怕被拒绝——干脆回避一切社交。
+
+@@ ap-psychology.u5.t5-4.dependent-personality-disorder
+def: 依赖型人格障碍。事事依附他人。
+def: Clinging, submissive behavior; fear of separation; lets others make all decisions.
+ex: 什么都让别人替自己决定——极度害怕被抛弃（女性更多见）。
+
+@@ ap-psychology.u5.t5-4.obsessive-compulsive-personality-disorder
+def: 强迫型人格障碍（≠OCD）。完美主义到失能。
+def: Intense preoccupation with orderliness, perfectionism, and control, losing flexibility and efficiency.
+ex: 一份报告改了二十遍还不满意，反而什么都完不成——对规则细节极度执着。
+pit: 强迫型**人格障碍**是长期人格风格（自己不觉得痛苦）；**OCD** 是强迫观念+行为（自己很痛苦）——别混。
+
+@@ ap-psychology.u5.t5-5.evidence-based-interventions
+def: 循证干预。经科学验证的治疗方法。
+def: Treatment methods supported by scientific research and empirical evidence.
+ex: 用经过临床试验验证有效的疗法——不是凭感觉治疗。
+
+@@ ap-psychology.u5.t5-5.cultural-humility
+def: 文化谦逊。持续反思和学习来访者文化。
+def: Ongoing self-reflection and learning about clients' cultural backgrounds for culturally sensitive treatment.
+ex: 治疗师主动了解来访者的文化背景——尊重差异，不假设。
+
+@@ ap-psychology.u5.t5-5.therapeutic-alliance
+def: 治疗联盟。治疗师与来访者的信任关系。
+def: The collaborative, trusting relationship between therapist and client — a key factor in treatment effectiveness.
+ex: 来访者感到被理解和信任，愿意敞开心扉——不管什么流派，这个最影响疗效。
+
+@@ ap-psychology.u5.t5-5.psychotropic-medication
+def: 精神类药物。改脑化学治心理障碍。
+def: Medications that affect brain chemistry to treat psychological disorders.
+ex: 通过影响神经递质缓解症状——前提是很多障碍涉及生物因素。
+
+@@ ap-psychology.u5.t5-5.nonmaleficence
+def: 无害原则。Do no harm。
+def: Do no harm — avoid causing physical, emotional, or psychological harm to clients.
+ex: 治疗师不能使用可能伤害来访者的方法。
+
+@@ ap-psychology.u5.t5-5.fidelity
+def: 忠诚原则。信守咨询承诺。
+def: Maintaining trust, honesty, and commitment in the therapeutic relationship.
+ex: 信守与来访者的咨询契约和承诺。
+
+@@ ap-psychology.u5.t5-5.integrity
+def: 诚信原则。坦诚透明。
+def: Maintaining honesty, transparency, and consistency in professional conduct.
+ex: 对来访者坦诚——不隐瞒治疗方案的利弊。
+
+@@ ap-psychology.u5.t5-5.respect-for-people-s-rights-and-dignity
+def: 尊重权利与尊严。保护隐私和自主。
+def: Protecting clients' privacy, confidentiality, and autonomy — including the right to pause or stop treatment.
+ex: 来访者有权随时暂停或终止治疗。
+
+@@ ap-psychology.u5.t5-5.psychodynamic-therapies
+def: 心理动力学疗法。挖掘潜意识冲突。
+def: Based on psychoanalysis: uncovering unconscious content to relieve psychological tension.
+ex: 探索潜意识冲突和童年经历——传统格式：每周2-3次，最长7年。
+
+@@ ap-psychology.u5.t5-5.free-association
+def: 自由联想。想到什么说什么。
+def: Client freely expresses whatever comes to mind to uncover unconscious conflicts.
+ex: 来访者躺在沙发上想到什么就说什么——Freudian slip（口误）被视为真实想法的浮现。
+
+@@ ap-psychology.u5.t5-5.dream-interpretation
+def: 梦的解析。分析梦境探潜意识。
+def: Analyzing dream content to reveal unconscious thoughts and unresolved conflicts.
+ex: 通过分析反复出现的梦境场景——发现潜意识里的恐惧。
+
+@@ ap-psychology.u5.t5-5.cognitive-therapies
+def: 认知疗法。改变想法来改变情绪。
+def: Based on the idea that thinking colors our feelings — thoughts mediate between events and emotions.
+ex: 「Thinking colors our feelings」——改变对事件的想法，就能改变情绪反应。
+
+@@ ap-psychology.u5.t5-5.cognitive-restructuring
+def: 认知重构。换掉非理性信念。
+def: Identifying and replacing negative, irrational beliefs with more positive, realistic thoughts.
+ex: 把「考试没考好=一无是处」替换成「这只是一次考试，下次可以改进」。
+
+@@ ap-psychology.u5.t5-5.fear-hierarchies
+def: 恐惧等级。从轻到重的恐惧清单。
+def: A ranked list of feared situations from least to most anxiety-provoking, used in systematic desensitization.
+ex: 怕蜘蛛：看蜘蛛图片（低）→ 看真蜘蛛（中）→ 触摸蜘蛛（高）。
+
+@@ ap-psychology.u5.t5-5.combating-maladaptive-thinking
+def: 对抗适应不良思维。识别并纠正扭曲思维。
+def: Identifying and challenging negative, irrational thought patterns that cause distress and dysfunction.
+ex: 意识到自己总在灾难化（一件小事就觉得天要塌了）——然后主动纠正。
+
+@@ ap-psychology.u5.t5-5.cognitive-triad
+def: 认知三角。自我-世界-未来的负面看法。
+def: Beck's concept: negative views of self, world, and future — the core of depression.
+ex: 我不行（自我）、世界很糟糕（世界）、未来没希望（未来）——三个负面向度。
+
+@@ ap-psychology.u5.t5-5.applied-behavior-analysis
+def: 应用行为分析。用条件反射原理改行为。
+def: The application of learning principles (classical and operant conditioning) to modify behavior.
+ex: 用行为学原理系统地改变问题行为。
+
+@@ ap-psychology.u5.t5-5.exposure-therapies
+def: 暴露疗法。受控地逐步面对恐惧。
+def: Gradual, repeated exposure to feared objects/situations in a controlled environment to reduce anxiety.
+ex: 恐高症患者从低楼层开始逐步适应——适用于恐惧症、惊恐、社交焦虑、OCD、PTSD、GAD。
+
+@@ ap-psychology.u5.t5-5.systematic-desensitization
+def: 系统脱敏。放松+恐惧等级逐步推进。
+def: Combines a fear hierarchy with progressive relaxation — you cannot be deeply relaxed and deeply afraid at the same time.
+ex: 先学会深度放松，再从最轻微的恐惧场景开始逐步面对——想蜘蛛→摸蜘蛛。
+
+@@ ap-psychology.u5.t5-5.aversion-therapies
+def: 厌恶疗法。坏行为配不愉快刺激。
+def: Pairing an unwanted behavior with an unpleasant stimulus to create a negative association.
+ex: 酗酒者喝酒时同时服用致恶心药物——建立「喝酒=恶心」的联结。操作不当可能有害。
+
+@@ ap-psychology.u5.t5-5.token-economies
+def: 代币经济。代币奖励换特权。
+def: Using tokens as rewards for desired behaviors; tokens can be exchanged for privileges. Based on operant conditioning.
+ex: 精神病院里患者按时吃药、整理床铺获得代币——攒够换零食或活动时间。二级强化物的应用。
+
+@@ ap-psychology.u5.t5-5.biofeedback
+def: 生物反馈。实时生理数据学自我调控。
+def: Using electronic monitoring to give real-time information about physiological states, enabling self-regulation.
+ex: 通过屏幕实时看到自己的心率——练习用呼吸把它降下来。压力管理用。
+
+@@ ap-psychology.u5.t5-5.cognitive-behavioral-therapies
+def: 认知行为疗法（CBT）。想法-行为-情绪一起改。
+def: Integrates cognitive and behavioral approaches: thoughts, behaviors, and emotions are interconnected.
+ex: 同时改变消极想法和不良行为来改善情绪——治抑郁、焦虑、PTSD、OCD。
+
+@@ ap-psychology.u5.t5-5.dialectical-behavior-therapy
+def: 辩证行为疗法（DBT）。接纳+改变。
+def: Combines acceptance of self with changing unhealthy patterns; core skills: emotional regulation, distress tolerance, interpersonal effectiveness, mindfulness.
+ex: 接受自己当下的情绪，同时学习更健康的应对方式——专治边缘型人格障碍（BPD）。
+
+@@ ap-psychology.u5.t5-5.rational-emotive-behavior-therapy-rebt
+def: 理性情绪行为疗法（REBT）。挑战非理性信念。
+def: Developed by Albert Ellis; identifies and restructures irrational beliefs. A precursor to CBT.
+ex: 挑战「我必须让所有人喜欢我」这种非理性信念——CBT 的前身。
+
+@@ ap-psychology.u5.t5-5.person-centered-therapy
+def: 来访者中心疗法。创造安全环境自成长。
+def: Provides a supportive environment for self-discovery and growth; focuses on the present and future.
+ex: 治疗师**不给建议**——创造安全环境让来访者自己找到答案（Rogers）。
+
+@@ ap-psychology.u5.t5-5.unconditional-positive-regard
+def: 无条件积极关注。完全不评判地接纳。
+def: The therapist offers complete acceptance and support regardless of what the client says or does.
+ex: 无论来访者说了什么——治疗师都不评判，给予完全的接纳。
+
+@@ ap-psychology.u5.t5-5.active-listening
+def: 积极倾听。全神贯注地理解和回应。
+def: The therapist fully attends to, understands, responds to, and remembers what the client expresses, validating feelings.
+ex: 治疗师认真复述来访者的话、确认理解正确——让来访者感到被听见。
+
+@@ ap-psychology.u5.t5-5.group-therapy
+def: 团体治疗。多人同时治疗。
+def: Therapy conducted with multiple clients simultaneously — shared experiences, peer support.
+ex: 几个有社交焦虑的人一起治疗、互相分享和支持——个性化关注少是劣势。
+
+@@ ap-psychology.u5.t5-5.hypnosis
+def: 催眠。低阻抗状态下接受暗示。
+def: A state of lowered conscious resistance where the patient is more receptive to therapeutic suggestions.
+ex: 有效：缓解慢性疼痛和焦虑；**无效**：恢复准确记忆、年龄回归（研究不支持）。
+
+@@ ap-psychology.u5.t5-5.psychoactive-medication
+def: 精神活性药物（治疗用）。
+def: Same as psychotropic medication — drugs that alter brain chemistry to treat mental disorders.
+ex: 通过调节神经递质治疗心理障碍——和 psychotropic medication 同义。
+
+@@ ap-psychology.u5.t5-5.antidepressants
+def: 抗抑郁药。主攻血清素。
+def: Improve mood by affecting neurotransmitters, primarily serotonin.
+ex: SSRI（Prozac、Zoloft、Lexapro）阻断血清素再摄取——最常见；SNRI 加去甲肾上腺素；NDRI 加多巴胺。
+
+@@ ap-psychology.u5.t5-5.antianxiety-drugs
+def: 抗焦虑药。压低交感活动。
+def: Reduce sympathetic brain activity, promote relaxation.
+ex: 苯二氮䓬类（Xanax、Valium）起效快但成瘾；阿扎哌隆类（Buspar）不成瘾但起效慢。
+
+@@ ap-psychology.u5.t5-5.lithium
+def: 锂盐。双相的情绪稳定剂。
+def: A mood stabilizer commonly used to treat bipolar disorder.
+ex: 降低躁狂和抑郁发作的频率与严重程度——双相障碍的经典用药。
+
+@@ ap-psychology.u5.t5-5.antipsychotic-medications
+def: 抗精神病药。减少多巴胺受体活动。
+def: Eliminate positive symptoms by reducing dopamine receptor activity.
+ex: 典型/一代（Haldol）：对阳性有效但运动副作用大；非典型/二代（Risperdal）：阴阳都有效、副作用少。
+
+@@ ap-psychology.u5.t5-5.tardive-dyskinesia
+def: 迟发性运动障碍。长期服药的不自主抽动。
+def: A side effect of long-term antipsychotic use: involuntary, repetitive movements of face, jaw, and limbs.
+ex: 长期服用抗精神病药后——面部不自主抽动、嘴巴咀嚼动作（多巴胺调节相关）。
+
+@@ ap-psychology.u5.t5-5.psychosurgery
+def: 精神外科。最后手段的脑手术。
+def: Surgically altering brain tissue; a last resort when other treatments fail. Irreversible.
+ex: 所有其他治疗都无效后——由精神科医生与神经外科医生合作进行。
+
+@@ ap-psychology.u5.t5-5.lesioning
+def: 损毁术。小范围损毁特定脑区。
+def: Making small, targeted destructions to specific brain areas.
+ex: 对特定脑区进行精确的小范围损毁来改变行为。
+
+@@ ap-psychology.u5.t5-5.tms-transcranial-magnetic-stimulation
+def: 经颅磁刺激（TMS）。磁场无创刺激前额叶。
+def: Non-invasive; a pulsed magnetic coil over the prefrontal area stimulates nerve cells to treat depression.
+ex: 用磁场无创地刺激前额叶治抑郁——副作用比 ECT 小很多。
+
+@@ ap-psychology.u5.t5-5.electroconvulsive-therapy
+def: 电休克疗法（ECT）。微电流诱发癫痫发作。
+def: Sending small electrical currents through the brain to induce brief seizures; for severe, treatment-resistant depression.
+ex: 对药物无效的重度抑郁——可能导致短暂的记忆丧失。
+
+@@ ap-psychology.u5.t5-5.lobotomy
+def: 前脑叶切断术。已废弃的破坏性手术。
+def: Severing connections to the prefrontal cortex; largely abandoned due to severe side effects.
+ex: 早期切断前额叶连接——患者变得像行尸走肉，现已基本废弃（教训型考点）。
