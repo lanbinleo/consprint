@@ -36,12 +36,12 @@ export type Concept = {
   unitId: string
   topicId: string
   term: string
+  normalizedTerm?: string
+  position: number
   contentStatus: string
   unit?: Unit
   topic?: Topic
   content?: ConceptContent
-  // Present on review-queue payloads (/api/review/next); absent elsewhere.
-  state?: ConceptState
 }
 
 export type ConceptState = {
@@ -52,8 +52,18 @@ export type ConceptState = {
   starred: boolean
 }
 
+// A concept row as the client renders it: the slim /api/concepts payload plus
+// the per-user state composed by the concept store (lib/conceptStore.ts).
 export type ConceptRow = Concept & {
   state: ConceptState
+}
+
+// GET /api/content/version — the client concept cache's change signal. Marks
+// bump only stateVersion; content edits and imports bump only contentVersion.
+export type ContentVersion = {
+  contentVersion: number
+  conceptCount: number
+  stateVersion: number
 }
 
 export type User = {

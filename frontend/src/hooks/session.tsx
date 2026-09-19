@@ -1,6 +1,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react'
 import { api, ApiError } from '../lib/api'
 import { queryClient } from '../lib/queryClient'
+import { clearConceptSnapshots } from '../lib/conceptSnapshot'
 import { getCopy, detectLang, type Copy } from '../lib/i18n'
 import type { AppMeta, AuthPayload, Lang, User } from '../lib/types'
 
@@ -69,9 +70,11 @@ export function SessionProvider({ children }: { children: ReactNode }) {
         api.logout()
         setUser(null)
         setTenant(null)
-        // Drop cached queries: on a shared machine the next login may be a
-        // different user, and fresh-but-wrong cached data would flash.
+        // Drop cached queries and the persisted concept snapshot: on a shared
+        // machine the next login may be a different user, and fresh-but-wrong
+        // cached data would flash.
         queryClient.clear()
+        clearConceptSnapshots()
       }
     } finally {
       setReady(true)
@@ -99,8 +102,9 @@ export function SessionProvider({ children }: { children: ReactNode }) {
       onAuthed: (payload) => {
         api.setToken(payload.token)
         // A new sign-in may be a different user on the same browser: never
-        // serve the previous account's cached queries.
+        // serve the previous account's cached queries or concept snapshot.
         queryClient.clear()
+        clearConceptSnapshots()
         setUser(payload.user)
         setTenant(payload.tenant)
       },
@@ -110,6 +114,7 @@ export function SessionProvider({ children }: { children: ReactNode }) {
         setUser(null)
         setTenant(null)
         queryClient.clear()
+        clearConceptSnapshots()
       },
     }
   }, [ready, user, tenant, meta, lang, theme, refreshUser])
