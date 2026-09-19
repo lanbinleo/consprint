@@ -19,6 +19,9 @@ RUN apk add --no-cache ca-certificates tzdata
 WORKDIR /app
 COPY --from=backend /out/ap-psych-final ./ap-psych-final
 COPY --from=frontend /src/frontend/dist ./frontend/dist
+# router.go registers /avatars and /fonts only when frontend/public exists at
+# runtime; without this line the container serves the SPA shell for them.
+COPY --from=frontend /src/frontend/public ./frontend/public
 COPY data/sources ./data/sources
 ENV APP_ENV=production \
     GIN_MODE=release \
