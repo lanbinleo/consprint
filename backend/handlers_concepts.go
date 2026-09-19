@@ -9,6 +9,74 @@ import (
 	"gorm.io/gorm"
 )
 
+// conceptStateLite is the compact per-user progress row shared by the concept
+// cache sync (/api/concepts/states) and the flashcard deck (/api/review/next):
+// conceptId plus the fields the UI reads, none of the audit columns.
+type conceptStateLite struct {
+	ConceptID       string `json:"conceptId"`
+	Status          string `json:"status"`
+	ReviewCount     int    `json:"reviewCount"`
+	ShortTermReview bool   `json:"shortTermReview"`
+	Starred         bool   `json:"starred"`
+}
+
+// maxUpdatedAt reports the newest updated_at in the given query as unix
+// milliseconds, or 0 when there is nothing to report. It plucks the column and
+// maxes in Go because SQLite's max() aggregate drops the datetime decltype, so
+// the driver would hand back strings instead of time.Time.
+func maxUpdatedAt(db *gorm.DB) int64 {
+	times := make([]time.Time, 0)
+	if err := db.Pluck("updated_at", &times).Error; err != nil {
+		return 0
+	}
+	var newest int64
+	for _, t := range times {
+		if ms := t.UnixMilli(); ms > newest {
+			newest = ms
+		}
+	}
+	return newest
+}
+
+// contentVersion is the cheap change signal for the client-side concept cache:
+// one tiny request tells the caller whether the cached corpus (contentVersion
+// + row count) and their own progress (stateVersion) are still current, so an
+// unchanged reload transfers no list data at all. Marks bump only
+// stateVersion; content edits and imports bump only contentVersion.
+func (a *App) contentVersion(c *gin.Context) {
+	userID := c.GetString("userID")
+	a.ensureStates(userID)
+	var conceptCount int64
+	a.DB.Model(&Concept{}).Count(&conceptCount)
+	contentVersion := max(
+		maxUpdatedAt(a.DB.Model(&Concept{})),
+		maxUpdatedAt(a.DB.Model(&ConceptContent{})),
+		maxUpdatedAt(a.DB.Model(&Unit{})),
+		maxUpdatedAt(a.DB.Model(&Topic{})),
+	)
+	c.JSON(200, gin.H{
+		"contentVersion": contentVersion,
+		"conceptCount":   conceptCount,
+		"stateVersion":   maxUpdatedAt(a.DB.Model(&UserConceptState{}).Where("user_id = ?", userID)),
+	})
+}
+
+// conceptStates returns the caller's per-concept progress without concept
+// payloads. Only rows deviating from the default (unmarked, unstarred, not
+// queued) are included — absent conceptIds mean the default state — so the
+// response stays tiny for fresh accounts. This is what recalibrates a locally
+// cached concept list after progress made on another device.
+func (a *App) conceptStates(c *gin.Context) {
+	userID := c.GetString("userID")
+	a.ensureStates(userID)
+	rows := make([]conceptStateLite, 0)
+	a.DB.Model(&UserConceptState{}).
+		Where("user_id = ? and (status <> '' or starred or short_term_review)", userID).
+		Order("concept_id asc").
+		Find(&rows)
+	c.JSON(200, rows)
+}
+
 func (a *App) units(c *gin.Context) {
 	userID := c.GetString("userID")
 	a.ensureStates(userID)

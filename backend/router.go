@@ -51,6 +51,8 @@ func (a *App) Router() *gin.Engine {
 	protected.GET("/units", a.units)
 	protected.GET("/note-resources", a.noteResources)
 	protected.GET("/concepts", a.concepts)
+	protected.GET("/concepts/states", a.conceptStates)
+	protected.GET("/content/version", a.contentVersion)
 	protected.GET("/concepts/:id", a.concept)
 	protected.PATCH("/concepts/:id/status", a.setConceptStatus)
 	protected.PATCH("/concepts/:id/star", a.starConcept)
