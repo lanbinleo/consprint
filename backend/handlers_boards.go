@@ -63,24 +63,10 @@ var seedQuotes = [][3]string{
 }
 
 // seedBoards installs the default dashboard board content on empty tables
-// only: one welcome announcement (so the board is never blank on a fresh
-// install) and the quote pack behind the daily thought card.
+// only: the quote pack behind the daily thought card. The announcement board
+// stays empty on a fresh install (Leo: no seeded announcements) — teachers
+// publish real ones through the admin UI.
 func seedBoards(db *gorm.DB) error {
-	var announcements int64
-	db.Model(&Announcement{}).Count(&announcements)
-	if announcements == 0 {
-		welcome := Announcement{
-			ID:         NewID("ann"),
-			Title:      "欢迎来到 Psych Hub",
-			Body:       "这里是我们的心理学小基地。\n\n先去【词条】里点亮你的第一批概念吧！老师发布的 ==tangerine|公告和截止日期== 也会出现在这个看板上。",
-			Pinned:     true,
-			Status:     "published",
-			AuthorName: "Psych Hub",
-		}
-		if err := db.Create(&welcome).Error; err != nil {
-			return err
-		}
-	}
 	var quotes int64
 	db.Model(&Quote{}).Count(&quotes)
 	if quotes == 0 {

@@ -16,13 +16,10 @@ func newBoardsTestApp(t *testing.T) (*App, http.Handler, string, string) {
 func TestBoardsSeedAndQuote(t *testing.T) {
 	app, router, student, _ := newBoardsTestApp(t)
 
-	// The welcome announcement is visible to students and pinned.
+	// The announcement board starts empty — no seeded welcome post.
 	announcements := fetchAnnouncements(t, router, student)
-	if len(announcements) != 1 || !announcements[0].Pinned || announcements[0].Status != "published" {
-		t.Fatalf("welcome announcement missing: %#v", announcements)
-	}
-	if announcements[0].AuthorName != "Psych Hub" {
-		t.Fatalf("welcome author mismatch: %q", announcements[0].AuthorName)
+	if len(announcements) != 0 {
+		t.Fatalf("fresh board should have no announcements: %#v", announcements)
 	}
 
 	// Quote pack is seeded and the pick is deterministic within a day.
@@ -56,9 +53,14 @@ func TestBoardsSeedAndQuote(t *testing.T) {
 	if err := seedBoards(app.DB); err != nil {
 		t.Fatal(err)
 	}
-	app.DB.Model(&Announcement{}).Count(&quotes)
-	if quotes != 1 {
-		t.Fatalf("announcement seed not idempotent: %d rows", quotes)
+	var reseededAnnouncements, reseededQuotes int64
+	app.DB.Model(&Announcement{}).Count(&reseededAnnouncements)
+	if reseededAnnouncements != 0 {
+		t.Fatalf("announcement seed not idempotent: %d rows", reseededAnnouncements)
+	}
+	app.DB.Model(&Quote{}).Count(&reseededQuotes)
+	if reseededQuotes != int64(len(seedQuotes)) {
+		t.Fatalf("quote seed not idempotent: %d rows", reseededQuotes)
 	}
 }
 
@@ -94,11 +96,11 @@ func TestAnnouncementCRUD(t *testing.T) {
 		t.Fatalf("draft create failed: %d %s", w.Code, w.Body.String())
 	}
 	visible := fetchAnnouncements(t, router, student)
-	if len(visible) != 2 { // welcome seed + 周五模考
-		t.Fatalf("student should see 2 published announcements, got %d", len(visible))
+	if len(visible) != 1 { // 周五模考 is the only published post (no seed)
+		t.Fatalf("student should see 1 published announcement, got %d", len(visible))
 	}
 
-	// Pinning reorders the board ahead of the seeded welcome.
+	// Pinning puts the announcement at the top of the board.
 	if w := notesRequest(t, router, http.MethodPatch, "/api/admin/announcements/"+created.ID, teacher, map[string]any{"pinned": true}); w.Code != http.StatusOK {
 		t.Fatalf("pin failed: %d %s", w.Code, w.Body.String())
 	}
@@ -116,8 +118,8 @@ func TestAnnouncementCRUD(t *testing.T) {
 	if err := json.Unmarshal(w.Body.Bytes(), &staffList); err != nil {
 		t.Fatal(err)
 	}
-	if len(staffList) != 3 {
-		t.Fatalf("staff should see all 3 announcements, got %d", len(staffList))
+	if len(staffList) != 2 { // 周五模考 + 草稿
+		t.Fatalf("staff should see all 2 announcements, got %d", len(staffList))
 	}
 
 	// Validation: empty title, bad status, oversized body all 400.
@@ -136,7 +138,7 @@ func TestAnnouncementCRUD(t *testing.T) {
 		t.Fatalf("delete failed: %d %s", w.Code, w.Body.String())
 	}
 	visible = fetchAnnouncements(t, router, student)
-	if len(visible) != 1 {
+	if len(visible) != 0 {
 		t.Fatalf("deleted announcement still visible: %#v", visible)
 	}
 }
