@@ -10,7 +10,7 @@ import (
 	"testing"
 )
 
-func reviewNextRequest(t *testing.T, router http.Handler, token, query string) []Concept {
+func reviewNextRequest(t *testing.T, router http.Handler, token, query string) []conceptStateLite {
 	t.Helper()
 	req := httptest.NewRequest(http.MethodGet, "/api/review/next?"+query, nil)
 	req.Header.Set("Authorization", "Bearer "+token)
@@ -19,11 +19,26 @@ func reviewNextRequest(t *testing.T, router http.Handler, token, query string) [
 	if w.Code != http.StatusOK {
 		t.Fatalf("review next failed: %d %s", w.Code, w.Body.String())
 	}
-	var concepts []Concept
-	if err := json.Unmarshal(w.Body.Bytes(), &concepts); err != nil {
+	var rows []conceptStateLite
+	if err := json.Unmarshal(w.Body.Bytes(), &rows); err != nil {
 		t.Fatal(err)
 	}
-	return concepts
+	return rows
+}
+
+// conceptTopics maps concept id -> topic id straight from the DB, so tests can
+// verify deck scoping even though /api/review/next no longer ships concept rows.
+func conceptTopics(t *testing.T, app *App) map[string]string {
+	t.Helper()
+	var concepts []Concept
+	if err := app.DB.Select("id", "topic_id").Find(&concepts).Error; err != nil {
+		t.Fatal(err)
+	}
+	m := make(map[string]string, len(concepts))
+	for _, c := range concepts {
+		m[c.ID] = c.TopicID
+	}
+	return m
 }
 
 func markConcept(t *testing.T, router http.Handler, token, conceptID, response string) {
@@ -79,24 +94,47 @@ func TestReviewNextTopicIDsFilter(t *testing.T) {
 	topicC, countC := topicWithConcepts(t, app, 2)
 
 	// topicIds selects across multiple topics; topicId unions into the list.
-	concepts := reviewNextRequest(t, router, token,
+	rows := reviewNextRequest(t, router, token,
 		fmt.Sprintf("topicIds=%s,%s&topicId=%s&limit=200&order=outline", topicA.ID, topicB.ID, topicC.ID))
-	if int64(len(concepts)) != countA+countB+countC {
-		t.Fatalf("expected %d concepts across three topics, got %d", countA+countB+countC, len(concepts))
+	if int64(len(rows)) != countA+countB+countC {
+		t.Fatalf("expected %d concepts across three topics, got %d", countA+countB+countC, len(rows))
 	}
+	topics := conceptTopics(t, app)
 	allowed := map[string]bool{topicA.ID: true, topicB.ID: true, topicC.ID: true}
-	for _, concept := range concepts {
-		if !allowed[concept.TopicID] {
-			t.Fatalf("concept %s has unexpected topic %s", concept.ID, concept.TopicID)
+	for _, row := range rows {
+		if !allowed[topics[row.ConceptID]] {
+			t.Fatalf("concept %s has unexpected topic %s", row.ConceptID, topics[row.ConceptID])
 		}
 	}
 
 	// Topic ids take precedence over unitId.
-	concepts = reviewNextRequest(t, router, token,
+	rows = reviewNextRequest(t, router, token,
 		fmt.Sprintf("unitId=%s&topicIds=%s&limit=200", topicB.UnitID, topicA.ID))
-	for _, concept := range concepts {
-		if concept.TopicID != topicA.ID {
-			t.Fatalf("topicIds should win over unitId, got topic %s", concept.TopicID)
+	for _, row := range rows {
+		if topics[row.ConceptID] != topicA.ID {
+			t.Fatalf("topicIds should win over unitId, got topic %s", topics[row.ConceptID])
+		}
+	}
+
+	// The deck must stay slim: no concept payload on the wire.
+	req := httptest.NewRequest(http.MethodGet, "/api/review/next?limit=5", nil)
+	req.Header.Set("Authorization", "Bearer "+token)
+	w := httptest.NewRecorder()
+	router.ServeHTTP(w, req)
+	if w.Code != http.StatusOK {
+		t.Fatalf("review next failed: %d %s", w.Code, w.Body.String())
+	}
+	var raw []map[string]any
+	if err := json.Unmarshal(w.Body.Bytes(), &raw); err != nil {
+		t.Fatal(err)
+	}
+	for _, row := range raw {
+		for key := range row {
+			switch key {
+			case "conceptId", "status", "reviewCount", "shortTermReview", "starred":
+			default:
+				t.Fatalf("deck row carries concept payload field %q: %v", key, row)
+			}
 		}
 	}
 }
@@ -118,9 +156,9 @@ func TestReviewNextStatusFilters(t *testing.T) {
 	if int64(len(unmarked)) != total-2 {
 		t.Fatalf("expected %d unmarked concepts, got %d", total-2, len(unmarked))
 	}
-	for _, concept := range unmarked {
-		if concept.ID == fuzzyID || concept.ID == unknownID {
-			t.Fatalf("marked concept %s leaked into unmarked filter", concept.ID)
+	for _, row := range unmarked {
+		if row.ConceptID == fuzzyID || row.ConceptID == unknownID {
+			t.Fatalf("marked concept %s leaked into unmarked filter", row.ConceptID)
 		}
 	}
 
@@ -130,8 +168,8 @@ func TestReviewNextStatusFilters(t *testing.T) {
 		t.Fatalf("expected 2 concepts for status=fuzzy,unknown, got %d", len(multi))
 	}
 	seen := map[string]bool{}
-	for _, concept := range multi {
-		seen[concept.ID] = true
+	for _, row := range multi {
+		seen[row.ConceptID] = true
 	}
 	if !seen[fuzzyID] || !seen[unknownID] {
 		t.Fatalf("status=fuzzy,unknown should return both marked concepts, got %#v", seen)

@@ -121,12 +121,15 @@ func (a *App) units(c *gin.Context) {
 	c.JSON(200, unitRows)
 }
 
+// concepts serves the concept corpus for the client-side cache: concept rows
+// with content but WITHOUT the Unit/Topic relation objects (the client already
+// has /api/units) or the merged per-user state (that lives in
+// /api/concepts/states). updatedSince narrows the response to rows changed at
+// or after the boundary for incremental sync.
 func (a *App) concepts(c *gin.Context) {
 	userID := c.GetString("userID")
 	a.ensureStates(userID)
 	q := a.DB.Model(&Concept{}).
-		Preload("Unit").
-		Preload("Topic").
 		Preload("Content").
 		Joins("join units on units.id = concepts.unit_id").
 		Joins("join topics on topics.id = concepts.topic_id").
@@ -151,6 +154,16 @@ func (a *App) concepts(c *gin.Context) {
 			q = q.Where("filter_state.status = ?", progress)
 		}
 	}
+	if raw := c.Query("updatedSince"); raw != "" {
+		if _, err := time.Parse(time.RFC3339, raw); err != nil {
+			c.JSON(400, gin.H{"error": "updatedSince must be an RFC3339 timestamp"})
+			return
+		}
+		// Stored datetimes carry the server's timezone offset while the
+		// client's boundary may carry another; SQLite compares them as
+		// strings, so normalize both sides with datetime() first.
+		q = q.Where("datetime(concepts.updated_at) >= datetime(?)", raw)
+	}
 	var concepts []Concept
 	limit, _ := strconv.Atoi(c.DefaultQuery("limit", "1000"))
 	if limit <= 0 {
@@ -160,21 +173,7 @@ func (a *App) concepts(c *gin.Context) {
 		limit = 1000
 	}
 	q.Limit(limit).Find(&concepts)
-	states := map[string]UserConceptState{}
-	var stateRows []UserConceptState
-	a.DB.Where("user_id = ?", userID).Find(&stateRows)
-	for _, s := range stateRows {
-		states[s.ConceptID] = s
-	}
-	type row struct {
-		Concept
-		State UserConceptState `json:"state"`
-	}
-	out := make([]row, 0, len(concepts))
-	for _, concept := range concepts {
-		out = append(out, row{Concept: concept, State: states[concept.ID]})
-	}
-	c.JSON(200, out)
+	c.JSON(200, concepts)
 }
 
 func (a *App) concept(c *gin.Context) {

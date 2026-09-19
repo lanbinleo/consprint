@@ -77,8 +77,10 @@ type Concept struct {
 	Position       int             `json:"position"`
 	ContentStatus  string          `gorm:"not null;default:pending" json:"contentStatus"`
 	Content        *ConceptContent `json:"content,omitempty"`
-	Unit           Unit            `json:"unit,omitempty"`
-	Topic          Topic           `json:"topic,omitempty"`
+	// Unit/Topic are pointers so the slim concept list (no relation preloads)
+	// omits them entirely; struct fields would serialize zero-value objects.
+	Unit   *Unit  `json:"unit,omitempty"`
+	Topic  *Topic `json:"topic,omitempty"`
 	CreatedAt      time.Time       `json:"createdAt"`
 	UpdatedAt      time.Time       `json:"updatedAt"`
 }

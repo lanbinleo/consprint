@@ -65,13 +65,10 @@ func (a *App) reviewScope(c *gin.Context, userID string) *gorm.DB {
 	return q
 }
 
-// conceptWithState is the review payload row: the concept plus the caller's
-// per-concept state (status, star) in one flat object.
-type conceptWithState struct {
-	Concept
-	State UserConceptState `json:"state"`
-}
-
+// reviewNext serves the flashcard deck as concept ids plus the caller's slim
+// state, in the chosen order — no concept payloads. The client hydrates card
+// content from its locally cached concept corpus; the deck endpoint only
+// decides WHICH concepts are due.
 func (a *App) reviewNext(c *gin.Context) {
 	userID := c.GetString("userID")
 	a.ensureStates(userID)
@@ -87,33 +84,33 @@ func (a *App) reviewNext(c *gin.Context) {
 	if scope == nil {
 		return
 	}
-	concepts := make([]Concept, 0)
-	q := scope.
-		Select("concepts.*").
-		Preload("Unit").
-		Preload("Topic").
-		Preload("Content")
+	q := scope.Order("s.short_term_review desc, case s.status when 'unknown' then 0 when 'fuzzy' then 1 when 'proficient' then 2 else 3 end asc, random()")
 	if order == "outline" {
-		q = q.Order("units.position asc, topics.position asc, concepts.position asc")
-	} else {
-		q = q.Order("s.short_term_review desc, case s.status when 'unknown' then 0 when 'fuzzy' then 1 when 'proficient' then 2 else 3 end asc, random()")
+		q = scope.Order("units.position asc, topics.position asc, concepts.position asc")
 	}
-	q.Limit(limit).Find(&concepts)
+	ids := make([]string, 0)
+	if err := q.Limit(limit).Pluck("concepts.id", &ids).Error; err != nil {
+		c.JSON(500, gin.H{"error": "could not build deck"})
+		return
+	}
 	states := map[string]UserConceptState{}
-	if len(concepts) > 0 {
-		ids := make([]string, 0, len(concepts))
-		for _, concept := range concepts {
-			ids = append(ids, concept.ID)
-		}
+	if len(ids) > 0 {
 		var stateRows []UserConceptState
 		a.DB.Where("user_id = ? and concept_id in ?", userID, ids).Find(&stateRows)
 		for _, state := range stateRows {
 			states[state.ConceptID] = state
 		}
 	}
-	out := make([]conceptWithState, 0, len(concepts))
-	for _, concept := range concepts {
-		out = append(out, conceptWithState{Concept: concept, State: states[concept.ID]})
+	out := make([]conceptStateLite, 0, len(ids))
+	for _, id := range ids {
+		state := states[id]
+		out = append(out, conceptStateLite{
+			ConceptID:       id,
+			Status:          state.Status,
+			ReviewCount:     state.ReviewCount,
+			ShortTermReview: state.ShortTermReview,
+			Starred:         state.Starred,
+		})
 	}
 	c.JSON(200, out)
 }
