@@ -2,6 +2,8 @@ package backend
 
 import (
 	"encoding/json"
+	"errors"
+	"sort"
 	"strconv"
 	"strings"
 	"time"
@@ -65,6 +67,14 @@ func stripAnswer(q Question) gin.H {
 			redacted = append(redacted, gin.H{"label": part.Label, "prompt": part.Prompt})
 		}
 		out["parts"] = redacted
+	} else if len(q.Parts) > 0 {
+		// Malformed stored parts: drop the key entirely rather than risk
+		// passing the raw JSON through (it would carry reference answers
+		// and rubrics).
+		delete(out, "parts")
+	}
+	if out["tags"] == nil {
+		out["tags"] = []Tag{}
 	}
 	return out
 }
@@ -104,6 +114,7 @@ func (a *App) loadSetQuestions(setID string) ([]Question, []PracticeSetItem) {
 	}
 	var questions []Question
 	a.DB.Preload("Tags").Where("id in ?", ids).Find(&questions)
+	ensureTags(questions)
 	return questions, items
 }
 
@@ -129,7 +140,7 @@ func (a *App) practiceSets(c *gin.Context) {
 		a.DB.Model(&PracticeSetItem{}).Where("set_id = ?", set.ID).Count(&count)
 		var attempts []PracticeAttempt
 		a.DB.Where("user_id = ? AND set_id = ?", userID, set.ID).Order("started_at asc").Find(&attempts)
-		row := setRow{PracticeSet: set, QuestionCount: int(count)}
+		row := setRow{PracticeSet: set, QuestionCount: int(count), Attempts: make([]attemptBrief, 0)}
 		best := -1
 		for _, attempt := range attempts {
 			brief := attemptBrief{ID: attempt.ID, FinishedAt: attempt.FinishedAt, Score: attempt.Score, TotalMCQ: attempt.TotalMCQ}
@@ -155,7 +166,7 @@ func (a *App) practiceSetDetail(c *gin.Context) {
 	}
 	questions, items := a.loadSetQuestions(set.ID)
 	userID := c.GetString("userID")
-	var attempts []PracticeAttempt
+	attempts := make([]PracticeAttempt, 0)
 	a.DB.Where("user_id = ? AND set_id = ?", userID, set.ID).Order("started_at desc").Find(&attempts)
 	stripped := make([]gin.H, 0, len(questions))
 	byID := map[string]Question{}
@@ -229,7 +240,7 @@ func (a *App) attemptDetail(c *gin.Context) {
 	var set PracticeSet
 	a.DB.First(&set, "id = ?", attempt.SetID)
 	questions, items := a.loadSetQuestions(attempt.SetID)
-	var answers []PracticeAnswer
+	answers := make([]PracticeAnswer, 0)
 	a.DB.Where("attempt_id = ?", attempt.ID).Find(&answers)
 	answerByQuestion := map[string]PracticeAnswer{}
 	for _, answer := range answers {
@@ -307,6 +318,9 @@ func (a *App) submitAnswer(c *gin.Context) {
 	var answer PracticeAnswer
 	err := a.DB.Transaction(func(tx *gorm.DB) error {
 		if err := tx.Where("attempt_id = ? AND question_id = ?", attempt.ID, question.ID).First(&answer).Error; err != nil {
+			if !errors.Is(err, gorm.ErrRecordNotFound) {
+				return err
+			}
 			answer = PracticeAnswer{ID: NewID("ans"), AttemptID: attempt.ID, QuestionID: question.ID}
 		}
 		if question.Type == "mcq" {
@@ -337,10 +351,11 @@ func (a *App) submitAnswer(c *gin.Context) {
 }
 
 // finalizeAttempt grades every MCQ answer of the attempt and stamps the
-// score. Idempotent.
-func (a *App) finalizeAttempt(attempt *PracticeAttempt) {
+// score. Idempotent. Returns the transaction error so callers can surface
+// grading failures instead of reporting success with unsaved state.
+func (a *App) finalizeAttempt(attempt *PracticeAttempt) error {
 	if attempt.FinishedAt != nil {
-		return
+		return nil
 	}
 	questions, _ := a.loadSetQuestions(attempt.SetID)
 	byID := map[string]Question{}
@@ -358,7 +373,7 @@ func (a *App) finalizeAttempt(attempt *PracticeAttempt) {
 		answerByQuestion[answers[i].QuestionID] = &answers[i]
 	}
 	score := 0
-	_ = a.DB.Transaction(func(tx *gorm.DB) error {
+	return a.DB.Transaction(func(tx *gorm.DB) error {
 		for questionID, question := range byID {
 			if question.Type != "mcq" {
 				continue
@@ -389,13 +404,16 @@ func (a *App) finishAttempt(c *gin.Context) {
 	if !ok {
 		return
 	}
-	a.finalizeAttempt(attempt)
+	if err := a.finalizeAttempt(attempt); err != nil {
+		c.JSON(500, gin.H{"error": "could not grade attempt"})
+		return
+	}
 	c.JSON(200, a.attemptSummaryPayload(attempt))
 }
 
 func (a *App) attemptSummaryPayload(attempt *PracticeAttempt) gin.H {
 	questions, items := a.loadSetQuestions(attempt.SetID)
-	var answers []PracticeAnswer
+	answers := make([]PracticeAnswer, 0)
 	a.DB.Where("attempt_id = ?", attempt.ID).Find(&answers)
 	answerByQuestion := map[string]PracticeAnswer{}
 	for _, answer := range answers {
@@ -439,9 +457,22 @@ func (a *App) selfRateAnswer(c *gin.Context) {
 		c.JSON(400, gin.H{"error": "rating must be proficient, partial, or weak"})
 		return
 	}
+	// Self-rating travels with the answer reveal: instant mode reveals right
+	// after submitting, exam mode only once the attempt is finished. Without
+	// this gate a student could rate an open exam answer "weak" and read the
+	// reference answer from the wrong book before submitting.
+	if attempt.FinishedAt == nil && attempt.Mode == "exam" {
+		c.JSON(409, gin.H{"error": "self-rating is only available after the exam is submitted"})
+		return
+	}
 	var answer PracticeAnswer
 	if err := a.DB.Where("attempt_id = ? AND question_id = ?", attempt.ID, c.Param("qid")).First(&answer).Error; err != nil {
 		c.JSON(404, gin.H{"error": "answer not found"})
+		return
+	}
+	var question Question
+	if err := a.DB.First(&question, "id = ?", answer.QuestionID).Error; err != nil || question.Type != "subjective" {
+		c.JSON(400, gin.H{"error": "only subjective questions can be self-rated"})
 		return
 	}
 	answer.SelfRating = req.Rating
@@ -458,12 +489,23 @@ func (a *App) wrongBook(c *gin.Context) {
 	var answers []PracticeAnswer
 	a.DB.Joins("join practice_attempts at on at.id = practice_answers.attempt_id").
 		Where("at.user_id = ?", userID).
-		Order("practice_answers.answered_at asc").
+		Order("practice_answers.answered_at asc, practice_answers.id asc").
 		Find(&answers)
-	// Latest answer per question decides: a question leaves the book once it
-	// is answered correctly (MCQ) or self-rated proficient (subjective).
+	// The latest answer per question decides. A question leaves the book only
+	// on an affirmative good outcome: answered correctly (graded MCQ) or
+	// self-rated proficient (subjective, after reveal). Answers without a
+	// verdict yet — an exam attempt still open (MCQ ungraded, subjective
+	// unrated) — leave the question's previous state untouched instead of
+	// silently evicting it.
+	attempts := make([]PracticeAttempt, 0)
+	a.DB.Where("user_id = ?", userID).Find(&attempts)
+	attemptByID := make(map[string]PracticeAttempt, len(attempts))
+	for _, attempt := range attempts {
+		attemptByID[attempt.ID] = attempt
+	}
 	type entry struct {
-		Question   Question  `json:"question"`
+		QuestionID string    `json:"-"`
+		Question   gin.H     `json:"question"`
 		Reason     string    `json:"reason"` // wrong | weak
 		LastAt     time.Time `json:"lastAt"`
 		WrongCount int       `json:"wrongCount"`
@@ -474,7 +516,7 @@ func (a *App) wrongBook(c *gin.Context) {
 	for _, answer := range answers {
 		questionIDs[answer.QuestionID] = true
 	}
-	var questions []Question
+	questions := make([]Question, 0)
 	if len(questionIDs) > 0 {
 		ids := make([]string, 0, len(questionIDs))
 		for id := range questionIDs {
@@ -482,44 +524,71 @@ func (a *App) wrongBook(c *gin.Context) {
 		}
 		a.DB.Preload("Tags").Where("id in ?", ids).Find(&questions)
 	}
+	ensureTags(questions)
 	byID := map[string]Question{}
+	unitByQuestion := map[string]string{}
 	for _, q := range questions {
 		byID[q.ID] = q
+		if q.UnitID != nil {
+			unitByQuestion[q.ID] = *q.UnitID
+		}
 	}
 	for _, answer := range answers {
 		q, ok := byID[answer.QuestionID]
 		if !ok {
 			continue
 		}
+		attempt, hasAttempt := attemptByID[answer.AttemptID]
+		// Grading material counts as revealed only once the owning attempt
+		// showed feedback: instantly in instant mode, at finish in exam mode.
+		revealed := hasAttempt && (attempt.Mode != "exam" || attempt.FinishedAt != nil)
 		reason := ""
-		if q.Type == "mcq" && answer.ChoiceKey != "" && answer.IsCorrect != nil && !*answer.IsCorrect {
-			reason = "wrong"
-			counts[answer.QuestionID]++
-		} else if q.Type == "subjective" && answer.SelfRating == "weak" {
-			reason = "weak"
-		}
-		if reason == "" {
-			delete(latest, answer.QuestionID)
+		switch {
+		case q.Type == "mcq":
+			if answer.IsCorrect == nil {
+				continue // not graded yet — no verdict, keep prior state
+			}
+			if !*answer.IsCorrect {
+				reason = "wrong"
+				counts[answer.QuestionID]++
+			} else {
+				delete(latest, answer.QuestionID)
+				continue
+			}
+		case q.Type == "subjective":
+			switch answer.SelfRating {
+			case "weak":
+				if !revealed {
+					continue // exam answer not revealed yet
+				}
+				reason = "weak"
+			case "proficient":
+				delete(latest, answer.QuestionID)
+				continue
+			default:
+				// partial or not yet rated — no verdict, keep prior state
+				continue
+			}
+		default:
 			continue
 		}
-		latest[answer.QuestionID] = entry{Question: q, Reason: reason, LastAt: answer.AnsweredAt, WrongCount: counts[answer.QuestionID]}
+		// The student has already answered these questions, so grading
+		// material is revealed — but only through the explicit reveal path,
+		// never by embedding the raw Question model.
+		view := stripAnswer(q)
+		revealAnswer(view, q)
+		latest[answer.QuestionID] = entry{QuestionID: answer.QuestionID, Question: view, Reason: reason, LastAt: answer.AnsweredAt, WrongCount: counts[answer.QuestionID]}
 	}
 	out := make([]entry, 0, len(latest))
 	for _, value := range latest {
 		out = append(out, value)
 	}
 	// Most recent first.
-	for i := 0; i < len(out); i++ {
-		for j := i + 1; j < len(out); j++ {
-			if out[j].LastAt.After(out[i].LastAt) {
-				out[i], out[j] = out[j], out[i]
-			}
-		}
-	}
+	sort.Slice(out, func(i, j int) bool { return out[i].LastAt.After(out[j].LastAt) })
 	if unitFilter := c.Query("unitId"); unitFilter != "" {
 		filtered := make([]entry, 0, len(out))
 		for _, item := range out {
-			if item.Question.UnitID != nil && *item.Question.UnitID == unitFilter {
+			if unitByQuestion[item.QuestionID] == unitFilter {
 				filtered = append(filtered, item)
 			}
 		}
@@ -548,7 +617,7 @@ func (a *App) practiceStats(c *gin.Context) {
 		}
 		return rows
 	}
-	var byUnit []accuracyRow
+	byUnit := make([]accuracyRow, 0)
 	a.DB.Raw(`
 		select coalesce(u.title, 'Unlinked') as label, coalesce(u.id, '') as id,
 		       count(*) as answered,
@@ -557,11 +626,17 @@ func (a *App) practiceStats(c *gin.Context) {
 		join practice_attempts at on at.id = pa.attempt_id and at.user_id = ?
 		join questions q on q.id = pa.question_id
 		left join units u on u.id = q.unit_id
-		where pa.is_correct is not null
+		where pa.is_correct is not null and pa.rowid = (
+			select p2.rowid from practice_answers p2
+			join practice_attempts a2 on a2.id = p2.attempt_id and a2.user_id = at.user_id
+			where p2.question_id = pa.question_id
+			order by p2.answered_at desc, p2.id desc
+			limit 1
+		)
 		group by u.id, u.title
 		order by answered desc
 	`, userID).Scan(&byUnit)
-	var byTopic []accuracyRow
+	byTopic := make([]accuracyRow, 0)
 	a.DB.Raw(`
 		select coalesce(t.title, 'Unlinked') as label, coalesce(t.id, '') as id,
 		       count(*) as answered,
@@ -570,15 +645,21 @@ func (a *App) practiceStats(c *gin.Context) {
 		join practice_attempts at on at.id = pa.attempt_id and at.user_id = ?
 		join questions q on q.id = pa.question_id
 		left join topics t on t.id = q.topic_id
-		where pa.is_correct is not null
+		where pa.is_correct is not null and pa.rowid = (
+			select p2.rowid from practice_answers p2
+			join practice_attempts a2 on a2.id = p2.attempt_id and a2.user_id = at.user_id
+			where p2.question_id = pa.question_id
+			order by p2.answered_at desc, p2.id desc
+			limit 1
+		)
 		group by t.id, t.title
 		order by answered desc
 		limit 20
 	`, userID).Scan(&byTopic)
-	var selfRatings []struct {
+	selfRatings := make([]struct {
 		Rating string `json:"rating"`
 		Count  int    `json:"count"`
-	}
+	}, 0)
 	a.DB.Raw(`
 		select pa.self_rating as rating, count(*) as count
 		from practice_answers pa

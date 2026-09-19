@@ -22,7 +22,7 @@ type User struct {
 	Email         string         `gorm:"uniqueIndex;not null" json:"email"`
 	Role          string         `gorm:"not null;default:student" json:"role"` // student | teacher | admin
 	Provider      string         `gorm:"not null;default:local" json:"provider"`
-	EntraOID      *string        `gorm:"uniqueIndex" json:"-"`
+	EntraOID      *string        `gorm:"column:entra_oid;uniqueIndex" json:"-"`
 	AvatarDataURL string         `json:"avatarDataUrl"`
 	PasswordHash  string         `gorm:"not null" json:"-"`
 	CreatedAt     time.Time      `json:"createdAt"`
@@ -42,18 +42,29 @@ type Unit struct {
 	CourseID  string    `gorm:"index;not null" json:"courseId"`
 	Title     string    `gorm:"not null" json:"title"`
 	Position  int       `json:"position"`
-	Topics    []Topic   `json:"topics,omitempty"`
+	Topics    []Topic   `json:"topics"`
 	CreatedAt time.Time `json:"createdAt"`
 	UpdatedAt time.Time `json:"updatedAt"`
 }
 
+// TopicCounts is per-user metadata for a topic: how many concepts it holds and
+// how the current user has assessed them. The flashcard setup screen totals
+// these locally instead of calling a count endpoint per scope change.
+type TopicCounts struct {
+	Total      int64 `json:"total"`
+	Proficient int64 `json:"proficient"`
+	Fuzzy      int64 `json:"fuzzy"`
+	Unknown    int64 `json:"unknown"`
+}
+
 type Topic struct {
-	ID        string    `gorm:"primaryKey" json:"id"`
-	UnitID    string    `gorm:"index;not null" json:"unitId"`
-	Title     string    `gorm:"not null" json:"title"`
-	Position  int       `json:"position"`
-	CreatedAt time.Time `json:"createdAt"`
-	UpdatedAt time.Time `json:"updatedAt"`
+	ID        string       `gorm:"primaryKey" json:"id"`
+	UnitID    string       `gorm:"index;not null" json:"unitId"`
+	Title     string       `gorm:"not null" json:"title"`
+	Position  int          `json:"position"`
+	Counts    *TopicCounts `gorm:"-" json:"counts,omitempty"`
+	CreatedAt time.Time    `json:"createdAt"`
+	UpdatedAt time.Time    `json:"updatedAt"`
 }
 
 type Concept struct {
@@ -95,6 +106,7 @@ type UserConceptState struct {
 	Status          string     `gorm:"index;not null;default:''" json:"status"`
 	ReviewCount     int        `json:"reviewCount"`
 	ShortTermReview bool       `json:"shortTermReview"`
+	Starred         bool       `gorm:"not null;default:false" json:"starred"`
 	LastReviewedAt  *time.Time `json:"lastReviewedAt"`
 	CreatedAt       time.Time  `json:"createdAt"`
 	UpdatedAt       time.Time  `json:"updatedAt"`
@@ -188,11 +200,78 @@ type PracticeAttempt struct {
 type PracticeAnswer struct {
 	ID         string    `gorm:"primaryKey" json:"id"`
 	AttemptID  string    `gorm:"uniqueIndex:idx_attempt_question;not null" json:"attemptId"`
-	QuestionID string    `gorm:"uniqueIndex:idx_attempt_question;not null" json:"questionId"`
+	QuestionID string    `gorm:"uniqueIndex:idx_attempt_question;index:idx_practice_answer_question;not null" json:"questionId"`
 	ChoiceKey  string    `json:"choiceKey"`  // mcq
 	TextAnswer string    `json:"textAnswer"` // subjective
 	IsCorrect  *bool     `json:"isCorrect"`
 	SelfRating string    `json:"selfRating"` // proficient | partial | weak (subjective)
 	AnsweredAt time.Time `json:"answeredAt"`
 	CreatedAt  time.Time `json:"createdAt"`
+}
+
+// NoteResource is one tab on the Notes page: a curated bundle of study
+// materials (embedded pages such as Mubu outlines, PDFs, images, plain links).
+type NoteResource struct {
+	ID          string             `gorm:"primaryKey" json:"id"`
+	Title       string             `gorm:"not null" json:"title"`
+	Description string             `json:"description"`
+	Status      string             `gorm:"index;not null;default:draft" json:"status"` // draft | published | archived
+	Position    int                `json:"position"`
+	Items       []NoteResourceItem `gorm:"foreignKey:ResourceID" json:"items"`
+	CreatedAt   time.Time          `json:"createdAt"`
+	UpdatedAt   time.Time          `json:"updatedAt"`
+}
+
+// NoteResourceItem is one entry inside a Notes tab, e.g. "Unit 0" pointing at
+// a Mubu share link or an internal /files PDF. Kind picks the renderer.
+type NoteResourceItem struct {
+	ID         string    `gorm:"primaryKey" json:"id"`
+	ResourceID string    `gorm:"index;not null" json:"resourceId"`
+	Label      string    `gorm:"not null" json:"label"`
+	URL        string    `gorm:"not null" json:"url"`
+	Kind       string    `gorm:"not null;default:embed" json:"kind"` // embed | pdf | image | link
+	Position   int       `json:"position"`
+	CreatedAt  time.Time `json:"createdAt"`
+	UpdatedAt  time.Time `json:"updatedAt"`
+}
+
+// Announcement is a dashboard notice posted by staff. Body uses the frontend
+// inline-markdown dialect, including ==colored marker== highlights.
+type Announcement struct {
+	ID         string    `gorm:"primaryKey" json:"id"`
+	Title      string    `gorm:"not null" json:"title"`
+	Body       string    `gorm:"not null;default:''" json:"body"`
+	Pinned     bool      `gorm:"not null;default:false" json:"pinned"`
+	Status     string    `gorm:"index;not null;default:draft" json:"status"` // draft | published | archived
+	CreatedBy  string    `gorm:"index" json:"createdBy"`
+	AuthorName string    `json:"authorName"` // snapshot of the author's display name
+	CreatedAt  time.Time `json:"createdAt"`
+	UpdatedAt  time.Time `json:"updatedAt"`
+}
+
+// CalendarEvent is a teacher-managed deadline on the student dashboard
+// calendar: assignments, assessments, quizzes, holidays or generic events.
+// Dates are local "YYYY-MM-DD" strings so timezone conversion can never shift
+// the day the teacher picked; Time is a nil-able "HH:MM" (nil = all day).
+type CalendarEvent struct {
+	ID        string    `gorm:"primaryKey" json:"id"`
+	Title     string    `gorm:"not null" json:"title"`
+	Date      string    `gorm:"index;not null" json:"date"`
+	EndDate   *string   `gorm:"index" json:"endDate,omitempty"`
+	Time      *string   `json:"time,omitempty"`
+	Kind      string    `gorm:"index;not null;default:event" json:"kind"` // assignment | assessment | quiz | holiday | event
+	Note      string    `json:"note"`
+	CreatedBy string    `json:"createdBy"`
+	CreatedAt time.Time `json:"createdAt"`
+	UpdatedAt time.Time `json:"updatedAt"`
+}
+
+// Quote is one bilingual "psychology thought of the day" shown beside the
+// mascot on the dashboard; the pick rotates deterministically by date.
+type Quote struct {
+	ID        uint      `gorm:"primaryKey" json:"id"`
+	TextZh    string    `gorm:"not null" json:"textZh"`
+	TextEn    string    `gorm:"not null" json:"textEn"`
+	Source    string    `json:"source"`
+	CreatedAt time.Time `json:"createdAt"`
 }

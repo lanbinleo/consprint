@@ -28,11 +28,11 @@ func finalizeAccuracy(rows []analyticsAccuracy) []analyticsAccuracy {
 func (a *App) analyticsOverview(c *gin.Context) {
 	weekAgo := time.Now().AddDate(0, 0, -7)
 
-	var roles []struct {
+	roles := make([]struct {
 		Role  string `json:"role"`
 		Count int    `json:"count"`
-	}
-	a.DB.Raw(`select role, count(*) as count from users group by role`).Scan(&roles)
+	}, 0)
+	a.DB.Raw(`select role, count(*) as count from users where deleted_at is null group by role`).Scan(&roles)
 
 	var active7 int64
 	a.DB.Raw(`
@@ -47,43 +47,62 @@ func (a *App) analyticsOverview(c *gin.Context) {
 		Attempts int `json:"attempts"`
 	}
 	a.DB.Raw(`select count(*) as attempts from practice_attempts`).Scan(&totals)
+	// Accuracy fields count each student's LATEST answer per question (same
+	// derivation as the wrong book), so re-taking a set does not double-count
+	// earlier attempts. Attempt counts stay cumulative: they measure volume.
 	var answered struct {
 		Answered int `json:"answered"`
 		Correct  int `json:"correct"`
 	}
-	a.DB.Raw(`select count(*) as answered, coalesce(sum(case when is_correct then 1 else 0 end), 0) as correct
-		from practice_answers where is_correct is not null`).Scan(&answered)
+	a.DB.Raw(`select count(*) as answered, coalesce(sum(case when pa.is_correct then 1 else 0 end), 0) as correct
+		from practice_answers pa
+		join practice_attempts at on at.id = pa.attempt_id
+		where pa.is_correct is not null and pa.rowid = (
+			select p2.rowid from practice_answers p2
+			join practice_attempts a2 on a2.id = p2.attempt_id and a2.user_id = at.user_id
+			where p2.question_id = pa.question_id
+			order by p2.answered_at desc, p2.id desc
+			limit 1
+		)`).Scan(&answered)
 
-	var byUnit []analyticsAccuracy
+	byUnit := make([]analyticsAccuracy, 0)
 	a.DB.Raw(`
 		select coalesce(u.title, 'Unlinked') as label, coalesce(u.id, '') as id,
 		       count(*) as answered,
 		       coalesce(sum(case when pa.is_correct then 1 else 0 end), 0) as correct
 		from practice_answers pa
+		join practice_attempts at on at.id = pa.attempt_id
 		join questions q on q.id = pa.question_id
 		left join units u on u.id = q.unit_id
-		where pa.is_correct is not null
+		where pa.is_correct is not null and pa.rowid = (
+			select p2.rowid from practice_answers p2
+			join practice_attempts a2 on a2.id = p2.attempt_id and a2.user_id = at.user_id
+			where p2.question_id = pa.question_id
+			order by p2.answered_at desc, p2.id desc
+			limit 1
+		)
 		group by u.id, u.title
 		order by answered desc
 	`).Scan(&byUnit)
 
-	var flashcard []struct {
+	flashcard := make([]struct {
 		Status string `json:"status"`
 		Count  int    `json:"count"`
-	}
+	}, 0)
 	a.DB.Raw(`select status, count(*) as count from user_concept_states group by status`).Scan(&flashcard)
 
-	var weakConcepts []struct {
+	weakConcepts := make([]struct {
 		Term string `json:"term"`
 		Unit string `json:"unit"`
 		Weak int    `json:"weak"`
-	}
+	}, 0)
 	a.DB.Raw(`
 		select c.term as term, u.title as unit,
 		       sum(case when s.status in ('fuzzy', 'unknown') then 1 else 0 end) as weak
 		from concepts c
 		join units u on u.id = c.unit_id
 		join user_concept_states s on s.concept_id = c.id
+		join users us on us.id = s.user_id and us.deleted_at is null
 		group by c.id, c.term, u.title
 		having weak > 0
 		order by weak desc
@@ -120,7 +139,7 @@ func (a *App) analyticsOverview(c *gin.Context) {
 		}
 	}
 
-	var students []struct {
+	students := make([]struct {
 		ID       string  `json:"id"`
 		Name     string  `json:"name"`
 		Email    string  `json:"email"`
@@ -130,17 +149,28 @@ func (a *App) analyticsOverview(c *gin.Context) {
 		Correct  int     `json:"correct"`
 		Marked   int     `json:"marked"`
 		Accuracy float64 `json:"accuracy"`
-	}
+	}, 0)
+	// answered/correct use each student's latest answer per question (see
+	// analyticsOverview); attempts and marked stay cumulative.
 	a.DB.Raw(`
 		select us.id, us.name, us.email, us.role,
 		       (select count(*) from practice_attempts pa where pa.user_id = us.id) as attempts,
 		       (select count(*) from practice_answers pan join practice_attempts pa2 on pa2.id = pan.attempt_id
-		        where pa2.user_id = us.id and pan.is_correct is not null) as answered,
+		        where pa2.user_id = us.id and pan.is_correct is not null
+		          and pan.rowid = (select p3.rowid from practice_answers p3
+		                           join practice_attempts a3 on a3.id = p3.attempt_id and a3.user_id = us.id
+		                           where p3.question_id = pan.question_id
+		                           order by p3.answered_at desc, p3.id desc limit 1)) as answered,
 		       (select count(*) from practice_answers pan join practice_attempts pa2 on pa2.id = pan.attempt_id
-		        where pa2.user_id = us.id and pan.is_correct = 1) as correct,
+		        where pa2.user_id = us.id and pan.is_correct = 1
+		          and pan.rowid = (select p3.rowid from practice_answers p3
+		                           join practice_attempts a3 on a3.id = p3.attempt_id and a3.user_id = us.id
+		                           where p3.question_id = pan.question_id
+		                           order by p3.answered_at desc, p3.id desc limit 1)) as correct,
 		       (select count(*) from user_concept_states s where s.user_id = us.id and s.status <> '') as marked,
 		       0.0 as accuracy
 		from users us
+		where us.deleted_at is null
 		order by us.created_at asc
 	`).Scan(&students)
 	for i := range students {
@@ -174,16 +204,16 @@ func (a *App) analyticsUserDetail(c *gin.Context) {
 	}
 	userID := user.ID
 
-	var flashcard []struct {
+	flashcard := make([]struct {
 		Status string `json:"status"`
 		Count  int    `json:"count"`
-	}
+	}, 0)
 	a.DB.Raw(`select status, count(*) as count from user_concept_states where user_id = ? group by status`, userID).Scan(&flashcard)
 
-	var recent []ReviewEvent
+	recent := make([]ReviewEvent, 0)
 	a.DB.Where("user_id = ?", userID).Order("created_at desc").Limit(20).Find(&recent)
 
-	var byUnit []analyticsAccuracy
+	byUnit := make([]analyticsAccuracy, 0)
 	a.DB.Raw(`
 		select coalesce(u.title, 'Unlinked') as label, coalesce(u.id, '') as id,
 		       count(*) as answered,
@@ -192,7 +222,13 @@ func (a *App) analyticsUserDetail(c *gin.Context) {
 		join practice_attempts at on at.id = pa.attempt_id and at.user_id = ?
 		join questions q on q.id = pa.question_id
 		left join units u on u.id = q.unit_id
-		where pa.is_correct is not null
+		where pa.is_correct is not null and pa.rowid = (
+			select p2.rowid from practice_answers p2
+			join practice_attempts a2 on a2.id = p2.attempt_id and a2.user_id = at.user_id
+			where p2.question_id = pa.question_id
+			order by p2.answered_at desc, p2.id desc
+			limit 1
+		)
 		group by u.id, u.title
 		order by answered desc
 	`, userID).Scan(&byUnit)
@@ -227,10 +263,18 @@ func (a *App) analyticsUserDetail(c *gin.Context) {
 	var wrongTotal struct {
 		Count int `json:"count"`
 	}
+	// Wrong answers right now: latest answer per question is wrong (mirrors
+	// the student's wrong book), not every wrong attempt ever.
 	a.DB.Raw(`
 		select count(*) as count from practice_answers pa
 		join practice_attempts at on at.id = pa.attempt_id and at.user_id = ?
-		where pa.is_correct = 0
+		where pa.is_correct = 0 and pa.rowid = (
+			select p2.rowid from practice_answers p2
+			join practice_attempts a2 on a2.id = p2.attempt_id and a2.user_id = at.user_id
+			where p2.question_id = pa.question_id
+			order by p2.answered_at desc, p2.id desc
+			limit 1
+		)
 	`, userID).Scan(&wrongTotal)
 
 	c.JSON(200, gin.H{

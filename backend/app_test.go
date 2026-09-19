@@ -110,7 +110,9 @@ func TestConceptStatusAndReviewFlow(t *testing.T) {
 	if err := json.Unmarshal(w.Body.Bytes(), &payload); err != nil {
 		t.Fatal(err)
 	}
-	if payload.State.Status != "proficient" || payload.State.ShortTermReview || payload.State.ReviewCount != 1 {
+	if payload.State.Status != "proficient" || payload.State.ShortTermReview || payload.State.ReviewCount != 2 {
+		// reviewCount is 2: one from the list-view status mark above, one
+		// from this flashcard review event.
 		t.Fatalf("proficient response should clear short-term review: %#v", payload.State)
 	}
 
@@ -131,7 +133,8 @@ func TestConceptStatusAndReviewFlow(t *testing.T) {
 	if err := json.Unmarshal(w.Body.Bytes(), &progress); err != nil {
 		t.Fatal(err)
 	}
-	if progress.MarkedConcepts == 0 || progress.ProficientConcepts != 1 || progress.TodayReviews != 1 || progress.StreakDays == 0 {
+	if progress.MarkedConcepts == 0 || progress.ProficientConcepts != 1 || progress.TodayReviews != 2 || progress.StreakDays == 0 {
+		// Two events today: the list-view status mark and the flashcard review.
 		t.Fatalf("dashboard progress did not reflect review: %#v", progress)
 	}
 	if progress.ShortTermReviews != 0 {

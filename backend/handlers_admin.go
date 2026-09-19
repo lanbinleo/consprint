@@ -30,8 +30,12 @@ func (a *App) listQuestions(c *gin.Context) {
 	if tagsParam := c.Query("tags"); tagsParam != "" {
 		names := splitList(tagsParam, ",")
 		if len(names) > 0 {
+			lowered := make([]string, 0, len(names))
+			for _, name := range names {
+				lowered = append(lowered, strings.ToLower(name))
+			}
 			q = q.Joins("join question_tags qt on qt.question_id = questions.id").
-				Joins("join tags t on t.id = qt.tag_id and lower(t.name) in ?", names)
+				Joins("join tags t on t.id = qt.tag_id and lower(t.name) in ?", lowered)
 		}
 	}
 	limit, _ := strconv.Atoi(c.DefaultQuery("limit", "200"))
@@ -41,9 +45,19 @@ func (a *App) listQuestions(c *gin.Context) {
 	if limit > 1000 {
 		limit = 1000
 	}
-	var questions []Question
+	questions := make([]Question, 0)
 	q.Order("created_at desc").Limit(limit).Find(&questions)
+	ensureTags(questions)
 	c.JSON(200, questions)
+}
+
+// ensureTags replaces nil tag slices with empty ones so JSON emits [] not null.
+func ensureTags(questions []Question) {
+	for i := range questions {
+		if questions[i].Tags == nil {
+			questions[i].Tags = []Tag{}
+		}
+	}
 }
 
 func (a *App) getQuestion(c *gin.Context) {
@@ -51,6 +65,9 @@ func (a *App) getQuestion(c *gin.Context) {
 	if err := a.DB.Preload("Tags").First(&question, "id = ?", c.Param("id")).Error; err != nil {
 		c.JSON(404, gin.H{"error": "not found"})
 		return
+	}
+	if question.Tags == nil {
+		question.Tags = []Tag{}
 	}
 	c.JSON(200, question)
 }
@@ -71,6 +88,9 @@ func (a *App) createQuestion(c *gin.Context) {
 		return
 	}
 	a.DB.Preload("Tags").First(question, "id = ?", question.ID)
+	if question.Tags == nil {
+		question.Tags = []Tag{}
+	}
 	c.JSON(200, question)
 }
 
@@ -150,14 +170,18 @@ func (a *App) updateQuestion(c *gin.Context) {
 		return
 	}
 	a.DB.Preload("Tags").First(&question, "id = ?", question.ID)
+	if question.Tags == nil {
+		question.Tags = []Tag{}
+	}
 	c.JSON(200, question)
 }
 
 func (a *App) listTags(c *gin.Context) {
-	var rows []struct {
+	// Non-nil slice so an empty tag list marshals to [] instead of null.
+	rows := []struct {
 		Name      string `json:"name"`
 		Questions int    `json:"questions"`
-	}
+	}{}
 	a.DB.Raw(`
 		select t.name as name, count(qt.question_id) as questions
 		from tags t
@@ -221,7 +245,7 @@ func (a *App) questionImportCommit(c *gin.Context) {
 		include[index] = true
 	}
 	created := 0
-	var failures []importIssue
+	failures := make([]importIssue, 0)
 	for i, draft := range session.Items {
 		if len(include) > 0 && !include[i] {
 			continue
@@ -237,6 +261,24 @@ func (a *App) questionImportCommit(c *gin.Context) {
 
 func validSetMode(mode string) bool {
 	return mode == "instant" || mode == "exam"
+}
+
+// maxSetTimeLimitSec caps exam time limits (4h) so huge values cannot
+// overflow time.Duration into a negative (already-past) deadline.
+const maxSetTimeLimitSec = 14400
+
+func clampTimeLimitSec(sec *int) *int {
+	if sec == nil {
+		return nil
+	}
+	value := *sec
+	if value < 0 {
+		value = 0
+	}
+	if value > maxSetTimeLimitSec {
+		value = maxSetTimeLimitSec
+	}
+	return &value
 }
 
 func (a *App) listSets(c *gin.Context) {
@@ -266,16 +308,17 @@ func (a *App) getSet(c *gin.Context) {
 		c.JSON(404, gin.H{"error": "not found"})
 		return
 	}
-	var items []PracticeSetItem
+	items := make([]PracticeSetItem, 0)
 	a.DB.Where("set_id = ?", set.ID).Order("position asc").Find(&items)
 	questionIDs := make([]string, 0, len(items))
 	for _, item := range items {
 		questionIDs = append(questionIDs, item.QuestionID)
 	}
-	var questions []Question
+	questions := make([]Question, 0)
 	if len(questionIDs) > 0 {
 		a.DB.Preload("Tags").Where("id in ?", questionIDs).Find(&questions)
 	}
+	ensureTags(questions)
 	c.JSON(200, gin.H{"set": set, "items": items, "questions": questions})
 }
 
@@ -308,7 +351,7 @@ func (a *App) createSet(c *gin.Context) {
 		c.JSON(400, gin.H{"error": "invalid status"})
 		return
 	}
-	set := PracticeSet{ID: NewID("set"), Title: strings.TrimSpace(req.Title), Description: strings.TrimSpace(req.Description), Mode: mode, TimeLimitSec: req.TimeLimitSec, Status: status, CreatedBy: c.GetString("userID")}
+	set := PracticeSet{ID: NewID("set"), Title: strings.TrimSpace(req.Title), Description: strings.TrimSpace(req.Description), Mode: mode, TimeLimitSec: clampTimeLimitSec(req.TimeLimitSec), Status: status, CreatedBy: c.GetString("userID")}
 	err := a.DB.Transaction(func(tx *gorm.DB) error {
 		if err := tx.Create(&set).Error; err != nil {
 			return err
@@ -371,11 +414,7 @@ func (a *App) updateSet(c *gin.Context) {
 		set.Mode = *req.Mode
 	}
 	if req.TimeLimitSec != nil {
-		if *req.TimeLimitSec < 0 {
-			c.JSON(400, gin.H{"error": "invalid time limit"})
-			return
-		}
-		set.TimeLimitSec = req.TimeLimitSec
+		set.TimeLimitSec = clampTimeLimitSec(req.TimeLimitSec)
 	}
 	if req.Status != nil {
 		if *req.Status != "draft" && *req.Status != "published" && *req.Status != "archived" {
@@ -409,7 +448,7 @@ func (a *App) listUsers(c *gin.Context) {
 		needle := strings.ToLower(search)
 		q = q.Where("lower(email) like ? or lower(name) like ?", "%"+needle+"%", "%"+needle+"%")
 	}
-	var users []User
+	users := make([]User, 0)
 	q.Order("created_at asc").Limit(1000).Find(&users)
 	c.JSON(200, users)
 }

@@ -16,15 +16,24 @@ func (a *App) auth() gin.HandlerFunc {
 			c.Abort()
 			return
 		}
-		token, err := jwt.ParseWithClaims(tokenString, &Claims{}, func(token *jwt.Token) (any, error) { return a.JWTSecret, nil })
+		token, err := jwt.ParseWithClaims(tokenString, &Claims{}, func(token *jwt.Token) (any, error) { return a.JWTSecret, nil }, jwt.WithValidMethods([]string{"HS256"}))
 		if err != nil || !token.Valid {
 			c.JSON(401, gin.H{"error": "invalid token"})
 			c.Abort()
 			return
 		}
 		claims := token.Claims.(*Claims)
+		// Re-check the user so deleted or demoted accounts lose access
+		// immediately instead of riding the token until expiry.
+		var user User
+		if err := a.DB.First(&user, "id = ?", claims.UserID).Error; err != nil {
+			c.JSON(401, gin.H{"error": "invalid token"})
+			c.Abort()
+			return
+		}
 		c.Set("userID", claims.UserID)
 		c.Set("tenantID", claims.TenantID)
+		c.Set("role", user.Role)
 		c.Next()
 	}
 }

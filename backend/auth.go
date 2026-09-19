@@ -10,6 +10,10 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
+// dummyBcryptHash is a fixed valid-format hash used only to equalize login
+// response time for unknown emails.
+const dummyBcryptHash = "$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy"
+
 func (a *App) register(c *gin.Context) {
 	var req struct {
 		Name       string `json:"name"`
@@ -36,9 +40,16 @@ func (a *App) register(c *gin.Context) {
 		return
 	}
 	role := "student"
+	// In production, registration only grants admin through the invite-code
+	// path (or Entra SSO): with open registration and no invite code, anyone
+	// registering a listed ADMIN_EMAILS address first would pre-hijack the
+	// admin account.
+	inviteConfigured := strings.TrimSpace(os.Getenv("REGISTRATION_INVITE_CODE")) != ""
 	if isAdminEmail(req.Email) {
-		role = "admin"
-	} else {
+		if !productionMode() || inviteConfigured {
+			role = "admin"
+		}
+	} else if !productionMode() {
 		// Fallback for local development: without ADMIN_EMAILS the very
 		// first account keeps the deployment usable by becoming admin.
 		var admins int64
@@ -67,6 +78,9 @@ func (a *App) login(c *gin.Context) {
 	}
 	var user User
 	if err := a.DB.Where("email = ?", strings.ToLower(req.Email)).First(&user).Error; err != nil {
+		// Compare against a dummy hash anyway so response time does not
+		// reveal whether the account exists.
+		_ = bcrypt.CompareHashAndPassword([]byte(dummyBcryptHash), []byte(req.Password))
 		c.JSON(401, gin.H{"error": "invalid credentials"})
 		return
 	}

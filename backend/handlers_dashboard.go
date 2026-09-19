@@ -52,7 +52,7 @@ func (a *App) dashboardSummaryPayload(userID string) gin.H {
 	var total, ready int64
 	a.DB.Model(&Concept{}).Count(&total)
 	a.DB.Model(&Concept{}).Where("content_status <> ?", "pending").Count(&ready)
-	return gin.H{"totalConcepts": total, "readyConcepts": ready}
+	return gin.H{"totalConcepts": total, "readyConcepts": ready, "quote": a.quoteOfToday()}
 }
 
 func (a *App) dashboardProgressPayload(userID string) gin.H {
@@ -91,16 +91,20 @@ func (a *App) dashboardTrendsPayload(userID string) gin.H {
 
 func (a *App) dashboardAlertsPayload(userID string) gin.H {
 	a.ensureStates(userID)
-	var recent []ReviewEvent
+	recent := make([]ReviewEvent, 0)
 	a.DB.Where("user_id = ?", userID).Order("created_at desc").Limit(8).Find(&recent)
-	var weak []Concept
-	a.DB.Model(&Concept{}).
-		Select("concepts.*").
-		Joins("join user_concept_states s on s.concept_id = concepts.id and s.user_id = ?", userID).
-		Where("s.status in ('fuzzy', 'unknown')").
-		Order("s.updated_at desc").
-		Limit(6).
-		Find(&weak)
+	weak := make([]starredConceptRow, 0)
+	a.DB.Raw(`
+		select c.id as concept_id, c.term as term, u.title as unit_title,
+		       t.title as topic_title, s.status as status
+		from user_concept_states s
+		join concepts c on c.id = s.concept_id
+		join units u on u.id = c.unit_id
+		join topics t on t.id = c.topic_id
+		where s.user_id = ? and s.status in ('fuzzy', 'unknown')
+		order by s.updated_at desc
+		limit 8
+	`, userID).Scan(&weak)
 	return gin.H{"recent": recent, "weakConcepts": weak, "weakUnits": a.weakUnitStats(userID), "weakTopics": a.weakTopicStats(userID)}
 }
 

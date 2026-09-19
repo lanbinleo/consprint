@@ -64,6 +64,12 @@ type importPreview struct {
 	Errors  []importIssue   `json:"errors"`
 }
 
+// newImportPreview initializes Items/Errors as empty slices so a fully valid
+// (or fully invalid) file marshals to [] instead of null.
+func newImportPreview(channel string, total int) importPreview {
+	return importPreview{Channel: channel, Total: total, Items: []questionDraft{}, Errors: []importIssue{}}
+}
+
 var importSessions = struct {
 	sync.Mutex
 	m map[string]importSession
@@ -127,7 +133,7 @@ func parseQuestionJSON(r io.Reader) (importPreview, error) {
 	if err := json.Unmarshal(body, &drafts); err != nil {
 		return importPreview{}, errors.New("invalid JSON: expected an array of questions")
 	}
-	preview := importPreview{Channel: "json", Total: len(drafts)}
+	preview := newImportPreview("json", len(drafts))
 	for i, draft := range drafts {
 		if err := validateQuestionDraft(&draft); err != nil {
 			preview.Errors = append(preview.Errors, importIssue{Index: i, Message: err.Error()})
@@ -151,6 +157,12 @@ func parseQuestionCSV(r io.Reader) (importPreview, error) {
 		return importPreview{}, errors.New("empty CSV file")
 	}
 	header := records[0]
+	// Excel "CSV UTF-8" exports prefix the first header cell with a BOM
+	// (U+FEFF), which strings.TrimSpace does not strip; without this the
+	// "type" column is never found and subjective rows silently parse as MCQ.
+	if len(header) > 0 {
+		header[0] = strings.TrimPrefix(header[0], string(rune(0xFEFF)))
+	}
 	columns := map[string]int{}
 	for i, name := range header {
 		columns[strings.ToLower(strings.TrimSpace(name))] = i
@@ -162,7 +174,7 @@ func parseQuestionCSV(r io.Reader) (importPreview, error) {
 		}
 		return strings.TrimSpace(record[index])
 	}
-	preview := importPreview{Channel: "csv", Total: len(records) - 1}
+	preview := newImportPreview("csv", len(records)-1)
 	for i, record := range records[1:] {
 		draft := questionDraft{
 			Type:        strings.ToLower(get(record, "type")),

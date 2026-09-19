@@ -96,6 +96,16 @@ func envBool(key string, fallbackValue bool) bool {
 	return value == "1" || value == "true" || value == "yes" || value == "on"
 }
 
+// productionMode reports whether the server runs with deploy hardening
+// expected. It mirrors the check in main.requireDeployConfig so backend
+// gates (registration admin grants, startup admin promotion) enforce the
+// same boundary.
+func productionMode() bool {
+	return envBool("APP_REQUIRE_SECURE_CONFIG", false) ||
+		strings.EqualFold(strings.TrimSpace(os.Getenv("APP_ENV")), "production") ||
+		strings.EqualFold(strings.TrimSpace(os.Getenv("GIN_MODE")), "release")
+}
+
 func fallback(v, d string) string {
 	if strings.TrimSpace(v) == "" {
 		return d

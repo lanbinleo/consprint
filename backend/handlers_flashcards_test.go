@@ -1,0 +1,147 @@
+package backend
+
+import (
+	"bytes"
+	"encoding/json"
+	"fmt"
+	"net/http"
+	"net/http/httptest"
+	"path/filepath"
+	"testing"
+)
+
+func reviewNextRequest(t *testing.T, router http.Handler, token, query string) []Concept {
+	t.Helper()
+	req := httptest.NewRequest(http.MethodGet, "/api/review/next?"+query, nil)
+	req.Header.Set("Authorization", "Bearer "+token)
+	w := httptest.NewRecorder()
+	router.ServeHTTP(w, req)
+	if w.Code != http.StatusOK {
+		t.Fatalf("review next failed: %d %s", w.Code, w.Body.String())
+	}
+	var concepts []Concept
+	if err := json.Unmarshal(w.Body.Bytes(), &concepts); err != nil {
+		t.Fatal(err)
+	}
+	return concepts
+}
+
+func markConcept(t *testing.T, router http.Handler, token, conceptID, response string) {
+	t.Helper()
+	body := bytes.NewBufferString(`{"conceptId":"` + conceptID + `","response":"` + response + `"}`)
+	req := httptest.NewRequest(http.MethodPost, "/api/review/events", body)
+	req.Header.Set("Content-Type", "application/json")
+	req.Header.Set("Authorization", "Bearer "+token)
+	w := httptest.NewRecorder()
+	router.ServeHTTP(w, req)
+	if w.Code != http.StatusOK {
+		t.Fatalf("review event failed: %d %s", w.Code, w.Body.String())
+	}
+}
+
+func newFlashcardTestApp(t *testing.T) (*App, http.Handler, string) {
+	t.Helper()
+	app, err := NewApp(filepath.Join(t.TempDir(), "app.db"), filepath.Join("..", "data", "sources"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	t.Cleanup(func() {
+		if sqlDB, err := app.DB.DB(); err == nil {
+			sqlDB.Close()
+		}
+	})
+	router := app.Router()
+	token := registerTestUser(t, router, "flashcards@example.com")
+	return app, router, token
+}
+
+func topicWithConcepts(t *testing.T, app *App, offset int) (Topic, int64) {
+	t.Helper()
+	var topics []Topic
+	if err := app.DB.Order("id").Find(&topics).Error; err != nil {
+		t.Fatal(err)
+	}
+	topic := topics[offset]
+	var count int64
+	if err := app.DB.Model(&Concept{}).Where("topic_id = ?", topic.ID).Count(&count).Error; err != nil {
+		t.Fatal(err)
+	}
+	if count < 3 {
+		t.Fatalf("topic %s has only %d concepts, need at least 3", topic.ID, count)
+	}
+	return topic, count
+}
+
+func TestReviewNextTopicIDsFilter(t *testing.T) {
+	app, router, token := newFlashcardTestApp(t)
+	topicA, countA := topicWithConcepts(t, app, 0)
+	topicB, countB := topicWithConcepts(t, app, 1)
+	topicC, countC := topicWithConcepts(t, app, 2)
+
+	// topicIds selects across multiple topics; topicId unions into the list.
+	concepts := reviewNextRequest(t, router, token,
+		fmt.Sprintf("topicIds=%s,%s&topicId=%s&limit=200&order=outline", topicA.ID, topicB.ID, topicC.ID))
+	if int64(len(concepts)) != countA+countB+countC {
+		t.Fatalf("expected %d concepts across three topics, got %d", countA+countB+countC, len(concepts))
+	}
+	allowed := map[string]bool{topicA.ID: true, topicB.ID: true, topicC.ID: true}
+	for _, concept := range concepts {
+		if !allowed[concept.TopicID] {
+			t.Fatalf("concept %s has unexpected topic %s", concept.ID, concept.TopicID)
+		}
+	}
+
+	// Topic ids take precedence over unitId.
+	concepts = reviewNextRequest(t, router, token,
+		fmt.Sprintf("unitId=%s&topicIds=%s&limit=200", topicB.UnitID, topicA.ID))
+	for _, concept := range concepts {
+		if concept.TopicID != topicA.ID {
+			t.Fatalf("topicIds should win over unitId, got topic %s", concept.TopicID)
+		}
+	}
+}
+
+func TestReviewNextStatusFilters(t *testing.T) {
+	app, router, token := newFlashcardTestApp(t)
+	topic, total := topicWithConcepts(t, app, 0)
+
+	var concepts []Concept
+	if err := app.DB.Where("topic_id = ?", topic.ID).Order("position").Find(&concepts).Error; err != nil {
+		t.Fatal(err)
+	}
+	fuzzyID, unknownID := concepts[0].ID, concepts[1].ID
+	markConcept(t, router, token, fuzzyID, "fuzzy")
+	markConcept(t, router, token, unknownID, "unknown")
+
+	unmarked := reviewNextRequest(t, router, token,
+		fmt.Sprintf("topicId=%s&status=unmarked&limit=200", topic.ID))
+	if int64(len(unmarked)) != total-2 {
+		t.Fatalf("expected %d unmarked concepts, got %d", total-2, len(unmarked))
+	}
+	for _, concept := range unmarked {
+		if concept.ID == fuzzyID || concept.ID == unknownID {
+			t.Fatalf("marked concept %s leaked into unmarked filter", concept.ID)
+		}
+	}
+
+	multi := reviewNextRequest(t, router, token,
+		fmt.Sprintf("topicId=%s&status=fuzzy,unknown&limit=200", topic.ID))
+	if len(multi) != 2 {
+		t.Fatalf("expected 2 concepts for status=fuzzy,unknown, got %d", len(multi))
+	}
+	seen := map[string]bool{}
+	for _, concept := range multi {
+		seen[concept.ID] = true
+	}
+	if !seen[fuzzyID] || !seen[unknownID] {
+		t.Fatalf("status=fuzzy,unknown should return both marked concepts, got %#v", seen)
+	}
+
+	req := httptest.NewRequest(http.MethodGet, "/api/review/next?status=bogus", nil)
+	req.Header.Set("Authorization", "Bearer "+token)
+	w := httptest.NewRecorder()
+	router.ServeHTTP(w, req)
+	if w.Code != http.StatusBadRequest {
+		t.Fatalf("invalid status should be rejected: %d %s", w.Code, w.Body.String())
+	}
+}
