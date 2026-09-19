@@ -2,6 +2,20 @@
 
 This guide deploys AP Psych Final Sprint as one Docker service. The app uses SQLite, so the only persistent runtime directory is `data/`.
 
+## Current Production Deployment (since 2026-09-20)
+
+- Server: `root@43.156.135.80` (CentOS 7 VM, 2 vCPU / 3 GB RAM, OnePanel stack; SSH key auth).
+- App directory: `/opt/1panel/apps/mypsych` — a git clone of this repository; the container is the OnePanel compose project `mypsych` (container name `ap-psych-final`).
+- Public entry: `https://psy.tsinglan.top` (OnePanel openresty reverse proxy) → host port `8052` → container port `8052` (`.env` sets `PORT=8052`).
+- The server's `compose.yaml` differs from the repo copy only in the port mapping and healthcheck port (8052 vs 8080). `git reset --hard` reverts it — restore from `/root/mypsych-backups/compose.yaml.8052` afterwards.
+- The server `.env` (gitignored) holds production secrets: `JWT_SECRET`, `REGISTRATION_INVITE_CODE`, `CORS_ORIGIN=https://psy.tsinglan.top`, and `ADMIN_EMAILS=leo.huo_27@tsinglan.org`. Production mode has no first-user-admin fallback, so `ADMIN_EMAILS` is required or nobody can manage the site.
+- `data/public/ap-psych-sample.pdf` backs the demo Notes PDF tab. It is gitignored — restore it manually on a fresh checkout.
+- Entra SSO is not configured on the server (no `ENTRA_*` in `.env`); local email login works. Enabling SSO later needs the production redirect URI `https://psy.tsinglan.top/api/auth/entra/callback` in the app registration plus the `ENTRA_*` env vars.
+- Update flow from a dev machine: commit + `git push origin master`, then on the server: keep `.env` and the 8052 compose variant, `git fetch && git reset --hard origin/master`, restore the compose variant, optionally wipe `data/app.db*` for a fresh database, then `docker compose up -d --build`.
+- Pre-wipe database/compose backups live under `/root/mypsych-backups/`.
+
+Fresh-database seeds (verified 2026-09-20): 794 concepts, all sourced from `cards.compact`; 0 announcements (the welcome-announcement seed was removed on purpose); 0 questions / practice sets (the sample question bank is never auto-imported — teachers import via the admin two-step).
+
 ## What Persists
 
 The Compose file mounts:
