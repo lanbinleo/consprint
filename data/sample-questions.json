@@ -1,0 +1,256 @@
+[
+  {
+    "type": "mcq",
+    "stem": "The neuron's sodium-potassium pump is best described as:",
+    "choices": [
+      { "key": "A", "text": "A passive channel that lets ions flow along their gradients" },
+      { "key": "B", "text": "An active transport mechanism that moves sodium out and potassium in" },
+      { "key": "C", "text": "A receptor site that binds neurotransmitters on the dendrites" },
+      { "key": "D", "text": "The fatty sheath that insulates axons and speeds conduction" }
+    ],
+    "answerKey": "B",
+    "explanation": "The sodium-potassium pump actively (using ATP) exports 3 Na+ and imports 2 K+ per cycle to maintain the resting potential. Myelin (D) insulates axons; ion channels (A) are passive.",
+    "unit": "2",
+    "topic": "neurons",
+    "tags": ["biology", "neurons"],
+    "sourceNote": "sample seed 2026-09-19"
+  },
+  {
+    "type": "mcq",
+    "stem": "A researcher damages a rat's cerebellum. Which behavior is most likely to be impaired?",
+    "choices": [
+      { "key": "A", "text": "Coordinated movement and balance" },
+      { "key": "B", "text": "Hunger and thirst regulation" },
+      { "key": "C", "text": "Formation of new long-term memories" },
+      { "key": "D", "text": "Visual recognition of objects" }
+    ],
+    "answerKey": "A",
+    "explanation": "The cerebellum coordinates voluntary movement and balance. Hypothalamus (B) regulates hunger; hippocampus (C) consolidates new memories.",
+    "unit": "2",
+    "topic": "brain",
+    "tags": ["biology", "brain"],
+    "sourceNote": "sample seed 2026-09-19"
+  },
+  {
+    "type": "mcq",
+    "stem": "Split-brain patients can best identify an object placed in their left visual field by:",
+    "choices": [
+      { "key": "A", "text": "Saying its name out loud" },
+      { "key": "B", "text": "Pointing to it with their left hand" },
+      { "key": "C", "text": "Writing its name with their right hand" },
+      { "key": "D", "text": "Describing it verbally with both eyes closed" }
+    ],
+    "answerKey": "B",
+    "explanation": "Left-visual-field information goes to the right hemisphere, which controls the left hand but (after corpus callosum severing) cannot feed the language-dominant left hemisphere.",
+    "unit": "2",
+    "topic": "brain",
+    "tags": ["biology", "brain", "split-brain"],
+    "sourceNote": "sample seed 2026-09-19"
+  },
+  {
+    "type": "mcq",
+    "stem": "In a study, children who saw an adult punished for hitting a doll later hit the doll less, but when offered rewards for imitating, they performed the behavior as often as other children. This demonstrates:",
+    "choices": [
+      { "key": "A", "text": "Observational learning with latent, unreinforced acquisition" },
+      { "key": "B", "text": "Classical conditioning of aggressive emotional responses" },
+      { "key": "C", "text": "Negative reinforcement strengthening aggressive behavior" },
+      { "key": "D", "text": "Spontaneous recovery of a previously extinguished response" }
+    ],
+    "answerKey": "A",
+    "explanation": "Bandura's Bobo doll work: children learned the behavior (acquisition) even without performing it; performance depended on incentives — the hallmark of latent observational learning.",
+    "unit": "4",
+    "topic": "learning",
+    "tags": ["learning", "bandura"],
+    "sourceNote": "sample seed 2026-09-19"
+  },
+  {
+    "type": "mcq",
+    "stem": "Fixed-ratio reinforcement schedules produce responses that are:",
+    "choices": [
+      { "key": "A", "text": "Steady, with a brief pause after each reinforcement" },
+      { "key": "B", "text": "Slow and constant regardless of reinforcement" },
+      { "key": "C", "text": "Rapid and steady with no post-reinforcement pause" },
+      { "key": "D", "text": "Unpredictable bursts tied to time intervals" }
+    ],
+    "answerKey": "A",
+    "explanation": "Fixed-ratio schedules (reinforce every N responses) yield high response rates with a short pause after each reinforcer. Variable-ratio (C) produces high steady rates without the pause.",
+    "unit": "4",
+    "topic": "operant",
+    "tags": ["learning", "schedules"],
+    "sourceNote": "sample seed 2026-09-19"
+  },
+  {
+    "type": "mcq",
+    "stem": "After wearing a yellow-tinted ski mask for an hour, taking it off makes the snow look slightly bluish. This is best explained by:",
+    "choices": [
+      { "key": "A", "text": "Sensory adaptation in opponent-process color channels" },
+      { "key": "B", "text": "The volley principle in auditory processing" },
+      { "key": "C", "text": "Weber's law applied to brightness differences" },
+      { "key": "D", "text": "Selective attention to blue wavelengths" }
+    ],
+    "answerKey": "A",
+    "explanation": "Prolonged yellow exposure fatigues yellow-processing cells; the opponent aftereffect biases perception toward blue — opponent-process theory.",
+    "unit": "3",
+    "topic": "vision",
+    "tags": ["sensation", "color"],
+    "sourceNote": "sample seed 2026-09-19"
+  },
+  {
+    "type": "mcq",
+    "stem": "A child calls every four-legged animal \"doggie.\" Later, she learns that only some are dogs. The refinement of her category is called:",
+    "choices": [
+      { "key": "A", "text": "Accommodation" },
+      { "key": "B", "text": "Assimilation" },
+      { "key": "C", "text": "Conservation" },
+      { "key": "D", "text": "Object permanence" }
+    ],
+    "answerKey": "A",
+    "explanation": "Accommodation modifies an existing schema to fit new information; assimilation (B) would stretch the \"doggie\" schema to absorb cats without change.",
+    "unit": "5",
+    "topic": "development",
+    "tags": ["development", "piaget"],
+    "sourceNote": "sample seed 2026-09-19"
+  },
+  {
+    "type": "mcq",
+    "stem": "Which pair correctly matches a memory phenomenon with its stage of processing?",
+    "choices": [
+      { "key": "A", "text": "Chunking — retrieval from long-term memory" },
+      { "key": "B", "text": "Echoic memory — brief sensory store for auditory input" },
+      { "key": "C", "text": "Proactive interference — encoding failure" },
+      { "key": "D", "text": "The spacing effect — sensory registration" }
+    ],
+    "answerKey": "B",
+    "explanation": "Echoic memory is the momentary (a few seconds) sensory register for sound. Chunking reorganizes encoding capacity (A); proactive interference is a retrieval phenomenon (C); spacing affects encoding (D).",
+    "unit": "5",
+    "topic": "memory",
+    "tags": ["cognition", "memory"],
+    "sourceNote": "sample seed 2026-09-19"
+  },
+  {
+    "type": "mcq",
+    "stem": "A woman attributes her poor exam grade to the test being unfairly difficult but attributes a friend's poor grade to laziness. This illustrates:",
+    "choices": [
+      { "key": "A", "text": "The self-serving bias combined with the fundamental attribution error" },
+      { "key": "B", "text": "The mere exposure effect" },
+      { "key": "C", "text": "Cognitive dissonance reduction" },
+      { "key": "D", "text": "Deindividuation" }
+    ],
+    "answerKey": "A",
+    "explanation": "Taking credit-protecting external excuses for oneself (self-serving bias) while explaining others' behavior dispositionally (fundamental attribution error).",
+    "unit": "4",
+    "topic": "social",
+    "tags": ["social", "attribution"],
+    "sourceNote": "sample seed 2026-09-19"
+  },
+  {
+    "type": "mcq",
+    "stem": "Research finds that as participants' groups grew larger, each individual was less likely to help a person in distress. This effect is best labeled:",
+    "choices": [
+      { "key": "A", "text": "Social loafing" },
+      { "key": "B", "text": "Diffusion of responsibility" },
+      { "key": "C", "text": "Groupthink" },
+      { "key": "D", "text": "Social facilitation" }
+    ],
+    "answerKey": "B",
+    "explanation": "Bystander effect: responsibility divides among onlookers as group size grows. Social loafing (A) concerns reduced effort on shared tasks, not helping decisions.",
+    "unit": "4",
+    "topic": "social",
+    "tags": ["social", "bystander"],
+    "sourceNote": "sample seed 2026-09-19"
+  },
+  {
+    "type": "mcq",
+    "stem": "Signal detection theory predicts that a radiologist expecting a high base rate of tumors will make more:",
+    "choices": [
+      { "key": "A", "text": "Misses" },
+      { "key": "B", "text": "False alarms" },
+      { "key": "C", "text": "Correct rejections only" },
+      { "key": "D", "text": "Weber fractions" }
+    ],
+    "answerKey": "B",
+    "explanation": "A liberal response criterion (biased toward saying \"yes\") raises hits at the cost of more false alarms — a core signal-detection tradeoff.",
+    "unit": "3",
+    "topic": "detection",
+    "tags": ["sensation", "signal-detection"],
+    "sourceNote": "sample seed 2026-09-19"
+  },
+  {
+    "type": "mcq",
+    "stem": "Which scenario is the clearest example of negative reinforcement?",
+    "choices": [
+      { "key": "A", "text": "A parent scolds a child for running into the street" },
+      { "key": "B", "text": "Buckling your seatbelt stops the car's warning chime" },
+      { "key": "C", "text": "A student loses screen time after skipping homework" },
+      { "key": "D", "text": "A rat receives a food pellet for pressing a lever" }
+    ],
+    "answerKey": "B",
+    "explanation": "Negative reinforcement removes an aversive stimulus (the chime) and increases the behavior (buckling). A and C add aversive outcomes (punishment); D is positive reinforcement.",
+    "unit": "4",
+    "topic": "operant",
+    "tags": ["learning", "reinforcement"],
+    "sourceNote": "sample seed 2026-09-19"
+  },
+  {
+    "type": "subjective",
+    "stem": "Design a study to test whether sleep affects memory consolidation in high school students.",
+    "parts": [
+      {
+        "label": "A",
+        "prompt": "State a testable hypothesis for this study.",
+        "referenceAnswer": "Students who sleep 8 or more hours after learning a word list will recall more words 24 hours later than students who sleep 5 or fewer hours.",
+        "rubric": ["Hypothesis states a relationship between sleep and memory", "Hypothesis is testable/measurable"]
+      },
+      {
+        "label": "B",
+        "prompt": "Identify the independent and dependent variables and one variable that should be controlled.",
+        "referenceAnswer": "IV: hours of sleep (sleep condition). DV: number of words recalled after 24 hours. Controls: same word list, same learning time, same recall environment, similar baseline memory ability.",
+        "rubric": ["Correct IV", "Correct DV (measured recall)", "Names a plausible controlled variable"]
+      },
+      {
+        "label": "C",
+        "prompt": "Explain how one ethical guideline applies to this study.",
+        "referenceAnswer": "Informed consent: student participants (and guardians if minors) must be told the purpose, procedures, and right to withdraw; the sleep restriction condition must be disclosed as a possible cost.",
+        "rubric": ["Names a specific guideline", "Applies it concretely to this study"]
+      }
+    ],
+    "unit": "5",
+    "topic": "memory",
+    "tags": ["research-methods", "memory", "frq"],
+    "sourceNote": "sample seed 2026-09-19"
+  },
+  {
+    "type": "subjective",
+    "stem": "Use the source to answer the questions below.",
+    "materials": [
+      {
+        "title": "Study Vignette",
+        "text": "A researcher recruits 40 college students for a two-week study. Half are randomly assigned to use a mindfulness app for 10 minutes daily; half play a casual puzzle game. Before and after the two weeks, all participants complete a standardized anxiety questionnaire and keep a sleep diary. The mindfulness group reports lower anxiety scores and 25 more minutes of nightly sleep on average."
+      }
+    ],
+    "parts": [
+      {
+        "label": "A",
+        "prompt": "Identify the operational definition of the dependent variables in this study.",
+        "referenceAnswer": "Anxiety is operationalized as the score on the standardized anxiety questionnaire; sleep is operationalized as nightly sleep minutes from the diary.",
+        "rubric": ["Identifies questionnaire score as anxiety measure", "Identifies diary minutes as sleep measure"]
+      },
+      {
+        "label": "B",
+        "prompt": "Name the design feature that supports a cause-and-effect claim and explain why it matters.",
+        "referenceAnswer": "Random assignment: it evenly distributes participant characteristics (baseline anxiety, sleep habits) across groups, so group differences at the end are attributable to the app rather than preexisting differences.",
+        "rubric": ["Names random assignment", "Explains control of confounds/enables causal inference"]
+      },
+      {
+        "label": "C",
+        "prompt": "Propose one change that would improve the study's validity.",
+        "referenceAnswer": "Add an active placebo condition matched for time and expectation, or blind the researchers scoring questionnaires, to reduce expectancy/demand effects.",
+        "rubric": ["Proposes a concrete improvement", "Links it to a specific validity threat"]
+      }
+    ],
+    "unit": "0",
+    "topic": "research",
+    "tags": ["research-methods", "aaq"],
+    "sourceNote": "sample seed 2026-09-19"
+  }
+]

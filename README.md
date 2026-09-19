@@ -6,8 +6,8 @@ School sign-in is handled by Microsoft Entra ID (Teams accounts); local email lo
 
 ## What It Does
 
-- Imports the canonical AP Psychology concept skeleton from `data/sources/keyterms.md` (6 units / 41 topics / 794 concepts) and enriches it with local notes, OPML fragments, and the compact AI enrichment file.
-- **Learn**: browse units → topics → concepts with bilingual definitions, examples, pitfalls, and notes; mark each concept as 熟练 / 模糊 / 不熟悉 (proficient / fuzzy / unfamiliar).
+- Imports the canonical AP Psychology concept skeleton from `data/sources/keyterms.md` (6 units / 41 topics / 794 concepts) and enriches it with local notes, OPML fragments, the zh-first AI enrichment, and hand-curated term cards (`cards.compact`).
+- **Terms**（术语目录）: browse units → topics → concepts with bilingual definitions, examples, pitfalls, and notes; mark each concept as 熟练 / 模糊 / 不熟悉 (proficient / fuzzy / unfamiliar).
 - **Flashcards**: big flip-card review sessions (space to flip, keys 1/2/3) scoped by unit/topic and status filter; fuzzy/unfamiliar concepts enter the short-term queue.
 - **Question bank**: teachers/TAs manage MCQ and subjective (FRQ/AAQ/EBQ-style) questions with materials, per-part prompts, reference answers, and rubrics; questions carry tags and unit/topic links.
 - **Bulk import**: two-step CSV (Excel-friendly) and JSON import with full validation and per-row error preview; nothing is written before review. CSV template included at `/api/admin/questions/import/template`.
@@ -73,7 +73,7 @@ JWT_SECRET=replace-with-a-long-random-secret
 CORS_ORIGIN=https://your-domain.example
 REGISTRATION_INVITE_CODE=optional-class-code
 APP_TIMEZONE=Asia/Shanghai
-AP_EXAM_DATE=2027-05-01T12:00:00+08:00   # dashboard countdown, optional
+AP_EXAM_DATE=2027-05-14T12:00:00+08:00   # dashboard countdown, optional (default 2027-05-14)
 ```
 
 Microsoft Entra SSO (leave empty to hide the Microsoft button and use local login):
@@ -115,24 +115,39 @@ type,stem,choice_a,choice_b,choice_c,choice_d,choice_e,answer,explanation,unit,t
 
 JSON is an array of question objects with `type` (`mcq`|`subjective`), `stem`, `choices`+`answerKey`, `explanation`, `materials`, `parts` (label/prompt/referenceAnswer/rubric), `unit`, `topic`, `tags`. Subjective questions need a reference answer or rubric.
 
+A ready-to-import sample file lives at `data/sample-questions.json` (12 MCQs + FRQ/AAQ). The async UI layer (optimistic marking, review-event queue, per-topic counts) and the local seeding recipe are documented in [docs/async-interaction.md](docs/async-interaction.md).
+
 ## AI Enrichment (local workflow, concept content)
 
-The enrichment tool runs locally against an OpenAI-compatible endpoint and writes `data/sources/ai-enrichment.compact`; the app only imports the file:
+The enrichment tool runs locally against an OpenAI-compatible endpoint and writes compact source files; the app only imports the files:
 
 ```powershell
 node tools/ai-enrich.mjs --limit=20
 ```
 
-Config: `OPENAI_API_KEY`, `OPENAI_BASE_URL`, `OPENAI_MODEL`, `AI_BATCH_SIZE`, `AI_TIMEOUT_MS`, `AI_RETRIES`. Re-import from Admin → Concept content.
+Config: `OPENAI_API_KEY`, `OPENAI_BASE_URL`, `OPENAI_MODEL`, `AI_BATCH_SIZE`, `AI_TIMEOUT_MS`, `AI_RETRIES`. Re-import from Admin → Concept content, or run `go run . --reimport` to re-run all source importers against the existing database.
+
+Source files consumed at startup/import (in precedence order — later wins within its tier):
+
+- `keyterms.md` — canonical concept skeleton.
+- `unit0.md`, `unit1.md`, `AP-Psychology-Notes.opml` — local notes.
+- `ai-enrichment.compact`, `ai-enrichment-v2.compact` — AI enrichment (v2 is the zh-first bilingual rewrite).
+- `cards.compact` — hand-curated term cards (authoritative; overwrites AI enrichment).
+- `glossary.json` — curated zh-name mapping kept for content work; not read by the app.
 
 ## Tests
 
 ```powershell
 go test ./...
 cd frontend
-npm run build
+npm test        # vitest unit tests
+npm run build   # typecheck + production build
 ```
 
 ## Accounts And Roles
 
 Register a local account on first launch — the first account becomes admin when `ADMIN_EMAILS` is unset (development fallback). In production set `ADMIN_EMAILS`; those accounts are promoted at startup and on first Entra sign-in. Teachers and admins manage the question bank, practice sets, and analytics; admins also manage user roles and concept content.
+
+## Credits
+
+Default user avatars use the "Notionists" style from [DiceBear](https://dicebear.com) (CC BY 4.0). Pre-generated seeded variants live in `frontend/public/avatars/` and are assigned per user by name hash.
