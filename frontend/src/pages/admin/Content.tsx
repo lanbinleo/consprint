@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { Database, Edit3, Save, Search } from 'lucide-react'
 import { api } from '../../lib/api'
@@ -7,21 +7,33 @@ import { useSession } from '../../hooks/session'
 import { Header, ListSkeleton, Metric, SpinnerButton } from '../../components/ui'
 import { InlineMarkdown } from '../../components/InlineMarkdown'
 import { imageOnlyBlock } from '../../lib/inlineMarkdown'
-import type { Block, Concept, ConceptRow, ImportStatus } from '../../lib/types'
+import { attachUnitTopic } from '../../lib/conceptStore'
+import { useUnits } from '../../components/ScopePicker'
+import type { Block, Concept, ImportStatus } from '../../lib/types'
 
 export function Content() {
   const { t, lang } = useSession()
   const queryClient = useQueryClient()
+  const [searchInput, setSearchInput] = useState('')
   const [search, setSearch] = useState('')
-  const [selected, setSelected] = useState<ConceptRow | null>(null)
+  const [selected, setSelected] = useState<Concept | null>(null)
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState('')
+  const { data: units = [] } = useUnits()
+
+  // Debounce: every keystroke would otherwise refetch the admin list.
+  useEffect(() => {
+    const timer = setTimeout(() => setSearch(searchInput.trim()), 300)
+    return () => clearTimeout(timer)
+  }, [searchInput])
 
   const { data: status } = useQuery({ queryKey: ['import-status'], queryFn: () => api.request<ImportStatus>('/api/import/status') })
   const { data: concepts = [], isPending } = useQuery({
     queryKey: ['concepts-admin', search],
-    queryFn: async () => (await api.request<ConceptRow[] | null>(`/api/concepts?search=${encodeURIComponent(search)}`)) ?? [],
+    queryFn: async () => (await api.request<Concept[] | null>(`/api/concepts?search=${encodeURIComponent(search)}`)) ?? [],
   })
+  // The slim list carries no unit/topic objects — join them from /api/units.
+  const rows = useMemo(() => attachUnitTopic(concepts, units), [concepts, units])
 
   async function runImport() {
     setBusy(true)
@@ -30,6 +42,8 @@ export function Content() {
       await api.request('/api/import/run', { method: 'POST', body: '{}' })
       await queryClient.invalidateQueries({ queryKey: ['import-status'] })
       await queryClient.invalidateQueries({ queryKey: ['concepts-admin'] })
+      // The shared concept store picks the new corpus up via its version check.
+      void queryClient.invalidateQueries({ queryKey: ['concepts'] })
     } catch (err) {
       setError(err instanceof Error ? err.message : t.errorGeneric)
     } finally {
@@ -57,13 +71,13 @@ export function Content() {
           </div>
           <label className="search">
             <Search size={16} />
-            <input placeholder={t.search} value={search} onChange={(e) => setSearch(e.target.value)} />
+            <input placeholder={t.search} value={searchInput} onChange={(e) => setSearchInput(e.target.value)} />
           </label>
           {isPending ? (
             <ListSkeleton />
           ) : (
             <div className="table">
-              {concepts.slice(0, 250).map((concept) => (
+              {rows.slice(0, 250).map((concept) => (
                 <button
                   className={`concept-row ${selected?.id === concept.id ? 'selected' : ''}`}
                   key={concept.id}
@@ -79,13 +93,21 @@ export function Content() {
             </div>
           )}
         </div>
-        <ConceptEditor concept={selected} onSaved={(concept) => setSelected({ ...(selected ?? ({} as ConceptRow)), ...concept })} />
+        <ConceptEditor
+          concept={selected}
+          onSaved={(concept) => {
+            setSelected(concept)
+            // Propagate the edit to the shared concept store (version check
+            // will fetch just this row as a delta).
+            void queryClient.invalidateQueries({ queryKey: ['concepts'] })
+          }}
+        />
       </div>
     </div>
   )
 }
 
-function ConceptEditor({ concept, onSaved }: { concept: ConceptRow | null; onSaved: (concept: Concept) => void }) {
+function ConceptEditor({ concept, onSaved }: { concept: Concept | null; onSaved: (concept: Concept) => void }) {
   const { t } = useSession()
   const [definition, setDefinition] = useState('')
   const [examples, setExamples] = useState('')

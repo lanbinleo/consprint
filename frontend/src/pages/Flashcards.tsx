@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useBlocker, useNavigate } from 'react-router'
+import { useQueryClient } from '@tanstack/react-query'
 import { ArrowLeft, ChevronRight, Play, RotateCcw, Star } from 'lucide-react'
 import { api } from '../lib/api'
 import { useSession } from '../hooks/session'
@@ -9,7 +10,8 @@ import { RichContent } from '../components/RichContent'
 import { useUnits } from '../components/ScopePicker'
 import { StatusButtons } from '../components/StatusButtons'
 import { reviewQueue, usePendingReviewCount } from '../lib/reviewQueue'
-import type { Concept, ConceptStatus, Unit } from '../lib/types'
+import { markConceptState, useConceptRows } from '../lib/conceptStore'
+import type { Concept, ConceptRow, ConceptState, ConceptStatus, Unit } from '../lib/types'
 
 type Filter = 'unmarked' | 'review' | 'proficient' | 'all'
 
@@ -18,12 +20,16 @@ const FILTER_VALUES: Filter[] = ['all', 'unmarked', 'review', 'proficient']
 export function Flashcards() {
   const { t } = useSession()
   const navigate = useNavigate()
+  const queryClient = useQueryClient()
   const { data: units = [], isPending: unitsPending } = useUnits()
+  // Card content hydrates from the shared concept store, so the deck request
+  // itself carries only concept ids + state.
+  const { rows: conceptRows, isPending: conceptsPending } = useConceptRows()
   const [picked, setPicked] = useState<Set<string>>(new Set())
   const [expanded, setExpanded] = useState<Set<string>>(new Set())
   const [order, setOrder] = useState<'random' | 'outline'>('random')
   const [filter, setFilter] = useState<Filter>('all')
-  const [queue, setQueue] = useState<Concept[]>([])
+  const [queue, setQueue] = useState<ConceptRow[]>([])
   const [index, setIndex] = useState(0)
   const [flipped, setFlipped] = useState(false)
   const [started, setStarted] = useState(false)
@@ -153,13 +159,36 @@ export function Flashcards() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [started, current])
 
+  // The deck endpoint returns concept ids + state in the chosen order; card
+  // content is looked up in the local corpus. Ids missing from the corpus
+  // (stale-cache edge, e.g. fresh import) are backfilled from the detail
+  // endpoint so a session never silently drops cards.
   async function start() {
     setLoading(true)
     setError('')
     try {
       const search = new URLSearchParams({ limit: String(sessionCap), order })
-      const rows = await api.request<Concept[] | null>(`/api/review/next?${scopeParams}&${search.toString()}`)
-      setQueue(rows ?? [])
+      const deck = (await api.request<ConceptState[] | null>(`/api/review/next?${scopeParams}&${search.toString()}`)) ?? []
+      const byId = new Map(conceptRows.map((row) => [row.id, row]))
+      const resolved = new Map<string, ConceptRow>()
+      const missing: ConceptState[] = []
+      for (const entry of deck) {
+        const row = byId.get(entry.conceptId)
+        if (row) resolved.set(entry.conceptId, { ...row, state: entry })
+        else missing.push(entry)
+      }
+      if (missing.length > 0) {
+        const details = await Promise.all(
+          missing.map((entry) =>
+            api
+              .request<{ concept: Concept; state: ConceptState }>(`/api/concepts/${entry.conceptId}`)
+              .then((payload) => ({ ...payload.concept, state: entry }))
+              .catch(() => null),
+          ),
+        )
+        for (const row of details) if (row) resolved.set(row.id, row)
+      }
+      setQueue(deck.map((entry) => resolved.get(entry.conceptId)).filter((row) => !!row))
       setIndex(0)
       setFlipped(false)
       setTally({})
@@ -172,11 +201,17 @@ export function Flashcards() {
   }
 
   // Marks are queued locally and flushed in the background, so the card always
-  // flips immediately; retries are handled by the queue.
+  // flips immediately; retries are handled by the queue. The shared concept
+  // cache is patched too, so the glossary reflects the mark right away.
   function respond(response: ConceptStatus) {
     if (!current || !response) return
     setError('')
     reviewQueue.enqueue({ conceptId: current.id, response })
+    markConceptState(queryClient, current.id, {
+      status: response,
+      shortTermReview: response !== 'proficient',
+      reviewCount: current.state.reviewCount + 1,
+    })
     setTally((counts) => ({ ...counts, [response]: (counts[response] ?? 0) + 1 }))
     setFlipped(false)
     setIndex((value) => value + 1)
@@ -192,12 +227,21 @@ export function Flashcards() {
     setIndex((value) => value + 1)
   }
 
-  // Corner star: optimistic toggle that never flips the card underneath.
-  function toggleCardStar(concept: Concept) {
-    const next = !(starOverrides[concept.id] ?? concept.state?.starred ?? false)
+  // Corner star: optimistic toggle that never flips the card underneath, and
+  // keeps the shared concept cache in step.
+  function toggleCardStar(concept: ConceptRow) {
+    const next = !(starOverrides[concept.id] ?? concept.state.starred)
     setStarOverrides((map) => ({ ...map, [concept.id]: next }))
     api
-      .request(`/api/concepts/${concept.id}/star`, { method: 'PATCH', body: JSON.stringify({ starred: next }) })
+      .request<ConceptState>(`/api/concepts/${concept.id}/star`, { method: 'PATCH', body: JSON.stringify({ starred: next }) })
+      .then((state) =>
+        markConceptState(queryClient, concept.id, {
+          status: state.status,
+          reviewCount: state.reviewCount,
+          shortTermReview: state.shortTermReview,
+          starred: state.starred,
+        }),
+      )
       .catch(() => setStarOverrides((map) => ({ ...map, [concept.id]: !next })))
   }
 
@@ -316,7 +360,7 @@ export function Flashcards() {
               </span>
             </div>
             <div className="session-controls">
-              <button className="primary" onClick={() => void start()} disabled={loading || unitsPending || totalAvailable === 0}>
+              <button className="primary" onClick={() => void start()} disabled={loading || unitsPending || conceptsPending || totalAvailable === 0}>
                 <Play size={16} /> {t.start}
               </button>
             </div>
@@ -373,16 +417,16 @@ export function Flashcards() {
             <small>{current.topic?.title}</small>
             <h2>{current.term}</h2>
             <p className="muted">{t.tapToFlip}</p>
-            <button
-              className={`card-star ${starOverrides[current.id] ?? current.state?.starred ?? false ? 'on' : ''}`}
-              onClick={(event) => {
-                event.stopPropagation()
-                toggleCardStar(current)
-              }}
-              aria-label={t.star}
-              title={t.star}
-            >
-              <Star size={18} fill={(starOverrides[current.id] ?? current.state?.starred ?? false) ? 'currentColor' : 'none'} />
+              <button
+                className={`card-star ${starOverrides[current.id] ?? current.state.starred ? 'on' : ''}`}
+                onClick={(event) => {
+                  event.stopPropagation()
+                  toggleCardStar(current)
+                }}
+                aria-label={t.star}
+                title={t.star}
+              >
+                <Star size={18} fill={(starOverrides[current.id] ?? current.state.starred) ? 'currentColor' : 'none'} />
             </button>
           </div>
           <div className="flashcard-face flashcard-back">
