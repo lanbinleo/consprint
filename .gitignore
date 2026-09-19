@@ -5,11 +5,17 @@
 data/app.db
 data/generated/
 data/ai-output/
+data/logs/
+data/public/
+data/backups/
 node_modules/
 frontend/node_modules/
 frontend/dist/
 coverage/
 .DS_Store
 *.log
+*.exe
 
+# Local agent scratch space (audit scripts, drafts) — never commit.
+.scratch/
 .zcode/
