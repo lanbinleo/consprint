@@ -2,10 +2,13 @@ package backend
 
 import (
 	"bytes"
+	"compress/gzip"
 	"encoding/json"
+	"io"
 	"net/http"
 	"net/http/httptest"
 	"path/filepath"
+	"strings"
 	"testing"
 )
 
@@ -287,6 +290,49 @@ func TestRegistrationInviteCode(t *testing.T) {
 	router.ServeHTTP(w, req)
 	if w.Code != http.StatusOK {
 		t.Fatalf("registration with invite failed: %d %s", w.Code, w.Body.String())
+	}
+}
+
+func TestGzipCompression(t *testing.T) {
+	app, err := NewApp(filepath.Join(t.TempDir(), "app.db"), filepath.Join("..", "data", "sources"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	sqlDB, err := app.DB.DB()
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer sqlDB.Close()
+	router := app.Router()
+
+	req := httptest.NewRequest(http.MethodGet, "/api/health", nil)
+	req.Header.Set("Accept-Encoding", "gzip")
+	w := httptest.NewRecorder()
+	router.ServeHTTP(w, req)
+	if w.Code != http.StatusOK {
+		t.Fatalf("health failed: %d", w.Code)
+	}
+	if got := w.Header().Get("Content-Encoding"); got != "gzip" {
+		t.Fatalf("expected gzip Content-Encoding, got %q", got)
+	}
+	zr, err := gzip.NewReader(w.Body)
+	if err != nil {
+		t.Fatalf("body is not valid gzip: %v", err)
+	}
+	body, err := io.ReadAll(zr)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !strings.Contains(string(body), `"ok":true`) {
+		t.Fatalf("unexpected decompressed body: %s", body)
+	}
+
+	// Clients that do not advertise gzip must get plain JSON.
+	req = httptest.NewRequest(http.MethodGet, "/api/health", nil)
+	w = httptest.NewRecorder()
+	router.ServeHTTP(w, req)
+	if got := w.Header().Get("Content-Encoding"); got != "" {
+		t.Fatalf("plain request should not be compressed, got %q", got)
 	}
 }
 

@@ -6,6 +6,7 @@ import (
 	"path/filepath"
 	"strings"
 
+	"github.com/gin-contrib/gzip"
 	"github.com/gin-gonic/gin"
 )
 
@@ -23,6 +24,10 @@ func (a *App) Router() *gin.Engine {
 		c.Next()
 	})
 	api := r.Group("/api")
+	// Compress API JSON on the wire: the concept corpus is ~1.4MB raw and
+	// compresses ~10x. Scoped to /api so static files and SPA assets are
+	// untouched; fetch() decodes gzip transparently.
+	api.Use(gzip.Gzip(gzip.DefaultCompression))
 	api.GET("/health", func(c *gin.Context) { c.JSON(200, gin.H{"ok": true}) })
 	api.GET("/meta", a.appMeta)
 	api.GET("/auth/providers", a.authProviders)
