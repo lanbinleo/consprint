@@ -38,6 +38,8 @@ func (i Importer) RunAll() error {
 	_ = i.EnrichFromBullets(filepath.Join(i.Sources, "unit1.md"), "unit1.md")
 	_ = i.EnrichFromOPML(filepath.Join(i.Sources, "AP-Psychology-Notes.opml"))
 	_ = i.EnrichFromCompact(filepath.Join(i.Sources, "ai-enrichment.compact"))
+	_ = i.EnrichFromCompactV2(filepath.Join(i.Sources, "ai-enrichment-v2.compact"))
+	_ = i.EnrichFromCards(filepath.Join(i.Sources, "cards.compact"))
 	return nil
 }
 
@@ -259,22 +261,26 @@ func (i Importer) EnrichFromOPML(path string) error {
 	return i.applyNotes(entries, "AP Psychology Notes.opml", 0.58)
 }
 
-func (i Importer) EnrichFromCompact(path string) error {
+type compactEntry struct {
+	id    string
+	def   []string
+	ex    []string
+	pit   []string
+	notes []string
+}
+
+// parseCompactEntries reads the "@@ id / key: value" compact protocol shared
+// by the AI enrichment sources. Repeated keys accumulate as separate blocks,
+// which is how the zh-first bilingual split is expressed.
+func parseCompactEntries(path string) ([]*compactEntry, error) {
 	file, err := os.Open(path)
 	if err != nil {
-		return err
+		return nil, err
 	}
 	defer file.Close()
 
-	type entry struct {
-		id    string
-		def   []string
-		ex    []string
-		pit   []string
-		notes []string
-	}
-	var entries []*entry
-	var current *entry
+	var entries []*compactEntry
+	var current *compactEntry
 	currentID := ""
 	scanner := bufio.NewScanner(file)
 	scanner.Buffer(make([]byte, 1024), 1024*1024)
@@ -286,7 +292,7 @@ func (i Importer) EnrichFromCompact(path string) error {
 		if strings.HasPrefix(t, "@@") {
 			currentID = strings.TrimSpace(strings.TrimPrefix(t, "@@"))
 			if currentID != "" {
-				current = &entry{id: currentID}
+				current = &compactEntry{id: currentID}
 				entries = append(entries, current)
 			}
 			continue
@@ -314,50 +320,186 @@ func (i Importer) EnrichFromCompact(path string) error {
 			current.notes = append(current.notes, value)
 		}
 	}
-	if err := scanner.Err(); err != nil {
+	return entries, scanner.Err()
+}
+
+func (i Importer) EnrichFromCompact(path string) error {
+	entries, err := parseCompactEntries(path)
+	if err != nil {
 		return err
 	}
 
 	updated := 0
 	ordered, indexByID := i.orderedConcepts()
 	lastIndex := -1
-	for _, e := range entries {
-		resolvedID, resolvedIndex := resolveCompactID(e.id, ordered, indexByID, lastIndex)
-		if resolvedID == "" {
-			continue
+	// One transaction for the whole pass: per-entry commits cost an fsync
+	// each on Windows, which made fresh-database boot (~800 entries) take
+	// half a minute.
+	err = i.DB.Transaction(func(tx *gorm.DB) error {
+		for _, e := range entries {
+			resolvedID, resolvedIndex := resolveCompactID(e.id, ordered, indexByID, lastIndex)
+			if resolvedID == "" {
+				continue
+			}
+			lastIndex = resolvedIndex
+			var concept Concept
+			if err := tx.First(&concept, "id = ?", resolvedID).Error; err != nil {
+				continue
+			}
+			if concept.ContentStatus == "ready" {
+				continue
+			}
+			payload := ConceptContent{
+				ID:          concept.ID + ".content",
+				ConceptID:   concept.ID,
+				Definition:  blocksJSON(e.def),
+				Examples:    blocksJSON(e.ex),
+				Pitfalls:    blocksJSON(e.pit),
+				Notes:       blocksJSON(e.notes),
+				Source:      "ai-enrichment.compact",
+				Confidence:  0.66,
+				NeedsReview: true,
+			}
+			if err := tx.Clauses(clause.OnConflict{UpdateAll: true}).Create(&payload).Error; err != nil {
+				return err
+			}
+			status := "partial"
+			if len(e.def) > 0 {
+				status = "ready"
+			}
+			if err := tx.Model(&Concept{}).Where("id = ?", concept.ID).Update("content_status", status).Error; err != nil {
+				return err
+			}
+			updated++
 		}
-		lastIndex = resolvedIndex
-		var concept Concept
-		if err := i.DB.First(&concept, "id = ?", resolvedID).Error; err != nil {
-			continue
-		}
-		if concept.ContentStatus == "ready" {
-			continue
-		}
-		payload := ConceptContent{
-			ID:          concept.ID + ".content",
-			ConceptID:   concept.ID,
-			Definition:  blocksJSON(e.def),
-			Examples:    blocksJSON(e.ex),
-			Pitfalls:    blocksJSON(e.pit),
-			Notes:       blocksJSON(e.notes),
-			Source:      "ai-enrichment.compact",
-			Confidence:  0.66,
-			NeedsReview: true,
-		}
-		if err := i.DB.Clauses(clause.OnConflict{UpdateAll: true}).Create(&payload).Error; err != nil {
-			return err
-		}
-		status := "partial"
-		if len(e.def) > 0 {
-			status = "ready"
-		}
-		if err := i.DB.Model(&Concept{}).Where("id = ?", concept.ID).Update("content_status", status).Error; err != nil {
-			return err
-		}
-		updated++
+		return nil
+	})
+	if err != nil {
+		return err
 	}
 	run := ImportRun{ID: NewID("imp"), Source: "ai-enrichment.compact", Status: "ok", Message: "Imported compact AI enrichment", Counts: fmt.Sprintf("concepts=%d", updated)}
+	return i.DB.Create(&run).Error
+}
+
+// EnrichFromCompactV2 re-applies the zh-first bilingual rewrite of the AI
+// enrichment (ai-enrichment-v2.compact). It only overwrites concepts whose
+// current content came from the AI pipeline; entries sourced from unit0.md,
+// unit1.md, or the OPML are never touched. Safe to re-run: v2 is its own
+// recognized source, so repeated imports converge to the same state.
+func (i Importer) EnrichFromCompactV2(path string) error {
+	entries, err := parseCompactEntries(path)
+	if err != nil {
+		return err
+	}
+	var affected []string
+	if err := i.DB.Table("concept_contents").
+		Where("source IN ?", []string{"ai-enrichment.compact", "ai-enrichment-v2.compact"}).
+		Distinct().Pluck("concept_id", &affected).Error; err != nil {
+		return err
+	}
+	if len(affected) == 0 {
+		return nil
+	}
+	affectedSet := make(map[string]bool, len(affected))
+	for _, id := range affected {
+		affectedSet[id] = true
+	}
+
+	updated := 0
+	ordered, indexByID := i.orderedConcepts()
+	lastIndex := -1
+	err = i.DB.Transaction(func(tx *gorm.DB) error {
+		for _, e := range entries {
+			resolvedID, resolvedIndex := resolveCompactID(e.id, ordered, indexByID, lastIndex)
+			if resolvedID != "" {
+				lastIndex = resolvedIndex
+			}
+			if resolvedID == "" || !affectedSet[resolvedID] {
+				continue
+			}
+			var concept Concept
+			if err := tx.First(&concept, "id = ?", resolvedID).Error; err != nil {
+				continue
+			}
+			payload := ConceptContent{
+				ID:          concept.ID + ".content",
+				ConceptID:   concept.ID,
+				Definition:  blocksJSON(e.def),
+				Examples:    blocksJSON(e.ex),
+				Pitfalls:    blocksJSON(e.pit),
+				Notes:       blocksJSON(e.notes),
+				Source:      "ai-enrichment-v2.compact",
+				Confidence:  0.66,
+				NeedsReview: true,
+			}
+			if err := tx.Clauses(clause.OnConflict{UpdateAll: true}).Create(&payload).Error; err != nil {
+				return err
+			}
+			if err := tx.Model(&Concept{}).Where("id = ?", concept.ID).Update("content_status", "ready").Error; err != nil {
+				return err
+			}
+			updated++
+		}
+		return nil
+	})
+	if err != nil {
+		return err
+	}
+	run := ImportRun{ID: NewID("imp"), Source: "ai-enrichment-v2.compact", Status: "ok", Message: "Re-applied AI enrichment with zh-first bilingual blocks", Counts: fmt.Sprintf("concepts=%d", updated)}
+	return i.DB.Create(&run).Error
+}
+
+// EnrichFromCards applies the hand-curated term cards (cards.compact),
+// rewritten from the Irene-refined 合订本 and Leo's OPML. This is the
+// authoritative source: it overwrites content from any earlier source,
+// because every card was manually written or reviewed.
+func (i Importer) EnrichFromCards(path string) error {
+	entries, err := parseCompactEntries(path)
+	if err != nil {
+		return err
+	}
+	updated := 0
+	ordered, indexByID := i.orderedConcepts()
+	lastIndex := -1
+	err = i.DB.Transaction(func(tx *gorm.DB) error {
+		for _, e := range entries {
+			resolvedID, resolvedIndex := resolveCompactID(e.id, ordered, indexByID, lastIndex)
+			if resolvedID == "" {
+				continue
+			}
+			lastIndex = resolvedIndex
+			var concept Concept
+			if err := tx.First(&concept, "id = ?", resolvedID).Error; err != nil {
+				continue
+			}
+			payload := ConceptContent{
+				ID:          concept.ID + ".content",
+				ConceptID:   concept.ID,
+				Definition:  blocksJSON(e.def),
+				Examples:    blocksJSON(e.ex),
+				Pitfalls:    blocksJSON(e.pit),
+				Notes:       blocksJSON(e.notes),
+				Source:      "cards.compact",
+				Confidence:  0.9,
+				NeedsReview: false,
+			}
+			if err := tx.Clauses(clause.OnConflict{UpdateAll: true}).Create(&payload).Error; err != nil {
+				return err
+			}
+			if err := tx.Model(&Concept{}).Where("id = ?", concept.ID).Update("content_status", "ready").Error; err != nil {
+				return err
+			}
+			updated++
+		}
+		return nil
+	})
+	if err != nil {
+		return err
+	}
+	if updated == 0 {
+		return nil
+	}
+	run := ImportRun{ID: NewID("imp"), Source: "cards.compact", Status: "ok", Message: "Imported curated term cards", Counts: fmt.Sprintf("concepts=%d", updated)}
 	return i.DB.Create(&run).Error
 }
 
@@ -423,34 +565,40 @@ func (i Importer) applyNotes(entries map[string][]string, source string, confide
 		byTerm[c.NormalizedTerm] = c
 	}
 	updated := 0
-	for term, notes := range entries {
-		concept, ok := byTerm[term]
-		if !ok || len(notes) == 0 {
-			continue
+	txErr := i.DB.Transaction(func(tx *gorm.DB) error {
+		for term, notes := range entries {
+			concept, ok := byTerm[term]
+			if !ok || len(notes) == 0 {
+				continue
+			}
+			def, examples, pitfalls, extra := classifyNotes(notes)
+			payload := ConceptContent{
+				ID:          concept.ID + ".content",
+				ConceptID:   concept.ID,
+				Definition:  blocksJSON(def),
+				Examples:    blocksJSON(examples),
+				Pitfalls:    blocksJSON(pitfalls),
+				Notes:       blocksJSON(extra),
+				Source:      source,
+				Confidence:  confidence,
+				NeedsReview: confidence < 0.7,
+			}
+			if err := tx.Clauses(clause.OnConflict{UpdateAll: true}).Create(&payload).Error; err != nil {
+				return err
+			}
+			status := "partial"
+			if len(def) > 0 {
+				status = "ready"
+			}
+			if err := tx.Model(&Concept{}).Where("id = ?", concept.ID).Update("content_status", status).Error; err != nil {
+				return err
+			}
+			updated++
 		}
-		def, examples, pitfalls, extra := classifyNotes(notes)
-		payload := ConceptContent{
-			ID:          concept.ID + ".content",
-			ConceptID:   concept.ID,
-			Definition:  blocksJSON(def),
-			Examples:    blocksJSON(examples),
-			Pitfalls:    blocksJSON(pitfalls),
-			Notes:       blocksJSON(extra),
-			Source:      source,
-			Confidence:  confidence,
-			NeedsReview: confidence < 0.7,
-		}
-		if err := i.DB.Clauses(clause.OnConflict{UpdateAll: true}).Create(&payload).Error; err != nil {
-			return err
-		}
-		status := "partial"
-		if len(def) > 0 {
-			status = "ready"
-		}
-		if err := i.DB.Model(&Concept{}).Where("id = ?", concept.ID).Update("content_status", status).Error; err != nil {
-			return err
-		}
-		updated++
+		return nil
+	})
+	if txErr != nil {
+		return txErr
 	}
 	run := ImportRun{ID: NewID("imp"), Source: source, Status: "ok", Message: "Enriched concepts from notes", Counts: fmt.Sprintf("concepts=%d", updated)}
 	return i.DB.Create(&run).Error

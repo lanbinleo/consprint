@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"flag"
 	"log"
 	"os"
 	"strings"
@@ -10,12 +11,24 @@ import (
 )
 
 func main() {
+	reimport := flag.Bool("reimport", false, "re-run the source importers against the existing database, then exit")
+	flag.Parse()
+
 	loadDotEnv(".env")
 	requireDeployConfig()
+	warnInsecureDevConfig()
 
 	app, err := backend.NewApp("data/app.db", "data/sources")
 	if err != nil {
 		log.Fatal(err)
+	}
+	if *reimport {
+		imp := backend.Importer{DB: app.DB, Sources: app.Sources}
+		if err := imp.RunAll(); err != nil {
+			log.Fatal(err)
+		}
+		log.Print("reimport complete")
+		return
 	}
 	port := os.Getenv("PORT")
 	if port == "" {
@@ -39,6 +52,22 @@ func requireDeployConfig() {
 	secret := strings.TrimSpace(os.Getenv("JWT_SECRET"))
 	if secret == "" || secret == "local-dev-secret-change-me" || len(secret) < 32 {
 		log.Fatal("JWT_SECRET must be set to a unique value of at least 32 characters before production deployment")
+	}
+}
+
+// warnInsecureDevConfig surfaces the two silent-fallback risks that only
+// hard-fail in production mode, so a dev deployment heading for production
+// sees them in the log.
+func warnInsecureDevConfig() {
+	if productionMode() {
+		return
+	}
+	secret := strings.TrimSpace(os.Getenv("JWT_SECRET"))
+	if secret == "" || secret == "local-dev-secret-change-me" {
+		log.Print("WARNING: JWT_SECRET is unset or the default dev value; anyone can forge tokens. Set a unique JWT_SECRET before real deployment.")
+	}
+	if strings.TrimSpace(os.Getenv("ENTRA_TENANT_ID")) != "" && strings.TrimSpace(os.Getenv("ENTRA_ALLOWED_DOMAINS")) == "" {
+		log.Print("WARNING: ENTRA_ALLOWED_DOMAINS is empty while Entra sign-in is configured; any Microsoft account whose email matches an existing local account can link to it.")
 	}
 }
 
