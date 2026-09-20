@@ -3,8 +3,10 @@ package backend
 import (
 	"strconv"
 	"strings"
+	"time"
 
 	"github.com/gin-gonic/gin"
+	"golang.org/x/crypto/bcrypt"
 	"gorm.io/gorm"
 )
 
@@ -460,8 +462,9 @@ func (a *App) updateUser(c *gin.Context) {
 		return
 	}
 	var req struct {
-		Role *string `json:"role"`
-		Name *string `json:"name"`
+		Role        *string `json:"role"`
+		Name        *string `json:"name"`
+		AvatarReset *bool   `json:"avatarReset"`
 	}
 	if err := c.ShouldBindJSON(&req); err != nil {
 		c.JSON(400, gin.H{"error": "invalid request"})
@@ -481,6 +484,39 @@ func (a *App) updateUser(c *gin.Context) {
 	if req.Name != nil && strings.TrimSpace(*req.Name) != "" {
 		user.Name = strings.TrimSpace(*req.Name)
 	}
+	if req.AvatarReset != nil && *req.AvatarReset {
+		// Back to the DiceBear default derived from the name.
+		user.AvatarDataURL = ""
+	}
 	a.DB.Save(&user)
 	c.JSON(200, user)
+}
+
+// adminResetPassword sets a new password for any account (support flow: a
+// student forgot theirs, or an Entra account needs local sign-in). Marks it
+// as user-set so subsequent changes require the current password; the user
+// should still change it again after signing in.
+func (a *App) adminResetPassword(c *gin.Context) {
+	var user User
+	if err := a.DB.First(&user, "id = ?", c.Param("id")).Error; err != nil {
+		c.JSON(404, gin.H{"error": "user not found"})
+		return
+	}
+	var req struct {
+		NewPassword string `json:"newPassword"`
+	}
+	if err := c.ShouldBindJSON(&req); err != nil || len(req.NewPassword) < 8 || len(req.NewPassword) > 72 {
+		c.JSON(400, gin.H{"error": "new password must be 8-72 characters"})
+		return
+	}
+	hash, err := bcrypt.GenerateFromPassword([]byte(req.NewPassword), bcrypt.DefaultCost)
+	if err != nil {
+		c.JSON(500, gin.H{"error": "could not hash password"})
+		return
+	}
+	now := time.Now()
+	user.PasswordHash = string(hash)
+	user.PasswordSetAt = &now
+	a.DB.Save(&user)
+	c.JSON(200, gin.H{"ok": true})
 }

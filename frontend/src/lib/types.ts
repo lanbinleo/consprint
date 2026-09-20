@@ -84,6 +84,9 @@ export type AuthPayload = {
 
 export type AppMeta = {
   entra: boolean
+  // false once Entra owns registration in production: the local form is
+  // sign-in only then (sign-up goes through Microsoft).
+  emailRegistration: boolean
   examDate: string
   timezone: string
 }

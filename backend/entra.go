@@ -131,13 +131,15 @@ func (a *App) authProviders(c *gin.Context) {
 }
 
 // appMeta exposes public client configuration: available login providers,
-// the AP exam date (2027-05-14 unless AP_EXAM_DATE overrides it), and the
-// app timezone.
+// whether email registration is open (closed once Entra owns sign-up in
+// production), the AP exam date (2027-05-14 unless AP_EXAM_DATE overrides it),
+// and the app timezone.
 func (a *App) appMeta(c *gin.Context) {
 	c.JSON(200, gin.H{
-		"entra":    entraConfigured(),
-		"examDate": env("AP_EXAM_DATE", "2027-05-14T12:00:00+08:00"),
-		"timezone": env("APP_TIMEZONE", "Asia/Shanghai"),
+		"entra":             entraConfigured(),
+		"emailRegistration": !(productionMode() && entraConfigured()),
+		"examDate":          env("AP_EXAM_DATE", "2027-05-14T12:00:00+08:00"),
+		"timezone":          env("APP_TIMEZONE", "Asia/Shanghai"),
 	})
 }
 

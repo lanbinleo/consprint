@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
-import { Check, PenLine, Search, X } from 'lucide-react'
+import { KeyRound, PenLine, RotateCcw, Search, X } from 'lucide-react'
 import { api } from '../../lib/api'
 import { useSession } from '../../hooks/session'
-import { Header } from '../../components/ui'
+import { Avatar, Header, SpinnerButton } from '../../components/ui'
 import type { Role, User } from '../../lib/types'
 
 export function Users() {
@@ -16,40 +16,16 @@ export function Users() {
   })
   const users = data ?? []
   const [actionError, setActionError] = useState('')
-  const [renamingId, setRenamingId] = useState<string | null>(null)
-  const [renameValue, setRenameValue] = useState('')
+  const [editing, setEditing] = useState<User | null>(null)
 
   function refresh() {
     void queryClient.invalidateQueries({ queryKey: ['admin-users'] })
   }
 
-  async function setRole(target: User, role: Role) {
-    setActionError('')
-    try {
-      await api.request(`/api/admin/users/${target.id}`, { method: 'PATCH', body: JSON.stringify({ role }) })
-      refresh()
-    } catch (err) {
-      setActionError(err instanceof Error ? err.message : t.errorGeneric)
-      refresh()
-    }
-  }
-
-  async function saveName(target: User) {
-    const name = renameValue.trim()
-    if (!name) return
-    setActionError('')
-    try {
-      await api.request(`/api/admin/users/${target.id}`, { method: 'PATCH', body: JSON.stringify({ name }) })
-      setRenamingId(null)
-      refresh()
-    } catch (err) {
-      setActionError(err instanceof Error ? err.message : t.errorGeneric)
-    }
-  }
-
-  function startRename(target: User) {
-    setRenamingId(target.id)
-    setRenameValue(target.name)
+  function roleLabel(role: string) {
+    if (role === 'admin') return t.roleAdmin
+    if (role === 'teacher') return t.roleTeacher
+    return t.roleStudent
   }
 
   return (
@@ -69,39 +45,16 @@ export function Users() {
         {users.map((user) => (
           <div className="student-row" key={user.id}>
             <span className="student-name">
-              {renamingId === user.id ? (
-                <>
-                  <input
-                    autoFocus
-                    value={renameValue}
-                    onChange={(e) => setRenameValue(e.target.value)}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter') void saveName(user)
-                      if (e.key === 'Escape') setRenamingId(null)
-                    }}
-                  />
-                  <button className="icon-line" title={t.save} onClick={() => void saveName(user)}>
-                    <Check size={15} />
-                  </button>
-                  <button className="icon-line" title={t.cancel} onClick={() => setRenamingId(null)}>
-                    <X size={15} />
-                  </button>
-                </>
-              ) : (
-                <>
-                  <strong>{user.name}</strong>
-                  <small>{user.email}</small>
-                </>
-              )}
+              <Avatar user={user} />
+              <span className="student-id">
+                <strong>{user.name}</strong>
+                <small>{user.email}</small>
+              </span>
             </span>
-            <select value={user.role} disabled={user.id === me?.id} onChange={(e) => void setRole(user, e.target.value as Role)}>
-              <option value="student">{t.roleStudent}</option>
-              <option value="teacher">{t.roleTeacher}</option>
-              <option value="admin">{t.roleAdmin}</option>
-            </select>
+            <span>{roleLabel(user.role)}</span>
             <span>{user.provider === 'entra' ? t.providerEntra : t.providerLocal}</span>
             <span className="row-actions">
-              <button className="icon-line" title={t.renameUser} onClick={() => startRename(user)}>
+              <button className="icon-line" title={t.editUser} onClick={() => setEditing(user)}>
                 <PenLine size={15} />
               </button>
             </span>
@@ -109,6 +62,151 @@ export function Users() {
         ))}
       </div>
       {actionError && <div className="error" style={{ marginTop: 12 }}>{actionError}</div>}
+      {editing && (
+        <UserEditModal
+          user={editing}
+          selfEdit={editing.id === me?.id}
+          onClose={() => setEditing(null)}
+          refresh={refresh}
+          onError={setActionError}
+        />
+      )}
+    </div>
+  )
+}
+
+// Editing lives in a modal: identity fields up top, support actions (avatar
+// and password reset) below the fold of the same dialog.
+function UserEditModal({
+  user,
+  selfEdit,
+  onClose,
+  refresh,
+  onError,
+}: {
+  user: User
+  selfEdit: boolean
+  onClose: () => void
+  refresh: () => void
+  onError: (message: string) => void
+}) {
+  const { t } = useSession()
+  const [name, setName] = useState(user.name)
+  const [role, setRole] = useState<Role>(user.role)
+  const [avatarDataUrl, setAvatarDataUrl] = useState(user.avatarDataUrl)
+  const [newPassword, setNewPassword] = useState('')
+  const [busy, setBusy] = useState(false)
+  const [saved, setSaved] = useState(false)
+  const [notice, setNotice] = useState('')
+  const [error, setError] = useState('')
+
+  async function save() {
+    setBusy(true)
+    setError('')
+    try {
+      await api.request<User>(`/api/admin/users/${user.id}`, {
+        method: 'PATCH',
+        body: JSON.stringify({ name, role }),
+      })
+      refresh()
+      setSaved(true)
+      setTimeout(() => setSaved(false), 1200)
+      onError('')
+    } catch (err) {
+      setError(err instanceof Error ? err.message : t.errorGeneric)
+    } finally {
+      setBusy(false)
+    }
+  }
+
+  async function resetAvatar() {
+    setError('')
+    try {
+      await api.request(`/api/admin/users/${user.id}`, { method: 'PATCH', body: JSON.stringify({ avatarReset: true }) })
+      setAvatarDataUrl(undefined)
+      refresh()
+      setNotice(t.avatarResetDone)
+      setTimeout(() => setNotice(''), 1500)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : t.errorGeneric)
+    }
+  }
+
+  async function resetPassword() {
+    setError('')
+    if (newPassword.length < 8) {
+      setError(t.passwordTooShort)
+      return
+    }
+    try {
+      await api.request(`/api/admin/users/${user.id}/password`, {
+        method: 'PATCH',
+        body: JSON.stringify({ newPassword }),
+      })
+      setNewPassword('')
+      setNotice(t.passwordResetDone)
+      setTimeout(() => setNotice(''), 1500)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : t.errorGeneric)
+    }
+  }
+
+  return (
+    <div className="modal-backdrop" onClick={onClose}>
+      <div className="modal" role="dialog" aria-modal="true" onClick={(event) => event.stopPropagation()}>
+        <div className="modal-head">
+          <h3>{t.editUser}</h3>
+          <button className="icon-line" title={t.cancel} onClick={onClose}>
+            <X size={16} />
+          </button>
+        </div>
+        <div className="user-edit-head">
+          <Avatar user={{ name: user.name, avatarDataUrl }} />
+          <div>
+            <strong>{user.name}</strong>
+            <small>{user.email}</small>
+          </div>
+        </div>
+        <label>
+          {t.name}
+          <input value={name} onChange={(e) => setName(e.target.value)} />
+        </label>
+        <label>
+          {t.role}
+          <select value={role} disabled={selfEdit} onChange={(e) => setRole(e.target.value as Role)} className={selfEdit ? 'disabled-field' : ''}>
+            <option value="student">{t.roleStudent}</option>
+            <option value="teacher">{t.roleTeacher}</option>
+            <option value="admin">{t.roleAdmin}</option>
+          </select>
+          {selfEdit && <small className="field-hint">{t.cannotEditSelfRole}</small>}
+        </label>
+        {error && <div className="error">{error}</div>}
+        <SpinnerButton className="primary" busy={busy} onClick={() => void save()}>
+          {saved ? t.saved : t.save}
+        </SpinnerButton>
+
+        <div className="modal-section">
+          <button className="secondary" onClick={() => void resetAvatar()}>
+            <RotateCcw size={16} /> {t.resetAvatar}
+          </button>
+        </div>
+        <div className="modal-section">
+          <label>
+            {t.newPassword}
+            <input
+              type="password"
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+              placeholder={t.passwordResetPlaceholder}
+              autoComplete="new-password"
+            />
+          </label>
+          <button className="secondary" disabled={!newPassword} onClick={() => void resetPassword()}>
+            <KeyRound size={16} /> {t.resetPassword}
+          </button>
+        </div>
+        {notice && <div className="success-note">{notice}</div>}
+      </div>
     </div>
   )
 }

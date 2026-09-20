@@ -25,6 +25,13 @@ func (a *App) register(c *gin.Context) {
 		c.JSON(400, gin.H{"error": "email and password are required"})
 		return
 	}
+	if productionMode() && entraConfigured() {
+		// With Entra live, sign-up happens through Microsoft sign-in only.
+		// Email registration stays open where Entra is not configured (local
+		// development) so the app remains usable there.
+		c.JSON(403, gin.H{"error": "registration is only available through Microsoft sign-in"})
+		return
+	}
 	if requiredCode := strings.TrimSpace(os.Getenv("REGISTRATION_INVITE_CODE")); requiredCode != "" && strings.TrimSpace(req.InviteCode) != requiredCode {
 		c.JSON(403, gin.H{"error": "invalid registration code"})
 		return
@@ -107,7 +114,7 @@ func (a *App) me(c *gin.Context) {
 	var tenant Tenant
 	a.DB.First(&user, "id = ?", c.GetString("userID"))
 	a.DB.First(&tenant, "id = ?", c.GetString("tenantID"))
-	c.JSON(200, gin.H{"user": user, "tenant": tenant})
+	c.JSON(200, gin.H{"user": user, "tenant": tenant, "passwordSet": userHasPassword(user)})
 }
 
 func (a *App) updateMe(c *gin.Context) {
@@ -137,5 +144,48 @@ func (a *App) updateMe(c *gin.Context) {
 	a.DB.Save(&user)
 	var tenant Tenant
 	a.DB.First(&tenant, "id = ?", user.TenantID)
-	c.JSON(200, gin.H{"user": user, "tenant": tenant})
+	c.JSON(200, gin.H{"user": user, "tenant": tenant, "passwordSet": userHasPassword(user)})
+}
+
+// userHasPassword reports whether email+password sign-in works for the user:
+// local accounts registered with a password, Entra accounts only after they
+// set one in the profile (their bootstrap hash is random and unguessable).
+func userHasPassword(user User) bool {
+	return user.Provider == "local" || user.PasswordSetAt != nil
+}
+
+// updateMyPassword lets a signed-in user set or change their password.
+// Accounts that already have one (local registration, or a previous set) must
+// confirm the current password; Entra accounts without one may set it
+// directly, which also enables email+password sign-in for them.
+func (a *App) updateMyPassword(c *gin.Context) {
+	var req struct {
+		CurrentPassword string `json:"currentPassword"`
+		NewPassword     string `json:"newPassword"`
+	}
+	if err := c.ShouldBindJSON(&req); err != nil || len(req.NewPassword) < 8 || len(req.NewPassword) > 72 {
+		c.JSON(400, gin.H{"error": "new password must be 8-72 characters"})
+		return
+	}
+	var user User
+	if err := a.DB.First(&user, "id = ?", c.GetString("userID")).Error; err != nil {
+		c.JSON(404, gin.H{"error": "user not found"})
+		return
+	}
+	if userHasPassword(user) {
+		if bcrypt.CompareHashAndPassword([]byte(user.PasswordHash), []byte(req.CurrentPassword)) != nil {
+			c.JSON(400, gin.H{"error": "current password is incorrect"})
+			return
+		}
+	}
+	hash, err := bcrypt.GenerateFromPassword([]byte(req.NewPassword), bcrypt.DefaultCost)
+	if err != nil {
+		c.JSON(500, gin.H{"error": "could not hash password"})
+		return
+	}
+	now := time.Now()
+	user.PasswordHash = string(hash)
+	user.PasswordSetAt = &now
+	a.DB.Save(&user)
+	c.JSON(200, gin.H{"ok": true, "passwordSet": true})
 }

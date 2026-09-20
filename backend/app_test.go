@@ -10,6 +10,8 @@ import (
 	"path/filepath"
 	"strings"
 	"testing"
+
+	"golang.org/x/crypto/bcrypt"
 )
 
 func TestAuthAndDashboardFlow(t *testing.T) {
@@ -290,6 +292,220 @@ func TestRegistrationInviteCode(t *testing.T) {
 	router.ServeHTTP(w, req)
 	if w.Code != http.StatusOK {
 		t.Fatalf("registration with invite failed: %d %s", w.Code, w.Body.String())
+	}
+}
+
+// With Entra live in production, email sign-up closes entirely — registration
+// goes through Microsoft sign-in. Local dev (no Entra or non-production env)
+// keeps email registration so the app stays usable there.
+func TestEmailRegistrationClosedWithEntra(t *testing.T) {
+	t.Setenv("APP_ENV", "production")
+	t.Setenv("JWT_SECRET", "test-secret-that-is-long-enough-for-production")
+	t.Setenv("ENTRA_TENANT_ID", "tenant")
+	t.Setenv("ENTRA_CLIENT_ID", "client")
+	t.Setenv("ENTRA_CLIENT_SECRET", "secret")
+	t.Setenv("ENTRA_REDIRECT_URI", "https://example.com/api/auth/entra/callback")
+	app, err := NewApp(filepath.Join(t.TempDir(), "app.db"), filepath.Join("..", "data", "sources"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	sqlDB, err := app.DB.DB()
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer sqlDB.Close()
+	router := app.Router()
+
+	req := httptest.NewRequest(http.MethodGet, "/api/meta", nil)
+	w := httptest.NewRecorder()
+	router.ServeHTTP(w, req)
+	if w.Code != http.StatusOK || !strings.Contains(w.Body.String(), `"emailRegistration":false`) {
+		t.Fatalf("meta should advertise closed email registration: %d %s", w.Code, w.Body.String())
+	}
+
+	body := bytes.NewBufferString(`{"tenantName":"Test","name":"Student","email":"closed@example.com","password":"secret"}`)
+	req = httptest.NewRequest(http.MethodPost, "/api/auth/register", body)
+	req.Header.Set("Content-Type", "application/json")
+	w = httptest.NewRecorder()
+	router.ServeHTTP(w, req)
+	if w.Code != http.StatusForbidden {
+		t.Fatalf("email registration should be closed with Entra in production: %d %s", w.Code, w.Body.String())
+	}
+
+	// Email+password sign-in for existing accounts keeps working.
+	hash, err := bcrypt.GenerateFromPassword([]byte("secret"), bcrypt.DefaultCost)
+	if err != nil {
+		t.Fatal(err)
+	}
+	existing := User{ID: "usr_existing", TenantID: schoolTenantID, Name: "Existing", Email: "existing@example.com", Role: "student", Provider: "local", PasswordHash: string(hash)}
+	if err := app.DB.Create(&existing).Error; err != nil {
+		t.Fatal(err)
+	}
+	req = httptest.NewRequest(http.MethodPost, "/api/auth/login", bytes.NewBufferString(`{"email":"existing@example.com","password":"secret"}`))
+	req.Header.Set("Content-Type", "application/json")
+	w = httptest.NewRecorder()
+	router.ServeHTTP(w, req)
+	if w.Code != http.StatusOK {
+		t.Fatalf("local login should still work: %d %s", w.Code, w.Body.String())
+	}
+}
+
+// Set/change password flows: Entra accounts set a first password without a
+// current one (and gain email+password sign-in); afterwards, and for local
+// accounts from the start, changing requires the current password.
+func TestSetPassword(t *testing.T) {
+	app, err := NewApp(filepath.Join(t.TempDir(), "app.db"), filepath.Join("..", "data", "sources"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	sqlDB, err := app.DB.DB()
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer sqlDB.Close()
+	router := app.Router()
+
+	// Local user (registered with password "secret").
+	token := registerTestUser(t, router, "local-pw@example.com")
+	setPassword := func(body, token string) int {
+		t.Helper()
+		req := httptest.NewRequest(http.MethodPatch, "/api/me/password", bytes.NewBufferString(body))
+		req.Header.Set("Content-Type", "application/json")
+		req.Header.Set("Authorization", "Bearer "+token)
+		w := httptest.NewRecorder()
+		router.ServeHTTP(w, req)
+		return w.Code
+	}
+	if code := setPassword(`{"newPassword":"new-secret-1"}`, token); code != http.StatusBadRequest {
+		t.Fatalf("local user must confirm current password: %d", code)
+	}
+	if code := setPassword(`{"currentPassword":"wrong","newPassword":"new-secret-1"}`, token); code != http.StatusBadRequest {
+		t.Fatalf("wrong current password should fail: %d", code)
+	}
+	if code := setPassword(`{"currentPassword":"secret","newPassword":"new-secret-1"}`, token); code != http.StatusOK {
+		t.Fatalf("correct current password should allow change: %d", code)
+	}
+	if code := setPassword(`{"currentPassword":"secret","newPassword":"short"}`, token); code != http.StatusBadRequest {
+		t.Fatalf("too-short new password should fail: %d", code)
+	}
+	// Old password stops working, the new one signs in.
+	req := httptest.NewRequest(http.MethodPost, "/api/auth/login", bytes.NewBufferString(`{"email":"local-pw@example.com","password":"secret"}`))
+	req.Header.Set("Content-Type", "application/json")
+	w := httptest.NewRecorder()
+	router.ServeHTTP(w, req)
+	if w.Code != http.StatusUnauthorized {
+		t.Fatalf("old password should be rejected: %d", w.Code)
+	}
+	req = httptest.NewRequest(http.MethodPost, "/api/auth/login", bytes.NewBufferString(`{"email":"local-pw@example.com","password":"new-secret-1"}`))
+	req.Header.Set("Content-Type", "application/json")
+	w = httptest.NewRecorder()
+	router.ServeHTTP(w, req)
+	if w.Code != http.StatusOK {
+		t.Fatalf("login with the changed password failed: %d %s", w.Code, w.Body.String())
+	}
+
+	// Entra user: random bootstrap hash, no usable password yet.
+	oid := "entra-oid-1"
+	entraUser := User{ID: "usr_entra_pw", TenantID: schoolTenantID, Name: "MS User", Email: "entra-pw@example.com", Role: "student", Provider: "entra", EntraOID: &oid, PasswordHash: dummyBcryptHash}
+	if err := app.DB.Create(&entraUser).Error; err != nil {
+		t.Fatal(err)
+	}
+	entraToken, err := app.sign(entraUser)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	// passwordSet is false before, true after.
+	req = httptest.NewRequest(http.MethodGet, "/api/me", nil)
+	req.Header.Set("Authorization", "Bearer "+entraToken)
+	w = httptest.NewRecorder()
+	router.ServeHTTP(w, req)
+	if w.Code != http.StatusOK || !strings.Contains(w.Body.String(), `"passwordSet":false`) {
+		t.Fatalf("entra user should report passwordSet=false: %d %s", w.Code, w.Body.String())
+	}
+
+	if code := setPassword(`{"newPassword":"chosen-pass-1"}`, entraToken); code != http.StatusOK {
+		t.Fatalf("entra user should set a first password without a current one: %d", code)
+	}
+
+	req = httptest.NewRequest(http.MethodPost, "/api/auth/login", bytes.NewBufferString(`{"email":"entra-pw@example.com","password":"chosen-pass-1"}`))
+	req.Header.Set("Content-Type", "application/json")
+	w = httptest.NewRecorder()
+	router.ServeHTTP(w, req)
+	if w.Code != http.StatusOK {
+		t.Fatalf("entra user should now sign in with email+password: %d %s", w.Code, w.Body.String())
+	}
+
+	// Once set, changing needs the current password again.
+	if code := setPassword(`{"newPassword":"another-pass"}`, entraToken); code != http.StatusBadRequest {
+		t.Fatalf("entra user with a set password must confirm current password: %d", code)
+	}
+	if code := setPassword(`{"currentPassword":"chosen-pass-1","newPassword":"another-pass"}`, entraToken); code != http.StatusOK {
+		t.Fatalf("entra user password change with current password failed: %d", code)
+	}
+}
+
+// Admin user maintenance: avatar reset clears the stored image, password
+// reset yields a working sign-in, and the own-role guard keeps holding.
+func TestAdminUserMaintenance(t *testing.T) {
+	app, err := NewApp(filepath.Join(t.TempDir(), "app.db"), filepath.Join("..", "data", "sources"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	sqlDB, err := app.DB.DB()
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer sqlDB.Close()
+	router := app.Router()
+	token := registerTestUser(t, router, "admin-maint@example.com")
+
+	target := User{ID: "usr_target", TenantID: schoolTenantID, Name: "Target", Email: "target@example.com", Role: "student", Provider: "local", PasswordHash: dummyBcryptHash, AvatarDataURL: "data:image/png;base64,AAAA"}
+	if err := app.DB.Create(&target).Error; err != nil {
+		t.Fatal(err)
+	}
+
+	patch := func(path, body string) *httptest.ResponseRecorder {
+		req := httptest.NewRequest(http.MethodPatch, path, bytes.NewBufferString(body))
+		req.Header.Set("Content-Type", "application/json")
+		req.Header.Set("Authorization", "Bearer "+token)
+		w := httptest.NewRecorder()
+		router.ServeHTTP(w, req)
+		return w
+	}
+
+	if w := patch("/api/admin/users/usr_target", `{"avatarReset":true}`); w.Code != http.StatusOK {
+		t.Fatalf("avatar reset failed: %d %s", w.Code, w.Body.String())
+	}
+	var after User
+	if err := app.DB.First(&after, "id = ?", "usr_target").Error; err != nil {
+		t.Fatal(err)
+	}
+	if after.AvatarDataURL != "" {
+		t.Fatalf("avatar should be cleared, got %q", after.AvatarDataURL)
+	}
+
+	if w := patch("/api/admin/users/usr_target/password", `{"newPassword":"admin-reset-1"}`); w.Code != http.StatusOK {
+		t.Fatalf("password reset failed: %d %s", w.Code, w.Body.String())
+	}
+	if w := patch("/api/admin/users/usr_target/password", `{"newPassword":"short"}`); w.Code != http.StatusBadRequest {
+		t.Fatalf("short password should be rejected: %d", w.Code)
+	}
+	req := httptest.NewRequest(http.MethodPost, "/api/auth/login", bytes.NewBufferString(`{"email":"target@example.com","password":"admin-reset-1"}`))
+	req.Header.Set("Content-Type", "application/json")
+	w := httptest.NewRecorder()
+	router.ServeHTTP(w, req)
+	if w.Code != http.StatusOK {
+		t.Fatalf("login with admin-reset password failed: %d %s", w.Code, w.Body.String())
+	}
+
+	// The admin cannot demote themselves out of the panel.
+	var me User
+	if err := app.DB.First(&me, "email = ?", "admin-maint@example.com").Error; err != nil {
+		t.Fatal(err)
+	}
+	if w := patch("/api/admin/users/"+me.ID, `{"role":"student"}`); w.Code != http.StatusBadRequest {
+		t.Fatalf("self demotion should be rejected: %d %s", w.Code, w.Body.String())
 	}
 }
 

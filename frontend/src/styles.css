@@ -1708,7 +1708,7 @@ input:read-only:not([type="file"]) {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-bottom: 18px;
+  margin-bottom: 4px;
 }
 
 .auth-brand .brand-mark { width: 40px; height: 40px; flex-basis: 40px; border-radius: 10px; }
@@ -1716,7 +1716,7 @@ input:read-only:not([type="file"]) {
 
 .auth-greet {
   display: inline-block;
-  margin-top: 18px;
+  margin-top: 14px;
   padding: 7px 16px;
   border-radius: 999px;
   background: color-mix(in srgb, var(--accent) 10%, transparent);
@@ -1729,16 +1729,19 @@ input:read-only:not([type="file"]) {
   font-size: var(--text-display);
   font-weight: 700;
   line-height: 1.08;
-  margin: 12px 0;
+  margin: 18px 0 14px;
   letter-spacing: -0.03em;
 }
 
 .auth-copy p {
   font-size: var(--text-lg);
   color: var(--muted);
-  line-height: 1.5;
+  line-height: 1.7;
   max-width: 520px;
 }
+
+/* Each source line renders as its own paragraph (Login splits on \n). */
+.auth-copy p + p { margin-top: 12px; }
 
 .badge {
   display: inline-block;
@@ -1752,9 +1755,33 @@ input:read-only:not([type="file"]) {
   letter-spacing: 0.04em;
 }
 
-.auth-card { padding: 20px; display: grid; gap: 12px; }
+.auth-card { padding: 24px 20px; display: grid; gap: 14px; }
 .auth-card.center { width: min(420px, 100%); display: grid; gap: 12px; justify-items: center; }
+/* A real card heading, not just bold body text. */
+.auth-card-title {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  text-align: center;
+  margin: 2px 0 4px;
+}
 .auth-form { display: grid; gap: 12px; }
+
+/* Divider between the email form and the Microsoft button below it. */
+.auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--muted);
+  font-size: var(--text-sm);
+}
+.auth-divider::before,
+.auth-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
 
 /* Official Microsoft sign-in button: white card, neutral border, brand mark left. */
 .entra-button {
@@ -2259,9 +2286,33 @@ input:read-only:not([type="file"]) {
 .student-row span strong, .student-row span small { display: block; }
 .student-row small { color: var(--muted); }
 /* Inline rename: name cell becomes input + confirm/cancel actions. */
-.student-name { display: flex; align-items: center; gap: 8px; min-width: 0; flex-wrap: wrap; }
-.student-name strong { overflow: hidden; text-overflow: ellipsis; }
+.student-name { display: flex; align-items: center; gap: 10px; min-width: 0; flex-wrap: wrap; }
+.student-name .student-id { min-width: 0; }
+.student-name .student-id strong { overflow: hidden; text-overflow: ellipsis; }
 .student-name input { width: 150px; }
+
+/* Admin user-edit modal: identity block + support-action sections. */
+.user-edit-head { display: flex; align-items: center; gap: 12px; }
+.user-edit-head .avatar { width: 44px; height: 44px; flex-basis: 44px; font-size: 15px; }
+.user-edit-head strong, .user-edit-head small { display: block; }
+.user-edit-head small { color: var(--muted); }
+.modal-section {
+  border-top: 1px solid var(--line);
+  padding-top: 12px;
+  display: grid;
+  gap: 10px;
+}
+
+/* Obvious "locked" state for fields the current user cannot touch (e.g.
+   changing your own role), instead of a barely-dimmed native disabled. */
+select:disabled,
+input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  border-style: dashed;
+  background: var(--surface);
+  color: var(--muted);
+}
 .accuracy-list { display: grid; gap: 10px; }
 .accuracy-list > div { display: grid; grid-template-columns: minmax(0, 1fr) 90px 60px; gap: 10px; align-items: center; }
 .accuracy-list span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 600; font-size: var(--text-base); }

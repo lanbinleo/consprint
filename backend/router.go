@@ -39,6 +39,7 @@ func (a *App) Router() *gin.Engine {
 	protected.Use(a.auth())
 	protected.GET("/me", a.me)
 	protected.PATCH("/me", a.updateMe)
+	protected.PATCH("/me/password", a.updateMyPassword)
 	protected.GET("/dashboard", a.dashboard)
 	protected.GET("/dashboard/summary", a.dashboardSummary)
 	protected.GET("/dashboard/progress", a.dashboardProgress)
@@ -105,6 +106,7 @@ func (a *App) Router() *gin.Engine {
 	admin.POST("/import/run", a.importRun)
 	admin.GET("/admin/users", a.listUsers)
 	admin.PATCH("/admin/users/:id", a.updateUser)
+	admin.PATCH("/admin/users/:id/password", a.adminResetPassword)
 	// /files serves uploaded note materials (PDFs, images) from the data dir.
 	// It must stay public: <iframe>/<img> subresources cannot carry the
 	// Authorization header. /avatars and /fonts fix the production binary
@@ -114,11 +116,19 @@ func (a *App) Router() *gin.Engine {
 		filesDir = filepath.Join("data", "public")
 	}
 	r.Static("/files", filesDir)
+	// DiceBear default avatars and the theme fonts are content-stable files:
+	// cache them hard so repeat visits do not re-download them.
+	staticWithCache := func(urlPrefix, dir string) {
+		group := r.Group(urlPrefix, func(c *gin.Context) {
+			c.Header("Cache-Control", "public, max-age=604800, immutable")
+		})
+		group.Static("/", dir)
+	}
 	if _, err := os.Stat("frontend/public/avatars"); err == nil {
-		r.Static("/avatars", "frontend/public/avatars")
+		staticWithCache("/avatars", "frontend/public/avatars")
 	}
 	if _, err := os.Stat("frontend/public/fonts"); err == nil {
-		r.Static("/fonts", "frontend/public/fonts")
+		staticWithCache("/fonts", "frontend/public/fonts")
 	}
 	if _, err := os.Stat("frontend/dist/index.html"); err == nil {
 		r.Static("/assets", "frontend/dist/assets")

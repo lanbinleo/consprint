@@ -25,6 +25,11 @@ type User struct {
 	EntraOID      *string        `gorm:"column:entra_oid;uniqueIndex" json:"-"`
 	AvatarDataURL string         `json:"avatarDataUrl"`
 	PasswordHash  string         `gorm:"not null" json:"-"`
+	// PasswordSetAt marks a password the user chose themselves (profile set /
+	// change). Local accounts implicitly have one from registration; Entra
+	// accounts start with an unguessable random hash and only become
+	// email-loginable after they set a password.
+	PasswordSetAt *time.Time     `json:"-"`
 	CreatedAt     time.Time      `json:"createdAt"`
 	UpdatedAt     time.Time      `json:"updatedAt"`
 	DeletedAt     gorm.DeletedAt `gorm:"index" json:"-"`

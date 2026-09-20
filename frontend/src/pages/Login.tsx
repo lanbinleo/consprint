@@ -18,6 +18,10 @@ export function Login() {
   const [busy, setBusy] = useState(false)
 
   const entraEnabled = meta?.entra ?? false
+  // Whenever Microsoft sign-in is available, the email form is sign-in only —
+  // registration goes through Microsoft. (Production also refuses email
+  // registration server-side; without Entra the tab stays so the app remains
+  // usable.)
 
   async function submit() {
     setBusy(true)
@@ -34,6 +38,19 @@ export function Login() {
     }
   }
 
+  const entraButton = (
+    <a className="entra-button" href="/api/auth/entra/login">
+      {/* Official Microsoft four-square brand mark */}
+      <svg className="ms-mark" width="18" height="18" viewBox="0 0 23 23" aria-hidden="true">
+        <path fill="#f25022" d="M1 1h10v10H1z" />
+        <path fill="#7fba00" d="M12 1h10v10H12z" />
+        <path fill="#00a4ef" d="M1 12h10v10H1z" />
+        <path fill="#ffb900" d="M12 12h10v10H12z" />
+      </svg>
+      {t.microsoftSignIn}
+    </a>
+  )
+
   return (
     <main className="auth-page">
       <section className="auth-panel">
@@ -46,70 +63,76 @@ export function Login() {
           </div>
           <div className="auth-greet">{t.authBubble}</div>
           <h1>{t.authTitle}</h1>
-          <p>{t.authCopy}</p>
+          {t.authCopy
+            .split('\n')
+            .filter(Boolean)
+            .map((para, index) => (
+              <p key={index}>{para}</p>
+            ))}
         </div>
         <div className="auth-card">
-          {entraEnabled && (
+          <h2 className="auth-card-title">{t.signInOrCreate}</h2>
+          {entraEnabled && !showLocal ? (
             <>
-              <a className="entra-button" href="/api/auth/entra/login">
-                {/* Official Microsoft four-square brand mark */}
-                <svg className="ms-mark" width="18" height="18" viewBox="0 0 23 23" aria-hidden="true">
-                  <path fill="#f25022" d="M1 1h10v10H1z" />
-                  <path fill="#7fba00" d="M12 1h10v10H12z" />
-                  <path fill="#00a4ef" d="M1 12h10v10H1z" />
-                  <path fill="#ffb900" d="M12 12h10v10H12z" />
-                </svg>
-                {t.microsoftSignIn}
-              </a>
-              {!showLocal && (
-                <button className="link-button" onClick={() => setShowLocal(true)}>
-                  {t.localLogin}
-                </button>
-              )}
+              {entraButton}
+              <button className="link-button" onClick={() => setShowLocal(true)}>
+                {t.localLogin}
+              </button>
             </>
-          )}
-          {(showLocal || !entraEnabled) && (
-            <form
-              className="auth-form"
-              onSubmit={(event) => {
-                event.preventDefault()
-                void submit()
-              }}
-            >
-              <div className="segmented">
-                <button type="button" className={mode === 'login' ? 'active' : ''} onClick={() => setMode('login')}>
-                  {t.signIn}
+          ) : (
+            <>
+              <form
+                className="auth-form"
+                onSubmit={(event) => {
+                  event.preventDefault()
+                  void submit()
+                }}
+              >
+                {!entraEnabled && (
+                  <div className="segmented">
+                    <button type="button" className={mode === 'login' ? 'active' : ''} onClick={() => setMode('login')}>
+                      {t.signIn}
+                    </button>
+                    <button type="button" className={mode === 'register' ? 'active' : ''} onClick={() => setMode('register')}>
+                      {t.register}
+                    </button>
+                  </div>
+                )}
+                {!entraEnabled && mode === 'register' && (
+                  <>
+                    <label>
+                      {t.name}
+                      <input placeholder="Student" value={name} onChange={(e) => setName(e.target.value)} />
+                    </label>
+                    <label>
+                      {t.inviteCode}
+                      <input value={inviteCode} onChange={(e) => setInviteCode(e.target.value)} />
+                    </label>
+                  </>
+                )}
+                <label>
+                  {t.email}
+                  <input type="email" placeholder="student@tsinglan.org" value={email} onChange={(e) => setEmail(e.target.value)} />
+                </label>
+                <label>
+                  {t.password}
+                  <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                </label>
+                {error && <div className="error">{error}</div>}
+                <button type="submit" className="primary" disabled={busy}>
+                  {busy ? <Loader2 className="spin" size={16} /> : null}
+                  {!entraEnabled && mode === 'register' ? t.createAccount : t.signIn}
                 </button>
-                <button type="button" className={mode === 'register' ? 'active' : ''} onClick={() => setMode('register')}>
-                  {t.register}
-                </button>
-              </div>
-              {mode === 'register' && (
+              </form>
+              {entraEnabled && (
                 <>
-                  <label>
-                    {t.name}
-                    <input placeholder="Student" value={name} onChange={(e) => setName(e.target.value)} />
-                  </label>
-                  <label>
-                    {t.inviteCode}
-                    <input value={inviteCode} onChange={(e) => setInviteCode(e.target.value)} />
-                  </label>
+                  <div className="auth-divider">
+                    <span>{t.orDivider}</span>
+                  </div>
+                  {entraButton}
                 </>
               )}
-              <label>
-                {t.email}
-                <input type="email" placeholder="student@tsinglan.org" value={email} onChange={(e) => setEmail(e.target.value)} />
-              </label>
-              <label>
-                {t.password}
-                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-              </label>
-              {error && <div className="error">{error}</div>}
-              <button type="submit" className="primary" disabled={busy}>
-                {busy ? <Loader2 className="spin" size={16} /> : null}
-                {mode === 'register' ? t.createAccount : t.signIn}
-              </button>
-            </form>
+            </>
           )}
         </div>
       </section>
