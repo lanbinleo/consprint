@@ -49,8 +49,15 @@ export async function syncConcepts(local: ConceptSnapshot | null, deps: SyncDeps
     rows = [...byId.values()]
     if (rows.length !== version.conceptCount) {
       // A concept was deleted (nothing bumps updated_at on delete), so the
-      // delta cannot express it — rebuild from a full fetch.
-      rows = (await deps.fetchFull()).map((concept) => ({ ...concept, state: defaultState(concept.id) }))
+      // delta cannot express it — rebuild from a full fetch. The cached states
+      // carry over by id: a deletion does not bump stateVersion, so the states
+      // sync below will not run, and default states here would wipe every
+      // mark from the snapshot.
+      const cachedState = new Map(local.rows.map((row) => [row.id, row.state]))
+      rows = (await deps.fetchFull()).map((concept) => ({
+        ...concept,
+        state: cachedState.get(concept.id) ?? defaultState(concept.id),
+      }))
     }
   }
   if (!local || local.stateVersion !== version.stateVersion) {

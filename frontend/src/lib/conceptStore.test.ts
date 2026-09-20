@@ -109,14 +109,19 @@ describe('syncConcepts', () => {
     expect(result.rows.find((row) => row.id === 'b')?.state.status).toBe('')
   })
 
-  it('deleted concept (count mismatch after delta): falls back to a full fetch', async () => {
-    const local = snapshot([markedRow('a', 'Term A', ''), markedRow('b', 'Term B', '')])
+  it('deleted concept (count mismatch after delta): falls back to a full fetch, keeping cached marks', async () => {
+    const local = snapshot([markedRow('a', 'Term A', 'fuzzy'), markedRow('b', 'Term B', '')])
     const { deps } = makeDeps(version({ contentVersion: 200, conceptCount: 1 }), [concept('a', 'Term A')], [])
     const result = await syncConcepts(local, deps)
     expect(deps.fetchDelta).toHaveBeenCalledTimes(1)
     expect(deps.fetchFull).toHaveBeenCalledTimes(1)
+    expect(deps.fetchStates).not.toHaveBeenCalled() // a deletion does not bump stateVersion
     expect(result.rows).toHaveLength(1)
     expect(result.rows[0].id).toBe('a')
+    // Resetting to default states here would wipe the user's marks from the
+    // snapshot (server truth only returns with the next states sync).
+    expect(result.rows[0].state.status).toBe('fuzzy')
+    expect(result.rows[0].state.shortTermReview).toBe(true)
   })
 
   it('stateVersion change: states recalibrate, unlisted rows reset to default', async () => {
