@@ -658,11 +658,9 @@ a.secondary, a.primary { cursor: pointer; }
 .weak-list small { color: var(--muted); }
 
 /* ---- Dashboard boards: announcements, greeting, calendar, stars ---- */
-/* The announcements board is the primary top-region element: 55% of the
-   hero row (greeting gets 45%). */
 .boards-hero {
   display: grid;
-  grid-template-columns: minmax(0, 45fr) minmax(0, 55fr);
+  grid-template-columns: minmax(0, 1fr) 400px;
   gap: 12px;
   margin-top: 12px;
   align-items: stretch;
@@ -736,19 +734,15 @@ a.secondary, a.primary { cursor: pointer; }
   overflow-y: auto;
   align-content: start;
   border-top: 0;
-  margin: 0 2px;
-  padding: 6px 10px;
-  border-radius: var(--radius-md);
+  padding: 4px 6px 8px 0;
   cursor: pointer;
-  transition: background 140ms ease;
+  gap: 12px;
 }
-
-.ann-track .announcement:hover { background: var(--surface-soft); }
 
 .ann-track .announcement:focus-visible {
   outline: 2px solid var(--accent-line);
   outline-offset: -2px;
-  background: var(--surface-soft);
+  border-radius: var(--radius-sm);
 }
 
 /* Header row: title/meta on the left, the zoom affordance on the right. */
@@ -759,30 +753,28 @@ a.secondary, a.primary { cursor: pointer; }
   gap: 8px;
 }
 
-.announcement .ann-heading { min-width: 0; display: grid; gap: 4px; }
+.announcement .ann-heading { min-width: 0; display: grid; gap: 6px; }
 
 .announcement h4 { margin: 0; font-size: var(--text-md); }
 
+/* The zoom button is the explicit clickable affordance (the card itself has
+   no hover tint — it would read as a card inside the card). */
 .ann-zoom {
   flex: 0 0 auto;
   display: grid;
   place-items: center;
-  border: 0;
+  border: 1px solid var(--line);
+  background: var(--surface-soft);
   padding: 5px;
   border-radius: var(--radius-sm);
-  background: transparent;
   color: var(--muted);
-  opacity: 0.65;
-  transition: opacity 140ms ease, background 140ms ease, color 140ms ease, transform 140ms ease;
+  transition: background 140ms ease, color 140ms ease, border-color 140ms ease;
 }
 
-.announcement:hover .ann-zoom,
-.ann-zoom:focus-visible { opacity: 1; }
-
 .ann-zoom:hover {
+  border-color: var(--accent-line);
   background: var(--accent-soft);
   color: var(--accent-strong);
-  transform: scale(1.08);
 }
 
 .ann-dots {
@@ -810,7 +802,7 @@ a.secondary, a.primary { cursor: pointer; }
   border-top: 1px solid var(--line);
   padding-top: 12px;
   display: grid;
-  gap: 6px;
+  gap: 12px;
 }
 
 .announcement h4 { margin: 0; font-size: var(--text-md); }
@@ -823,7 +815,10 @@ a.secondary, a.primary { cursor: pointer; }
   font-size: var(--text-xs);
 }
 
-.announcement p { margin: 0; }
+/* Roomier reading: taller line height, and a paragraph gap between body
+   parts so multi-paragraph announcements breathe inside the card. */
+.announcement p { margin: 0; line-height: 1.7; }
+.announcement p + p { margin-top: 8px; }
 
 .pin-flag {
   display: inline-flex;
