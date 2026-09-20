@@ -18,6 +18,8 @@ import { Terms } from './pages/Terms'
 import { Flashcards } from './pages/Flashcards'
 import { Notes } from './pages/Notes'
 import { Practice } from './pages/Practice'
+import { PracticeHistory } from './pages/PracticeHistory'
+import { AttemptReviewPage } from './pages/AttemptReviewPage'
 import { PracticeRunner } from './pages/PracticeRunner'
 import { Writing } from './pages/Writing'
 import { WritingRunner } from './pages/WritingRunner'
@@ -89,6 +91,8 @@ const router = createBrowserRouter(
         <Route path="notes" element={<Notes />} />
         <Route path="practice" element={<Practice />} />
         <Route path="practice/writing" element={<Writing />} />
+        <Route path="practice/history" element={<PracticeHistory />} />
+        <Route path="practice/history/:attemptId" element={<AttemptReviewPage />} />
         <Route path="practice/:setId" element={<PracticeRunner />} />
         <Route path="wrongbook" element={<WrongBook />} />
         <Route path="profile" element={<Profile />} />
