@@ -84,10 +84,15 @@ func (a *App) reviewNext(c *gin.Context) {
 	if scope == nil {
 		return
 	}
-	q := scope.Order("s.short_term_review desc, case s.status when 'unknown' then 0 when 'fuzzy' then 1 when 'proficient' then 2 else 3 end asc, random()")
+	// Chained Order calls on the same scope APPEND order clauses, so the two
+	// orderings must be chosen before the statement is touched — putting the
+	// outline order after the random one would leave random() ahead of the
+	// position columns and the deck effectively unordered.
+	ordering := "s.short_term_review desc, case s.status when 'unknown' then 0 when 'fuzzy' then 1 when 'proficient' then 2 else 3 end asc, random()"
 	if order == "outline" {
-		q = scope.Order("units.position asc, topics.position asc, concepts.position asc")
+		ordering = "units.position asc, topics.position asc, concepts.position asc"
 	}
+	q := scope.Order(ordering)
 	ids := make([]string, 0)
 	if err := q.Limit(limit).Pluck("concepts.id", &ids).Error; err != nil {
 		c.JSON(500, gin.H{"error": "could not build deck"})

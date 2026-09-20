@@ -139,6 +139,35 @@ func TestReviewNextTopicIDsFilter(t *testing.T) {
 	}
 }
 
+// order=outline must reproduce unit/topic/position order exactly. The two
+// orderings are mutually exclusive: appending the outline order after the
+// random one leaves random() ahead of the position columns, so the deck comes
+// out random despite the request.
+func TestReviewNextOutlineOrder(t *testing.T) {
+	app, router, token := newFlashcardTestApp(t)
+
+	var expected []string
+	if err := app.DB.Raw(`
+		select c.id from concepts c
+		join units u on u.id = c.unit_id
+		join topics tp on tp.id = c.topic_id
+		order by u.position asc, tp.position asc, c.position asc
+		limit 200
+	`).Scan(&expected).Error; err != nil {
+		t.Fatal(err)
+	}
+
+	rows := reviewNextRequest(t, router, token, "limit=200&order=outline")
+	if len(rows) != len(expected) {
+		t.Fatalf("expected %d cards, got %d", len(expected), len(rows))
+	}
+	for i, row := range rows {
+		if row.ConceptID != expected[i] {
+			t.Fatalf("position %d: got %s, want %s — deck is not in outline order", i, row.ConceptID, expected[i])
+		}
+	}
+}
+
 func TestReviewNextStatusFilters(t *testing.T) {
 	app, router, token := newFlashcardTestApp(t)
 	topic, total := topicWithConcepts(t, app, 0)
