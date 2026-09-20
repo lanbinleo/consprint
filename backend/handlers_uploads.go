@@ -96,13 +96,35 @@ func (a *App) uploadQuestionImage(c *gin.Context) {
 		TooLarge: "image exceeds the 5MB limit",
 		BadType:  "only png, jpg, gif, and webp images are supported",
 		Name: func(header *multipart.FileHeader, ext string) string {
-			var b [4]byte
-			_, _ = rand.Read(b[:])
-			return fmt.Sprintf("qimg-%d-%s%s", time.Now().Unix(), hex.EncodeToString(b[:]), ext)
+			return questionImageName(ext)
 		},
 	})
 	if !ok {
 		return
 	}
 	c.JSON(200, gin.H{"url": "/files/" + name})
+}
+
+// questionImageName builds the unguessable stored filename for a question
+// image (shared by the upload endpoint and base64 localization).
+func questionImageName(ext string) string {
+	var b [4]byte
+	_, _ = rand.Read(b[:])
+	return fmt.Sprintf("qimg-%d-%s%s", time.Now().Unix(), hex.EncodeToString(b[:]), ext)
+}
+
+// storeImageBytes writes raw image bytes (already size/type-checked) under
+// PublicDir and returns the stored filename.
+func (a *App) storeImageBytes(raw []byte, ext string) (string, bool) {
+	if len(raw) == 0 || len(raw) > maxQuestionImageBytes {
+		return "", false
+	}
+	name := questionImageName(ext)
+	if err := os.MkdirAll(a.PublicDir, 0o755); err != nil {
+		return "", false
+	}
+	if err := os.WriteFile(filepath.Join(a.PublicDir, name), raw, 0o644); err != nil {
+		return "", false
+	}
+	return name, true
 }

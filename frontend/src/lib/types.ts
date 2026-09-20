@@ -243,6 +243,7 @@ export type QuestionDraft = {
   topic?: string
   tags?: string[]
   concepts?: string[]
+  stimulus?: { title: string; kind: string; documents: { title: string; text: string }[] }
   sourceNote?: string
 }
 

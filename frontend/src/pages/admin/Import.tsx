@@ -125,7 +125,9 @@ export function Import() {
                 <span>
                   <strong>{item.stem.slice(0, 140)}</strong>
                   <small>
-                    {item.type} · {item.answerKey ?? '—'} · {t.tags}: {(item.tags ?? []).join('; ')}
+                    {item.type === 'mcq' ? t.mcq : item.format === 'aaq' ? t.formatAaq : item.format === 'ebq' ? t.formatEbg : `${t.subjective} · FRQ`}
+                    {item.stimulus ? ` · ${t.stimulus}: ${item.stimulus.title}` : item.stimulusId ? ` · ${t.stimulus}: ✓` : ''} ·{' '}
+                    {item.answerKey ?? '—'} · {t.tags}: {(item.tags ?? []).join('; ')}
                   </small>
                 </span>
               </label>

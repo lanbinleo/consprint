@@ -336,7 +336,7 @@ export const copy = {
     imageUploading: 'Uploading…',
     // import
     importTitle: 'Import questions',
-    importHint: 'Upload a CSV (Excel-friendly) or JSON file. Everything is validated before anything is saved.',
+    importHint: 'Upload a CSV (Excel-friendly) or JSON file. Everything is validated before anything is saved. JSON rows also support format (aaq/ebq), inline shared stimulus, concepts, and base64 images.',
     uploadFile: 'Choose file',
     importTemplate: 'Download CSV template',
     previewResult: 'Preview',
@@ -764,7 +764,7 @@ export const copy = {
     addImage: '插图',
     imageUploading: '上传中…',
     importTitle: '导入题目',
-    importHint: '上传 CSV（Excel 友好）或 JSON 文件，入库前会先完整校验。',
+    importHint: '上传 CSV（Excel 友好）或 JSON 文件，入库前会先完整校验。JSON 行还支持 format（aaq/ebq）、内联共享材料、concepts 关联和 base64 图片。',
     uploadFile: '选择文件',
     importTemplate: '下载 CSV 模板',
     previewResult: '预览',

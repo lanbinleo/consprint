@@ -1,12 +1,14 @@
 package backend
 
 import (
+	"encoding/base64"
 	"encoding/csv"
 	"encoding/json"
 	"errors"
 	"fmt"
 	"io"
 	"mime/multipart"
+	"regexp"
 	"strings"
 	"sync"
 	"time"
@@ -45,12 +47,22 @@ type QuestionPart struct {
 	Points *int `json:"points"`
 }
 
+// stimulusDraft is an inline shared-material spec inside an import row;
+// commit resolves it find-or-create by title so a passage shared by several
+// rows is stored once.
+type stimulusDraft struct {
+	Title     string             `json:"title"`
+	Kind      string             `json:"kind"`
+	Documents []StimulusDocument `json:"documents"`
+}
+
 // questionDraft is the normalized shape produced by both import channels.
 type questionDraft struct {
 	Type        string             `json:"type"`
 	Format      string             `json:"format"`
 	Stem        string             `json:"stem"`
 	StimulusID  string             `json:"stimulusId"`
+	Stimulus    *stimulusDraft     `json:"stimulus"`
 	Materials   []QuestionMaterial `json:"materials"`
 	Choices     []QuestionChoice   `json:"choices"`
 	AnswerKey   string             `json:"answerKey"`
@@ -274,8 +286,23 @@ func validateQuestionDraft(draft *questionDraft) error {
 	if !validQuestionFormat(draft.Format) {
 		return errors.New("format must be frq, aaq, or ebq")
 	}
-	if (draft.Format == QuestionFormatAAQ || draft.Format == QuestionFormatEBQ) && strings.TrimSpace(draft.StimulusID) == "" {
+	if (draft.Format == QuestionFormatAAQ || draft.Format == QuestionFormatEBQ) && strings.TrimSpace(draft.StimulusID) == "" && draft.Stimulus == nil {
 		return errors.New(draft.Format + " questions need a shared stimulus (article / sources)")
+	}
+	if draft.Stimulus != nil {
+		kind := strings.ToLower(strings.TrimSpace(draft.Stimulus.Kind))
+		if kind == "" {
+			kind = "passage"
+		}
+		if strings.TrimSpace(draft.Stimulus.Title) == "" {
+			return errors.New("stimulus: title is required")
+		}
+		if !validStimulusKind(kind) {
+			return errors.New("stimulus: kind must be passage, article, or sources")
+		}
+		if len(normalizeStimulusDocuments(draft.Stimulus.Documents)) == 0 {
+			return errors.New("stimulus: at least one document with text is required")
+		}
 	}
 	if (draft.Format == QuestionFormatAAQ || draft.Format == QuestionFormatEBQ) && len(draft.Parts) == 0 {
 		return errors.New(draft.Format + " questions need per-part prompts (parts)")
@@ -366,17 +393,27 @@ func (a *App) createQuestionFromDraft(draft questionDraft, source, createdBy str
 	if err != nil {
 		return nil, err
 	}
+	if stimulusID == nil && draft.Stimulus != nil {
+		stimulusID, err = a.findOrCreateStimulus(*draft.Stimulus, createdBy)
+		if err != nil {
+			return nil, err
+		}
+	}
 	concepts, err := a.resolveConcepts(draft.Concepts)
 	if err != nil {
 		return nil, err
+	}
+	materials := make([]QuestionMaterial, 0, len(draft.Materials))
+	for _, material := range draft.Materials {
+		materials = append(materials, QuestionMaterial{Title: material.Title, Text: a.localizeDataImages(material.Text)})
 	}
 	question := Question{
 		ID:          NewID("q"),
 		Type:        draft.Type,
 		Format:      draft.Format,
-		Stem:        draft.Stem,
+		Stem:        a.localizeDataImages(draft.Stem),
 		StimulusID:  stimulusID,
-		Materials:   mustJSON(draft.Materials),
+		Materials:   mustJSON(materials),
 		Choices:     mustJSON(draft.Choices),
 		AnswerKey:   draft.AnswerKey,
 		Explanation: strings.TrimSpace(draft.Explanation),
@@ -398,6 +435,60 @@ func (a *App) createQuestionFromDraft(draft questionDraft, source, createdBy str
 		}
 	}
 	return &question, nil
+}
+
+// findOrCreateStimulus resolves an inline import stimulus by title (case
+// insensitive): rows sharing a passage title share one stimulus.
+func (a *App) findOrCreateStimulus(draft stimulusDraft, createdBy string) (*string, error) {
+	title := strings.TrimSpace(draft.Title)
+	var existing Stimulus
+	if err := a.DB.Where("lower(title) = ?", strings.ToLower(title)).First(&existing).Error; err == nil {
+		id := existing.ID
+		return &id, nil
+	}
+	kind := strings.ToLower(strings.TrimSpace(draft.Kind))
+	if kind == "" {
+		kind = "passage"
+	}
+	docs := normalizeStimulusDocuments(draft.Documents)
+	for i := range docs {
+		docs[i].Text = a.localizeDataImages(docs[i].Text)
+	}
+	stimulus := Stimulus{ID: NewID("sti"), Title: title, Kind: kind, Documents: mustJSON(docs), CreatedBy: createdBy}
+	if err := a.DB.Create(&stimulus).Error; err != nil {
+		return nil, err
+	}
+	return &stimulus.ID, nil
+}
+
+// dataImageRE matches embedded base64 image data URLs inside markdown text.
+var dataImageRE = regexp.MustCompile(`data:image/(png|jpe?g|gif|webp);base64,([A-Za-z0-9+/=\s]+)`)
+
+var dataImageExts = map[string]string{"png": ".png", "jpeg": ".jpg", "jpg": ".jpg", "gif": ".gif", "webp": ".webp"}
+
+// localizeDataImages rewrites base64 data URLs embedded in imported markdown
+// into stored /files images, so question payloads stay small and cacheable.
+// Unparseable or oversized images are left untouched (and will be flagged by
+// review) instead of failing the whole row.
+func (a *App) localizeDataImages(text string) string {
+	if !strings.Contains(text, "data:image/") {
+		return text
+	}
+	return dataImageRE.ReplaceAllStringFunc(text, func(match string) string {
+		sub := dataImageRE.FindStringSubmatch(match)
+		if len(sub) != 3 {
+			return match
+		}
+		raw, err := base64.StdEncoding.DecodeString(strings.Join(strings.Fields(sub[2]), ""))
+		if err != nil {
+			return match
+		}
+		name, ok := a.storeImageBytes(raw, dataImageExts[sub[1]])
+		if !ok {
+			return match
+		}
+		return "/files/" + name
+	})
 }
 
 // resolveStimulusID validates the stimulus reference exists (when set) and
