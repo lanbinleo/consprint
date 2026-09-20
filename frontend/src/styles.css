@@ -3047,3 +3047,17 @@ input:disabled {
   .pane-left { position: static; max-height: 40dvh; }
   .pane-handle { display: none; }
 }
+
+/* Inline-markdown images must fit their container: an oversized upload in an
+   announcement (or question body) otherwise inflates the card and pushes the
+   header/buttons out of place. */
+.announcement img,
+.announcement-detail img,
+.material-block img,
+.preview-stimulus img,
+.preview-stem img,
+.part-form img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius-sm);
+}
