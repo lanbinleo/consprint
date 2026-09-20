@@ -6,7 +6,7 @@ import { api } from '../../lib/api'
 import { useSession } from '../../hooks/session'
 import { Modal } from '../../components/ui'
 import { useUnits } from '../../components/ScopePicker'
-import { InlineMarkdown } from '../../components/InlineMarkdown'
+import { InlineMarkdown, MarkdownText } from '../../components/InlineMarkdown'
 import { kindLabel } from '../../components/StimulusPicker'
 import { questionLabel } from './Questions'
 import { clusterRanges } from '../../lib/questionGrouping'
@@ -462,18 +462,6 @@ export function SetEditor() {
   )
 }
 
-function MarkdownLines({ text }: { text: string }) {
-  return (
-    <>
-      {text.split(/\n/).map((line, i) => (
-        <p key={i}>
-          <InlineMarkdown text={line} />
-        </p>
-      ))}
-    </>
-  )
-}
-
 // Read-only full-question preview used by the bank browser.
 function QuestionPreview({
   question,
@@ -498,18 +486,18 @@ function QuestionPreview({
             {(stimulus.documents ?? []).map((doc, i) => (
               <details key={i} open={i === 0}>
                 <summary>{doc.title || `${t.document} ${i + 1}`}</summary>
-                <MarkdownLines text={doc.text} />
+                <MarkdownText text={doc.text} />
               </details>
             ))}
           </div>
         )}
         <div className="preview-stem">
-          <MarkdownLines text={question.stem} />
+          <MarkdownText text={question.stem} />
         </div>
         {(question.materials ?? []).map((material, i) => (
           <div className="material-block" key={i}>
             {material.title && <strong>{material.title}</strong>}
-            <MarkdownLines text={material.text} />
+            <MarkdownText text={material.text} />
           </div>
         ))}
         {question.type === 'mcq' ? (

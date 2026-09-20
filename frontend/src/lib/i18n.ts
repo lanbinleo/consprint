@@ -25,6 +25,8 @@ export const copy = {
     // common
     save: 'Save',
     saved: 'Saved',
+    saving: 'Saving…',
+    saveRetry: 'Save failed — retry',
     cancel: 'Cancel',
     search: 'Search',
     all: 'All',
@@ -456,6 +458,8 @@ export const copy = {
     loading: '加载中',
     save: '保存',
     saved: '已保存',
+    saving: '保存中…',
+    saveRetry: '保存失败，点击重试',
     cancel: '取消',
     search: '搜索',
     all: '全部',

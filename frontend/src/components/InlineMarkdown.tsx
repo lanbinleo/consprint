@@ -46,3 +46,17 @@ export function renderInlineNodes(nodes: InlineNode[], keyPrefix = ''): ReactNod
 export function InlineMarkdown({ text }: { text: string }) {
   return <>{renderInlineNodes(parseInline(text))}</>
 }
+
+// Multi-line markdown-ish body (question stems, stimulus documents): each
+// line gets inline treatment, so embedded images render inline.
+export function MarkdownText({ text }: { text: string }) {
+  return (
+    <>
+      {text.split(/\n/).map((line, i) => (
+        <p key={i}>
+          <InlineMarkdown text={line} />
+        </p>
+      ))}
+    </>
+  )
+}

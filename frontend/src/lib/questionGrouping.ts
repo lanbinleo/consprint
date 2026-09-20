@@ -41,3 +41,33 @@ export function clusterRanges<T extends { stimulusId?: string | null }>(items: T
   }
   return ranges
 }
+
+// A render unit of the runner: standalone question, MCQ cluster sharing a
+// passage, or one AAQ/EBQ composite question next to its stimulus.
+export type RenderItem<T> =
+  | { kind: 'single'; question: T }
+  | { kind: 'mcq-set'; stimulusId: string; questions: T[] }
+  | { kind: 'aaq'; stimulusId: string; question: T }
+  | { kind: 'ebq'; stimulusId: string; question: T }
+
+export function buildRenderItems<T extends { type: string; format?: string; stimulusId?: string | null }>(items: T[]): RenderItem<T>[] {
+  const out: RenderItem<T>[] = []
+  for (const range of clusterRanges(items)) {
+    const cluster = items.slice(range.start, range.start + range.length)
+    if (!range.stimulusId) {
+      for (const question of cluster) out.push({ kind: 'single', question })
+      continue
+    }
+    const composite = cluster.find((question) => question.type !== 'mcq')
+    if (composite && (composite.format === 'aaq' || composite.format === 'ebq')) {
+      // AAQ/EBQ is one composite question; MCQ siblings sharing the same
+      // stimulus render as their own set block right after it.
+      out.push({ kind: composite.format, stimulusId: range.stimulusId, question: composite })
+      const mcqs = cluster.filter((question) => question.type === 'mcq')
+      if (mcqs.length > 0) out.push({ kind: 'mcq-set', stimulusId: range.stimulusId, questions: mcqs })
+      continue
+    }
+    out.push({ kind: 'mcq-set', stimulusId: range.stimulusId, questions: cluster })
+  }
+  return out
+}
