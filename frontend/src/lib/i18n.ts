@@ -89,6 +89,7 @@ export const copy = {
     // dashboard boards (mascot, announcements, calendar, stars)
     announcements: 'Announcements',
     announcementsEmpty: 'No announcements yet — this board is warming up.',
+    viewDetail: 'View announcement',
     pinned: 'Pinned',
     starredTitle: 'Starred terms',
     starredEmpty: 'No starred terms yet — tap the star on any term card.',
@@ -527,6 +528,7 @@ export const copy = {
     // dashboard boards (mascot, announcements, calendar, stars)
     announcements: '公告栏',
     announcementsEmpty: '还没有公告，看板先帮你占着位子。',
+    viewDetail: '查看公告详情',
     pinned: '置顶',
     starredTitle: '收藏的词条',
     starredEmpty: '还没有收藏的词条——在词条卡片上点星星就能收进来。',

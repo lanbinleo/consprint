@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router'
 import { useQuery } from '@tanstack/react-query'
-import { CalendarDays, ChevronLeft, ChevronRight, ClipboardList, History, ListChecks, Megaphone, Pin, Sparkles, Star } from 'lucide-react'
+import { CalendarDays, ChevronLeft, ChevronRight, ClipboardList, History, ListChecks, Maximize2, Megaphone, Pin, Sparkles, Star } from 'lucide-react'
 import { api } from '../lib/api'
 import { examCountdown, formatDateTime } from '../lib/format'
 import { useSession } from '../hooks/session'
@@ -54,6 +54,7 @@ export function Dashboard() {
   const locale = lang === 'zh' ? 'zh-CN' : 'en-US'
   const [month, setMonth] = useState(() => isoDate(new Date()).slice(0, 7))
   const [openDay, setOpenDay] = useState<string | null>(null)
+  const [openAnnouncement, setOpenAnnouncement] = useState<Announcement | null>(null)
 
   // Hierarchical keys: other pages invalidate the shared ['dashboard'] prefix
   // after marking concepts or toggling stars.
@@ -144,7 +145,7 @@ export function Dashboard() {
               <p>{t.announcementsEmpty}</p>
             </div>
           ) : (
-            <AnnouncementCarousel items={announcements.data ?? []} locale={locale} />
+            <AnnouncementCarousel items={announcements.data ?? []} locale={locale} onOpen={setOpenAnnouncement} />
           )}
         </div>
       </div>
@@ -256,6 +257,29 @@ export function Dashboard() {
           )}
         </div>
       </div>
+      {openAnnouncement && (
+        <Modal title={openAnnouncement.title} onClose={() => setOpenAnnouncement(null)}>
+          <div className="announcement-detail">
+            <small className="ann-detail-meta">
+              {openAnnouncement.pinned && (
+                <span className="pin-flag">
+                  <Pin size={11} /> {t.pinned}
+                </span>
+              )}
+              {openAnnouncement.authorName ? `${openAnnouncement.authorName} · ` : ''}
+              {formatDateTime(openAnnouncement.createdAt)}
+            </small>
+            {openAnnouncement.body
+              .split('\n')
+              .filter((line) => line.trim() !== '')
+              .map((line, index) => (
+                <p key={index}>
+                  <InlineMarkdown text={line} />
+                </p>
+              ))}
+          </div>
+        </Modal>
+      )}
       {openDay && (
         <Modal
           title={new Date(`${openDay}T00:00`).toLocaleDateString(locale, { month: 'long', day: 'numeric', weekday: 'long' })}
@@ -291,7 +315,16 @@ function monthTitle(month: string, locale: string) {
 
 // Announcement carousel: one announcement at a time, auto-advances every 6s
 // with a horizontal swipe, pauses while hovered, and the dots jump manually.
-function AnnouncementCarousel({ items, locale }: { items: Announcement[]; locale: string }) {
+// Clicking a card (or its zoom button) opens the animated detail modal.
+function AnnouncementCarousel({
+  items,
+  locale,
+  onOpen,
+}: {
+  items: Announcement[]
+  locale: string
+  onOpen: (announcement: Announcement) => void
+}) {
   const { t } = useSession()
   const [index, setIndex] = useState(0)
   const [paused, setPaused] = useState(false)
@@ -312,18 +345,44 @@ function AnnouncementCarousel({ items, locale }: { items: Announcement[]; locale
       <div className="ann-carousel" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
         <div className="ann-track" style={{ transform: `translateX(-${index * 100}%)` }}>
           {items.map((announcement) => (
-            <article key={announcement.id} className={`announcement ${announcement.pinned ? 'pinned' : ''}`}>
+            <article
+              key={announcement.id}
+              className={`announcement ${announcement.pinned ? 'pinned' : ''}`}
+              role="button"
+              tabIndex={0}
+              aria-label={`${t.viewDetail}: ${announcement.title}`}
+              onClick={() => onOpen(announcement)}
+              onKeyDown={(event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                  event.preventDefault()
+                  onOpen(announcement)
+                }
+              }}
+            >
               <header>
-                <h4>{announcement.title}</h4>
-                <small>
-                  {announcement.pinned && (
-                    <span className="pin-flag">
-                      <Pin size={11} /> {t.pinned}
-                    </span>
-                  )}
-                  {announcement.authorName ? `${announcement.authorName} · ` : ''}
-                  {new Date(announcement.createdAt).toLocaleDateString(locale, { month: 'short', day: 'numeric' })}
-                </small>
+                <div className="ann-heading">
+                  <h4>{announcement.title}</h4>
+                  <small>
+                    {announcement.pinned && (
+                      <span className="pin-flag">
+                        <Pin size={11} /> {t.pinned}
+                      </span>
+                    )}
+                    {announcement.authorName ? `${announcement.authorName} · ` : ''}
+                    {new Date(announcement.createdAt).toLocaleDateString(locale, { month: 'short', day: 'numeric' })}
+                  </small>
+                </div>
+                <button
+                  className="ann-zoom"
+                  aria-label={t.viewDetail}
+                  title={t.viewDetail}
+                  onClick={(event) => {
+                    event.stopPropagation()
+                    onOpen(announcement)
+                  }}
+                >
+                  <Maximize2 size={14} />
+                </button>
               </header>
               {announcement.body
                 .split('\n')
