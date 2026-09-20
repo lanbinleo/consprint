@@ -53,7 +53,17 @@ export function SetupCard({ children }: { children: ReactNode }) {
 
 // Lightweight dialog: scrim click and Escape close it, clicks inside pass
 // through. Used for the dashboard calendar day details and admin editors.
-export function Modal({ title, onClose, children }: { title: string; onClose: () => void; children: ReactNode }) {
+export function Modal({
+  title,
+  onClose,
+  wide,
+  children,
+}: {
+  title: string
+  onClose: () => void
+  wide?: boolean
+  children: ReactNode
+}) {
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
       if (event.key === 'Escape') onClose()
@@ -63,7 +73,13 @@ export function Modal({ title, onClose, children }: { title: string; onClose: ()
   }, [onClose])
   return (
     <div className="modal-backdrop" onClick={onClose}>
-      <div className="modal" role="dialog" aria-modal="true" aria-label={title} onClick={(event) => event.stopPropagation()}>
+      <div
+        className={wide ? 'modal wide' : 'modal'}
+        role="dialog"
+        aria-modal="true"
+        aria-label={title}
+        onClick={(event) => event.stopPropagation()}
+      >
         <div className="modal-head">
           <h3>{title}</h3>
           <button className="icon-btn" onClick={onClose} aria-label="close">

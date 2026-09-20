@@ -3,9 +3,32 @@ import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { Plus, Search } from 'lucide-react'
 import { api } from '../../lib/api'
 import { useSession } from '../../hooks/session'
-import { Header, ListSkeleton } from '../../components/ui'
+import { Header, ListSkeleton, Modal } from '../../components/ui'
 import { useUnits } from '../../components/ScopePicker'
+import { StimulusPicker } from '../../components/StimulusPicker'
+import { ConceptPicker } from '../../components/ConceptPicker'
+import { ImageTextarea } from '../../components/ImageTextarea'
 import type { Question, QuestionDraft } from '../../lib/types'
+
+type PartEdit = { label: string; prompt: string; referenceAnswer: string; rubric: string; points: string }
+
+// Official College Board scaffolds: AAQ = 6 parts (F is worth 2), EBQ =
+// claim / two pieces of evidence / two explanations.
+const AAQ_SCAFFOLD: PartEdit[] = ['A', 'B', 'C', 'D', 'E', 'F'].map((label, i) => ({
+  label,
+  prompt: '',
+  referenceAnswer: '',
+  rubric: '',
+  points: i === 5 ? '2' : '1',
+}))
+
+const EBQ_SCAFFOLD: PartEdit[] = ['A', 'B', 'C', 'D', 'E'].map((label) => ({
+  label,
+  prompt: '',
+  referenceAnswer: '',
+  rubric: '',
+  points: '',
+}))
 
 export function Questions() {
   const { t } = useSession()
@@ -89,7 +112,7 @@ export function Questions() {
                 <span>
                   <strong>{question.stem.slice(0, 140)}</strong>
                   <small>
-                    {question.type === 'mcq' ? t.mcq : t.subjective} ·{' '}
+                    {questionLabel(t, question)} ·{' '}
                     {question.status === 'published' ? t.published : question.status === 'draft' ? t.draft : t.archived} ·{' '}
                     {(question.tags ?? []).map((tag) => tag.name).join(', ')}
                   </small>
@@ -116,6 +139,18 @@ export function Questions() {
   )
 }
 
+export function questionLabel(
+  t: { mcq: string; subjective: string; formatFrq: string; formatAaq: string; formatEbg: string; formatSet: string },
+  question: Pick<Question, 'type' | 'format' | 'stimulusId'>,
+) {
+  if (question.type === 'mcq') {
+    return question.stimulusId ? `${t.mcq} · ${t.formatSet}` : t.mcq
+  }
+  if (question.format === 'aaq') return t.formatAaq
+  if (question.format === 'ebq') return t.formatEbg
+  return `${t.subjective} · ${t.formatFrq}`
+}
+
 function QuestionEditor({
   question,
   onClose,
@@ -127,7 +162,15 @@ function QuestionEditor({
 }) {
   const { t } = useSession()
   const { data: units = [] } = useUnits()
+  const { data: tagOptions = [] } = useQuery({
+    queryKey: ['admin-tags'],
+    queryFn: async () => (await api.request<{ name: string; questions: number }[] | null>('/api/admin/tags')) ?? [],
+  })
   const [type, setType] = useState<'mcq' | 'subjective'>(question?.type ?? 'mcq')
+  const [format, setFormat] = useState<'' | 'frq' | 'aaq' | 'ebq'>(
+    question?.format || (question?.type === 'subjective' ? 'frq' : ''),
+  )
+  const [stimulusId, setStimulusId] = useState(question?.stimulusId ?? '')
   const [stem, setStem] = useState(question?.stem ?? '')
   const [choices, setChoices] = useState(
     question?.choices?.length ? question.choices : [
@@ -138,20 +181,55 @@ function QuestionEditor({
   const [answerKey, setAnswerKey] = useState(question?.answerKey ?? 'A')
   const [explanation, setExplanation] = useState(question?.explanation ?? '')
   const [materials, setMaterials] = useState(question?.materials?.map((m) => `${m.title} :: ${m.text}`).join('\n') ?? '')
-  const [parts, setParts] = useState(
+  const [parts, setParts] = useState<PartEdit[]>(
     question?.parts?.length
-      ? question.parts.map((part) => ({ label: part.label, prompt: part.prompt, referenceAnswer: part.referenceAnswer ?? '', rubric: (part.rubric ?? []).join('\n') }))
-      : [{ label: 'A', prompt: '', referenceAnswer: '', rubric: '' }],
+      ? question.parts.map((part) => ({
+          label: part.label,
+          prompt: part.prompt,
+          referenceAnswer: part.referenceAnswer ?? '',
+          rubric: (part.rubric ?? []).join('\n'),
+          points: part.points != null ? String(part.points) : '',
+        }))
+      : [{ label: 'A', prompt: '', referenceAnswer: '', rubric: '', points: '' }],
   )
   const [unitRef, setUnitRef] = useState(question?.unitId ?? '')
+  const [topicRef, setTopicRef] = useState(question?.topicId ?? '')
+  const [conceptIds, setConceptIds] = useState<string[]>([])
   const [tags, setTags] = useState((question?.tags ?? []).map((tag) => tag.name).join('; '))
   const [error, setError] = useState('')
   const [busy, setBusy] = useState(false)
 
+  const perPart = type === 'subjective' && (format === 'aaq' || format === 'ebq')
+  const unitTopics = units.find((unit) => unit.id === unitRef)?.topics ?? []
+  const stimulusRequired = perPart
+
+  function switchType(next: 'mcq' | 'subjective') {
+    setType(next)
+    if (next === 'mcq') {
+      setFormat('')
+    } else if (!format) {
+      setFormat('frq')
+    }
+  }
+
+  function switchFormat(next: '' | 'frq' | 'aaq' | 'ebq') {
+    setFormat(next)
+    // Switching to a College Board layout re-seeds the official scaffold
+    // when the parts are still the untouched single default row.
+    const untouched = parts.length === 1 && !parts[0].prompt && !parts[0].referenceAnswer && !parts[0].rubric
+    if (next === 'aaq' && untouched) setParts(AAQ_SCAFFOLD.map((part) => ({ ...part })))
+    if (next === 'ebq' && untouched) setParts(EBQ_SCAFFOLD.map((part) => ({ ...part })))
+  }
+
   function buildDraft(): QuestionDraft {
     const draft: QuestionDraft = {
       type,
+      format: type === 'subjective' ? format : '',
+      stimulusId,
       stem,
+      unit: unitRef,
+      topic: topicRef,
+      concepts: conceptIds,
       tags: tags.split(/[;,]/).map((tag) => tag.trim()).filter(Boolean),
     }
     if (materials.trim()) {
@@ -174,9 +252,9 @@ function QuestionEditor({
         prompt: part.prompt || stem,
         referenceAnswer: part.referenceAnswer,
         rubric: part.rubric.split('\n').map((point) => point.trim()).filter(Boolean),
+        points: part.points.trim() ? Number(part.points) || null : null,
       }))
     }
-    if (unitRef) draft.unit = unitRef
     return draft
   }
 
@@ -199,124 +277,179 @@ function QuestionEditor({
   }
 
   return (
-    <div className="modal-backdrop" onClick={onClose}>
-      <div className="modal wide" onClick={(event) => event.stopPropagation()}>
-        <h3>{question ? t.editQuestion : t.newQuestion}</h3>
+    <Modal wide title={question ? t.editQuestion : t.newQuestion} onClose={onClose}>
+      <div className="segmented inline">
+        <button className={type === 'mcq' ? 'active' : ''} onClick={() => switchType('mcq')}>
+          {t.mcq}
+        </button>
+        <button className={type === 'subjective' ? 'active' : ''} onClick={() => switchType('subjective')}>
+          {t.subjective}
+        </button>
+      </div>
+      {type === 'subjective' && (
         <div className="segmented inline">
-          <button className={type === 'mcq' ? 'active' : ''} onClick={() => setType('mcq')}>
-            {t.mcq}
-          </button>
-          <button className={type === 'subjective' ? 'active' : ''} onClick={() => setType('subjective')}>
-            {t.subjective}
-          </button>
+          {(['frq', 'aaq', 'ebq'] as const).map((option) => (
+            <button key={option} className={format === option ? 'active' : ''} onClick={() => switchFormat(option)}>
+              {option === 'frq' ? t.formatFrq : option === 'aaq' ? t.formatAaq : t.formatEbg}
+            </button>
+          ))}
         </div>
-        <label>
-          {t.stem}
-          <textarea rows={3} value={stem} onChange={(e) => setStem(e.target.value)} />
-        </label>
-        <label>
-          {t.materials} <small className="muted">{t.materialsHint}</small>
-          <textarea rows={3} value={materials} onChange={(e) => setMaterials(e.target.value)} />
-        </label>
-        {type === 'mcq' ? (
-          <>
-            {choices.map((choice, i) => (
-              <div className="choice-edit" key={i}>
-                <input
-                  className="choice-key-input"
-                  value={choice.key}
-                  onChange={(e) => setChoices((rows) => rows.map((row, j) => (i === j ? { ...row, key: e.target.value.toUpperCase() } : row)))}
-                />
-                <input
-                  placeholder={`${t.choices} ${choice.key}`}
-                  value={choice.text}
-                  onChange={(e) => setChoices((rows) => rows.map((row, j) => (i === j ? { ...row, text: e.target.value } : row)))}
-                />
-              </div>
-            ))}
-            <button className="secondary" onClick={() => setChoices((rows) => [...rows, { key: String.fromCharCode(65 + rows.length), text: '' }])}>
-              {t.addChoice}
-            </button>
-            <label>
-              {t.answerKey}
-              <select value={answerKey} onChange={(e) => setAnswerKey(e.target.value)}>
-                {choices.map((choice) => (
-                  <option key={choice.key} value={choice.key}>
-                    {choice.key}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <label>
-              {t.explanation}
-              <textarea rows={2} value={explanation} onChange={(e) => setExplanation(e.target.value)} />
-            </label>
-          </>
-        ) : (
-          <>
-            {parts.map((part, i) => (
-              <div className="part-edit" key={i}>
-                <div className="part-head">
-                  <input
-                    className="choice-key-input"
-                    value={part.label}
-                    onChange={(e) => setParts((rows) => rows.map((row, j) => (i === j ? { ...row, label: e.target.value } : row)))}
-                  />
-                  <input
-                    placeholder={t.partPrompt}
-                    value={part.prompt}
-                    onChange={(e) => setParts((rows) => rows.map((row, j) => (i === j ? { ...row, prompt: e.target.value } : row)))}
-                  />
-                </div>
-                <textarea
-                  placeholder={t.reference}
-                  rows={2}
-                  value={part.referenceAnswer}
-                  onChange={(e) => setParts((rows) => rows.map((row, j) => (i === j ? { ...row, referenceAnswer: e.target.value } : row)))}
-                />
-                <textarea
-                  placeholder={t.rubricPoints}
-                  rows={2}
-                  value={part.rubric}
-                  onChange={(e) => setParts((rows) => rows.map((row, j) => (i === j ? { ...row, rubric: e.target.value } : row)))}
-                />
-              </div>
-            ))}
-            <button
-              className="secondary"
-              onClick={() => setParts((rows) => [...rows, { label: String.fromCharCode(65 + rows.length), prompt: '', referenceAnswer: '', rubric: '' }])}
-            >
-              {t.addPart}
-            </button>
-          </>
-        )}
-        <div className="scope-grid">
+      )}
+      <label>
+        {t.stem}
+        <ImageTextarea ariaLabel={t.stem} rows={3} value={stem} onChange={setStem} />
+      </label>
+      <label>
+        {t.materials} <small className="muted">{t.materialsHint}</small>
+        <ImageTextarea ariaLabel={t.materials} rows={3} value={materials} onChange={setMaterials} />
+      </label>
+      <label>
+        {t.stimulus}
+        {stimulusRequired ? <small className="muted"> · {t.required}</small> : null}
+        <StimulusPicker
+          value={stimulusId}
+          onChange={setStimulusId}
+          defaultKind={format === 'aaq' ? 'article' : format === 'ebq' ? 'sources' : 'passage'}
+        />
+      </label>
+      {type === 'mcq' ? (
+        <>
+          {choices.map((choice, i) => (
+            <div className="choice-edit" key={i}>
+              <input
+                className="choice-key-input"
+                value={choice.key}
+                onChange={(e) => setChoices((rows) => rows.map((row, j) => (i === j ? { ...row, key: e.target.value.toUpperCase() } : row)))}
+              />
+              <input
+                placeholder={`${t.choices} ${choice.key}`}
+                value={choice.text}
+                onChange={(e) => setChoices((rows) => rows.map((row, j) => (i === j ? { ...row, text: e.target.value } : row)))}
+              />
+            </div>
+          ))}
+          <button className="secondary" onClick={() => setChoices((rows) => [...rows, { key: String.fromCharCode(65 + rows.length), text: '' }])}>
+            {t.addChoice}
+          </button>
           <label>
-            {t.unit}
-            <select value={unitRef} onChange={(e) => setUnitRef(e.target.value)}>
-              <option value="">{t.all}</option>
-              {units.map((unit) => (
-                <option key={unit.id} value={unit.id}>
-                  {unit.title}
+            {t.answerKey}
+            <select value={answerKey} onChange={(e) => setAnswerKey(e.target.value)}>
+              {choices.map((choice) => (
+                <option key={choice.key} value={choice.key}>
+                  {choice.key}
                 </option>
               ))}
             </select>
           </label>
           <label>
-            {t.tags}
-            <input placeholder="unit-1; high-yield" value={tags} onChange={(e) => setTags(e.target.value)} />
+            {t.explanation}
+            <textarea rows={2} value={explanation} onChange={(e) => setExplanation(e.target.value)} />
           </label>
-        </div>
-        {error && <div className="error">{error}</div>}
-        <div className="action-row">
-          <button className="secondary" onClick={onClose}>
-            {t.cancel}
+        </>
+      ) : (
+        <>
+          {parts.map((part, i) => (
+            <div className="part-edit" key={i}>
+              <div className="part-head">
+                <input
+                  className="choice-key-input"
+                  value={part.label}
+                  onChange={(e) => setParts((rows) => rows.map((row, j) => (i === j ? { ...row, label: e.target.value } : row)))}
+                />
+                <input
+                  placeholder={t.partPrompt}
+                  value={part.prompt}
+                  onChange={(e) => setParts((rows) => rows.map((row, j) => (i === j ? { ...row, prompt: e.target.value } : row)))}
+                />
+                <input
+                  className="points-input"
+                  type="number"
+                  min={0}
+                  max={10}
+                  placeholder={t.points}
+                  value={part.points}
+                  onChange={(e) => setParts((rows) => rows.map((row, j) => (i === j ? { ...row, points: e.target.value } : row)))}
+                />
+              </div>
+              <textarea
+                placeholder={t.reference}
+                rows={2}
+                value={part.referenceAnswer}
+                onChange={(e) => setParts((rows) => rows.map((row, j) => (i === j ? { ...row, referenceAnswer: e.target.value } : row)))}
+              />
+              <textarea
+                placeholder={t.rubricPoints}
+                rows={2}
+                value={part.rubric}
+                onChange={(e) => setParts((rows) => rows.map((row, j) => (i === j ? { ...row, rubric: e.target.value } : row)))}
+              />
+            </div>
+          ))}
+          <button
+            className="secondary"
+            onClick={() => setParts((rows) => [...rows, { label: String.fromCharCode(65 + rows.length), prompt: '', referenceAnswer: '', rubric: '', points: '' }])}
+          >
+            {t.addPart}
           </button>
-          <button className="primary" disabled={busy || !stem.trim()} onClick={save}>
-            {t.save}
-          </button>
-        </div>
+        </>
+      )}
+      <div className="scope-grid">
+        <label>
+          {t.unit}
+          <select
+            value={unitRef}
+            onChange={(e) => {
+              setUnitRef(e.target.value)
+              setTopicRef('')
+            }}
+          >
+            <option value="">{t.all}</option>
+            {units.map((unit) => (
+              <option key={unit.id} value={unit.id}>
+                {unit.title}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label>
+          {t.topic}
+          <select value={topicRef} onChange={(e) => setTopicRef(e.target.value)} disabled={!unitRef}>
+            <option value="">{t.all}</option>
+            {unitTopics.map((topic) => (
+              <option key={topic.id} value={topic.id}>
+                {topic.title}
+              </option>
+            ))}
+          </select>
+        </label>
       </div>
-    </div>
+      <label>
+        {t.concepts}
+        <ConceptPicker initial={question?.concepts ?? []} onChange={setConceptIds} />
+      </label>
+      <label>
+        {t.tags}
+        <input
+          list="question-tag-options"
+          placeholder="unit-1; high-yield"
+          value={tags}
+          onChange={(e) => setTags(e.target.value)}
+        />
+        <datalist id="question-tag-options">
+          {tagOptions.map((tag) => (
+            <option key={tag.name} value={tag.name} />
+          ))}
+        </datalist>
+      </label>
+      {error && <div className="error">{error}</div>}
+      <div className="action-row">
+        <button className="secondary" onClick={onClose}>
+          {t.cancel}
+        </button>
+        <button className="primary" disabled={busy || !stem.trim() || (stimulusRequired && !stimulusId)} onClick={save}>
+          {t.save}
+        </button>
+      </div>
+    </Modal>
   )
 }

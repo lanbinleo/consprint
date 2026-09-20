@@ -183,11 +183,28 @@ export type QuestionChoice = { key: string; text: string }
 
 export type QuestionMaterial = { title: string; text: string }
 
+export type StimulusDocument = { title: string; text: string }
+
+// Shared reading material: MCQ passage / AAQ article / EBQ sources.
+export type Stimulus = {
+  id: string
+  title: string
+  kind: 'passage' | 'article' | 'sources'
+  documents: StimulusDocument[] | null
+  documentCount?: number
+  questions?: number
+  createdBy?: string
+  createdAt?: string
+}
+
+export type ConceptChip = { id: string; term: string }
+
 export type QuestionPart = {
   label: string
   prompt: string
   referenceAnswer?: string
   rubric?: string[]
+  points?: number | null
 }
 
 export type Tag = { id: string; name: string }
@@ -195,7 +212,9 @@ export type Tag = { id: string; name: string }
 export type Question = {
   id: string
   type: 'mcq' | 'subjective'
+  format: '' | 'frq' | 'aaq' | 'ebq'
   stem: string
+  stimulusId?: string | null
   materials: QuestionMaterial[] | null
   choices: QuestionChoice[] | null
   answerKey: string
@@ -207,10 +226,13 @@ export type Question = {
   source: string
   sourceNote: string
   tags: Tag[]
+  concepts?: ConceptChip[]
 }
 
 export type QuestionDraft = {
   type: 'mcq' | 'subjective'
+  format?: '' | 'frq' | 'aaq' | 'ebq'
+  stimulusId?: string
   stem: string
   materials?: QuestionMaterial[]
   choices?: QuestionChoice[]
@@ -220,6 +242,7 @@ export type QuestionDraft = {
   unit?: string
   topic?: string
   tags?: string[]
+  concepts?: string[]
   sourceNote?: string
 }
 
@@ -264,6 +287,8 @@ export type PracticeAnswer = {
   questionId: string
   choiceKey: string
   textAnswer: string
+  parts?: { label: string; text: string }[] | null
+  partRatings?: { label: string; rating: 'proficient' | 'partial' | 'weak' }[] | null
   isCorrect?: boolean | null
   selfRating: '' | 'proficient' | 'partial' | 'weak'
   answeredAt: string
@@ -273,10 +298,13 @@ export type PracticeAnswer = {
 export type RunnerQuestion = {
   id: string
   type: 'mcq' | 'subjective'
+  format?: '' | 'frq' | 'aaq' | 'ebq'
   stem: string
+  stimulusId?: string | null
   materials: QuestionMaterial[] | null
   choices: QuestionChoice[] | null
   tags: Tag[]
+  concepts?: ConceptChip[]
   answerKey?: string
   explanation?: string
   parts?: (QuestionPart & { referenceAnswer?: string; rubric?: string[] })[]

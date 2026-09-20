@@ -2750,3 +2750,66 @@ input:disabled {
   .note-item-fields { grid-template-columns: 1fr; }
   .note-link-card { flex-direction: column; align-items: flex-start; }
 }
+
+/* ---- Question linkage & stimulus editor (admin) ---- */
+.image-textarea { display: flex; flex-direction: column; gap: 6px; }
+.image-textarea textarea { width: 100%; }
+.image-tools { display: flex; align-items: center; gap: 10px; }
+.image-tools .error-text { color: var(--red); font-size: var(--text-xs); }
+.stimulus-picker { display: flex; align-items: center; gap: 8px; }
+.stimulus-picker select { flex: 1; min-width: 0; }
+.stimulus-picker .muted { flex-basis: 100%; }
+.stimulus-picker { flex-wrap: wrap; }
+.stimulus-editor {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px;
+  border: 1px solid var(--accent-line);
+  border-radius: var(--radius-md);
+  background: var(--surface-soft);
+}
+.doc-edit { display: flex; flex-direction: column; gap: 6px; }
+.doc-head { display: flex; align-items: center; gap: 8px; }
+.doc-head input { flex: 1; min-width: 0; }
+.points-input { width: 64px; }
+.concept-picker { display: flex; flex-direction: column; gap: 6px; }
+.chip-row { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--accent-line);
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+  font-size: var(--text-xs);
+}
+.chip button { display: inline-flex; padding: 0; border: none; background: none; cursor: pointer; color: inherit; }
+.concept-search { position: relative; }
+.concept-results {
+  position: absolute;
+  z-index: 30;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  max-height: 220px;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow);
+  padding: 4px;
+}
+.concept-results button {
+  text-align: left;
+  border: none;
+  background: none;
+  padding: 6px 8px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+.concept-results button:hover { background: var(--accent-soft); }
