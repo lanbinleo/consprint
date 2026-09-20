@@ -2813,3 +2813,111 @@ input:disabled {
   cursor: pointer;
 }
 .concept-results button:hover { background: var(--accent-soft); }
+
+/* ---- Set assembly full-page editor ---- */
+.set-editor-page { display: flex; flex-direction: column; gap: 14px; min-height: 0; }
+.set-editor-topbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.set-editor-topbar > strong { flex: 1; min-width: 120px; font-size: var(--text-lg); }
+.set-editor-layout {
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr) 400px;
+  gap: 16px;
+  align-items: start;
+}
+.set-meta,
+.set-picker {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  position: sticky;
+  top: 16px;
+  max-height: calc(100dvh - 120px);
+  overflow: auto;
+}
+.set-paper { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.paper-block {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 8px;
+  background: var(--surface);
+}
+.paper-block.has-stimulus { border-color: var(--accent-line); }
+.block-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--accent-strong);
+  font-size: var(--text-xs);
+  padding: 2px 4px 6px;
+  border-bottom: 1px dashed var(--accent-line);
+  margin-bottom: 4px;
+}
+.block-head > span { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.set-item-row { display: flex; align-items: center; gap: 6px; }
+.set-item-row .drag-handle { color: var(--muted); cursor: grab; user-select: none; }
+.coverage-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+  margin-top: 4px;
+}
+.coverage-bar { display: grid; grid-template-columns: minmax(0, 1fr) 60px 24px; align-items: center; gap: 8px; font-size: var(--text-xs); }
+.coverage-bar > span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.coverage-bar .bar { height: 6px; border-radius: 3px; background: var(--surface-soft); overflow: hidden; }
+.coverage-bar .bar > div { height: 100%; background: var(--accent); border-radius: 3px; }
+.coverage-bar em { font-style: normal; color: var(--muted); text-align: right; }
+.coverage-topics { display: flex; flex-direction: column; gap: 2px; color: var(--muted); }
+.coverage-warning { color: var(--orange); }
+.picker-filters { display: flex; flex-direction: column; gap: 6px; }
+.candidate-list { display: flex; flex-direction: column; gap: 6px; max-height: 52dvh; overflow: auto; }
+.candidate-row { display: flex; align-items: center; gap: 6px; border-bottom: 1px solid var(--line); padding-bottom: 6px; }
+.candidate-row:last-child { border-bottom: none; }
+.question-preview { display: flex; flex-direction: column; gap: 12px; }
+.preview-stimulus { display: flex; flex-direction: column; gap: 6px; }
+.preview-stimulus details { border: 1px solid var(--line); border-radius: var(--radius-md); padding: 8px 10px; }
+.preview-stimulus summary { cursor: pointer; font-weight: 600; }
+.preview-stem p { margin: 0 0 4px; }
+.preview-choices { display: flex; flex-direction: column; gap: 6px; }
+.preview-choice {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 6px 10px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+}
+.preview-choice.correct { border-color: var(--green); background: color-mix(in srgb, var(--green) 8%, transparent); }
+.preview-choice .choice-key {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  font-size: var(--text-xs);
+  flex-shrink: 0;
+}
+.preview-parts { display: flex; flex-direction: column; gap: 10px; }
+.preview-part { border-left: 3px solid var(--accent-line); padding-left: 10px; display: flex; flex-direction: column; gap: 4px; }
+.preview-part p { margin: 0; }
+.preview-part ul { margin: 0; padding-left: 18px; }
+
+@media (max-width: 1100px) {
+  .set-editor-layout { grid-template-columns: 1fr; }
+  .set-meta, .set-picker { position: static; max-height: none; }
+}

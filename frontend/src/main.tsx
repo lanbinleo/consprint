@@ -27,6 +27,7 @@ import { AdminLayout } from './pages/admin/AdminLayout'
 import { Questions } from './pages/admin/Questions'
 import { Import } from './pages/admin/Import'
 import { Sets } from './pages/admin/Sets'
+import { SetEditor } from './pages/admin/SetEditor'
 import { NoteResources } from './pages/admin/NoteResources'
 import { Boards } from './pages/admin/Boards'
 import { Analytics } from './pages/admin/Analytics'
@@ -104,6 +105,7 @@ const router = createBrowserRouter(
           <Route path="questions" element={<Questions />} />
           <Route path="import" element={<Import />} />
           <Route path="sets" element={<Sets />} />
+          <Route path="sets/:setId" element={<SetEditor />} />
           <Route path="notes" element={<NoteResources />} />
           <Route path="boards" element={<Boards />} />
           <Route
