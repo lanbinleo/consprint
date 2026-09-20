@@ -2,9 +2,7 @@ package backend
 
 import (
 	"fmt"
-	"io"
-	"net/http"
-	"os"
+	"mime/multipart"
 	"path/filepath"
 	"strings"
 	"time"
@@ -280,49 +278,20 @@ var noteUploadExts = map[string]string{
 // uploadNoteResourceFile stores one PDF/image under PublicDir and returns its
 // /files URL for use as an internal link on a note item.
 func (a *App) uploadNoteResourceFile(c *gin.Context) {
-	file, header, err := c.Request.FormFile("file")
-	if err != nil {
-		c.JSON(400, gin.H{"error": "file is required"})
-		return
-	}
-	defer file.Close()
-	if header.Size > maxNoteUploadBytes {
-		c.JSON(400, gin.H{"error": "file exceeds the 25MB limit"})
-		return
-	}
-	head := make([]byte, 512)
-	n, err := io.ReadFull(file, head)
-	if err != nil && err != io.ErrUnexpectedEOF {
-		c.JSON(400, gin.H{"error": "could not read file"})
-		return
-	}
-	ext, ok := noteUploadExts[http.DetectContentType(head[:n])]
+	name, ok := a.storeMultipart(c, uploadSpec{
+		MaxBytes: maxNoteUploadBytes,
+		Exts:     noteUploadExts,
+		TooLarge: "file exceeds the 25MB limit",
+		BadType:  "only PDF and image files are supported",
+		Name: func(header *multipart.FileHeader, ext string) string {
+			slug := Slugify(strings.TrimSuffix(header.Filename, filepath.Ext(header.Filename)))
+			if runes := []rune(slug); len(runes) > 40 {
+				slug = string(runes[:40])
+			}
+			return fmt.Sprintf("notes-%d-%s%s", time.Now().Unix(), slug, ext)
+		},
+	})
 	if !ok {
-		c.JSON(400, gin.H{"error": "only PDF and image files are supported"})
-		return
-	}
-	if _, err := file.Seek(0, io.SeekStart); err != nil {
-		c.JSON(500, gin.H{"error": "could not read file"})
-		return
-	}
-	slug := Slugify(strings.TrimSuffix(header.Filename, filepath.Ext(header.Filename)))
-	if runes := []rune(slug); len(runes) > 40 {
-		slug = string(runes[:40])
-	}
-	name := fmt.Sprintf("notes-%d-%s%s", time.Now().Unix(), slug, ext)
-	if err := os.MkdirAll(a.PublicDir, 0o755); err != nil {
-		c.JSON(500, gin.H{"error": "could not store file"})
-		return
-	}
-	dst, err := os.Create(filepath.Join(a.PublicDir, name))
-	if err != nil {
-		c.JSON(500, gin.H{"error": "could not store file"})
-		return
-	}
-	defer dst.Close()
-	written, err := io.Copy(dst, file)
-	if err != nil || written == 0 {
-		c.JSON(500, gin.H{"error": "could not store file"})
 		return
 	}
 	c.JSON(200, gin.H{"url": "/files/" + name, "filename": name})

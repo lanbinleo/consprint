@@ -51,8 +51,9 @@ func questionMaterials(raw datatypes.JSON) []QuestionMaterial {
 }
 
 // stripAnswer removes grading material (answer key, explanation, reference
-// answers, rubrics) from a question for student-facing payloads.
-func stripAnswer(q Question) gin.H {
+// answers, rubrics) from a question for student-facing payloads. Concepts are
+// passed in as lite chips so full concept content never rides along.
+func stripAnswer(q Question, concepts []conceptLite) gin.H {
 	data, _ := json.Marshal(q)
 	var out gin.H
 	if err := json.Unmarshal(data, &out); err != nil {
@@ -60,11 +61,16 @@ func stripAnswer(q Question) gin.H {
 	}
 	delete(out, "answerKey")
 	delete(out, "explanation")
+	if concepts == nil {
+		concepts = []conceptLite{}
+	}
+	out["concepts"] = concepts
 	parts := questionParts(q.Parts)
 	if parts != nil {
 		redacted := make([]gin.H, 0, len(parts))
 		for _, part := range parts {
-			redacted = append(redacted, gin.H{"label": part.Label, "prompt": part.Prompt})
+			row := gin.H{"label": part.Label, "prompt": part.Prompt, "points": part.Points}
+			redacted = append(redacted, row)
 		}
 		out["parts"] = redacted
 	} else if len(q.Parts) > 0 {
@@ -94,6 +100,7 @@ func revealAnswer(out gin.H, q Question) {
 			full = append(full, gin.H{
 				"label":           part.Label,
 				"prompt":          part.Prompt,
+				"points":          part.Points,
 				"referenceAnswer": part.ReferenceAnswer,
 				"rubric":          part.Rubric,
 			})
@@ -122,6 +129,12 @@ func (a *App) practiceSets(c *gin.Context) {
 	userID := c.GetString("userID")
 	var sets []PracticeSet
 	a.DB.Where("status = ?", "published").Order("created_at desc").Find(&sets)
+	setIDs := make([]string, 0, len(sets))
+	for _, set := range sets {
+		setIDs = append(setIDs, set.ID)
+	}
+	counts := a.setQuestionCounts(setIDs)
+	unitIDs, formats := a.setFacets(setIDs)
 	type attemptBrief struct {
 		ID         string     `json:"id"`
 		FinishedAt *time.Time `json:"finishedAt"`
@@ -131,16 +144,28 @@ func (a *App) practiceSets(c *gin.Context) {
 	type setRow struct {
 		PracticeSet
 		QuestionCount int            `json:"questionCount"`
+		UnitIDs       []string       `json:"unitIds"`
+		Formats       []string       `json:"formats"`
 		Attempts      []attemptBrief `json:"attempts"`
 		BestScore     *int           `json:"bestScore"`
 	}
 	out := make([]setRow, 0, len(sets))
 	for _, set := range sets {
-		var count int64
-		a.DB.Model(&PracticeSetItem{}).Where("set_id = ?", set.ID).Count(&count)
 		var attempts []PracticeAttempt
 		a.DB.Where("user_id = ? AND set_id = ?", userID, set.ID).Order("started_at asc").Find(&attempts)
-		row := setRow{PracticeSet: set, QuestionCount: int(count), Attempts: make([]attemptBrief, 0)}
+		row := setRow{
+			PracticeSet:   set,
+			QuestionCount: counts[set.ID],
+			UnitIDs:       unitIDs[set.ID],
+			Formats:       formats[set.ID],
+			Attempts:      make([]attemptBrief, 0),
+		}
+		if row.UnitIDs == nil {
+			row.UnitIDs = []string{}
+		}
+		if row.Formats == nil {
+			row.Formats = []string{}
+		}
 		best := -1
 		for _, attempt := range attempts {
 			brief := attemptBrief{ID: attempt.ID, FinishedAt: attempt.FinishedAt, Score: attempt.Score, TotalMCQ: attempt.TotalMCQ}
@@ -168,6 +193,11 @@ func (a *App) practiceSetDetail(c *gin.Context) {
 	userID := c.GetString("userID")
 	attempts := make([]PracticeAttempt, 0)
 	a.DB.Where("user_id = ? AND set_id = ?", userID, set.ID).Order("started_at desc").Find(&attempts)
+	ids := make([]string, 0, len(questions))
+	for _, q := range questions {
+		ids = append(ids, q.ID)
+	}
+	links := a.conceptLinks(ids)
 	stripped := make([]gin.H, 0, len(questions))
 	byID := map[string]Question{}
 	for _, q := range questions {
@@ -175,10 +205,16 @@ func (a *App) practiceSetDetail(c *gin.Context) {
 	}
 	for _, item := range items {
 		if q, ok := byID[item.QuestionID]; ok {
-			stripped = append(stripped, stripAnswer(q))
+			stripped = append(stripped, stripAnswer(q, conceptChips(links, q.ID)))
 		}
 	}
-	c.JSON(200, gin.H{"set": set, "questions": stripped, "attempts": attempts})
+	c.JSON(200, gin.H{
+		"set":       set,
+		"questions": stripped,
+		"attempts":  attempts,
+		"stimuli":   a.stimuliFor(questions),
+		"coverage":  a.computeSetCoverage(questions),
+	})
 }
 
 func (a *App) startAttempt(c *gin.Context) {
@@ -232,6 +268,62 @@ func (a *App) loadOwnAttempt(c *gin.Context) (*PracticeAttempt, bool) {
 	return &attempt, true
 }
 
+// attemptList is the student's cross-set 做题记录: own attempts newest first,
+// with the set title, progress (answered / total questions), and score.
+func (a *App) attemptList(c *gin.Context) {
+	userID := c.GetString("userID")
+	limit := 50
+	if parsed, err := strconv.Atoi(c.Query("limit")); err == nil && parsed > 0 && parsed <= 200 {
+		limit = parsed
+	}
+	attempts := make([]PracticeAttempt, 0)
+	a.DB.Where("user_id = ?", userID).Order("started_at desc").Limit(limit).Find(&attempts)
+	setIDs := make([]string, 0, len(attempts))
+	for _, attempt := range attempts {
+		setIDs = append(setIDs, attempt.SetID)
+	}
+	sets := make([]PracticeSet, 0)
+	if len(setIDs) > 0 {
+		a.DB.Where("id in ?", setIDs).Find(&sets)
+	}
+	setTitle := make(map[string]string, len(sets))
+	for _, set := range sets {
+		setTitle[set.ID] = set.Title
+	}
+	questionCounts := a.setQuestionCounts(setIDs)
+	answeredCounts := map[string]int{}
+	if len(attempts) > 0 {
+		attemptIDs := make([]string, 0, len(attempts))
+		for _, attempt := range attempts {
+			attemptIDs = append(attemptIDs, attempt.ID)
+		}
+		rows := []struct {
+			AttemptID string
+			Count     int
+		}{}
+		a.DB.Raw(`select attempt_id as attempt_id, count(*) as count from practice_answers where attempt_id in (?) group by attempt_id`, attemptIDs).Scan(&rows)
+		for _, row := range rows {
+			answeredCounts[row.AttemptID] = row.Count
+		}
+	}
+	type attemptRow struct {
+		PracticeAttempt
+		SetTitle      string `json:"setTitle"`
+		QuestionCount int    `json:"questionCount"`
+		AnsweredCount int    `json:"answeredCount"`
+	}
+	out := make([]attemptRow, 0, len(attempts))
+	for _, attempt := range attempts {
+		out = append(out, attemptRow{
+			PracticeAttempt: attempt,
+			SetTitle:        setTitle[attempt.SetID],
+			QuestionCount:   questionCounts[attempt.SetID],
+			AnsweredCount:   answeredCounts[attempt.ID],
+		})
+	}
+	c.JSON(200, out)
+}
+
 func (a *App) attemptDetail(c *gin.Context) {
 	attempt, ok := a.loadOwnAttempt(c)
 	if !ok {
@@ -246,10 +338,13 @@ func (a *App) attemptDetail(c *gin.Context) {
 	for _, answer := range answers {
 		answerByQuestion[answer.QuestionID] = answer
 	}
+	ids := make([]string, 0, len(questions))
 	byID := map[string]Question{}
 	for _, q := range questions {
 		byID[q.ID] = q
+		ids = append(ids, q.ID)
 	}
+	links := a.conceptLinks(ids)
 	finished := attempt.FinishedAt != nil
 	type questionRow = gin.H
 	rows := make([]questionRow, 0, len(items))
@@ -258,7 +353,7 @@ func (a *App) attemptDetail(c *gin.Context) {
 		if !exists {
 			continue
 		}
-		row := stripAnswer(q)
+		row := stripAnswer(q, conceptChips(links, q.ID))
 		if finished {
 			revealAnswer(row, q)
 		}
@@ -269,7 +364,13 @@ func (a *App) attemptDetail(c *gin.Context) {
 		}
 		rows = append(rows, row)
 	}
-	c.JSON(200, gin.H{"attempt": attempt, "set": set, "questions": rows, "answers": answers})
+	c.JSON(200, gin.H{
+		"attempt":   attempt,
+		"set":       set,
+		"questions": rows,
+		"answers":   answers,
+		"stimuli":   a.stimuliFor(questions),
+	})
 }
 
 func (a *App) submitAnswer(c *gin.Context) {
@@ -281,6 +382,10 @@ func (a *App) submitAnswer(c *gin.Context) {
 		QuestionID string `json:"questionId"`
 		ChoiceKey  string `json:"choiceKey"`
 		TextAnswer string `json:"textAnswer"`
+		Parts      []struct {
+			Label string `json:"label"`
+			Text  string `json:"text"`
+		} `json:"parts"`
 	}
 	if err := c.ShouldBindJSON(&req); err != nil || req.QuestionID == "" {
 		c.JSON(400, gin.H{"error": "questionId is required"})
@@ -306,11 +411,53 @@ func (a *App) submitAnswer(c *gin.Context) {
 		c.JSON(404, gin.H{"error": "question not found"})
 		return
 	}
-	if question.Type == "mcq" && strings.TrimSpace(req.ChoiceKey) == "" {
-		c.JSON(400, gin.H{"error": "choiceKey is required for mcq"})
-		return
-	}
-	if question.Type == "subjective" && strings.TrimSpace(req.TextAnswer) == "" {
+	perPart := question.Format == QuestionFormatAAQ || question.Format == QuestionFormatEBQ
+	// partAnswers validates the submitted per-part responses against the
+	// question's own part labels; nil means this answer is not per-part.
+	var partAnswers []AnswerPart
+	if question.Type == "mcq" {
+		if strings.TrimSpace(req.ChoiceKey) == "" {
+			c.JSON(400, gin.H{"error": "choiceKey is required for mcq"})
+			return
+		}
+	} else if perPart {
+		labels := map[string]bool{}
+		seen := map[string]bool{}
+		for _, part := range questionParts(question.Parts) {
+			labels[part.Label] = true
+		}
+		if len(labels) == 0 {
+			c.JSON(400, gin.H{"error": "question has no parts to answer"})
+			return
+		}
+		if len(req.Parts) == 0 {
+			c.JSON(400, gin.H{"error": "parts are required for " + question.Format + " questions"})
+			return
+		}
+		partAnswers = make([]AnswerPart, 0, len(req.Parts))
+		filled := false
+		for _, input := range req.Parts {
+			label := strings.TrimSpace(input.Label)
+			if !labels[label] {
+				c.JSON(400, gin.H{"error": "unknown part label: " + label})
+				return
+			}
+			if seen[label] {
+				c.JSON(400, gin.H{"error": "duplicate part label: " + label})
+				return
+			}
+			seen[label] = true
+			text := strings.TrimSpace(input.Text)
+			if text != "" {
+				filled = true
+			}
+			partAnswers = append(partAnswers, AnswerPart{Label: label, Text: text})
+		}
+		if !filled {
+			c.JSON(400, gin.H{"error": "at least one part needs an answer"})
+			return
+		}
+	} else if strings.TrimSpace(req.TextAnswer) == "" {
 		c.JSON(400, gin.H{"error": "textAnswer is required for subjective questions"})
 		return
 	}
@@ -326,13 +473,19 @@ func (a *App) submitAnswer(c *gin.Context) {
 		if question.Type == "mcq" {
 			answer.ChoiceKey = strings.ToUpper(strings.TrimSpace(req.ChoiceKey))
 			answer.TextAnswer = ""
+			answer.Parts = mustJSON(nil)
 			if attempt.Mode == "instant" {
 				correct := strings.EqualFold(answer.ChoiceKey, strings.TrimSpace(question.AnswerKey))
 				answer.IsCorrect = &correct
 			}
+		} else if perPart {
+			answer.Parts = mustJSON(partAnswers)
+			answer.TextAnswer = ""
+			answer.ChoiceKey = ""
 		} else {
 			answer.TextAnswer = strings.TrimSpace(req.TextAnswer)
 			answer.ChoiceKey = ""
+			answer.Parts = mustJSON(nil)
 		}
 		answer.AnsweredAt = now
 		return tx.Save(&answer).Error
@@ -345,7 +498,7 @@ func (a *App) submitAnswer(c *gin.Context) {
 		c.JSON(200, gin.H{"stored": true, "answer": answer})
 		return
 	}
-	row := stripAnswer(question)
+	row := stripAnswer(question, nil)
 	revealAnswer(row, question)
 	c.JSON(200, gin.H{"stored": true, "answer": answer, "question": row})
 }
@@ -419,10 +572,13 @@ func (a *App) attemptSummaryPayload(attempt *PracticeAttempt) gin.H {
 	for _, answer := range answers {
 		answerByQuestion[answer.QuestionID] = answer
 	}
+	ids := make([]string, 0, len(questions))
 	byID := map[string]Question{}
 	for _, q := range questions {
 		byID[q.ID] = q
+		ids = append(ids, q.ID)
 	}
+	links := a.conceptLinks(ids)
 	rows := make([]gin.H, 0, len(items))
 	correctCount := 0
 	for _, item := range items {
@@ -430,7 +586,7 @@ func (a *App) attemptSummaryPayload(attempt *PracticeAttempt) gin.H {
 		if !exists {
 			continue
 		}
-		row := stripAnswer(q)
+		row := stripAnswer(q, conceptChips(links, q.ID))
 		revealAnswer(row, q)
 		if answer, answered := answerByQuestion[q.ID]; answered && q.Type == "mcq" && answer.IsCorrect != nil && *answer.IsCorrect {
 			correctCount++
@@ -441,8 +597,13 @@ func (a *App) attemptSummaryPayload(attempt *PracticeAttempt) gin.H {
 		"attempt":   attempt,
 		"questions": rows,
 		"answers":   answers,
+		"stimuli":   a.stimuliFor(questions),
 		"correct":   correctCount,
 	}
+}
+
+func validSelfRating(rating string) bool {
+	return rating == "proficient" || rating == "partial" || rating == "weak"
 }
 
 func (a *App) selfRateAnswer(c *gin.Context) {
@@ -452,9 +613,13 @@ func (a *App) selfRateAnswer(c *gin.Context) {
 	}
 	var req struct {
 		Rating string `json:"rating"`
+		Parts  []struct {
+			Label  string `json:"label"`
+			Rating string `json:"rating"`
+		} `json:"parts"`
 	}
-	if err := c.ShouldBindJSON(&req); err != nil || (req.Rating != "proficient" && req.Rating != "partial" && req.Rating != "weak") {
-		c.JSON(400, gin.H{"error": "rating must be proficient, partial, or weak"})
+	if err := c.ShouldBindJSON(&req); err != nil {
+		c.JSON(400, gin.H{"error": "invalid request"})
 		return
 	}
 	// Self-rating travels with the answer reveal: instant mode reveals right
@@ -475,7 +640,56 @@ func (a *App) selfRateAnswer(c *gin.Context) {
 		c.JSON(400, gin.H{"error": "only subjective questions can be self-rated"})
 		return
 	}
-	answer.SelfRating = req.Rating
+	if len(req.Parts) > 0 {
+		labels := map[string]bool{}
+		for _, part := range questionParts(question.Parts) {
+			labels[part.Label] = true
+		}
+		ratings := make([]AnswerPartRating, 0, len(req.Parts))
+		seen := map[string]bool{}
+		allProficient := true
+		anyWeak := false
+		for _, input := range req.Parts {
+			label := strings.TrimSpace(input.Label)
+			if !labels[label] {
+				c.JSON(400, gin.H{"error": "unknown part label: " + label})
+				return
+			}
+			if seen[label] {
+				c.JSON(400, gin.H{"error": "duplicate part label: " + label})
+				return
+			}
+			seen[label] = true
+			if !validSelfRating(input.Rating) {
+				c.JSON(400, gin.H{"error": "rating must be proficient, partial, or weak"})
+				return
+			}
+			ratings = append(ratings, AnswerPartRating{Label: label, Rating: input.Rating})
+			if input.Rating == "weak" {
+				anyWeak = true
+			}
+			if input.Rating != "proficient" {
+				allProficient = false
+			}
+		}
+		// Aggregate mirrors the wrong-book verdict rules: any weak stays in
+		// the book, only all-proficient leaves it.
+		aggregate := "partial"
+		if anyWeak {
+			aggregate = "weak"
+		} else if allProficient {
+			aggregate = "proficient"
+		}
+		answer.PartRatings = mustJSON(ratings)
+		answer.SelfRating = aggregate
+	} else {
+		if !validSelfRating(req.Rating) {
+			c.JSON(400, gin.H{"error": "rating must be proficient, partial, or weak"})
+			return
+		}
+		answer.SelfRating = req.Rating
+		answer.PartRatings = mustJSON(nil)
+	}
 	a.DB.Save(&answer)
 	c.JSON(200, answer)
 }
@@ -525,6 +739,7 @@ func (a *App) wrongBook(c *gin.Context) {
 		a.DB.Preload("Tags").Where("id in ?", ids).Find(&questions)
 	}
 	ensureTags(questions)
+	links := a.conceptLinks(idsOf(questions))
 	byID := map[string]Question{}
 	unitByQuestion := map[string]string{}
 	for _, q := range questions {
@@ -575,7 +790,7 @@ func (a *App) wrongBook(c *gin.Context) {
 		// The student has already answered these questions, so grading
 		// material is revealed — but only through the explicit reveal path,
 		// never by embedding the raw Question model.
-		view := stripAnswer(q)
+		view := stripAnswer(q, conceptChips(links, q.ID))
 		revealAnswer(view, q)
 		latest[answer.QuestionID] = entry{QuestionID: answer.QuestionID, Question: view, Reason: reason, LastAt: answer.AnsweredAt, WrongCount: counts[answer.QuestionID]}
 	}

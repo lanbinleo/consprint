@@ -16,15 +16,15 @@ type Tenant struct {
 }
 
 type User struct {
-	ID            string         `gorm:"primaryKey" json:"id"`
-	TenantID      string         `gorm:"index;not null" json:"tenantId"`
-	Name          string         `gorm:"not null" json:"name"`
-	Email         string         `gorm:"uniqueIndex;not null" json:"email"`
-	Role          string         `gorm:"not null;default:student" json:"role"` // student | teacher | admin
-	Provider      string         `gorm:"not null;default:local" json:"provider"`
-	EntraOID      *string        `gorm:"column:entra_oid;uniqueIndex" json:"-"`
-	AvatarDataURL string         `json:"avatarDataUrl"`
-	PasswordHash  string         `gorm:"not null" json:"-"`
+	ID            string  `gorm:"primaryKey" json:"id"`
+	TenantID      string  `gorm:"index;not null" json:"tenantId"`
+	Name          string  `gorm:"not null" json:"name"`
+	Email         string  `gorm:"uniqueIndex;not null" json:"email"`
+	Role          string  `gorm:"not null;default:student" json:"role"` // student | teacher | admin
+	Provider      string  `gorm:"not null;default:local" json:"provider"`
+	EntraOID      *string `gorm:"column:entra_oid;uniqueIndex" json:"-"`
+	AvatarDataURL string  `json:"avatarDataUrl"`
+	PasswordHash  string  `gorm:"not null" json:"-"`
 	// PasswordSetAt marks a password the user chose themselves (profile set /
 	// change). Local accounts implicitly have one from registration; Entra
 	// accounts start with an unguessable random hash and only become
@@ -84,10 +84,10 @@ type Concept struct {
 	Content        *ConceptContent `json:"content,omitempty"`
 	// Unit/Topic are pointers so the slim concept list (no relation preloads)
 	// omits them entirely; struct fields would serialize zero-value objects.
-	Unit   *Unit  `json:"unit,omitempty"`
-	Topic  *Topic `json:"topic,omitempty"`
-	CreatedAt      time.Time       `json:"createdAt"`
-	UpdatedAt      time.Time       `json:"updatedAt"`
+	Unit      *Unit     `json:"unit,omitempty"`
+	Topic     *Topic    `json:"topic,omitempty"`
+	CreatedAt time.Time `json:"createdAt"`
+	UpdatedAt time.Time `json:"updatedAt"`
 }
 
 type ConceptContent struct {
@@ -150,10 +150,25 @@ type Tag struct {
 	UpdatedAt time.Time `json:"updatedAt"`
 }
 
+// Stimulus is a reading shared by several questions: the passage of an MCQ
+// question set, the single AAQ article, or the EBQ's three sources. Document
+// bodies are markdown and may embed uploaded images (![](url)).
+type Stimulus struct {
+	ID        string         `gorm:"primaryKey" json:"id"`
+	Title     string         `gorm:"index;not null" json:"title"`
+	Kind      string         `gorm:"not null;default:passage" json:"kind"` // passage | article | sources
+	Documents datatypes.JSON `json:"documents"`                            // []StimulusDocument
+	CreatedBy string         `json:"createdBy"`
+	CreatedAt time.Time      `json:"createdAt"`
+	UpdatedAt time.Time      `json:"updatedAt"`
+}
+
 type Question struct {
 	ID          string         `gorm:"primaryKey" json:"id"`
 	Type        string         `gorm:"index;not null" json:"type"` // mcq | subjective
+	Format      string         `gorm:"index;not null;default:''" json:"format"`
 	Stem        string         `gorm:"not null" json:"stem"`
+	StimulusID  *string        `gorm:"index" json:"stimulusId"`
 	Materials   datatypes.JSON `json:"materials"`   // []QuestionMaterial
 	Choices     datatypes.JSON `json:"choices"`     // []QuestionChoice (mcq)
 	AnswerKey   string         `json:"answerKey"`   // mcq choice key, hidden from students
@@ -166,8 +181,25 @@ type Question struct {
 	SourceNote  string         `json:"sourceNote"`
 	CreatedBy   string         `gorm:"index" json:"createdBy"`
 	Tags        []Tag          `gorm:"many2many:question_tags" json:"tags"`
-	CreatedAt   time.Time      `json:"createdAt"`
-	UpdatedAt   time.Time      `json:"updatedAt"`
+	// Concepts carries only ids in payloads; rows are attached separately as
+	// lite {id, term} chips so full concept content never rides along.
+	Concepts  []Concept `gorm:"many2many:question_concepts" json:"-"`
+	CreatedAt time.Time `json:"createdAt"`
+	UpdatedAt time.Time `json:"updatedAt"`
+}
+
+// QuestionFormatAAQ/EBQ mark College Board free-response layouts: AAQ answers
+// per part next to the article, EBQ scaffolds claim/evidence/explanation
+// parts next to three sources. FRQ (and empty, for pre-format rows) is the
+// plain essay prompt.
+const (
+	QuestionFormatFRQ = "frq"
+	QuestionFormatAAQ = "aaq"
+	QuestionFormatEBQ = "ebq"
+)
+
+func validQuestionFormat(format string) bool {
+	return format == "" || format == QuestionFormatFRQ || format == QuestionFormatAAQ || format == QuestionFormatEBQ
 }
 
 // PracticeSet is a curated paper assembled from the question bank. Instant
@@ -204,16 +236,35 @@ type PracticeAttempt struct {
 	TotalMCQ   int        `json:"totalMcq"`
 }
 
+// AnswerPart is one per-part response of an AAQ/EBQ question; labels match
+// the question's own part labels.
+type AnswerPart struct {
+	Label string `json:"label"`
+	Text  string `json:"text"`
+}
+
+// AnswerPartRating is the per-part self-assessment (proficient | partial |
+// weak). Their aggregate is always mirrored into PracticeAnswer.SelfRating.
+type AnswerPartRating struct {
+	Label  string `json:"label"`
+	Rating string `json:"rating"`
+}
+
 type PracticeAnswer struct {
-	ID         string    `gorm:"primaryKey" json:"id"`
-	AttemptID  string    `gorm:"uniqueIndex:idx_attempt_question;not null" json:"attemptId"`
-	QuestionID string    `gorm:"uniqueIndex:idx_attempt_question;index:idx_practice_answer_question;not null" json:"questionId"`
-	ChoiceKey  string    `json:"choiceKey"`  // mcq
-	TextAnswer string    `json:"textAnswer"` // subjective
-	IsCorrect  *bool     `json:"isCorrect"`
-	SelfRating string    `json:"selfRating"` // proficient | partial | weak (subjective)
-	AnsweredAt time.Time `json:"answeredAt"`
-	CreatedAt  time.Time `json:"createdAt"`
+	ID         string `gorm:"primaryKey" json:"id"`
+	AttemptID  string `gorm:"uniqueIndex:idx_attempt_question;not null" json:"attemptId"`
+	QuestionID string `gorm:"uniqueIndex:idx_attempt_question;index:idx_practice_answer_question;not null" json:"questionId"`
+	ChoiceKey  string `json:"choiceKey"`  // mcq
+	TextAnswer string `json:"textAnswer"` // subjective (frq single-essay)
+	// Parts/PartRatings hold per-part responses and self-ratings for AAQ/EBQ
+	// questions ([]AnswerPart / []AnswerPartRating). PartRatings always keep a
+	// derived aggregate in SelfRating so the wrong book keeps working.
+	Parts       datatypes.JSON `json:"parts"`
+	PartRatings datatypes.JSON `json:"partRatings"`
+	IsCorrect   *bool          `json:"isCorrect"`
+	SelfRating  string         `json:"selfRating"` // proficient | partial | weak (subjective)
+	AnsweredAt  time.Time      `json:"answeredAt"`
+	CreatedAt   time.Time      `json:"createdAt"`
 }
 
 // NoteResource is one tab on the Notes page: a curated bundle of study

@@ -44,11 +44,12 @@ func NewApp(dbPath, sources string) (*App, error) {
 	if err != nil {
 		return nil, err
 	}
-	if err := db.AutoMigrate(&Tenant{}, &User{}, &Course{}, &Unit{}, &Topic{}, &Concept{}, &ConceptContent{}, &UserConceptState{}, &ReviewEvent{}, &ImportRun{}, &Tag{}, &Question{}, &PracticeSet{}, &PracticeSetItem{}, &PracticeAttempt{}, &PracticeAnswer{}, &NoteResource{}, &NoteResourceItem{}, &Announcement{}, &CalendarEvent{}, &Quote{}); err != nil {
+	if err := db.AutoMigrate(&Tenant{}, &User{}, &Course{}, &Unit{}, &Topic{}, &Concept{}, &ConceptContent{}, &UserConceptState{}, &ReviewEvent{}, &ImportRun{}, &Tag{}, &Stimulus{}, &Question{}, &PracticeSet{}, &PracticeSetItem{}, &PracticeAttempt{}, &PracticeAnswer{}, &NoteResource{}, &NoteResourceItem{}, &Announcement{}, &CalendarEvent{}, &Quote{}); err != nil {
 		return nil, err
 	}
 	migrateLegacyEntraOID(db)
 	migrateCalendarKinds(db)
+	migrateQuestionFormats(db)
 	if err := ensureSchoolTenant(db); err != nil {
 		return nil, err
 	}
@@ -85,6 +86,12 @@ func NewApp(dbPath, sources string) (*App, error) {
 		return nil, err
 	}
 	return app, nil
+}
+
+// migrateQuestionFormats backfills the subjective layout discriminator: every
+// pre-format subjective row becomes frq (the plain essay prompt). Idempotent.
+func migrateQuestionFormats(db *gorm.DB) {
+	db.Exec("update questions set format = 'frq' where type = 'subjective' and (format = '' or format is null)")
 }
 
 // migrateCalendarKinds folds the retired generic "assessment" kind into the

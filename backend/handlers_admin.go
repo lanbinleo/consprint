@@ -1,6 +1,7 @@
 package backend
 
 import (
+	"encoding/json"
 	"strconv"
 	"strings"
 	"time"
@@ -12,6 +13,23 @@ import (
 
 // Staff (teacher + admin) question bank management, bulk import, practice
 // set assembly, and admin-only user management.
+
+// adminQuestionRows marshals questions and attaches lite concept chips so
+// editors can prefill the concept picker without loading concept content.
+func (a *App) adminQuestionRows(questions []Question) []gin.H {
+	links := a.conceptLinks(idsOf(questions))
+	rows := make([]gin.H, 0, len(questions))
+	for _, q := range questions {
+		data, _ := json.Marshal(q)
+		var row gin.H
+		if err := json.Unmarshal(data, &row); err != nil {
+			continue
+		}
+		row["concepts"] = conceptChips(links, q.ID)
+		rows = append(rows, row)
+	}
+	return rows
+}
 
 func (a *App) listQuestions(c *gin.Context) {
 	q := a.DB.Model(&Question{}).Preload("Tags")
@@ -25,6 +43,15 @@ func (a *App) listQuestions(c *gin.Context) {
 	}
 	if unitID := c.Query("unitId"); unitID != "" {
 		q = q.Where("unit_id = ?", unitID)
+	}
+	if topicID := c.Query("topicId"); topicID != "" {
+		q = q.Where("topic_id = ?", topicID)
+	}
+	if stimulusID := c.Query("stimulusId"); stimulusID != "" {
+		q = q.Where("stimulus_id = ?", stimulusID)
+	}
+	if format := c.Query("format"); format != "" {
+		q = q.Where("format = ?", format)
 	}
 	if search := strings.TrimSpace(c.Query("search")); search != "" {
 		q = q.Where("lower(stem) like ?", "%"+strings.ToLower(search)+"%")
@@ -50,7 +77,7 @@ func (a *App) listQuestions(c *gin.Context) {
 	questions := make([]Question, 0)
 	q.Order("created_at desc").Limit(limit).Find(&questions)
 	ensureTags(questions)
-	c.JSON(200, questions)
+	c.JSON(200, a.adminQuestionRows(questions))
 }
 
 // ensureTags replaces nil tag slices with empty ones so JSON emits [] not null.
@@ -71,7 +98,12 @@ func (a *App) getQuestion(c *gin.Context) {
 	if question.Tags == nil {
 		question.Tags = []Tag{}
 	}
-	c.JSON(200, question)
+	rows := a.adminQuestionRows([]Question{question})
+	if len(rows) == 0 {
+		c.JSON(500, gin.H{"error": "could not serialize question"})
+		return
+	}
+	c.JSON(200, rows[0])
 }
 
 func (a *App) createQuestion(c *gin.Context) {
@@ -86,25 +118,32 @@ func (a *App) createQuestion(c *gin.Context) {
 	}
 	question, err := a.createQuestionFromDraft(draft, "manual", c.GetString("userID"))
 	if err != nil {
-		c.JSON(500, gin.H{"error": "could not create question"})
+		c.JSON(400, gin.H{"error": err.Error()})
 		return
 	}
 	a.DB.Preload("Tags").First(question, "id = ?", question.ID)
 	if question.Tags == nil {
 		question.Tags = []Tag{}
 	}
-	c.JSON(200, question)
+	rows := a.adminQuestionRows([]Question{*question})
+	if len(rows) == 0 {
+		c.JSON(500, gin.H{"error": "could not serialize question"})
+		return
+	}
+	c.JSON(200, rows[0])
 }
 
 func (a *App) updateQuestion(c *gin.Context) {
 	var question Question
-	if err := a.DB.Preload("Tags").First(&question, "id = ?", c.Param("id")).Error; err != nil {
+	if err := a.DB.Preload("Tags").Preload("Concepts").First(&question, "id = ?", c.Param("id")).Error; err != nil {
 		c.JSON(404, gin.H{"error": "not found"})
 		return
 	}
 	var req struct {
 		Type        *string            `json:"type"`
+		Format      *string            `json:"format"`
 		Stem        *string            `json:"stem"`
+		StimulusID  *string            `json:"stimulusId"`
 		Materials   []QuestionMaterial `json:"materials"`
 		Choices     []QuestionChoice   `json:"choices"`
 		AnswerKey   *string            `json:"answerKey"`
@@ -113,6 +152,7 @@ func (a *App) updateQuestion(c *gin.Context) {
 		Unit        *string            `json:"unit"`
 		Topic       *string            `json:"topic"`
 		Tags        *[]string          `json:"tags"`
+		Concepts    *[]string          `json:"concepts"`
 		Status      *string            `json:"status"`
 		SourceNote  *string            `json:"sourceNote"`
 	}
@@ -123,8 +163,39 @@ func (a *App) updateQuestion(c *gin.Context) {
 	if req.Type != nil {
 		question.Type = *req.Type
 	}
+	if req.Format != nil {
+		question.Format = strings.ToLower(strings.TrimSpace(*req.Format))
+	}
+	if question.Type == "mcq" {
+		// MCQ clustering comes from the shared stimulus, not a format.
+		question.Format = ""
+	} else if question.Format == "" {
+		question.Format = QuestionFormatFRQ
+	}
+	if !validQuestionFormat(question.Format) {
+		c.JSON(400, gin.H{"error": "format must be frq, aaq, or ebq"})
+		return
+	}
 	if req.Stem != nil {
 		question.Stem = strings.TrimSpace(*req.Stem)
+	}
+	if req.StimulusID != nil {
+		stimulusID, err := a.resolveStimulusID(*req.StimulusID)
+		if err != nil {
+			c.JSON(400, gin.H{"error": err.Error()})
+			return
+		}
+		question.StimulusID = stimulusID
+	}
+	if question.Format == QuestionFormatAAQ || question.Format == QuestionFormatEBQ {
+		if question.StimulusID == nil {
+			c.JSON(400, gin.H{"error": question.Format + " questions need a shared stimulus (article / sources)"})
+			return
+		}
+		if len(questionParts(question.Parts)) == 0 && (req.Parts == nil || len(req.Parts) == 0) {
+			c.JSON(400, gin.H{"error": question.Format + " questions need per-part prompts (parts)"})
+			return
+		}
 	}
 	if req.Materials != nil {
 		question.Materials = mustJSON(req.Materials)
@@ -167,6 +238,14 @@ func (a *App) updateQuestion(c *gin.Context) {
 	if req.Tags != nil {
 		question.Tags = a.findOrCreateTags(*req.Tags)
 	}
+	if req.Concepts != nil {
+		concepts, err := a.resolveConcepts(*req.Concepts)
+		if err != nil {
+			c.JSON(400, gin.H{"error": err.Error()})
+			return
+		}
+		question.Concepts = concepts
+	}
 	if err := a.DB.Session(&gorm.Session{FullSaveAssociations: true}).Save(&question).Error; err != nil {
 		c.JSON(500, gin.H{"error": "could not save question"})
 		return
@@ -175,7 +254,12 @@ func (a *App) updateQuestion(c *gin.Context) {
 	if question.Tags == nil {
 		question.Tags = []Tag{}
 	}
-	c.JSON(200, question)
+	rows := a.adminQuestionRows([]Question{question})
+	if len(rows) == 0 {
+		c.JSON(500, gin.H{"error": "could not serialize question"})
+		return
+	}
+	c.JSON(200, rows[0])
 }
 
 func (a *App) listTags(c *gin.Context) {
@@ -290,16 +374,35 @@ func (a *App) listSets(c *gin.Context) {
 	}
 	var sets []PracticeSet
 	q.Order("created_at desc").Find(&sets)
+	setIDs := make([]string, 0, len(sets))
+	for _, set := range sets {
+		setIDs = append(setIDs, set.ID)
+	}
+	counts := a.setQuestionCounts(setIDs)
+	unitIDs, formats := a.setFacets(setIDs)
 	type setRow struct {
 		PracticeSet
-		QuestionCount int  `json:"questionCount"`
-		Published     bool `json:"published"`
+		QuestionCount int      `json:"questionCount"`
+		UnitIDs       []string `json:"unitIds"`
+		Formats       []string `json:"formats"`
+		Published     bool     `json:"published"`
 	}
 	out := make([]setRow, 0, len(sets))
 	for _, set := range sets {
-		var count int64
-		a.DB.Model(&PracticeSetItem{}).Where("set_id = ?", set.ID).Count(&count)
-		out = append(out, setRow{PracticeSet: set, QuestionCount: int(count), Published: set.Status == "published"})
+		row := setRow{
+			PracticeSet:   set,
+			QuestionCount: counts[set.ID],
+			UnitIDs:       unitIDs[set.ID],
+			Formats:       formats[set.ID],
+			Published:     set.Status == "published",
+		}
+		if row.UnitIDs == nil {
+			row.UnitIDs = []string{}
+		}
+		if row.Formats == nil {
+			row.Formats = []string{}
+		}
+		out = append(out, row)
 	}
 	c.JSON(200, out)
 }
@@ -321,7 +424,13 @@ func (a *App) getSet(c *gin.Context) {
 		a.DB.Preload("Tags").Where("id in ?", questionIDs).Find(&questions)
 	}
 	ensureTags(questions)
-	c.JSON(200, gin.H{"set": set, "items": items, "questions": questions})
+	c.JSON(200, gin.H{
+		"set":       set,
+		"items":     items,
+		"questions": a.adminQuestionRows(questions),
+		"stimuli":   a.stimuliFor(questions),
+		"coverage":  a.computeSetCoverage(questions),
+	})
 }
 
 func (a *App) createSet(c *gin.Context) {

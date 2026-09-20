@@ -29,17 +29,28 @@ type QuestionMaterial struct {
 	Text  string `json:"text"`
 }
 
+// StimulusDocument is one document inside a Stimulus (AAQ article, EBQ
+// source, MCQ passage). Text is markdown and may embed uploaded images.
+type StimulusDocument struct {
+	Title string `json:"title"`
+	Text  string `json:"text"`
+}
+
 type QuestionPart struct {
 	Label           string   `json:"label"`
 	Prompt          string   `json:"prompt"`
 	ReferenceAnswer string   `json:"referenceAnswer"`
 	Rubric          []string `json:"rubric"`
+	// Points is the College Board point value of this part (display only).
+	Points *int `json:"points"`
 }
 
 // questionDraft is the normalized shape produced by both import channels.
 type questionDraft struct {
 	Type        string             `json:"type"`
+	Format      string             `json:"format"`
 	Stem        string             `json:"stem"`
+	StimulusID  string             `json:"stimulusId"`
 	Materials   []QuestionMaterial `json:"materials"`
 	Choices     []QuestionChoice   `json:"choices"`
 	AnswerKey   string             `json:"answerKey"`
@@ -48,6 +59,7 @@ type questionDraft struct {
 	Unit        string             `json:"unit"`
 	Topic       string             `json:"topic"`
 	Tags        []string           `json:"tags"`
+	Concepts    []string           `json:"concepts"`
 	SourceNote  string             `json:"sourceNote"`
 }
 
@@ -251,6 +263,23 @@ func validateQuestionDraft(draft *questionDraft) error {
 	if draft.Stem == "" {
 		return errors.New("stem is required")
 	}
+	// Format only discriminates subjective layouts; MCQ clustering comes from
+	// the shared stimulus reference instead.
+	draft.Format = strings.ToLower(strings.TrimSpace(draft.Format))
+	if draft.Type == "mcq" {
+		draft.Format = ""
+	} else if draft.Format == "" {
+		draft.Format = QuestionFormatFRQ
+	}
+	if !validQuestionFormat(draft.Format) {
+		return errors.New("format must be frq, aaq, or ebq")
+	}
+	if (draft.Format == QuestionFormatAAQ || draft.Format == QuestionFormatEBQ) && strings.TrimSpace(draft.StimulusID) == "" {
+		return errors.New(draft.Format + " questions need a shared stimulus (article / sources)")
+	}
+	if (draft.Format == QuestionFormatAAQ || draft.Format == QuestionFormatEBQ) && len(draft.Parts) == 0 {
+		return errors.New(draft.Format + " questions need per-part prompts (parts)")
+	}
 	switch draft.Type {
 	case "mcq":
 		if len(draft.Choices) < 2 {
@@ -330,13 +359,23 @@ func mustJSON(v any) datatypes.JSON {
 }
 
 // createQuestionFromDraft persists a validated draft with resolved tags and
-// unit/topic links. Status starts as draft so staff can review imports.
+// unit/topic/concept links. Status starts as draft so staff can review imports.
 func (a *App) createQuestionFromDraft(draft questionDraft, source, createdBy string) (*Question, error) {
 	unitID, topicID := a.resolveUnitTopicLinked(normalizeUnitRef(draft.Unit), draft.Topic)
+	stimulusID, err := a.resolveStimulusID(draft.StimulusID)
+	if err != nil {
+		return nil, err
+	}
+	concepts, err := a.resolveConcepts(draft.Concepts)
+	if err != nil {
+		return nil, err
+	}
 	question := Question{
 		ID:          NewID("q"),
 		Type:        draft.Type,
+		Format:      draft.Format,
 		Stem:        draft.Stem,
+		StimulusID:  stimulusID,
 		Materials:   mustJSON(draft.Materials),
 		Choices:     mustJSON(draft.Choices),
 		AnswerKey:   draft.AnswerKey,
@@ -353,7 +392,57 @@ func (a *App) createQuestionFromDraft(draft questionDraft, source, createdBy str
 	if err := a.DB.Create(&question).Error; err != nil {
 		return nil, err
 	}
+	if len(concepts) > 0 {
+		if err := a.DB.Model(&question).Association("Concepts").Append(concepts); err != nil {
+			return nil, err
+		}
+	}
 	return &question, nil
+}
+
+// resolveStimulusID validates the stimulus reference exists (when set) and
+// returns the nullable column value.
+func (a *App) resolveStimulusID(ref string) (*string, error) {
+	ref = strings.TrimSpace(ref)
+	if ref == "" {
+		return nil, nil
+	}
+	var count int64
+	a.DB.Model(&Stimulus{}).Where("id = ?", ref).Count(&count)
+	if count == 0 {
+		return nil, errors.New("unknown stimulus: " + ref)
+	}
+	return &ref, nil
+}
+
+// resolveConcepts loads concept rows by id; every reference must exist so a
+// typo'd import row fails loudly instead of silently losing a link.
+func (a *App) resolveConcepts(ids []string) ([]Concept, error) {
+	trimmed := make([]string, 0, len(ids))
+	for _, id := range ids {
+		if v := strings.TrimSpace(id); v != "" {
+			trimmed = append(trimmed, v)
+		}
+	}
+	if len(trimmed) == 0 {
+		return nil, nil
+	}
+	var concepts []Concept
+	a.DB.Where("id in ?", trimmed).Find(&concepts)
+	if len(concepts) != len(trimmed) {
+		found := map[string]bool{}
+		for _, concept := range concepts {
+			found[concept.ID] = true
+		}
+		missing := make([]string, 0)
+		for _, id := range trimmed {
+			if !found[id] {
+				missing = append(missing, id)
+			}
+		}
+		return nil, errors.New("unknown concept: " + strings.Join(missing, ", "))
+	}
+	return concepts, nil
 }
 
 func (a *App) resolveUnitTopicLinked(unitRef, topicRef string) (*string, *string) {
