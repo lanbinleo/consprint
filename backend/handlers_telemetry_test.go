@@ -195,18 +195,23 @@ func TestTelemetryAggregatesAndPermissions(t *testing.T) {
 	app.DB.Create(&PracticeAnswer{ID: NewID("pan"), AttemptID: attempt.ID, QuestionID: "q_demo", ChoiceKey: "A", IsCorrect: &correct, AnsweredAt: now})
 	app.DB.Create(&NoteResource{ID: "nr_demo", Title: "Unit 1 Notes", Status: "published"})
 
-	// Students may not read any telemetry endpoint.
+	// Students and teachers may not read any telemetry endpoint: the whole
+	// module is admin-only (per-user access detail, failed-login emails).
 	if w := telemetryCall(t, router, http.MethodGet, "/api/admin/telemetry/activity", studentToken, ""); w.Code != http.StatusForbidden {
 		t.Fatalf("student should get 403 on activity, got %d", w.Code)
 	}
 	if w := telemetryCall(t, router, http.MethodGet, "/api/admin/telemetry/log", studentToken, ""); w.Code != http.StatusForbidden {
 		t.Fatalf("student should get 403 on log, got %d", w.Code)
 	}
+	for _, path := range []string{"activity", "features", "reviews", "practice", "log"} {
+		if w := telemetryCall(t, router, http.MethodGet, "/api/admin/telemetry/"+path, teacherToken, ""); w.Code != http.StatusForbidden {
+			t.Fatalf("teacher should get 403 on %s, got %d", path, w.Code)
+		}
+	}
 
-	// Teachers read aggregates but not the raw log.
-	w := telemetryCall(t, router, http.MethodGet, "/api/admin/telemetry/activity?days=7", teacherToken, "")
+	w := telemetryCall(t, router, http.MethodGet, "/api/admin/telemetry/activity?days=7", adminToken, "")
 	if w.Code != http.StatusOK {
-		t.Fatalf("teacher activity failed: %d %s", w.Code, w.Body.String())
+		t.Fatalf("admin activity failed: %d %s", w.Code, w.Body.String())
 	}
 	var activity struct {
 		Daily []struct {
@@ -273,9 +278,9 @@ func TestTelemetryAggregatesAndPermissions(t *testing.T) {
 		t.Fatal("student missing from activity students list")
 	}
 
-	w = telemetryCall(t, router, http.MethodGet, "/api/admin/telemetry/features?days=7", teacherToken, "")
+	w = telemetryCall(t, router, http.MethodGet, "/api/admin/telemetry/features?days=7", adminToken, "")
 	if w.Code != http.StatusOK {
-		t.Fatalf("teacher features failed: %d %s", w.Code, w.Body.String())
+		t.Fatalf("admin features failed: %d %s", w.Code, w.Body.String())
 	}
 	var features struct {
 		Names  []string `json:"names"`
@@ -300,9 +305,9 @@ func TestTelemetryAggregatesAndPermissions(t *testing.T) {
 		t.Fatalf("note ranking wrong: %+v", features.Notes)
 	}
 
-	w = telemetryCall(t, router, http.MethodGet, "/api/admin/telemetry/reviews?days=7", teacherToken, "")
+	w = telemetryCall(t, router, http.MethodGet, "/api/admin/telemetry/reviews?days=7", adminToken, "")
 	if w.Code != http.StatusOK {
-		t.Fatalf("teacher reviews failed: %d %s", w.Code, w.Body.String())
+		t.Fatalf("admin reviews failed: %d %s", w.Code, w.Body.String())
 	}
 	var reviews struct {
 		Total         int64 `json:"total"`
@@ -328,9 +333,9 @@ func TestTelemetryAggregatesAndPermissions(t *testing.T) {
 		t.Fatalf("top concepts wrong: %+v", reviews.TopConcepts)
 	}
 
-	w = telemetryCall(t, router, http.MethodGet, "/api/admin/telemetry/practice?days=7", teacherToken, "")
+	w = telemetryCall(t, router, http.MethodGet, "/api/admin/telemetry/practice?days=7", adminToken, "")
 	if w.Code != http.StatusOK {
-		t.Fatalf("teacher practice failed: %d %s", w.Code, w.Body.String())
+		t.Fatalf("admin practice failed: %d %s", w.Code, w.Body.String())
 	}
 	var practice struct {
 		Totals struct {
@@ -344,10 +349,6 @@ func TestTelemetryAggregatesAndPermissions(t *testing.T) {
 		t.Fatalf("practice totals wrong: %+v", practice.Totals)
 	}
 
-	if w := telemetryCall(t, router, http.MethodGet, "/api/admin/telemetry/log", teacherToken, ""); w.Code != http.StatusForbidden {
-		t.Fatalf("teacher should get 403 on raw log, got %d", w.Code)
-	}
-
 	// Admin reads the raw log with filters, keyset pagination and CSV export.
 	w = telemetryCall(t, router, http.MethodGet, "/api/admin/telemetry/log?type=login&limit=2", adminToken, "")
 	if w.Code != http.StatusOK {
@@ -358,12 +359,15 @@ func TestTelemetryAggregatesAndPermissions(t *testing.T) {
 			Type string `json:"type"`
 			Name string `json:"name"`
 		} `json:"events"`
-		HasMore    bool   `json:"hasMore"`
-		NextBefore string `json:"nextBefore"`
+		Total int `json:"total"`
+		Page  int `json:"page"`
 	}
 	json.Unmarshal(w.Body.Bytes(), &logPage)
 	if len(logPage.Events) == 0 || logPage.Events[0].Type != "login" {
 		t.Fatalf("log filter returned wrong rows: %+v", logPage.Events)
+	}
+	if logPage.Page != 1 || logPage.Total < len(logPage.Events) {
+		t.Fatalf("pagination fields wrong: page=%d total=%d rows=%d", logPage.Page, logPage.Total, len(logPage.Events))
 	}
 	w = telemetryCall(t, router, http.MethodGet, "/api/admin/telemetry/log?format=csv&userId="+student.ID, adminToken, "")
 	if w.Code != http.StatusOK || !strings.Contains(w.Header().Get("Content-Type"), "text/csv") {

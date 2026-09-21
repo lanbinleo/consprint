@@ -12,6 +12,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"gorm.io/datatypes"
+	"gorm.io/gorm"
 )
 
 // Telemetry aggregation endpoints for the admin activity panels. Aggregates
@@ -87,8 +88,8 @@ func (a *App) telemetryActivity(c *gin.Context) {
 	}
 
 	type providerRow struct {
-		Provider string
-		Count    int64 `gorm:"column:count"`
+		Provider string `json:"provider"`
+		Count    int64  `gorm:"column:count" json:"count"`
 	}
 	var providers []providerRow
 	a.DB.Raw(`select coalesce(json_extract(e.meta, '$.provider'), 'unknown') as provider, count(*) as count
@@ -248,12 +249,12 @@ func (a *App) telemetryReviews(c *gin.Context) {
 	join := fmt.Sprintf(studentScopeJoin, "re")
 
 	type dayRow struct {
-		Day        string
-		Total      int64  `gorm:"column:total"`
-		Proficient int64  `gorm:"column:proficient"`
-		Fuzzy      int64  `gorm:"column:fuzzy"`
-		Unknown    int64  `gorm:"column:unknown"`
-		AvgMS      *int64 `gorm:"column:avg_ms"`
+		Day        string   `json:"date"`
+		Total      int64    `gorm:"column:total" json:"total"`
+		Proficient int64    `gorm:"column:proficient" json:"proficient"`
+		Fuzzy      int64    `gorm:"column:fuzzy" json:"fuzzy"`
+		Unknown    int64    `gorm:"column:unknown" json:"unknown"`
+		AvgMS      *float64 `gorm:"column:avg_ms" json:"avgMs"`
 	}
 	var daily []dayRow
 	a.DB.Raw(`select strftime('%Y-%m-%d', re.created_at, ?) as day, count(*) as total,
@@ -270,17 +271,17 @@ func (a *App) telemetryReviews(c *gin.Context) {
 	}
 	dailyOut := make([]gin.H, 0, days)
 	var grandTotal int64
-	var durationSum, durationCount int64
+	var durationSum, durationCount float64
 	for _, date := range telemetryDates(start, days) {
 		row := byDay[date]
 		grandTotal += row.Total
 		if row.AvgMS != nil {
-			durationSum += *row.AvgMS * row.Total
-			durationCount += row.Total
+			durationSum += *row.AvgMS * float64(row.Total)
+			durationCount += float64(row.Total)
 		}
 		var avg any
 		if row.AvgMS != nil {
-			avg = *row.AvgMS
+			avg = int64(*row.AvgMS)
 		}
 		dailyOut = append(dailyOut, gin.H{
 			"date": date, "total": row.Total,
@@ -326,8 +327,8 @@ func (a *App) telemetryReviews(c *gin.Context) {
 	}
 
 	type conceptRow struct {
-		Term    string
-		Reviews int64 `gorm:"column:reviews"`
+		Term    string `json:"term"`
+		Reviews int64  `gorm:"column:reviews" json:"reviews"`
 	}
 	var topConcepts []conceptRow
 	a.DB.Raw(`select c.term, count(*) as reviews
@@ -337,7 +338,7 @@ func (a *App) telemetryReviews(c *gin.Context) {
 
 	var avgDuration any
 	if durationCount > 0 {
-		avgDuration = durationSum / durationCount
+		avgDuration = int64(durationSum / durationCount)
 	}
 	c.JSON(200, gin.H{
 		"days": days, "daily": dailyOut, "hours": hoursOut, "weekdays": weekdaysOut,
@@ -400,57 +401,58 @@ func (a *App) telemetryPractice(c *gin.Context) {
 	})
 }
 
-// telemetryLog streams raw activity events (admin-only). Keyset pagination:
-// pass the last row's createdAt + id back as before/beforeId.
+// telemetryLog streams raw activity events (admin-only) as a paginated
+// table: ?page=1&limit=20 with filters, plus format=csv export.
 func (a *App) telemetryLog(c *gin.Context) {
-	query := a.DB.Table("activity_events as e").
-		Select("e.id, e.created_at, e.type, e.name, e.path, e.meta, e.user_id, u.name as user_name, u.email as user_email").
-		Joins("left join users u on u.id = e.user_id")
-	if userID := c.Query("userId"); userID != "" {
-		query = query.Where("e.user_id = ?", userID)
-	}
-	if eventType := c.Query("type"); eventType != "" {
-		query = query.Where("e.type = ?", eventType)
-	}
-	if name := c.Query("name"); name != "" {
-		query = query.Where("e.name = ?", name)
-	}
-	if from := c.Query("from"); from != "" {
-		if day, err := time.ParseInLocation("2006-01-02", from, appTimeLocation()); err == nil {
-			query = query.Where("e.created_at >= ?", day)
+	filtered := func() *gorm.DB {
+		query := a.DB.Table("activity_events as e").
+			Select("e.id, e.created_at, e.type, e.name, e.path, e.meta, e.user_id, u.name as user_name, u.email as user_email").
+			Joins("left join users u on u.id = e.user_id")
+		if userID := c.Query("userId"); userID != "" {
+			query = query.Where("e.user_id = ?", userID)
 		}
-	}
-	if to := c.Query("to"); to != "" {
-		if day, err := time.ParseInLocation("2006-01-02", to, appTimeLocation()); err == nil {
-			query = query.Where("e.created_at < ?", day.AddDate(0, 0, 1))
+		if eventType := c.Query("type"); eventType != "" {
+			query = query.Where("e.type = ?", eventType)
 		}
-	}
-	if before := c.Query("before"); before != "" {
-		if at, err := time.Parse(time.RFC3339, before); err == nil {
-			query = query.Where("(e.created_at < ? or (e.created_at = ? and e.id < ?))", at, at, c.Query("beforeId"))
+		if name := c.Query("name"); name != "" {
+			query = query.Where("e.name = ?", name)
 		}
+		if from := c.Query("from"); from != "" {
+			if day, err := time.ParseInLocation("2006-01-02", from, appTimeLocation()); err == nil {
+				query = query.Where("e.created_at >= ?", day)
+			}
+		}
+		if to := c.Query("to"); to != "" {
+			if day, err := time.ParseInLocation("2006-01-02", to, appTimeLocation()); err == nil {
+				query = query.Where("e.created_at < ?", day.AddDate(0, 0, 1))
+			}
+		}
+		return query
 	}
 
-	limit := 100
-	if v, err := strconv.Atoi(c.DefaultQuery("limit", "100")); err == nil && v > 0 && v <= 500 {
+	limit := 20
+	if v, err := strconv.Atoi(c.DefaultQuery("limit", "20")); err == nil && v > 0 && v <= 500 {
 		limit = v
 	}
-
-	type logRow struct {
-		ID        string
-		CreatedAt time.Time
-		Type      string
-		Name      string
-		Path      string
-		Meta      datatypes.JSON
-		UserID    string `gorm:"column:user_id"`
-		UserName  *string
-		UserEmail *string
+	page := 1
+	if v, err := strconv.Atoi(c.DefaultQuery("page", "1")); err == nil && v > 0 {
+		page = v
 	}
 
 	if c.Query("format") == "csv" {
+		type logRow struct {
+			ID        string
+			CreatedAt time.Time
+			Type      string
+			Name      string
+			Path      string
+			Meta      datatypes.JSON
+			UserID    string `gorm:"column:user_id"`
+			UserName  *string
+			UserEmail *string
+		}
 		var rows []logRow
-		query.Order("e.created_at desc, e.id desc").Limit(5000).Scan(&rows)
+		filtered().Order("e.created_at desc, e.id desc").Limit(5000).Scan(&rows)
 		var buf bytes.Buffer
 		buf.WriteString("\xEF\xBB\xBF") // UTF-8 BOM so Excel opens Chinese correctly
 		w := csv.NewWriter(&buf)
@@ -478,19 +480,24 @@ func (a *App) telemetryLog(c *gin.Context) {
 		return
 	}
 
-	var rows []logRow
-	query.Order("e.created_at desc, e.id desc").Limit(limit + 1).Scan(&rows)
-	hasMore := len(rows) > limit
-	if hasMore {
-		rows = rows[:limit]
+	var total int64
+	filtered().Count(&total)
+
+	type logRow struct {
+		ID        string
+		CreatedAt time.Time
+		Type      string
+		Name      string
+		Path      string
+		Meta      datatypes.JSON
+		UserID    string `gorm:"column:user_id"`
+		UserName  *string
+		UserEmail *string
 	}
+	var rows []logRow
+	filtered().Order("e.created_at desc, e.id desc").Limit(limit).Offset((page - 1) * limit).Scan(&rows)
 	events := make([]gin.H, 0, len(rows))
-	var nextBefore, nextBeforeID string
-	for i, row := range rows {
-		if i == len(rows)-1 && hasMore {
-			nextBefore = row.CreatedAt.UTC().Format(time.RFC3339Nano)
-			nextBeforeID = row.ID
-		}
+	for _, row := range rows {
 		userName, userEmail := "", ""
 		if row.UserName != nil {
 			userName = *row.UserName
@@ -509,7 +516,6 @@ func (a *App) telemetryLog(c *gin.Context) {
 		})
 	}
 	c.JSON(200, gin.H{
-		"events": events, "hasMore": hasMore,
-		"nextBefore": nextBefore, "nextBeforeId": nextBeforeID,
+		"events": events, "total": total, "page": page, "pageSize": limit,
 	})
 }

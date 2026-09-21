@@ -108,10 +108,6 @@ func (a *App) Router() *gin.Engine {
 	staff.PATCH("/admin/sets/:id", a.updateSet)
 	staff.GET("/admin/analytics/overview", a.analyticsOverview)
 	staff.GET("/admin/analytics/users/:id", a.analyticsUserDetail)
-	staff.GET("/admin/telemetry/activity", a.telemetryActivity)
-	staff.GET("/admin/telemetry/features", a.telemetryFeatures)
-	staff.GET("/admin/telemetry/reviews", a.telemetryReviews)
-	staff.GET("/admin/telemetry/practice", a.telemetryPractice)
 	admin := protected.Group("")
 	admin.Use(a.requireAdmin())
 	admin.PATCH("/concepts/:id/content", a.updateConceptContent)
@@ -120,8 +116,13 @@ func (a *App) Router() *gin.Engine {
 	admin.GET("/admin/users", a.listUsers)
 	admin.PATCH("/admin/users/:id", a.updateUser)
 	admin.PATCH("/admin/users/:id/password", a.adminResetPassword)
-	// Raw telemetry rows carry per-user detail and failed-login emails:
-	// admin-only, unlike the staff-visible aggregates above.
+	// Telemetry (activity panels + raw log) is an operator concern: per-user
+	// access detail and failed-login emails stay admin-only, aggregates
+	// included so the whole module lives behind one permission.
+	admin.GET("/admin/telemetry/activity", a.telemetryActivity)
+	admin.GET("/admin/telemetry/features", a.telemetryFeatures)
+	admin.GET("/admin/telemetry/reviews", a.telemetryReviews)
+	admin.GET("/admin/telemetry/practice", a.telemetryPractice)
 	admin.GET("/admin/telemetry/log", a.telemetryLog)
 	// /files serves uploaded note materials (PDFs, images) from the data dir.
 	// It must stay public: <iframe>/<img> subresources cannot carry the
