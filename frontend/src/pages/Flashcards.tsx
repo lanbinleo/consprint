@@ -147,7 +147,7 @@ export function Flashcards() {
       }
       if (event.key === 'ArrowRight') {
         event.preventDefault()
-        if (index < queue.length - 1) goNext()
+        goNext()
         return
       }
       if (event.key === '1') respond('proficient')
@@ -449,13 +449,10 @@ export function Flashcards() {
           <ArrowLeft size={18} />
         </button>
         <StatusButtons status="" onMark={(status) => respond(status)} size="large" />
-        <button
-          className="secondary next-card"
-          onClick={goNext}
-          disabled={index >= queue.length - 1}
-          title={t.nextCard}
-        >
-          {t.nextCard} <ChevronRight size={18} />
+        {/* On the last card this becomes "finish review" and leads to the
+            summary — the session must be endable without forcing a mark. */}
+        <button className="secondary next-card" onClick={goNext} title={index >= queue.length - 1 ? t.finishSession : t.nextCard}>
+          {index >= queue.length - 1 ? t.finishSession : t.nextCard} <ChevronRight size={18} />
         </button>
       </div>
       {blocker.state === 'blocked' && (

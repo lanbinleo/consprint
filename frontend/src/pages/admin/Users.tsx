@@ -3,8 +3,11 @@ import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { KeyRound, PenLine, RotateCcw, Search, X } from 'lucide-react'
 import { api } from '../../lib/api'
 import { useSession } from '../../hooks/session'
-import { Avatar, Header, SpinnerButton } from '../../components/ui'
+import { Avatar, Header, SpinnerButton, TablePager } from '../../components/ui'
+import { formatDateTime } from '../../lib/format'
 import type { Role, User } from '../../lib/types'
+
+const USER_PAGE_SIZE = 15
 
 export function Users() {
   const { t, user: me } = useSession()
@@ -15,8 +18,12 @@ export function Users() {
     queryFn: async () => (await api.request<User[] | null>(`/api/admin/users?search=${encodeURIComponent(search)}`)) ?? [],
   })
   const users = data ?? []
+  const [page, setPage] = useState(1)
   const [actionError, setActionError] = useState('')
   const [editing, setEditing] = useState<User | null>(null)
+  const pageCount = Math.max(1, Math.ceil(users.length / USER_PAGE_SIZE))
+  const safePage = Math.min(page, pageCount)
+  const pagedUsers = users.slice((safePage - 1) * USER_PAGE_SIZE, safePage * USER_PAGE_SIZE)
 
   function refresh() {
     void queryClient.invalidateQueries({ queryKey: ['admin-users'] })
@@ -33,16 +40,18 @@ export function Users() {
       <Header eyebrow={t.admin} title={t.usersTitle} />
       <label className="search">
         <Search size={16} />
-        <input placeholder={t.search} value={search} onChange={(e) => setSearch(e.target.value)} />
+        <input placeholder={t.search} value={search} onChange={(e) => { setSearch(e.target.value); setPage(1) }} />
       </label>
-      <div className="student-table">
+      <div className="student-table user-table">
         <div className="student-row head">
           <span>{t.student}</span>
           <span>{t.role}</span>
           <span>{t.provider}</span>
+          <span>{t.recentLogin}</span>
+          <span>{t.recentSeen}</span>
           <span />
         </div>
-        {users.map((user) => (
+        {pagedUsers.map((user) => (
           <div className="student-row" key={user.id}>
             <span className="student-name">
               <Avatar user={user} />
@@ -53,6 +62,8 @@ export function Users() {
             </span>
             <span>{roleLabel(user.role)}</span>
             <span>{user.provider === 'entra' ? t.providerEntra : t.providerLocal}</span>
+            <span>{user.lastLoginAt ? formatDateTime(user.lastLoginAt) : '—'}</span>
+            <span>{user.lastSeenAt ? formatDateTime(user.lastSeenAt) : '—'}</span>
             <span className="row-actions">
               <button className="icon-line" title={t.editUser} onClick={() => setEditing(user)}>
                 <PenLine size={15} />
@@ -60,6 +71,9 @@ export function Users() {
             </span>
           </div>
         ))}
+        {users.length > USER_PAGE_SIZE && (
+          <TablePager page={safePage} pageCount={pageCount} total={users.length} onChange={setPage} />
+        )}
       </div>
       {actionError && <div className="error" style={{ marginTop: 12 }}>{actionError}</div>}
       {editing && (

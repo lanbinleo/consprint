@@ -1,4 +1,4 @@
-import { StrictMode, type ReactNode } from 'react'
+import { StrictMode, Suspense, lazy, type ReactNode } from 'react'
 import { createRoot } from 'react-dom/client'
 import {
   createBrowserRouter,
@@ -32,10 +32,17 @@ import { Sets } from './pages/admin/Sets'
 import { SetEditor } from './pages/admin/SetEditor'
 import { NoteResources } from './pages/admin/NoteResources'
 import { Boards } from './pages/admin/Boards'
-import { Analytics } from './pages/admin/Analytics'
+// Chart-heavy staff pages pull in recharts; lazy chunks keep students from
+// downloading the chart library with the main bundle.
+const Analytics = lazy(() => import('./pages/admin/Analytics').then((m) => ({ default: m.Analytics })))
+const Activity = lazy(() => import('./pages/admin/Activity').then((m) => ({ default: m.Activity })))
 import { Users } from './pages/admin/Users'
 import { Content } from './pages/admin/Content'
 import './styles.css'
+
+function PageFallback() {
+  return <p className="muted">…</p>
+}
 
 function RequireAuth({ children }: { children: ReactNode }) {
   const { ready, user } = useSession()
@@ -105,7 +112,24 @@ const router = createBrowserRouter(
           }
         >
           <Route index element={<Navigate to="/admin/analytics" replace />} />
-          <Route path="analytics" element={<Analytics />} />
+          <Route
+            path="analytics"
+            element={
+              <Suspense fallback={<PageFallback />}>
+                <Analytics />
+              </Suspense>
+            }
+          />
+          <Route
+            path="activity"
+            element={
+              <RequireAdmin>
+                <Suspense fallback={<PageFallback />}>
+                  <Activity />
+                </Suspense>
+              </RequireAdmin>
+            }
+          />
           <Route path="questions" element={<Questions />} />
           <Route path="import" element={<Import />} />
           <Route path="sets" element={<Sets />} />

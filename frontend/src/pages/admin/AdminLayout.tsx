@@ -20,6 +20,7 @@ export function AdminLayout() {
           {
             label: t.adminManage,
             items: [
+              { to: '/admin/activity', label: t.adminActivity },
               { to: '/admin/users', label: t.adminUsers },
               { to: '/admin/content', label: t.adminContent },
             ],

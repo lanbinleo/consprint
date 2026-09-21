@@ -131,3 +131,34 @@ export function StatusPill({ status }: { status: string }) {
     status === 'proficient' ? t.proficient : status === 'fuzzy' ? t.fuzzy : status === 'unknown' ? t.unknown : t.unmarked
   return <span className={`pill ${tone}`}>{label}</span>
 }
+
+// TablePager is the shared footer pager for client-side table pagination
+// (student lists, user lists). Place it as the last child of the table
+// container so its top border reads as the table's footer row.
+export function TablePager({
+  page,
+  pageCount,
+  total,
+  onChange,
+}: {
+  page: number
+  pageCount: number
+  total: number
+  onChange: (page: number) => void
+}) {
+  const { t } = useSession()
+  return (
+    <div className="log-pager">
+      <small className="muted">{t.totalRows.replace('{n}', String(total))}</small>
+      <div className="pager-controls">
+        <button className="secondary" disabled={page <= 1} onClick={() => onChange(page - 1)}>
+          {t.prevPage}
+        </button>
+        <span className="pager-info">{t.pageOf.replace('{a}', String(page)).replace('{b}', String(pageCount))}</span>
+        <button className="secondary" disabled={page >= pageCount} onClick={() => onChange(page + 1)}>
+          {t.nextPage}
+        </button>
+      </div>
+    </div>
+  )
+}

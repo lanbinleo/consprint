@@ -1171,6 +1171,20 @@ mark.mk-pink { background: color-mix(in srgb, #f472b6 38%, transparent); }
   padding: 8px 0;
 }
 
+/* Session-complete card: real padding so the praise line and the button are
+   not pressed against the card edges, plus the same 12px rhythm as the other
+   card rows. */
+.empty-state.celebrate {
+  gap: 12px;
+  padding: 26px 32px;
+  margin-top: 12px;
+}
+
+.empty-state.celebrate strong {
+  font-size: var(--text-xl);
+  letter-spacing: -0.01em;
+}
+
 .result-celebrate .muted { font-size: var(--text-sm); }
 
 /* ---- Boards admin ---- */
@@ -3060,4 +3074,115 @@ input:disabled {
   max-width: 100%;
   height: auto;
   border-radius: var(--radius-sm);
+}
+
+/* ---- Telemetry charts & activity panels ---- */
+.chart-subtitle { margin: 2px 0 10px; font-size: var(--text-sm); }
+.recharts-surface { overflow: visible; }
+
+.day-range-picker { display: inline-flex; gap: 4px; }
+.day-range-picker button {
+  padding: 5px 12px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--muted);
+  font-size: var(--text-sm);
+  cursor: pointer;
+}
+.day-range-picker button.active { background: var(--accent-soft); border-color: var(--accent-line); color: var(--accent-strong); font-weight: 600; }
+
+.doughnut-wrap { display: flex; flex-direction: column; gap: 10px; height: 100%; }
+.doughnut-plot { position: relative; flex: 1; min-height: 0; }
+.doughnut-center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+.doughnut-center strong { font-size: var(--text-xl); }
+.doughnut-center small { color: var(--muted); font-size: var(--text-xs); }
+.doughnut-legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: var(--text-sm); }
+.doughnut-legend span { display: inline-flex; align-items: center; gap: 6px; }
+.doughnut-legend i { width: 9px; height: 9px; border-radius: 50%; flex-basis: 9px; }
+.doughnut-legend b { font-weight: 600; }
+
+.activity-table { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); overflow: auto; }
+.activity-row {
+  display: grid;
+  grid-template-columns: minmax(170px, 1.8fr) 1.2fr 1.2fr 0.7fr 0.7fr 0.7fr;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 14px;
+  border-top: 1px solid var(--line);
+  font-size: var(--text-sm);
+}
+.activity-row:first-child { border-top: 0; }
+.activity-row.head { color: var(--muted); font-weight: 600; }
+.activity-row span strong, .activity-row span small { display: block; }
+.activity-row small { color: var(--muted); }
+
+.log-filters { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+.log-filters select, .log-filters input {
+  padding: 6px 10px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--text);
+  font-size: var(--text-sm);
+}
+.log-table { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); overflow: auto; }
+.log-row {
+  display: grid;
+  grid-template-columns: 150px 110px minmax(180px, 1.4fr) minmax(180px, 1.6fr);
+  gap: 10px;
+  align-items: center;
+  padding: 9px 14px;
+  border-top: 1px solid var(--line);
+  font-size: var(--text-sm);
+}
+.log-row:first-child { border-top: 0; }
+.log-row.head { color: var(--muted); font-weight: 600; }
+.log-row span strong, .log-row span small { display: block; }
+.log-row small { color: var(--muted); }
+.log-detail { min-width: 0; }
+.log-detail small { margin-top: 1px; overflow: hidden; text-overflow: ellipsis; }
+.log-more { display: flex; justify-content: center; padding: 12px; }
+.log-pager {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding: 10px 14px;
+  border-top: 1px solid var(--line);
+}
+.pager-controls { display: flex; align-items: center; gap: 8px; }
+.pager-controls .secondary { padding: 5px 12px; font-size: var(--text-sm); }
+.pager-info { font-size: var(--text-sm); color: var(--muted); font-variant-numeric: tabular-nums; }
+
+/* Standalone full-width chart cards (telemetry trend rows) need the same
+   vertical rhythm as .dashboard-grid; without this they sit flush against
+   the metrics row above and the grid below. */
+.metrics + .chart-card,
+.chart-card + .dashboard-grid,
+.dashboard-grid + .chart-card,
+.chart-card + .chart-card {
+  margin-top: 12px;
+}
+
+/* …but cards inside a grid row never carry that rhythm margin — the grid gap
+   owns their spacing, and a margin here would tilt the row's top edges. */
+.dashboard-grid > .chart-card,
+.settings-grid > .chart-card {
+  margin-top: 0;
+}
+
+/* Users admin table carries the activity rollup columns (last sign-in / last
+   seen), so it needs a wider column template than the shared student-row. */
+.user-table .student-row {
+  grid-template-columns: minmax(170px, 1.9fr) 0.7fr 0.9fr 1.1fr 1.1fr auto;
 }

@@ -4,15 +4,31 @@ import { ArrowLeft } from 'lucide-react'
 import { api } from '../../lib/api'
 import { formatDateTime, percent } from '../../lib/format'
 import { useSession } from '../../hooks/session'
-import { Header, Metric } from '../../components/ui'
-import type { AnalyticsOverview, AnalyticsUserDetail } from '../../lib/types'
+import { Header, Metric, TablePager } from '../../components/ui'
+import { BarsChart, ChartCard, HBarsChart, TrendChart } from '../../components/charts'
+import type { AnalyticsOverview, AnalyticsUserDetail, TelemetryReviews } from '../../lib/types'
+
+const STUDENT_PAGE_SIZE = 15
+
+export function formatDuration(ms: number | null | undefined) {
+  if (!ms || ms <= 0) return '—'
+  const seconds = ms / 1000
+  if (seconds < 60) return `${seconds.toFixed(1)}s`
+  const minutes = Math.floor(seconds / 60)
+  return `${minutes}m ${String(Math.round(seconds % 60)).padStart(2, '0')}s`
+}
 
 export function Analytics() {
   const { t } = useSession()
   const [studentId, setStudentId] = useState('')
+  const [studentPage, setStudentPage] = useState(1)
   const { data: overview } = useQuery({
     queryKey: ['analytics-overview'],
     queryFn: () => api.request<AnalyticsOverview>('/api/admin/analytics/overview'),
+  })
+  const { data: reviews } = useQuery({
+    queryKey: ['admin-telemetry', 'reviews', '30'],
+    queryFn: () => api.request<TelemetryReviews>('/api/admin/telemetry/reviews?days=30'),
   })
 
   if (studentId) {
@@ -24,6 +40,12 @@ export function Analytics() {
   const totalMarked = flashcardStatus.reduce((sum, row) => (row.status ? sum + row.count : sum), 0)
   const accuracyByUnit = overview?.accuracyByUnit ?? []
   const students = overview?.students ?? []
+  const studentPageCount = Math.max(1, Math.ceil(students.length / STUDENT_PAGE_SIZE))
+  const safeStudentPage = Math.min(studentPage, studentPageCount)
+  const pagedStudents = students.slice((safeStudentPage - 1) * STUDENT_PAGE_SIZE, safeStudentPage * STUDENT_PAGE_SIZE)
+  const daily = (overview?.daily ?? []).map((row) => ({ date: row.label, reviews: row.reviews, attempts: row.attempts }))
+  const reviewDaily = reviews?.daily ?? []
+  const reviewTotal = reviews?.total ?? 0
 
   return (
     <div>
@@ -34,24 +56,36 @@ export function Analytics() {
         <Metric label={t.answeredQuestions} value={overview?.practice.answered ?? 0} loading={!overview} />
         <Metric label={t.classAccuracy} value={`${percent(overview?.practice.correct ?? 0, overview?.practice.answered ?? 0)}%`} loading={!overview} />
       </div>
+      {daily.length > 0 && (
+        <ChartCard title={t.reviewsTrend} height={220}>
+          {daily.some((row) => row.reviews > 0 || row.attempts > 0) ? (
+            <TrendChart
+              data={daily}
+              xKey="date"
+              series={[
+                { key: 'reviews', label: t.reviewsTrend, color: 'accent' },
+                { key: 'attempts', label: t.practiceTrend, color: 'orange' },
+              ]}
+            />
+          ) : (
+            <p className="muted">{t.empty}</p>
+          )}
+        </ChartCard>
+      )}
       <div className="dashboard-grid">
         <div className="chart-card">
           <h3>{t.accuracyByUnit}</h3>
           {accuracyByUnit.length === 0 ? (
             <p className="muted">{t.empty}</p>
           ) : (
-            <div className="accuracy-list">
-              {accuracyByUnit.map((row) => (
-                <div key={row.id || row.label}>
-                  <span>{row.label}</span>
-                  <div className="accuracy-bar">
-                    <i style={{ width: `${Math.round(row.accuracy * 100)}%` }} />
-                  </div>
-                  <small>
-                    {row.correct}/{row.answered}
-                  </small>
-                </div>
-              ))}
+            <div style={{ height: Math.max(180, accuracyByUnit.length * 44) }}>
+              <HBarsChart
+                data={accuracyByUnit.map((row) => ({ unit: row.label.replace(/^Unit \d+: /, ''), accuracy: Math.round(row.accuracy * 100) }))}
+                labelKey="unit"
+                valueKey="accuracy"
+                valueName={t.accuracy}
+                valueSuffix="%"
+              />
             </div>
           )}
         </div>
@@ -87,6 +121,39 @@ export function Analytics() {
           </div>
         </div>
       </div>
+      <div className="dashboard-grid">
+        <ChartCard
+          title={t.reviewsTrend}
+          subtitle={`${t.lastDays.replace('{n}', '30')} · ${t.avgReviewDuration} ${formatDuration(reviews?.avgDurationMs)} · ${reviewTotal}`}
+        >
+          {reviewDaily.some((row) => row.total > 0) ? (
+            <BarsChart
+              data={reviewDaily}
+              xKey="date"
+              stacked
+              series={[
+                { key: 'proficient', label: t.proficient, color: 'green' },
+                { key: 'fuzzy', label: t.fuzzy, color: 'orange' },
+                { key: 'unknown', label: t.unknown, color: 'red' },
+              ]}
+            />
+          ) : (
+            <p className="muted">{t.empty}</p>
+          )}
+        </ChartCard>
+        <ChartCard title={t.reviewHours}>
+          {(reviews?.hours ?? []).some((row) => row.reviews > 0) ? (
+            <BarsChart
+              data={(reviews?.hours ?? []).map((row) => ({ hour: `${String(row.hour).padStart(2, '0')}:00`, reviews: row.reviews }))}
+              xKey="hour"
+              series={[{ key: 'reviews', label: t.reviewsTrend, color: 'accent' }]}
+              tickFormatter={(value) => value.slice(0, 2)}
+            />
+          ) : (
+            <p className="muted">{t.empty}</p>
+          )}
+        </ChartCard>
+      </div>
       <h3 className="section-title">
         {t.studentsTitle} ({students.length})
       </h3>
@@ -98,7 +165,7 @@ export function Analytics() {
           <span>{t.markedConcepts}</span>
           <span />
         </div>
-        {students.map((student) => (
+        {pagedStudents.map((student) => (
           <div className="student-row" key={student.id}>
             <span>
               <strong>{student.name}</strong>
@@ -112,6 +179,9 @@ export function Analytics() {
             </button>
           </div>
         ))}
+        {students.length > STUDENT_PAGE_SIZE && (
+          <TablePager page={safeStudentPage} pageCount={studentPageCount} total={students.length} onChange={setStudentPage} />
+        )}
       </div>
     </div>
   )

@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query'
 import { ExternalLink, Link2, Maximize2, Minimize2, NotebookPen, RefreshCw } from 'lucide-react'
 import { api } from '../lib/api'
 import { useSession } from '../hooks/session'
+import { track } from '../lib/telemetry'
 import { Header, ListSkeleton } from '../components/ui'
 import type { NoteResource, NoteResourceItem } from '../lib/types'
 
@@ -55,6 +56,12 @@ function TabBody({ resource }: { resource: NoteResource }) {
   const [index, setIndex] = useState(0)
   const [expanded, setExpanded] = useState(false)
   const item = resource.items[Math.min(index, resource.items.length - 1)]
+
+  // Note viewing has no fact table of its own — telemetry is the usage record
+  // the admin panel ranks. One event per tab/item selection.
+  useEffect(() => {
+    track('feature', 'note.open', { resourceId: resource.id, title: resource.title })
+  }, [resource.id, resource.title])
 
   // Esc leaves expanded mode; lock body scroll behind the overlay.
   useEffect(() => {

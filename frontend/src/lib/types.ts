@@ -74,6 +74,8 @@ export type User = {
   provider: string
   avatarDataUrl?: string
   createdAt: string
+  lastLoginAt?: string | null
+  lastSeenAt?: string | null
 }
 
 export type AuthPayload = {
@@ -368,6 +370,69 @@ export type ImportStatus = {
   readyConcepts: number
   byUnit: { unitId: string; unit: string; concepts: number; ready: number }[]
   runs: { id: string; source: string; status: string; message: string; counts: string; createdAt: string }[]
+}
+
+// ---- Telemetry (admin activity panels) ----
+
+export type TelemetryActivity = {
+  days: number
+  daily: { date: string; logins: number; dau: number }[]
+  hours: { hour: number; events: number }[]
+  providers: { provider: string; count: number }[]
+  students: {
+    id: string
+    name: string
+    email: string
+    lastLoginAt: string | null
+    lastSeenAt: string | null
+    logins: number
+    activeDays: number
+    inactiveDays: number
+  }[]
+  summary: { todayLogins: number; todayActive: number; active7d: number; inactive7d: number }
+}
+
+export type TelemetryFeatures = {
+  days: number
+  names: string[]
+  rows: ({ date: string } & Record<string, number | string>)[]
+  totals: { name: string; count: number; users: number }[]
+  notes: { resourceId: string; title: string; opens: number; users: number }[]
+}
+
+export type TelemetryReviews = {
+  days: number
+  daily: { date: string; total: number; proficient: number; fuzzy: number; unknown: number; avgMs: number | null }[]
+  hours: { hour: number; reviews: number }[]
+  weekdays: { weekday: number; reviews: number }[]
+  topConcepts: { term: string; reviews: number }[]
+  total: number
+  avgDurationMs: number | null
+}
+
+export type TelemetryPractice = {
+  days: number
+  daily: { date: string; attempts: number; answers: number; correct: number }[]
+  totals: { attempts: number; answers: number; correct: number }
+}
+
+export type TelemetryLogEvent = {
+  id: string
+  createdAt: string
+  type: 'login' | 'heartbeat' | 'page_view' | 'feature'
+  name: string
+  path: string
+  meta: Record<string, unknown> | null
+  userId: string
+  userName: string
+  userEmail: string
+}
+
+export type TelemetryLogPage = {
+  events: TelemetryLogEvent[]
+  total: number
+  page: number
+  pageSize: number
 }
 
 // ---- Notes page resource tabs ----

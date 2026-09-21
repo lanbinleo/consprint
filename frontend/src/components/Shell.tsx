@@ -22,6 +22,7 @@ import {
   Layers,
 } from 'lucide-react'
 import { useSession } from '../hooks/session'
+import { trackPageView } from '../lib/telemetry'
 import { Avatar } from './ui'
 import { Logo } from './Logo'
 import type { Role } from '../lib/types'
@@ -48,6 +49,7 @@ export function Shell() {
   // Route changes always close the mobile drawer.
   useEffect(() => {
     setMobileNavOpen(false)
+    trackPageView(location.pathname)
   }, [location.pathname])
 
   useEffect(() => {
