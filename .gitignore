@@ -19,3 +19,7 @@ coverage/
 # Local agent scratch space (audit scripts, drafts) — never commit.
 .scratch/
 .zcode/
+
+# Tool/plugin artifacts
+.video_agent/
+*.tsbuildinfo
