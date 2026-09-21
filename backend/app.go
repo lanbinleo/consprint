@@ -44,12 +44,13 @@ func NewApp(dbPath, sources string) (*App, error) {
 	if err != nil {
 		return nil, err
 	}
-	if err := db.AutoMigrate(&Tenant{}, &User{}, &Course{}, &Unit{}, &Topic{}, &Concept{}, &ConceptContent{}, &UserConceptState{}, &ReviewEvent{}, &ImportRun{}, &Tag{}, &Stimulus{}, &Question{}, &PracticeSet{}, &PracticeSetItem{}, &PracticeAttempt{}, &PracticeAnswer{}, &NoteResource{}, &NoteResourceItem{}, &Announcement{}, &CalendarEvent{}, &Quote{}); err != nil {
+	if err := db.AutoMigrate(&Tenant{}, &User{}, &Course{}, &Unit{}, &Topic{}, &Concept{}, &ConceptContent{}, &UserConceptState{}, &ReviewEvent{}, &ActivityEvent{}, &ImportRun{}, &Tag{}, &Stimulus{}, &Question{}, &PracticeSet{}, &PracticeSetItem{}, &PracticeAttempt{}, &PracticeAnswer{}, &NoteResource{}, &NoteResourceItem{}, &Announcement{}, &CalendarEvent{}, &Quote{}); err != nil {
 		return nil, err
 	}
 	migrateLegacyEntraOID(db)
 	migrateCalendarKinds(db)
 	migrateQuestionFormats(db)
+	pruneTelemetry(db)
 	if err := ensureSchoolTenant(db); err != nil {
 		return nil, err
 	}

@@ -151,52 +151,66 @@ func (a *App) entraLogin(c *gin.Context) {
 	c.Redirect(http.StatusFound, entraOAuthConfig().AuthCodeURL(newEntraState()))
 }
 
+// entraFail records a failed Microsoft sign-in (telemetry) and redirects the
+// browser back to the frontend with the error code.
+func (a *App) entraFail(c *gin.Context, reason string) {
+	a.recordActivity("", EventLogin, "login.failed", "/api/auth/entra/callback", map[string]any{
+		"provider": "entra",
+		"reason":   reason,
+		"ip":       c.ClientIP(),
+		"ua":       trimUserAgent(c.GetHeader("User-Agent")),
+	})
+	entraRedirect(c, map[string]string{"error": reason})
+}
+
 func (a *App) entraCallback(c *gin.Context) {
 	if !entraConfigured() {
 		entraRedirect(c, map[string]string{"error": "microsoft sign-in is not configured"})
 		return
 	}
 	if errParam := c.Query("error"); errParam != "" {
-		entraRedirect(c, map[string]string{"error": fallback(errParam, "sign_in_failed")})
+		a.entraFail(c, fallback(errParam, "sign_in_failed"))
 		return
 	}
 	code := c.Query("code")
 	state := c.Query("state")
 	if code == "" || !consumeEntraState(state) {
-		entraRedirect(c, map[string]string{"error": "invalid_state"})
+		a.entraFail(c, "invalid_state")
 		return
 	}
 	ctx, cancel := context.WithTimeout(c.Request.Context(), 15*time.Second)
 	defer cancel()
 	token, err := entraOAuthConfig().Exchange(ctx, code)
 	if err != nil {
-		entraRedirect(c, map[string]string{"error": "token_exchange_failed"})
+		a.entraFail(c, "token_exchange_failed")
 		return
 	}
 	profile, err := fetchGraphProfile(ctx, token)
 	if err != nil {
-		entraRedirect(c, map[string]string{"error": "profile_fetch_failed"})
+		a.entraFail(c, "profile_fetch_failed")
 		return
 	}
 	email := strings.ToLower(strings.TrimSpace(fallback(profile.Mail, profile.UserPrincipalName)))
 	if profile.ID == "" || email == "" {
-		entraRedirect(c, map[string]string{"error": "profile_incomplete"})
+		a.entraFail(c, "profile_incomplete")
 		return
 	}
 	if !entraEmailAllowed(email) {
-		entraRedirect(c, map[string]string{"error": "email_domain_not_allowed"})
+		a.entraFail(c, "email_domain_not_allowed")
 		return
 	}
 	user, err := a.upsertEntraUser(profile, email)
 	if err != nil {
-		entraRedirect(c, map[string]string{"error": "sign_in_failed"})
+		a.entraFail(c, "sign_in_failed")
 		return
 	}
 	jwtToken, err := a.sign(user)
 	if err != nil {
-		entraRedirect(c, map[string]string{"error": "token_failed"})
+		a.entraFail(c, "token_failed")
 		return
 	}
+	a.recordLogin(c, user.ID, "entra", email, true)
+	a.touchLastLogin(user.ID)
 	entraRedirect(c, map[string]string{"token": jwtToken})
 }
 

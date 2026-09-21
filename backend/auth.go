@@ -70,6 +70,10 @@ func (a *App) register(c *gin.Context) {
 		c.JSON(409, gin.H{"error": "email already exists"})
 		return
 	}
+	// Registration signs the user in: record it as a login so the activity
+	// panel's login history starts at account creation.
+	a.recordLogin(c, user.ID, "local", user.Email, true)
+	a.touchLastLogin(user.ID)
 	token, _ := a.sign(user)
 	c.JSON(200, gin.H{"token": token, "user": user, "tenant": tenant})
 }
@@ -88,13 +92,17 @@ func (a *App) login(c *gin.Context) {
 		// Compare against a dummy hash anyway so response time does not
 		// reveal whether the account exists.
 		_ = bcrypt.CompareHashAndPassword([]byte(dummyBcryptHash), []byte(req.Password))
+		a.recordLogin(c, "", "local", strings.ToLower(req.Email), false)
 		c.JSON(401, gin.H{"error": "invalid credentials"})
 		return
 	}
 	if bcrypt.CompareHashAndPassword([]byte(user.PasswordHash), []byte(req.Password)) != nil {
+		a.recordLogin(c, user.ID, "local", strings.ToLower(req.Email), false)
 		c.JSON(401, gin.H{"error": "invalid credentials"})
 		return
 	}
+	a.recordLogin(c, user.ID, "local", user.Email, true)
+	a.touchLastLogin(user.ID)
 	var tenant Tenant
 	a.DB.First(&tenant, "id = ?", user.TenantID)
 	token, _ := a.sign(user)

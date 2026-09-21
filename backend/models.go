@@ -33,6 +33,10 @@ type User struct {
 	CreatedAt     time.Time      `json:"createdAt"`
 	UpdatedAt     time.Time      `json:"updatedAt"`
 	DeletedAt     gorm.DeletedAt `gorm:"index" json:"-"`
+	// Telemetry rollups maintained by login recording and the heartbeat
+	// middleware; drive the admin activity panel without scanning events.
+	LastLoginAt *time.Time `json:"lastLoginAt"`
+	LastSeenAt  *time.Time `json:"lastSeenAt"`
 }
 
 type Course struct {
@@ -127,6 +131,22 @@ type ReviewEvent struct {
 	Response   string    `gorm:"index;not null" json:"response"` // proficient | fuzzy | unknown
 	DurationMS int       `json:"durationMs"`
 	CreatedAt  time.Time `json:"createdAt"`
+}
+
+// ActivityEvent is the append-only telemetry log: logins (success and
+// failure), deduped session heartbeats, and client-reported page views and
+// feature usage. Aggregates feed the staff activity panels; raw rows are
+// admin-only (they contain per-user detail and attempted emails on failed
+// logins).
+type ActivityEvent struct {
+	ID        string         `gorm:"primaryKey" json:"id"`
+	TenantID  string         `gorm:"index;not null" json:"tenantId"`
+	UserID    string         `gorm:"index" json:"userId"` // empty for failed logins
+	Type      string         `gorm:"index;not null" json:"type"` // login | heartbeat | page_view | feature
+	Name      string         `gorm:"index;not null" json:"name"` // login.success | page.review | note.open …
+	Path      string         `json:"path"`
+	Meta      datatypes.JSON `json:"meta"`
+	CreatedAt time.Time      `gorm:"index" json:"createdAt"`
 }
 
 type ImportRun struct {

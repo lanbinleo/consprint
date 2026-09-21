@@ -7,6 +7,7 @@ import (
 	"errors"
 	"os"
 	"regexp"
+	"strconv"
 	"strings"
 	"unicode"
 
@@ -84,6 +85,17 @@ func Clamp(v, min, max float64) float64 {
 func env(key, fallbackValue string) string {
 	if v := os.Getenv(key); strings.TrimSpace(v) != "" {
 		return v
+	}
+	return fallbackValue
+}
+
+func envInt(key string, fallbackValue int) int {
+	value := strings.TrimSpace(os.Getenv(key))
+	if value == "" {
+		return fallbackValue
+	}
+	if parsed, err := strconv.Atoi(value); err == nil {
+		return parsed
 	}
 	return fallbackValue
 }

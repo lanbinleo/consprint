@@ -37,6 +37,9 @@ func (a *App) Router() *gin.Engine {
 	api.GET("/auth/entra/callback", a.entraCallback)
 	protected := api.Group("")
 	protected.Use(a.auth())
+	// Session heartbeats ride along on every authenticated request (deduped
+	// per user per window) so the activity panels know who was online when.
+	protected.Use(a.heartbeat())
 	protected.GET("/me", a.me)
 	protected.PATCH("/me", a.updateMe)
 	protected.PATCH("/me/password", a.updateMyPassword)
@@ -71,6 +74,7 @@ func (a *App) Router() *gin.Engine {
 	protected.POST("/practice/attempts/:id/answers/:qid/self-rating", a.selfRateAnswer)
 	protected.GET("/practice/wrongbook", a.wrongBook)
 	protected.GET("/practice/stats", a.practiceStats)
+	protected.POST("/telemetry/events", a.reportTelemetry)
 	staff := protected.Group("")
 	staff.Use(a.requireRole("teacher", "admin"))
 	staff.GET("/admin/questions", a.listQuestions)
@@ -104,6 +108,10 @@ func (a *App) Router() *gin.Engine {
 	staff.PATCH("/admin/sets/:id", a.updateSet)
 	staff.GET("/admin/analytics/overview", a.analyticsOverview)
 	staff.GET("/admin/analytics/users/:id", a.analyticsUserDetail)
+	staff.GET("/admin/telemetry/activity", a.telemetryActivity)
+	staff.GET("/admin/telemetry/features", a.telemetryFeatures)
+	staff.GET("/admin/telemetry/reviews", a.telemetryReviews)
+	staff.GET("/admin/telemetry/practice", a.telemetryPractice)
 	admin := protected.Group("")
 	admin.Use(a.requireAdmin())
 	admin.PATCH("/concepts/:id/content", a.updateConceptContent)
@@ -112,6 +120,9 @@ func (a *App) Router() *gin.Engine {
 	admin.GET("/admin/users", a.listUsers)
 	admin.PATCH("/admin/users/:id", a.updateUser)
 	admin.PATCH("/admin/users/:id/password", a.adminResetPassword)
+	// Raw telemetry rows carry per-user detail and failed-login emails:
+	// admin-only, unlike the staff-visible aggregates above.
+	admin.GET("/admin/telemetry/log", a.telemetryLog)
 	// /files serves uploaded note materials (PDFs, images) from the data dir.
 	// It must stay public: <iframe>/<img> subresources cannot carry the
 	// Authorization header. /avatars and /fonts fix the production binary
